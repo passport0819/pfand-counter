@@ -1103,8 +1103,6 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         withIcon(howTo, R.drawable.ic_b_book, getString(R.string.howto_open));
         howTo.setTextColor(getColor(R.color.text));
         howTo.setBackgroundResource(R.drawable.btn_accent);
-        wrap.addView(howTo, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
         Button pfand = new Button(this);
         pfand.setAllCaps(false);
         withIcon(pfand, R.drawable.ic_b_info, getString(R.string.pfand_open));
@@ -1113,22 +1111,22 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         LinearLayout.LayoutParams pp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         pp.topMargin = (int) (8 * getResources().getDisplayMetrics().density);
-        wrap.addView(pfand, pp);
         Button statsButton = new Button(this);
         statsButton.setAllCaps(false);
         withIcon(statsButton, R.drawable.ic_b_stats, getString(R.string.stats_open));
         statsButton.setTextColor(getColor(R.color.text));
         statsButton.setBackgroundResource(R.drawable.btn_accent);
-        wrap.addView(statsButton, pp);
         Button learnedButton = sheetButton(R.drawable.ic_h_scan, R.string.learned_open);
-        wrap.addView(learnedButton, pp);
         // Jev and About sit here, not under the page: three buttons down there stacked up and
-        // had to be scrolled once the page grew (29.09.2026).
+        // had to be scrolled once the page grew. Two to a row, so the page fits on one screen.
         Button jevButton = sheetButton(R.drawable.ic_b_ai, R.string.jev_settings);
-        wrap.addView(jevButton, pp);
         Button aboutButton = sheetButton(R.drawable.ic_b_info, R.string.settings_about);
-        wrap.addView(aboutButton, pp);
         Button mapButton = sheetButton(R.drawable.ic_h_shop, R.string.map_open);
+        LinearLayout.LayoutParams first = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        wrap.addView(pair(this, howTo, pfand), first);
+        wrap.addView(pair(this, statsButton, learnedButton), pp);
+        wrap.addView(pair(this, jevButton, aboutButton), pp);
         wrap.addView(mapButton, pp);
         TextView mapNote = new TextView(this);
         mapNote.setText(R.string.map_note);
@@ -1157,6 +1155,7 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
 
         wrap.addView(heading(R.string.settings_theme));
         final RadioGroup themes = new RadioGroup(this);
+        themes.setOrientation(LinearLayout.HORIZONTAL); // one row instead of three
         int[] themeNames = {R.string.theme_system, R.string.theme_light, R.string.theme_dark};
         int themeNow = 0;
         try {
@@ -1168,7 +1167,7 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
             RadioButton b = new RadioButton(this);
             b.setId(1000 + i);
             b.setText(themeNames[i]);
-            themes.addView(b);
+            themes.addView(b, new RadioGroup.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
         }
         themes.check(1000 + (themeNow >= 0 && themeNow < THEME_MODES.length ? themeNow : 0));
         wrap.addView(themes);
@@ -2397,6 +2396,40 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
     }
 
     /** A full-width button with a picture, as in Settings. */
+    /** Marks a half-width button: its label may take two lines (LayoutCheck allows that). */
+    static final String TILE = "tile";
+
+    /** Two buttons side by side, equally wide and equally tall. */
+    static LinearLayout pair(Context ctx, Button a, Button b) {
+        LinearLayout row = new LinearLayout(ctx);
+        row.setOrientation(LinearLayout.HORIZONTAL);
+        int gap = (int) (8 * ctx.getResources().getDisplayMetrics().density);
+        LinearLayout.LayoutParams la = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
+        la.setMarginEnd(gap / 2);
+        LinearLayout.LayoutParams lb = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
+        lb.setMarginStart(gap / 2);
+        // A little smaller and with less side padding, so long labels (French, Russian at large
+        // font) stay within two lines.
+        for (Button t : new Button[]{a, b}) {
+            t.setTag(TILE);
+            t.setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 13);
+            t.setPadding(gap, t.getPaddingTop(), gap, t.getPaddingBottom());
+            // The picture was sized for the old letters (withIcon); shrink it along.
+            if (t.getText() instanceof android.text.Spanned) {
+                android.text.Spanned text = (android.text.Spanned) t.getText();
+                int size = Math.round(t.getTextSize() * 1.25f);
+                for (android.text.style.ImageSpan span : text.getSpans(0, text.length(),
+                        android.text.style.ImageSpan.class)) {
+                    span.getDrawable().setBounds(0, 0, size, size);
+                }
+                t.setText(text);
+            }
+        }
+        row.addView(a, la);
+        row.addView(b, lb);
+        return row;
+    }
+
     private Button sheetButton(int icon, int text) {
         Button b = new Button(this);
         b.setAllCaps(false);

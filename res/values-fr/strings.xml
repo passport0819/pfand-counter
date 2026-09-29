@@ -217,7 +217,7 @@
         <item quantity="many">%1$d articles</item>
         <item quantity="other">%1$d articles</item>
     </plurals>
-    <string name="pfand_open">Comment fonctionne la consigne</string>
+    <string name="pfand_open">Le système de consigne</string>
     <string name="pfand_title">La consigne en Allemagne</string>
     <string name="p_single_t">Usage unique : 0,25€</string>
     <string name="p_single">Les bouteilles en plastique, les canettes et les bouteilles en verre à usage unique de 0,1 à 3 litres ont une consigne de 0,25€ fixée par la loi. Elles sont marquées, généralement par le logo de consigne (une bouteille et une canette avec une flèche courbe) à côté du code-barres.</string>

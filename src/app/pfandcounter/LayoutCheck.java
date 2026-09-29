@@ -87,6 +87,22 @@ class LayoutCheck {
             MainActivity.withIcon(ctx, button, b[0], ctx.getString(b[1]));
             wrap.addView(button);
         }
+        // Settings shows six of them two to a row.
+        int[][] tiles = {
+                {R.drawable.ic_b_book, R.string.howto_open}, {R.drawable.ic_b_info, R.string.pfand_open},
+                {R.drawable.ic_b_stats, R.string.stats_open}, {R.drawable.ic_h_scan, R.string.learned_open},
+                {R.drawable.ic_b_ai, R.string.jev_settings}, {R.drawable.ic_b_info, R.string.settings_about},
+        };
+        for (int i = 0; i < tiles.length; i += 2) {
+            Button a = new Button(ctx), b = new Button(ctx);
+            for (int k = 0; k < 2; k++) {
+                Button t = k == 0 ? a : b;
+                t.setAllCaps(false);
+                t.setBackgroundResource(R.drawable.btn_accent);
+                MainActivity.withIcon(ctx, t, tiles[i + k][0], ctx.getString(tiles[i + k][1]));
+            }
+            wrap.addView(MainActivity.pair(ctx, a, b));
+        }
         return wrap;
     }
 
@@ -181,6 +197,8 @@ class LayoutCheck {
         for (int i = 0; i < t.getText().length(); i++) if (t.getText().charAt(i) == '\n') meant++;
         // A radio button's label may wrap like any line of text in a list.
         if (t instanceof android.widget.CompoundButton) meant = Integer.MAX_VALUE;
+        // A half-width button in Settings may take two lines, not three.
+        if (MainActivity.TILE.equals(t.getTag())) meant = 2;
         if (issue == null && t instanceof Button && !row && l.getLineCount() > meant) issue = "breaks into " + l.getLineCount() + " lines";
         if (issue == null && t.getHeight() < l.getHeight() + t.getTotalPaddingTop() + t.getTotalPaddingBottom() - 1) {
             issue = "taller than its box";
