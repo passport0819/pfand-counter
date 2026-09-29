@@ -65,6 +65,18 @@
     <string name="forgotten">Đã quên mã vạch — lần sau ứng dụng sẽ hỏi lại.</string>
     <string name="no_deposit_toast">Món này không có tiền cọc — không được đếm.</string>
     <string name="unknown_product">Sản phẩm không rõ</string>
+    <string name="name_hint">Tên cho sản phẩm này (không bắt buộc)</string>
+    <string name="rename_line">Đổi tên</string>
+    <string name="name_field">Tên sản phẩm</string>
+    <string name="scan_again">Quét lại</string>
+    <string name="similar_fmt">Giống một mã vạch đã biết: %1$s (%2$s). Đó có phải số trên nhãn không?</string>
+    <string name="similar_use">Có, đếm mã đó</string>
+    <string name="learned_open">Mã vạch đã học</string>
+    <string name="learned_empty">Chưa học gì. Ứng dụng học một mã vạch khi bạn chọn tiền cọc của nó.</string>
+    <string name="forget_all">Quên mọi thứ đã học</string>
+    <string name="forget_all_q">Quên mọi thứ bạn đã dạy ứng dụng? Mã vạch đã học: %1$d. Danh sách đi kèm ứng dụng vẫn giữ nguyên. Không thể hoàn tác.</string>
+    <string name="forget_all_yes">Quên tất cả</string>
+    <string name="forget_all_done">Đã quên tất cả mã vạch đã học</string>
     <string name="scanned_fmt">%1$s · %2$s</string>
 
     <string name="d150">1,50€ — két</string>

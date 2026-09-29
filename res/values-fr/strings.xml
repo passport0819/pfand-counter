@@ -65,6 +65,18 @@
     <string name="forgotten">Code-barres oublié — l\'app redemandera la prochaine fois.</string>
     <string name="no_deposit_toast">Pas de consigne sur cet article — non compté.</string>
     <string name="unknown_product">Produit inconnu</string>
+    <string name="name_hint">Nom de ce produit (facultatif)</string>
+    <string name="rename_line">Modifier le nom</string>
+    <string name="name_field">Nom du produit</string>
+    <string name="scan_again">Scanner à nouveau</string>
+    <string name="similar_fmt">Ressemble à un code-barres connu : %1$s (%2$s). Est-ce le numéro sur l’étiquette ?</string>
+    <string name="similar_use">Oui, compter celui-ci</string>
+    <string name="learned_open">Codes-barres appris</string>
+    <string name="learned_empty">Rien d’appris pour l’instant. L’appli apprend un code-barres quand vous choisissez sa consigne.</string>
+    <string name="forget_all">Oublier tout ce qui a été appris</string>
+    <string name="forget_all_q">Oublier tout ce que vous avez appris à l’appli ? Codes-barres appris : %1$d. La liste fournie avec l’appli reste. Cette action est irréversible.</string>
+    <string name="forget_all_yes">Tout oublier</string>
+    <string name="forget_all_done">Tous les codes-barres appris ont été oubliés</string>
     <string name="scanned_fmt">%1$s · %2$s</string>
 
     <string name="d150">1,50€ — casier</string>

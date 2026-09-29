@@ -65,6 +65,18 @@
     <string name="forgotten">Штрихкод забыт — в следующий раз приложение спросит снова.</string>
     <string name="no_deposit_toast">На это залога нет — не учтено.</string>
     <string name="unknown_product">Неизвестный товар</string>
+    <string name="name_hint">Название этого товара (необязательно)</string>
+    <string name="rename_line">Изменить название</string>
+    <string name="name_field">Название товара</string>
+    <string name="scan_again">Сканировать снова</string>
+    <string name="similar_fmt">Похож на известный штрихкод: %1$s (%2$s). Это номер на этикетке?</string>
+    <string name="similar_use">Да, засчитать его</string>
+    <string name="learned_open">Выученные штрихкоды</string>
+    <string name="learned_empty">Пока ничего не выучено. Приложение запоминает штрихкод, когда вы выбираете его залог.</string>
+    <string name="forget_all">Забыть все выученные</string>
+    <string name="forget_all_q">Забыть всё, чему вы научили приложение? Выученных штрихкодов: %1$d. Список, встроенный в приложение, останется. Это нельзя отменить.</string>
+    <string name="forget_all_yes">Забыть все</string>
+    <string name="forget_all_done">Все выученные штрихкоды забыты</string>
     <string name="scanned_fmt">%1$s · %2$s</string>
 
     <string name="d150">1,50€ — ящик</string>

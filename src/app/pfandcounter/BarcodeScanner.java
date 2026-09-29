@@ -22,6 +22,7 @@ import android.util.Size;
 import android.view.Surface;
 import android.view.TextureView;
 
+import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
 import java.nio.ByteBuffer;
@@ -43,6 +44,8 @@ class BarcodeScanner implements TextureView.SurfaceTextureListener {
         void onProblem(String message);
         /** The first frame after a problem: the camera works again, whatever onProblem said. */
         void onCameraBack();
+        /** Asked on the camera thread: a code the app already knows needs less proof. */
+        boolean isKnown(String code);
     }
 
     private static final long DECODE_INTERVAL_MS = 120;
@@ -50,6 +53,8 @@ class BarcodeScanner implements TextureView.SurfaceTextureListener {
     private static final long OTHER_CODE_COOLDOWN_MS = 2500;
     /** A number counts once two frames in a row agree; one noisy frame can invent a valid-looking EAN. */
     private static final long CONFIRM_WINDOW_MS = 600;
+    /** Frames that must agree: two for a known code, three for one the app would ask about. */
+    private static final int AGREE_KNOWN = 2, AGREE_UNKNOWN = 3;
 
     private final Activity activity;
     private final TextureView view;
@@ -78,6 +83,7 @@ class BarcodeScanner implements TextureView.SurfaceTextureListener {
     private long lastOtherAt;
     private String candidate;
     private long candidateAt;
+    private int agreeing;
     private byte[] yBuffer;
     private byte[] rotatedBuffer;
 
@@ -327,10 +333,18 @@ class BarcodeScanner implements TextureView.SurfaceTextureListener {
                 }
                 // Measured 25.09. on 1 500 drawn frames: 3 invented numbers from one frame each.
                 // Two agreeing frames cost about 0.1 s and leave a fluke nothing to repeat.
-                boolean confirmed = code.equals(candidate) && now - candidateAt < CONFIRM_WINDOW_MS;
+                // UPC-E is a short North American form; read off a German EAN-13 it invents a
+                // number. 29.09.2026: a kefir bottle, 4104060031960, came back as UPC-E 11040634;
+                // the shipped list holds six such 8-digit phantoms, e.g. 11051204 for a
+                // 4105120… beer. So an unknown UPC-E is never asked about; the camera keeps
+                // looking and finds the real code.
+                if (read.getBarcodeFormat() == BarcodeFormat.UPC_E && !listener.isKnown(code)) return;
+                // An unknown code asks for a third: a misread there gets learned, not just counted.
+                agreeing = code.equals(candidate) && now - candidateAt < CONFIRM_WINDOW_MS ? agreeing + 1 : 1;
                 candidate = code;
                 candidateAt = now;
-                if (!confirmed) return;
+                if (agreeing < AGREE_KNOWN) return;
+                if (agreeing < AGREE_UNKNOWN && !listener.isKnown(code)) return;
                 if (code.equals(lastCode) && now - lastCodeAt < SAME_CODE_COOLDOWN_MS) return;
                 lastCode = code;
                 lastCodeAt = now;

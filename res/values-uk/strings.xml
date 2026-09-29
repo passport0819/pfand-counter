@@ -65,6 +65,18 @@
     <string name="forgotten">Штрихкод забуто — наступного разу застосунок спитає знову.</string>
     <string name="no_deposit_toast">Застави на це немає — не враховано.</string>
     <string name="unknown_product">Невідомий товар</string>
+    <string name="name_hint">Назва цього товару (необов’язково)</string>
+    <string name="rename_line">Змінити назву</string>
+    <string name="name_field">Назва товару</string>
+    <string name="scan_again">Сканувати знову</string>
+    <string name="similar_fmt">Схожий на відомий штрихкод: %1$s (%2$s). Це номер на етикетці?</string>
+    <string name="similar_use">Так, зарахувати його</string>
+    <string name="learned_open">Вивчені штрихкоди</string>
+    <string name="learned_empty">Поки нічого не вивчено. Застосунок запам’ятовує штрихкод, коли ви обираєте його заставу.</string>
+    <string name="forget_all">Забути всі вивчені</string>
+    <string name="forget_all_q">Забути все, чого ви навчили застосунок? Вивчених штрихкодів: %1$d. Список, вбудований у застосунок, залишиться. Це не можна скасувати.</string>
+    <string name="forget_all_yes">Забути все</string>
+    <string name="forget_all_done">Усі вивчені штрихкоди забуто</string>
     <string name="scanned_fmt">%1$s · %2$s</string>
 
     <string name="d150">1,50€ — ящик</string>

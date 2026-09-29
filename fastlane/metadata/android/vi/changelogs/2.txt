@@ -1,0 +1,4 @@
+• Đặt tên riêng cho sản phẩm không rõ và đổi tên sau bằng cách nhấn giữ một dòng trong danh sách.
+• Cài đặt › Mã vạch đã học: xem, đổi tên, đổi tiền cọc hoặc quên những gì bạn đã dạy ứng dụng.
+• Ít đọc sai mã vạch hơn: mã chưa biết phải được đọc giống nhau ba lần, mã ngắn của Mỹ (UPC-E) không còn bị hỏi, và một mã vạch đã biết tương tự được gợi ý.
+• "Quét lại" trong cửa sổ chai mới.

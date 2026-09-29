@@ -65,6 +65,18 @@
     <string name="forgotten">تم نسيان الباركود — سيسألك التطبيق مرة أخرى في المرة القادمة.</string>
     <string name="no_deposit_toast">لا يوجد تأمين على هذه — لم تُحسب.</string>
     <string name="unknown_product">منتج غير معروف</string>
+    <string name="name_hint">اسم لهذا المنتج (اختياري)</string>
+    <string name="rename_line">تغيير الاسم</string>
+    <string name="name_field">اسم المنتج</string>
+    <string name="scan_again">امسح مرة أخرى</string>
+    <string name="similar_fmt">يشبه رمزًا شريطيًا معروفًا: %1$s (%2$s). هل هذا هو الرقم على الملصق؟</string>
+    <string name="similar_use">نعم، احسب هذا</string>
+    <string name="learned_open">الرموز الشريطية المُتعلَّمة</string>
+    <string name="learned_empty">لم يُتعلَّم شيء بعد. يتعلّم التطبيق الرمز الشريطي عندما تختار قيمة التأمين له.</string>
+    <string name="forget_all">انسَ كل ما تعلّمه</string>
+    <string name="forget_all_q">هل تريد نسيان كل ما علّمته للتطبيق؟ الرموز الشريطية المُتعلَّمة: %1$d. تبقى القائمة المرفقة بالتطبيق. لا يمكن التراجع عن ذلك.</string>
+    <string name="forget_all_yes">انسَ الكل</string>
+    <string name="forget_all_done">تم نسيان كل الرموز الشريطية المُتعلَّمة</string>
     <string name="scanned_fmt">%1$s · %2$s</string>
 
     <string name="d150">1,50€ — صندوق</string>

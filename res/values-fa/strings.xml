@@ -65,6 +65,18 @@
     <string name="forgotten">بارکد فراموش شد — دفعه‌ی بعد برنامه دوباره می‌پرسد.</string>
     <string name="no_deposit_toast">این یکی ودیعه ندارد — شمرده نشد.</string>
     <string name="unknown_product">محصول ناشناخته</string>
+    <string name="name_hint">نام این محصول (اختیاری)</string>
+    <string name="rename_line">تغییر نام</string>
+    <string name="name_field">نام محصول</string>
+    <string name="scan_again">دوباره اسکن کن</string>
+    <string name="similar_fmt">شبیه یک بارکد شناخته‌شده: %1$s (%2$s). آیا این همان شمارهٔ روی برچسب است؟</string>
+    <string name="similar_use">بله، همین را بشمار</string>
+    <string name="learned_open">بارکدهای یادگرفته‌شده</string>
+    <string name="learned_empty">هنوز چیزی یاد گرفته نشده. برنامه وقتی ودیعهٔ یک بارکد را انتخاب کنید آن را یاد می‌گیرد.</string>
+    <string name="forget_all">فراموش کردن همهٔ یادگرفته‌ها</string>
+    <string name="forget_all_q">هر چه به برنامه یاد داده‌اید فراموش شود؟ بارکدهای یادگرفته‌شده: %1$d. فهرستی که همراه برنامه است می‌ماند. این کار برگشت‌پذیر نیست.</string>
+    <string name="forget_all_yes">فراموش کردن همه</string>
+    <string name="forget_all_done">همهٔ بارکدهای یادگرفته‌شده فراموش شدند</string>
     <string name="scanned_fmt">%1$s · %2$s</string>
 
     <string name="d150">1,50€ — جعبه</string>

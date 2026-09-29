@@ -1,0 +1,4 @@
+• Pon tu propio nombre a los productos desconocidos y cámbialo más tarde manteniendo pulsada una fila de la lista.
+• Ajustes › Códigos de barras aprendidos: consulta, renombra, cambia el depósito u olvida lo que le enseñaste a la app.
+• Menos códigos mal leídos: un código desconocido debe leerse tres veces igual, los códigos cortos estadounidenses (UPC-E) ya no generan preguntas y se ofrece un código conocido parecido.
+• «Escanear de nuevo» en la ventana de botella nueva.

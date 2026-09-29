@@ -1,0 +1,4 @@
+• Give unknown products your own name, and change it later by holding a row in the list.
+• Settings › Learned barcodes: everything you taught the app, to rename, change the deposit or forget.
+• Fewer misread barcodes: an unknown code must be read three times alike, short US codes (UPC-E) are no longer asked about, and a similar known barcode is offered.
+• "Scan again" in the new-bottle window.

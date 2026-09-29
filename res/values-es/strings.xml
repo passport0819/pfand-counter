@@ -65,6 +65,18 @@
     <string name="forgotten">Código olvidado — la app volverá a preguntar la próxima vez.</string>
     <string name="no_deposit_toast">Este no tiene depósito — no se cuenta.</string>
     <string name="unknown_product">Producto desconocido</string>
+    <string name="name_hint">Nombre de este producto (opcional)</string>
+    <string name="rename_line">Cambiar nombre</string>
+    <string name="name_field">Nombre del producto</string>
+    <string name="scan_again">Escanear de nuevo</string>
+    <string name="similar_fmt">Parecido a un código de barras conocido: %1$s (%2$s). ¿Es ese el número de la etiqueta?</string>
+    <string name="similar_use">Sí, contar ese</string>
+    <string name="learned_open">Códigos de barras aprendidos</string>
+    <string name="learned_empty">Aún no se ha aprendido nada. La app aprende un código de barras cuando eliges su depósito.</string>
+    <string name="forget_all">Olvidar todo lo aprendido</string>
+    <string name="forget_all_q">¿Olvidar todo lo que le enseñaste a la app? Códigos de barras aprendidos: %1$d. La lista que viene con la app se mantiene. No se puede deshacer.</string>
+    <string name="forget_all_yes">Olvidar todo</string>
+    <string name="forget_all_done">Todos los códigos de barras aprendidos se han olvidado</string>
     <string name="scanned_fmt">%1$s · %2$s</string>
 
     <string name="d150">1,50€ — caja</string>

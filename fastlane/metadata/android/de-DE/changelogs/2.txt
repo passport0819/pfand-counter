@@ -1,0 +1,4 @@
+• Unbekannten Produkten einen eigenen Namen geben und ihn später durch langes Drücken einer Zeile ändern.
+• Einstellungen › Gelernte Barcodes: ansehen, umbenennen, Pfand ändern oder vergessen, was du der App beigebracht hast.
+• Weniger falsch gelesene Barcodes: Ein unbekannter Code muss dreimal gleich gelesen werden, kurze US-Codes (UPC-E) werden nicht mehr abgefragt, und ein ähnlicher bekannter Barcode wird angeboten.
+• „Nochmal scannen“ im Fenster für neue Flaschen.

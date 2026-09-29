@@ -1,0 +1,4 @@
+• Bilinmeyen ürünlere kendi adınızı verin ve daha sonra listedeki satıra basılı tutarak değiştirin.
+• Ayarlar › Öğrenilen barkodlar: uygulamaya öğrettiklerinizi görün, yeniden adlandırın, depozitosunu değiştirin veya unutun.
+• Daha az yanlış okunan barkod: bilinmeyen bir kod üç kez aynı okunmalı, kısa ABD kodları (UPC-E) artık sorulmuyor ve benzer bilinen bir barkod öneriliyor.
+• Yeni şişe penceresinde "Tekrar tara".

@@ -65,6 +65,18 @@
     <string name="forgotten">Kod zapomniany — następnym razem aplikacja zapyta ponownie.</string>
     <string name="no_deposit_toast">Na tym nie ma kaucji — nie doliczono.</string>
     <string name="unknown_product">Nieznany produkt</string>
+    <string name="name_hint">Nazwa tego produktu (opcjonalnie)</string>
+    <string name="rename_line">Zmień nazwę</string>
+    <string name="name_field">Nazwa produktu</string>
+    <string name="scan_again">Zeskanuj ponownie</string>
+    <string name="similar_fmt">Podobny do znanego kodu kreskowego: %1$s (%2$s). Czy to ten numer jest na etykiecie?</string>
+    <string name="similar_use">Tak, policz ten</string>
+    <string name="learned_open">Zapamiętane kody kreskowe</string>
+    <string name="learned_empty">Jeszcze nic nie nauczono. Aplikacja uczy się kodu, gdy wybierzesz jego kaucję.</string>
+    <string name="forget_all">Zapomnij wszystkie nauczone</string>
+    <string name="forget_all_q">Zapomnieć wszystko, czego nauczyłeś aplikację? Nauczone kody kreskowe: %1$d. Lista dołączona do aplikacji zostaje. Tego nie można cofnąć.</string>
+    <string name="forget_all_yes">Zapomnij wszystkie</string>
+    <string name="forget_all_done">Wszystkie nauczone kody zapomniane</string>
     <string name="scanned_fmt">%1$s · %2$s</string>
 
     <string name="d150">1,50€ — skrzynka</string>

@@ -1,0 +1,4 @@
+• Nadawaj nieznanym produktom własną nazwę i zmieniaj ją później, przytrzymując wiersz na liście.
+• Ustawienia › Zapamiętane kody kreskowe: przeglądaj, zmieniaj nazwę, zmieniaj kaucję lub zapominaj to, czego nauczyłeś aplikację.
+• Mniej błędnie odczytanych kodów: nieznany kod musi zostać odczytany trzy razy tak samo, krótkie kody amerykańskie (UPC-E) nie wywołują już pytania, a podobny znany kod jest proponowany.
+• „Zeskanuj ponownie” w oknie nowej butelki.

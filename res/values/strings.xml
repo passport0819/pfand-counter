@@ -79,6 +79,18 @@
     <string name="forgotten">Barcode forgotten — the app will ask again next time.</string>
     <string name="no_deposit_toast">No deposit on this one — not counted.</string>
     <string name="unknown_product">Unknown product</string>
+    <string name="name_hint">Name for this product (optional)</string>
+    <string name="rename_line">Change name</string>
+    <string name="name_field">Product name</string>
+    <string name="scan_again">Scan again</string>
+    <string name="similar_fmt">Similar to a known barcode: %1$s (%2$s). Is that the number on the label?</string>
+    <string name="similar_use">Yes, count that one</string>
+    <string name="learned_open">Learned barcodes</string>
+    <string name="learned_empty">Nothing learned yet. The app learns a barcode when you choose its deposit.</string>
+    <string name="forget_all">Forget all learned</string>
+    <string name="forget_all_q">Forget everything you taught the app? Learned barcodes: %1$d. The list that comes with the app stays. This cannot be undone.</string>
+    <string name="forget_all_yes">Forget all</string>
+    <string name="forget_all_done">All learned barcodes forgotten</string>
     <string name="scanned_fmt">%1$s · %2$s</string>
 
     <string name="d150">1,50€ — crate</string>

@@ -40,6 +40,7 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
@@ -125,6 +126,13 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 editLine(lineAt(position));
+            }
+        });
+        // Holding a row opens the same menu: change name, deposit, remove, forget.
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
+                editLine(lineAt(position));
+                return true;
             }
         });
 
@@ -352,9 +360,19 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
             showNoDeposit(code, rule.name);
             return;
         }
+        // A name the user gave (or learned before) wins over whatever the online lookup says.
+        if (rules.isLearned(code) && hasName(rule.name)) {
+            add(code, rule.name, rule.cents, 1, rule.crate);
+            return;
+        }
         String cached = lookup.cached(code);
         add(code, cached != null ? cached : rule.name, rule.cents, 1, rule.crate);
         fetchNameLater(code);
+    }
+
+    /** A real name, not empty and not the "Unknown product" stand-in. */
+    private boolean hasName(String name) {
+        return name != null && !name.trim().isEmpty() && !name.equals(getString(R.string.unknown_product));
     }
 
     /**
@@ -374,6 +392,11 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         hintView.setText(getString(R.string.camera_failed));
         torchButton.setVisibility(View.GONE);
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    /** Camera thread: an unknown code must agree in three frames, a known one in two. */
+    @Override public boolean isKnown(String code) {
+        return rules.lookup(code) != null;
     }
 
     @Override public void onCameraBack() {
@@ -531,7 +554,11 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
 
         final View content = LayoutInflater.from(this).inflate(R.layout.dialog_new, null);
         final TextView nameView = (TextView) content.findViewById(R.id.dlg_name);
+        final EditText ownName = (EditText) content.findViewById(R.id.dlg_name_edit);
         ((TextView) content.findViewById(R.id.dlg_code)).setText(code);
+        // Taught before under a name of the user's own: offer it again for correcting.
+        final DepositRules.Rule before = rules.isLearned(code) ? rules.lookup(code) : null;
+        if (before != null && hasName(before.name)) ownName.setText(before.name);
 
         final ProductLookup.Info known = lookup.cachedInfo(code);
         if (known != null && known.name != null) {
@@ -542,15 +569,21 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
                 @Override public void run() {
                     if (getString(R.string.looking_up).contentEquals(nameView.getText())) {
                         nameView.setText(R.string.no_name);
+                        ownName.setVisibility(View.VISIBLE);
                     }
                 }
             }, 5000);
+            // Looked up before without a name: nothing more will come, so no waiting.
+            if (known != null) nameView.setText(R.string.no_name);
+            if (known != null || ownName.length() > 0) ownName.setVisibility(View.VISIBLE);
         }
 
         final AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle(R.string.new_code_title)
                 .setView(content)
                 .setNegativeButton(R.string.skip_once, null)
+                // Same as skipping, said for the case where the digits do not match the label.
+                .setNeutralButton(R.string.scan_again, null)
                 .setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override public void onDismiss(DialogInterface d) {
                         if (openDialog == d) openDialog = null;
@@ -567,7 +600,10 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
                         : v.getId() == R.id.dlg_25 ? DepositRules.SINGLE_USE
                         : DepositRules.NONE;
                 String name = nameView.getText().toString();
-                if (name.equals(getString(R.string.looking_up)) || name.equals(getString(R.string.no_name))) {
+                String typed = ownName.getText().toString().trim();
+                if (!typed.isEmpty()) {
+                    name = typed;
+                } else if (name.equals(getString(R.string.looking_up)) || name.equals(getString(R.string.no_name))) {
                     name = getString(R.string.unknown_product);
                 }
                 rules.learn(code, cents, name);
@@ -591,7 +627,10 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         crateChoice.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 String name = nameView.getText().toString();
-                if (name.equals(getString(R.string.looking_up)) || name.equals(getString(R.string.no_name))) {
+                String typed = ownName.getText().toString().trim();
+                if (!typed.isEmpty()) {
+                    name = typed;
+                } else if (name.equals(getString(R.string.looking_up)) || name.equals(getString(R.string.no_name))) {
                     name = getString(R.string.crate_name);
                 }
                 rules.learn(code, crateCents, name, true);
@@ -599,6 +638,29 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
                 if (openDialog != null) openDialog.dismiss();
             }
         });
+
+        // Two digits away from a known barcode: offer that one, the camera may have misread.
+        final String near = rules.similar(code);
+        if (near != null) {
+            DepositRules.Rule nearRule = rules.lookup(near);
+            TextView similar = (TextView) content.findViewById(R.id.dlg_similar);
+            String nearName = nearRule != null && hasName(nearRule.name) ? nearRule.name
+                    : getString(R.string.unknown_product);
+            similar.setText(getString(R.string.similar_fmt, nearName, near));
+            similar.setVisibility(View.VISIBLE);
+            View use = content.findViewById(R.id.dlg_similar_use);
+            use.setVisibility(View.VISIBLE);
+            use.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    if (openDialog != null) openDialog.dismiss();
+                    openLater(new Runnable() {
+                        @Override public void run() {
+                            onCode(near);
+                        }
+                    });
+                }
+            });
+        }
 
         // "Help me decide" swaps the four buttons for the picture questions — in the same
         // window, because a window opened from a window blocked the input before (see openLater).
@@ -637,7 +699,12 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
             lookup.lookupInfo(code, new ProductLookup.InfoCallback() {
                 @Override public void onInfo(String forCode, ProductLookup.Info info) {
                     if (openDialog != dialog) return;
-                    if (info != null && info.name != null) nameView.setText(info.name);
+                    if (info != null && info.name != null) {
+                        nameView.setText(info.name);
+                    } else {
+                        nameView.setText(R.string.no_name);
+                        ownName.setVisibility(View.VISIBLE);
+                    }
                     jevState(content, askJev, info);
                     if (info != null && info.isDepositJar()) showJar(content, askJev);
                     else showMakerHint(content, rules.makerHint(code, info));
@@ -1053,6 +1120,8 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         statsButton.setTextColor(getColor(R.color.text));
         statsButton.setBackgroundResource(R.drawable.btn_accent);
         wrap.addView(statsButton, pp);
+        Button learnedButton = sheetButton(R.drawable.ic_h_scan, R.string.learned_open);
+        wrap.addView(learnedButton, pp);
         Button mapButton = sheetButton(R.drawable.ic_h_shop, R.string.map_open);
         wrap.addView(mapButton, pp);
         TextView mapNote = new TextView(this);
@@ -1201,6 +1270,16 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 openMapSearch();
+            }
+        });
+        learnedButton.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                dialog.dismiss();
+                openLater(new Runnable() {
+                    @Override public void run() {
+                        showLearned();
+                    }
+                });
             }
         });
         statsButton.setOnClickListener(new View.OnClickListener() {
@@ -1358,6 +1437,199 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         openDialog = dialog;
         dialog.show();
         dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setVisibility(stats.isEmpty() ? View.GONE : View.VISIBLE);
+    }
+
+    /**
+     * Everything the user taught, newest first: name, barcode, deposit. A tap renames or forgets
+     * one entry; "Forget all" clears them after asking. The shipped list is not shown here.
+     */
+    private void showLearned() {
+        scanner.setPaused(true);
+        final List<String> codes = new ArrayList<String>();
+        final List<DepositRules.Rule> learnedRules = new ArrayList<DepositRules.Rule>();
+        for (Map.Entry<String, DepositRules.Rule> e : rules.learnedList().entrySet()) {
+            codes.add(0, e.getKey());
+            learnedRules.add(0, e.getValue());
+        }
+        String[] rows = new String[codes.size()];
+        for (int i = 0; i < rows.length; i++) {
+            DepositRules.Rule r = learnedRules.get(i);
+            String name = hasName(r.name) ? r.name : getString(R.string.unknown_product);
+            String value = r.cents == DepositRules.NONE ? getString(R.string.no_deposit_title)
+                    : money(r.cents) + (r.crate ? " " + getString(R.string.crate_tag) : "");
+            rows[i] = name + "\n" + codes.get(i) + "  ·  " + value;
+        }
+        AlertDialog.Builder b = new AlertDialog.Builder(this)
+                .setTitle(R.string.learned_open)
+                .setPositiveButton(R.string.close, null)
+                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override public void onDismiss(DialogInterface d) {
+                        if (openDialog == d) openDialog = null;
+                        scanner.setPaused(false);
+                    }
+                });
+        if (rows.length == 0) {
+            b.setMessage(R.string.learned_empty);
+        } else {
+            b.setItems(rows, new DialogInterface.OnClickListener() {
+                @Override public void onClick(DialogInterface d, int which) {
+                    final String code = codes.get(which);
+                    final DepositRules.Rule r = learnedRules.get(which);
+                    openLater(new Runnable() {
+                        @Override public void run() {
+                            learnedEntry(code, r);
+                        }
+                    });
+                }
+            });
+            b.setNeutralButton(R.string.forget_all, new DialogInterface.OnClickListener() {
+                @Override public void onClick(DialogInterface d, int which) {
+                    openLater(new Runnable() {
+                        @Override public void run() {
+                            confirmForgetAll();
+                        }
+                    });
+                }
+            });
+        }
+        final AlertDialog dialog = b.create();
+        openDialog = dialog;
+        dialog.show();
+        // Holding an entry opens the same menu as a tap: rename, deposit, forget.
+        if (dialog.getListView() != null) {
+            dialog.getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
+                    final String code = codes.get(position);
+                    final DepositRules.Rule r = learnedRules.get(position);
+                    dialog.dismiss();
+                    openLater(new Runnable() {
+                        @Override public void run() {
+                            learnedEntry(code, r);
+                        }
+                    });
+                    return true;
+                }
+            });
+        }
+    }
+
+    /** A new deposit for a taught barcode; list lines of it follow, the statistics too. */
+    private void learnedDeposit(final String code, final DepositRules.Rule r, final Runnable after) {
+        scanner.setPaused(true);
+        final int crateCents = CrateSheet.crateValue(store);
+        final int[] values = {DepositRules.REUSABLE_SMALL, DepositRules.REUSABLE,
+                DepositRules.SINGLE_USE, crateCents, DepositRules.NONE};
+        String[] labels = {getString(R.string.d8), getString(R.string.d15), getString(R.string.d25),
+                getString(R.string.d_crate_fmt, money(crateCents)), getString(R.string.no_deposit_title)};
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle(R.string.change_deposit)
+                .setItems(labels, new DialogInterface.OnClickListener() {
+                    @Override public void onClick(DialogInterface d, int which) {
+                        int cents = values[which];
+                        boolean crate = which == 3;
+                        rules.learn(code, cents, r.name, crate);
+                        for (CountSession.Line l : new ArrayList<CountSession.Line>(session.lines())) {
+                            if (!l.code.equals(code)) continue;
+                            countStats(l.code, l.crate, l.cents, -l.qty);
+                            if (cents == DepositRules.NONE) {
+                                session.remove(l);
+                            } else {
+                                countStats(l.code, crate, cents, l.qty);
+                                session.setDeposit(l, cents, crate);
+                            }
+                        }
+                        session.save(store);
+                        refresh();
+                        openLater(after);
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override public void onClick(DialogInterface d, int which) {
+                        openLater(after);
+                    }
+                })
+                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override public void onDismiss(DialogInterface d) {
+                        if (openDialog == d) openDialog = null;
+                        scanner.setPaused(false);
+                    }
+                })
+                .create();
+        openDialog = dialog;
+        dialog.show();
+    }
+
+    private void learnedEntry(final String code, final DepositRules.Rule r) {
+        scanner.setPaused(true);
+        final Runnable backToList = new Runnable() {
+            @Override public void run() {
+                showLearned();
+            }
+        };
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle(hasName(r.name) ? r.name : getString(R.string.unknown_product))
+                .setItems(new String[]{getString(R.string.rename_line), getString(R.string.change_deposit),
+                                getString(R.string.forget_code)},
+                        new DialogInterface.OnClickListener() {
+                            @Override public void onClick(DialogInterface d, int which) {
+                                if (which == 0) {
+                                    openLater(new Runnable() {
+                                        @Override public void run() {
+                                            renameCode(code, r.name, backToList);
+                                        }
+                                    });
+                                } else if (which == 1) {
+                                    openLater(new Runnable() {
+                                        @Override public void run() {
+                                            learnedDeposit(code, r, backToList);
+                                        }
+                                    });
+                                } else {
+                                    if (rules.forget(code)) {
+                                        Toast.makeText(MainActivity.this, R.string.forgotten, Toast.LENGTH_SHORT).show();
+                                    }
+                                    openLater(backToList);
+                                }
+                            }
+                        })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override public void onClick(DialogInterface d, int which) {
+                        openLater(backToList);
+                    }
+                })
+                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override public void onDismiss(DialogInterface d) {
+                        if (openDialog == d) openDialog = null;
+                        scanner.setPaused(false);
+                    }
+                })
+                .create();
+        openDialog = dialog;
+        dialog.show();
+    }
+
+    /** Forgetting everything taught cannot be undone, so it asks first; the count stays. */
+    private void confirmForgetAll() {
+        scanner.setPaused(true);
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle(R.string.forget_all)
+                .setMessage(getString(R.string.forget_all_q, rules.learnedCount()))
+                .setPositiveButton(R.string.forget_all_yes, new DialogInterface.OnClickListener() {
+                    @Override public void onClick(DialogInterface d, int which) {
+                        rules.forgetAll();
+                        Toast.makeText(MainActivity.this, R.string.forget_all_done, Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, null)
+                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override public void onDismiss(DialogInterface d) {
+                        if (openDialog == d) openDialog = null;
+                        scanner.setPaused(false);
+                    }
+                })
+                .create();
+        openDialog = dialog;
+        dialog.show();
     }
 
     /** Clearing the statistics cannot be undone, so it asks first; the list stays as it is. */
@@ -1795,6 +2067,8 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         final List<Integer> actions = new ArrayList<Integer>();
         labels.add(getString(R.string.change_deposit));
         actions.add(2);
+        labels.add(getString(R.string.rename_line));
+        actions.add(5);
         labels.add(getString(R.string.remove_line));
         actions.add(3);
         if (rules.isLearned(line.code)) {
@@ -1812,6 +2086,13 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
                                 openLater(new Runnable() {
                                     @Override public void run() {
                                         changeDeposit(line);
+                                    }
+                                });
+                                return;
+                            case 5:
+                                openLater(new Runnable() {
+                                    @Override public void run() {
+                                        renameLine(line);
                                     }
                                 });
                                 return;
@@ -1843,6 +2124,64 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
                 .create();
         openDialog = dialog;
         dialog.show();
+    }
+
+    /**
+     * The user's own name for a line, kept for the next scan when the barcode was taught. Stays
+     * on the phone like everything the user teaches. An empty field goes back to "Unknown product".
+     */
+    private void renameLine(final CountSession.Line line) {
+        renameCode(line.code, line.name, null);
+    }
+
+    /** Renames every list line of `code` and, when it was taught, the learned entry too. */
+    private void renameCode(final String code, String current, final Runnable after) {
+        final EditText field = new EditText(this);
+        field.setSingleLine(true);
+        field.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+        field.setHint(R.string.name_field);
+        field.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO);
+        if (hasName(current)) {
+            field.setText(current);
+            field.setSelection(field.length());
+        }
+        android.widget.FrameLayout wrap = new android.widget.FrameLayout(this);
+        int pad = (int) (20 * getResources().getDisplayMetrics().density);
+        wrap.setPadding(pad, pad / 2, pad, 0);
+        wrap.addView(field);
+        scanner.setPaused(true);
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle(R.string.rename_line)
+                .setView(wrap)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override public void onClick(DialogInterface d, int which) {
+                        String typed = field.getText().toString().trim();
+                        String name = typed.isEmpty() ? getString(R.string.unknown_product) : typed;
+                        for (CountSession.Line l : session.lines()) {
+                            if (l.code.equals(code)) l.name = name;
+                        }
+                        if (rules.isLearned(code)) {
+                            DepositRules.Rule r = rules.lookup(code);
+                            rules.learn(code, r.cents, name, r.crate);
+                        }
+                        session.save(store);
+                        refresh();
+                        if (after != null) openLater(after);
+                    }
+                })
+                .setNegativeButton(R.string.cancel, null)
+                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override public void onDismiss(DialogInterface d) {
+                        if (openDialog == d) openDialog = null;
+                        scanner.setPaused(false);
+                        scanner.forgetLastCode();
+                    }
+                })
+                .create();
+        dialog.getWindow().setSoftInputMode(android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        openDialog = dialog;
+        dialog.show();
+        field.requestFocus();
     }
 
     private void changeDeposit(final CountSession.Line line) {

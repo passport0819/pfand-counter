@@ -1,0 +1,4 @@
+• Donnez votre propre nom aux produits inconnus et modifiez-le plus tard en maintenant une ligne de la liste.
+• Réglages › Codes-barres appris : consultez, renommez, changez la consigne ou oubliez ce que vous avez appris à l’appli.
+• Moins de codes-barres mal lus : un code inconnu doit être lu trois fois à l’identique, les codes américains courts (UPC-E) ne déclenchent plus de question, et un code-barres connu similaire est proposé.
+• « Scanner à nouveau » dans la fenêtre de nouvelle bouteille.
