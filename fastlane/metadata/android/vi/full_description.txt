@@ -1,6 +1,6 @@
 Pfand Counter là ứng dụng tính tiền cọc chai lon cho nước Đức: cộng dồn tiền cọc (Pfand) của chai, lon và két rỗng trong khi bạn quét mã vạch, để bạn biết trước sẽ nhận được bao nhiêu trước khi đến máy trả vỏ.
 
-Mã vạch không chứa số tiền cọc. Vì vậy ứng dụng đi kèm một danh sách mã vạch đã biết tiền cọc, tra cứu mã chưa biết trong các cơ sở dữ liệu sản phẩm mở và ghi nhớ mọi câu trả lời bạn đưa ra.
+Mã vạch không chứa số tiền cọc. Vì vậy ứng dụng đi kèm một danh sách hơn 2.500 mã vạch đã biết tiền cọc, tra cứu mã chưa biết trong các cơ sở dữ liệu sản phẩm mở và ghi nhớ mọi câu trả lời bạn đưa ra.
 
 <b>Ứng dụng làm được gì</b>
 <ul>

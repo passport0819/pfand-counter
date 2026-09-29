@@ -231,6 +231,12 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
             intent.removeExtra("layout_check");
             LayoutCheck.run(this, LANGUAGES);
         }
+        // adb shell am start -n … --ez page_check true: every window opened in every language.
+        if (intent.getBooleanExtra("page_check", false)) {
+            intent.removeExtra("page_check");
+            LocaleList was = getSystemService(LocaleManager.class).getApplicationLocales();
+            pageCheckNext(0, 0, was.toLanguageTags());
+        }
         // adb shell am start -n … --ez camera_problem true: the notice must go once frames arrive.
         if (intent.getBooleanExtra("camera_problem", false)) {
             intent.removeExtra("camera_problem");
@@ -249,6 +255,13 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
 
     @Override protected void onResume() {
         super.onResume();
+        if (pageCheck != null) {
+            listView.postDelayed(new Runnable() {
+                @Override public void run() {
+                    pageCheckRun();
+                }
+            }, 1000);
+        }
         if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             scanner.start();
             firstStartNotesLater();
@@ -1154,22 +1167,13 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         wrap.addView(soundNote);
 
         wrap.addView(heading(R.string.settings_theme));
-        final RadioGroup themes = new RadioGroup(this);
-        themes.setOrientation(LinearLayout.HORIZONTAL); // one row instead of three
-        int[] themeNames = {R.string.theme_system, R.string.theme_light, R.string.theme_dark};
         int themeNow = 0;
         try {
             themeNow = Integer.parseInt(String.valueOf(store.read(THEME_FILE)).trim());
         } catch (NumberFormatException ignored) {
             // no choice yet: the system's
         }
-        for (int i = 0; i < themeNames.length; i++) {
-            RadioButton b = new RadioButton(this);
-            b.setId(1000 + i);
-            b.setText(themeNames[i]);
-            themes.addView(b, new RadioGroup.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
-        }
-        themes.check(1000 + (themeNow >= 0 && themeNow < THEME_MODES.length ? themeNow : 0));
+        final RadioGroup themes = themeRow(this, themeNow >= 0 && themeNow < THEME_MODES.length ? themeNow : 0);
         wrap.addView(themes);
 
         wrap.addView(heading(R.string.settings_language));
@@ -1790,7 +1794,114 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
      * button handler, the closing window keeps the touch input and the new one looks frozen.
      */
     private void openLater(Runnable open) {
+        if (pageCheck != null) return; // the page check opens every window itself
         listView.postDelayed(open, 150);
+    }
+
+    // --- page check ----------------------------------------------------------
+
+    /**
+     * The windows LayoutCheck cannot build on its own, measured as the app really shows them:
+     * each one opened, its texts asked whether they fit (LayoutCheck.walk), closed again. One
+     * run per language and font size 1.0 and 1.3; between runs the screen is rebuilt, the
+     * progress waits in PAGE_CHECK_FILE ("step problems original-languages"). Nothing is counted
+     * or saved; at the end the app's language is what it was. Results: adb logcat -s PfandLayout
+     */
+    private static final String PAGE_CHECK_FILE = "pagecheck.txt";
+    private static final float[] PAGE_CHECK_SCALES = {1.0f, 1.3f};
+    /** The saved progress while a page check runs, else null. */
+    private String[] pageCheck;
+
+    @Override protected void attachBaseContext(Context base) {
+        String[] check = readPageCheck(base);
+        if (check != null) {
+            android.content.res.Configuration c = new android.content.res.Configuration();
+            c.fontScale = PAGE_CHECK_SCALES[Integer.parseInt(check[0]) % PAGE_CHECK_SCALES.length];
+            base = base.createConfigurationContext(c);
+        }
+        super.attachBaseContext(base);
+        pageCheck = check;
+    }
+
+    private static String[] readPageCheck(Context ctx) {
+        java.io.File f = new java.io.File(ctx.getFilesDir(), PAGE_CHECK_FILE);
+        if (!f.exists()) return null;
+        try {
+            String[] parts = new String(java.nio.file.Files.readAllBytes(f.toPath()), "UTF-8").trim().split(" ", 3);
+            return parts.length == 3 ? parts : new String[]{parts[0], parts[1], ""};
+        } catch (java.io.IOException | RuntimeException e) {
+            return null;
+        }
+    }
+
+    /** Sets language and font size for run {@code step} and rebuilds the screen; past the last, ends. */
+    private void pageCheckNext(int step, int problems, String original) {
+        LocaleManager locales = getSystemService(LocaleManager.class);
+        if (step >= LANGUAGES.length * PAGE_CHECK_SCALES.length) {
+            store.delete(PAGE_CHECK_FILE);
+            pageCheck = null;
+            android.util.Log.i(LayoutCheck.TAG, "page check done: " + problems + " problem(s) in " + LANGUAGES.length
+                    + " languages at font scale 1.0 and 1.3");
+            // "" is the phone's own language; forLanguageTags("") would pick a language of its own.
+            LocaleList back = original.isEmpty() ? LocaleList.getEmptyLocaleList() : LocaleList.forLanguageTags(original);
+            // A new language rebuilds the screen by itself; calling recreate() as well raced it and
+            // the old language stayed on screen.
+            if (!back.equals(locales.getApplicationLocales())) locales.setApplicationLocales(back);
+            else recreate();
+            return;
+        }
+        store.write(PAGE_CHECK_FILE, step + " " + problems + " " + original);
+        LocaleList want = LocaleList.forLanguageTags(LANGUAGES[step / PAGE_CHECK_SCALES.length]);
+        if (!want.equals(locales.getApplicationLocales())) locales.setApplicationLocales(want);
+        else recreate(); // same language, other font size
+    }
+
+    private void pageCheckRun() {
+        if (pageCheck == null) return;
+        final int step = Integer.parseInt(pageCheck[0]);
+        final int[] problems = {Integer.parseInt(pageCheck[1])};
+        final String original = pageCheck[2];
+        final String where = LANGUAGES[step / PAGE_CHECK_SCALES.length] + " x"
+                + PAGE_CHECK_SCALES[step % PAGE_CHECK_SCALES.length] + " ";
+        final String[] names = {"disclaimer", "howto", "pfand", "settings", "stats", "learned", "jev",
+                "about", "licenses", "privacy", "guide", "crates"};
+        final Runnable[] pages = {
+                new Runnable() { @Override public void run() { showDisclaimer(); } },
+                new Runnable() { @Override public void run() { showHowTo(); } },
+                new Runnable() { @Override public void run() { showPfand(); } },
+                new Runnable() { @Override public void run() { showSettings(); } },
+                new Runnable() { @Override public void run() { showStats(); } },
+                new Runnable() { @Override public void run() { showLearned(); } },
+                new Runnable() { @Override public void run() { showJevSettings(); } },
+                new Runnable() { @Override public void run() { showAbout(); } },
+                new Runnable() { @Override public void run() { showLicenses(); } },
+                new Runnable() { @Override public void run() { showPrivacy(); } },
+                new Runnable() { @Override public void run() { guideByHand(); } },
+                new Runnable() { @Override public void run() { showCrates(); } },
+        };
+        final int[] at = {0};
+        final Runnable[] next = {null};
+        next[0] = new Runnable() {
+            @Override public void run() {
+                if (pageCheck == null) return;
+                if (openDialog != null) {
+                    AlertDialog shown = openDialog;
+                    problems[0] += LayoutCheck.walk(shown.getWindow().getDecorView(), where + names[at[0] - 1]);
+                    shown.dismiss();
+                    openDialog = null;
+                } else if (at[0] > 0) {
+                    android.util.Log.w(LayoutCheck.TAG, where + names[at[0] - 1] + ": window did not open");
+                    problems[0]++;
+                }
+                if (at[0] == pages.length) {
+                    pageCheckNext(step + 1, problems[0], original);
+                    return;
+                }
+                pages[at[0]++].run();
+                listView.postDelayed(next[0], 700);
+            }
+        };
+        next[0].run();
     }
 
     private void showNoDeposit(final String code, String name) {
@@ -2399,20 +2510,59 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
     /** Marks a half-width button: its label may take two lines (LayoutCheck allows that). */
     static final String TILE = "tile";
 
+    /** The three design choices in one row; the chosen one (0 system, 1 light, 2 dark) is ticked. */
+    static RadioGroup themeRow(Context ctx, int now) {
+        RadioGroup themes = new RadioGroup(ctx);
+        themes.setOrientation(LinearLayout.HORIZONTAL); // one row instead of three
+        // Aligned by baseline, a label that wraps pushed its button down and the row cut off its second line.
+        themes.setBaselineAligned(false);
+        int[] themeNames = {R.string.theme_system, R.string.theme_light, R.string.theme_dark};
+        for (int i = 0; i < themeNames.length; i++) {
+            RadioButton b = new RadioButton(ctx);
+            b.setId(1000 + i);
+            b.setText(themeNames[i]);
+            // A long word ("Systemstandard") is split at a syllable with a hyphen, not anywhere.
+            b.setHyphenationFrequency(android.text.Layout.HYPHENATION_FREQUENCY_FULL);
+            themes.addView(b, new RadioGroup.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+        }
+        themes.check(1000 + now);
+        return themes;
+    }
+
     /** Two buttons side by side, equally wide and equally tall. */
     static LinearLayout pair(Context ctx, Button a, Button b) {
-        LinearLayout row = new LinearLayout(ctx);
+        // Both as tall as the taller one. MATCH_PARENT did that too, but a label that shrinks to
+        // fit (auto-size) came out a few pixels taller than the row and lost its bottom edge.
+        LinearLayout row = new LinearLayout(ctx) {
+            @Override protected void onMeasure(int widthSpec, int heightSpec) {
+                super.onMeasure(widthSpec, heightSpec);
+                int tallest = 0;
+                for (int i = 0; i < getChildCount(); i++) tallest = Math.max(tallest, getChildAt(i).getMeasuredHeight());
+                for (int i = 0; i < getChildCount(); i++) {
+                    View c = getChildAt(i);
+                    c.measure(MeasureSpec.makeMeasureSpec(c.getMeasuredWidth(), MeasureSpec.EXACTLY),
+                            MeasureSpec.makeMeasureSpec(tallest, MeasureSpec.EXACTLY));
+                }
+                setMeasuredDimension(getMeasuredWidth(), tallest + getPaddingTop() + getPaddingBottom());
+            }
+        };
         row.setOrientation(LinearLayout.HORIZONTAL);
+        row.setBaselineAligned(false);
         int gap = (int) (8 * ctx.getResources().getDisplayMetrics().density);
-        LinearLayout.LayoutParams la = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
+        LinearLayout.LayoutParams la = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
         la.setMarginEnd(gap / 2);
-        LinearLayout.LayoutParams lb = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
+        LinearLayout.LayoutParams lb = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
         lb.setMarginStart(gap / 2);
         // A little smaller and with less side padding, so long labels (French, Russian at large
         // font) stay within two lines.
         for (Button t : new Button[]{a, b}) {
             t.setTag(TILE);
             t.setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 13);
+            // At a large font size long labels shrink to stay within two lines, and a long word
+            // is split at a syllable with a hyphen.
+            t.setMaxLines(2);
+            t.setHyphenationFrequency(android.text.Layout.HYPHENATION_FREQUENCY_FULL);
+            t.setAutoSizeTextTypeUniformWithConfiguration(10, 13, 1, android.util.TypedValue.COMPLEX_UNIT_SP);
             t.setPadding(gap, t.getPaddingTop(), gap, t.getPaddingBottom());
             // The picture was sized for the old letters (withIcon); shrink it along.
             if (t.getText() instanceof android.text.Spanned) {

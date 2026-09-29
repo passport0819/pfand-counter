@@ -1,6 +1,6 @@
 Pfand Counter to kalkulator kaucji za butelki na Niemcy: sumuje kaucję (Pfand) za puste butelki, puszki i skrzynki, gdy skanujesz ich kody kreskowe. Dzięki temu jeszcze przed butelkomatem wiesz, czego się spodziewać.
 
-Kod kreskowy nie zawiera kwoty kaucji. Dlatego aplikacja ma wbudowaną listę kodów ze znaną kaucją, szuka nieznanych w otwartych bazach produktów i zapamiętuje każdą twoją odpowiedź.
+Kod kreskowy nie zawiera kwoty kaucji. Dlatego aplikacja ma wbudowaną listę ponad 2500 kodów ze znaną kaucją, szuka nieznanych w otwartych bazach produktów i zapamiętuje każdą twoją odpowiedź.
 
 <b>Co potrafi</b>
 <ul>

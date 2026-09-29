@@ -80,6 +80,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/total_label"
                 android:textColor="@color/text_dim"
+                android:hyphenationFrequency="full"
                 android:textSize="12sp" />
 
             <TextView

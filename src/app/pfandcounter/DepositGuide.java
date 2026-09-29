@@ -11,7 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
+import java.util.List;
 
 /**
  * "Help me decide": walks through the German deposit rules one picture question at a time,
@@ -100,6 +102,21 @@ final class DepositGuide {
                 new Option(R.drawable.ic_g_glass, R.string.g_o_glass, R.string.g_d_glass, glass),
                 new Option(R.drawable.ic_g_jar, R.string.g_o_jar, R.string.g_d_jar, jar),
                 new Option(R.drawable.ic_g_carton, R.string.g_o_carton, R.string.g_d_carton, carton));
+    }
+
+    /** Every step of the tree once, questions and answers (for LayoutCheck). */
+    static List<Step> steps() {
+        List<Step> all = new ArrayList<>();
+        Deque<Step> todo = new ArrayDeque<>();
+        todo.add(ROOT);
+        todo.add(JAR);
+        while (!todo.isEmpty()) {
+            Step s = todo.poll();
+            if (all.contains(s)) continue;
+            all.add(s);
+            if (s.options != null) for (Option o : s.options) todo.add(o.next);
+        }
+        return all;
     }
 
     private final Context context;

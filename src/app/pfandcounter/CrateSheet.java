@@ -209,6 +209,9 @@ final class CrateSheet {
 
         Button add = button(R.drawable.btn_bg);
         add.setText(R.string.c_own_add);
+        // One line in every language: long words shrink a little instead of wrapping.
+        add.setMaxLines(1);
+        add.setAutoSizeTextTypeUniformWithConfiguration(9, 15, 1, android.util.TypedValue.COMPLEX_UNIT_SP);
         add.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 showForm();
@@ -475,6 +478,8 @@ final class CrateSheet {
     private LinearLayout segments(String[] names, int picked, final Picked listener) {
         final LinearLayout row = new LinearLayout(context);
         row.setOrientation(LinearLayout.HORIZONTAL);
+        // Shrunk words sit lower on their baseline; aligned by it, a button slid out of the row.
+        row.setBaselineAligned(false);
         for (int i = 0; i < names.length; i++) {
             final int index = i;
             Button b = new Button(context);

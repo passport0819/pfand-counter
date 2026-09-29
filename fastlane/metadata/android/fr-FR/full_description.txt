@@ -1,6 +1,6 @@
 Pfand Counter est un calculateur de consigne pour l'Allemagne : il additionne la consigne (Pfand) de vos bouteilles, canettes et casiers vides pendant que vous scannez leurs codes-barres. Vous savez ainsi à quoi vous attendre avant d'aller à l'automate de reprise des bouteilles.
 
-Un code-barres ne contient pas le montant de la consigne. L'application est donc fournie avec une liste de codes-barres dont la consigne est connue, recherche les inconnus dans des bases de données ouvertes de produits et retient chaque réponse que vous lui donnez.
+Un code-barres ne contient pas le montant de la consigne. L'application est donc fournie avec une liste de plus de 2 500 codes-barres dont la consigne est connue, recherche les inconnus dans des bases de données ouvertes de produits et retient chaque réponse que vous lui donnez.
 
 <b>Ce qu'elle fait</b>
 <ul>
@@ -8,7 +8,7 @@ Un code-barres ne contient pas le montant de la consigne. L'application est donc
 <li>Une liste fournie de codes-barres à consigne connue, construite à partir d'Open Food Facts.</li>
 <li>Les codes-barres inconnus sont recherchés sur Open Food Facts, Open Beauty Facts et Open Products Facts. Ce qui n'est manifestement pas une boisson, ainsi que les sirops, n'est pas compté.</li>
 <li>Pour les boissons qu'elle ne peut pas trancher, un petit guide pose des questions sur le contenant et retient votre réponse pour ce code-barres.</li>
-<li>Casiers : consigne du casier, casiers pleins avec leurs bouteilles en un geste et vos propres tailles de casiers.</li>
+<li>Casiers : consigne du casier, casiers pleins avec leurs bouteilles d'un simple appui et vos propres tailles de casiers.</li>
 <li>Une page de statistiques qui reste sur le téléphone.</li>
 <li>Compatible avec TalkBack : chaque scan est annoncé, et « compté », « sans consigne » et « inconnu » vibrent différemment (les sons peuvent être activés dans les paramètres).</li>
 <li>« Supermarché à proximité » ouvre votre application de cartes ; l'application elle-même n'a pas besoin de l'autorisation de localisation.</li>

@@ -1,6 +1,6 @@
 Pfand Counter is a bottle deposit counter for Germany: it adds up the deposit (Pfand) on your empty bottles, cans and crates while you scan their barcodes, so you know what to expect before you go to the reverse vending machine.
 
-A barcode does not carry its deposit. So the app ships a list of barcodes with known deposits, looks up unknown ones in open product databases, and remembers every answer you give it.
+A barcode does not carry its deposit. So the app ships a list of more than 2,500 barcodes with known deposits, looks up unknown ones in open product databases, and remembers every answer you give it.
 
 <b>What it does</b>
 <ul>
@@ -10,18 +10,18 @@ A barcode does not carry its deposit. So the app ships a list of barcodes with k
 <li>For drinks it cannot decide, a short guide asks about the container and remembers your answer for that barcode.</li>
 <li>Crates: crate deposit, full crates with their bottles in one tap, and your own crate sizes.</li>
 <li>A statistics page that stays on the phone.</li>
-<li>Works with TalkBack: every scan is announced, and counted, no deposit and unknown vibrate differently (sounds can be switched on in Settings).</li>
+<li>Works with TalkBack: every scan is announced, and "counted", "no deposit" and "unknown" vibrate differently (sounds can be switched on in Settings).</li>
 <li>"Supermarket nearby" opens your map app; the app itself needs no location permission.</li>
 <li>11 languages: Deutsch, English, Türkçe, Русский, العربية, Polski, Українська, Français, Español, فارسی, Tiếng Việt (machine-translated, improvements welcome).</li>
 </ul>
 
 <b>Optional AI suggestion ("Jev")</b>
-Off after installation. If you switch it on and enter your own key for OpenRouter or TypeSafe (both paid services, not free software), "Ask Jev" sends the product description, never the barcode, and shows a suggested deposit with its measured reliability. You still decide.
+Off after installation. If you switch it on and enter your own key for OpenRouter or TypeSafe (both paid services, not free software), "Ask Jev" sends the product description, never the barcode, and shows a suggested deposit with its measured reliability. The decision stays with you.
 
 <b>Privacy</b>
 No account, no ads, no tracking, no server of its own. Your count stays on your phone. Only the scanned barcode is sent to Open Food Facts to find the product name.
 
 <b>Please note</b>
-The app can be wrong. What counts is what the return machine pays. Written with AI by a layperson, not reviewed by an expert.
+The app can be wrong. What matters is what the return machine pays out. Written with AI by a layperson, not reviewed by an expert.
 
 Product data © Open Food Facts contributors, Open Database License (ODbL).

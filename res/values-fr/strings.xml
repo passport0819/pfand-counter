@@ -73,7 +73,7 @@
     <string name="similar_use">Oui, compter celui-ci</string>
     <string name="learned_open">Codes-barres appris</string>
     <string name="learned_empty">Rien d’appris pour l’instant. L’appli apprend un code-barres quand vous choisissez sa consigne.</string>
-    <string name="forget_all">Oublier tout ce qui a été appris</string>
+    <string name="forget_all">Oublier les codes appris</string>
     <string name="forget_all_q">Oublier tout ce que vous avez appris à l’appli ? Codes-barres appris : %1$d. La liste fournie avec l’appli reste. Cette action est irréversible.</string>
     <string name="forget_all_yes">Tout oublier</string>
     <string name="forget_all_done">Tous les codes-barres appris ont été oubliés</string>

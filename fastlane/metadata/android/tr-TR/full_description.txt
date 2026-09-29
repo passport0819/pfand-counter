@@ -1,6 +1,6 @@
 Pfand Counter, Almanya için bir depozito hesaplayıcıdır: barkodlarını tararken boş şişe, kutu ve kasalarındaki depozitoyu (Pfand) toplar. Böylece iade makinesine gitmeden önce ne alacağını bilirsin.
 
-Barkod depozito tutarını taşımaz. Bu yüzden uygulama, depozitosu bilinen barkodların bir listesiyle gelir, bilinmeyenleri açık ürün veritabanlarında arar ve verdiğin her cevabı hatırlar.
+Barkod depozito tutarını taşımaz. Bu yüzden uygulama, depozitosu bilinen 2.500'den fazla barkodun listesiyle gelir, bilinmeyenleri açık ürün veritabanlarında arar ve verdiğin her cevabı hatırlar.
 
 <b>Neler yapar</b>
 <ul>
@@ -10,7 +10,7 @@ Barkod depozito tutarını taşımaz. Bu yüzden uygulama, depozitosu bilinen ba
 <li>Karar veremediği içeceklerde kısa bir rehber kabı sorar ve o barkod için cevabını hatırlar.</li>
 <li>Kasalar: kasa depozitosu, tek dokunuşla şişeleriyle dolu kasalar ve kendi kasa boyutların.</li>
 <li>Telefonda kalan bir istatistik sayfası.</li>
-<li>TalkBack ile çalışır: her tarama sesli bildirilir; sayıldı, depozito yok ve bilinmiyor farklı titreşir (sesler Ayarlar'dan açılabilir).</li>
+<li>TalkBack ile çalışır: her tarama sesli bildirilir; "sayıldı", "depozito yok" ve "bilinmiyor" farklı titreşir (sesler Ayarlar'dan açılabilir).</li>
 <li>"Yakındaki süpermarket" harita uygulamanı açar; uygulamanın kendisi konum izni istemez.</li>
 <li>11 dil: Deutsch, English, Türkçe, Русский, العربية, Polski, Українська, Français, Español, فارسی, Tiếng Việt (makine çevirisi, iyileştirmeler memnuniyetle karşılanır).</li>
 </ul>

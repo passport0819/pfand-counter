@@ -1,6 +1,6 @@
 Pfand Counter es una calculadora del depósito de envases para Alemania: suma el depósito (Pfand) de tus botellas, latas y cajas vacías mientras escaneas sus códigos de barras. Así sabes qué esperar antes de ir a la máquina de devolución de envases.
 
-Un código de barras no indica el depósito. Por eso la aplicación trae una lista de códigos con depósito conocido, busca los desconocidos en bases de datos abiertas de productos y recuerda cada respuesta que le das.
+Un código de barras no indica el depósito. Por eso la aplicación trae una lista de más de 2500 códigos con depósito conocido, busca los desconocidos en bases de datos abiertas de productos y recuerda cada respuesta que le das.
 
 <b>Qué hace</b>
 <ul>
@@ -16,7 +16,7 @@ Un código de barras no indica el depósito. Por eso la aplicación trae una lis
 </ul>
 
 <b>Sugerencia opcional con IA («Jev»)</b>
-Desactivada tras la instalación. Si la activas e introduces tu propia clave de OpenRouter o TypeSafe (ambos son servicios de pago, no software libre), «Preguntar a Jev» envía la descripción del producto, nunca el código de barras, y muestra un importe de depósito sugerido con su fiabilidad medida. Tú sigues decidiendo.
+Desactivada tras la instalación. Si la activas e introduces tu propia clave de OpenRouter o TypeSafe (ambos son servicios de pago, no software libre), «Preguntar a Jev» envía la descripción del producto, nunca el código de barras, y muestra un importe de depósito sugerido con su fiabilidad medida. La decisión sigue siendo tuya.
 
 <b>Privacidad</b>
 Sin cuenta, sin anuncios, sin rastreo, sin servidor propio. Tu recuento se queda en tu teléfono. Solo el código escaneado se envía a Open Food Facts para encontrar el nombre del producto.

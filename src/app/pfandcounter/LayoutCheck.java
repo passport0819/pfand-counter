@@ -47,7 +47,15 @@ class LayoutCheck {
                 problems += measure(crates(ctx, 1), inDialog, where + " crates-own");
                 problems += measure(crates(ctx, 2), inDialog, where + " crates-help");
                 problems += measure(stats(ctx), inDialog, where + " stats");
-                problems += measure(sheetButtons(ctx), inDialog, where + " buttons");
+                // Inside the page's side padding, as in Settings and About.
+                problems += measure(sheetButtons(ctx), inDialog - (int) (40 * density), where + " buttons");
+                // Settings: the design choices in one row, inside the page's side padding.
+                problems += measure(MainActivity.themeRow(ctx, 0), inDialog - (int) (40 * density), where + " design");
+                // Every question and every answer of "Not sure?".
+                int n = 0;
+                for (DepositGuide.Step step : DepositGuide.steps()) {
+                    problems += measure(guide(ctx, step), inDialog, where + " guide-" + n++);
+                }
             }
         }
         Log.i(TAG, "layout check done: " + problems + " problem(s) in " + languages.length
@@ -68,6 +76,19 @@ class LayoutCheck {
         if (face == 0) sheet.showMain();
         else if (face == 1) sheet.showForm();
         else sheet.showHelp();
+        return host;
+    }
+
+    /** One step of "Not sure?" as the guide window shows it. Choosing does nothing here. */
+    private static View guide(Context ctx, DepositGuide.Step step) {
+        android.widget.LinearLayout host = new android.widget.LinearLayout(ctx);
+        host.setOrientation(android.widget.LinearLayout.VERTICAL);
+        int pad = (int) (20 * ctx.getResources().getDisplayMetrics().density);
+        host.setPadding(pad, pad / 2, pad, pad / 2);
+        new DepositGuide(ctx, host, new DepositGuide.Listener() {
+            @Override public void onChosen(int cents) { }
+            @Override public void onLeave() { }
+        }).start(step);
         return host;
     }
 
@@ -162,12 +183,27 @@ class LayoutCheck {
         if (v instanceof TextView) ((TextView) v).setText(text);
     }
 
-    private static int walk(View v, String where) {
+    /** Also used on the app's real windows (MainActivity's page check). */
+    static int walk(View v, String where) {
         int n = 0;
         if (v.getVisibility() != View.VISIBLE) return 0;
         if (v instanceof ViewGroup) {
             ViewGroup g = (ViewGroup) v;
-            for (int i = 0; i < g.getChildCount(); i++) n += walk(g.getChildAt(i), where);
+            for (int i = 0; i < g.getChildCount(); i++) {
+                View child = g.getChildAt(i);
+                // A text pushed down (or up) out of its row is cut off by the row, even when the
+                // text itself fits its own box.
+                // A scrolling view holds more than it shows on purpose.
+                boolean scrolls = g instanceof android.widget.ScrollView || g instanceof android.widget.AbsListView;
+                if (child instanceof TextView && child.getVisibility() == View.VISIBLE && g.getClipChildren() && !scrolls
+                        && (child.getTop() < -1 || child.getBottom() > g.getHeight() + 1)) {
+                    Log.w(TAG, where + ": \"" + ((TextView) child).getText() + "\" sticks out of its row ("
+                            + child.getTop() + ".." + child.getBottom() + " in " + g.getHeight() + ")");
+                    n++;
+                    continue;
+                }
+                n += walk(child, where);
+            }
             return n;
         }
         if (!(v instanceof TextView)) return 0;
@@ -200,6 +236,17 @@ class LayoutCheck {
         // A half-width button in Settings may take two lines, not three.
         if (MainActivity.TILE.equals(t.getTag())) meant = 2;
         if (issue == null && t instanceof Button && !row && l.getLineCount() > meant) issue = "breaks into " + l.getLineCount() + " lines";
+        // A line that ends inside a word without a hyphen reads as two words ("Systemstan / dard").
+        // With hyphenation on, the platform draws a hyphen at such a break.
+        CharSequence chars = t.getText();
+        boolean hyphens = t.getHyphenationFrequency() != Layout.HYPHENATION_FREQUENCY_NONE;
+        for (int i = 0; issue == null && !hyphens && i < l.getLineCount() - 1; i++) {
+            int end = l.getLineEnd(i);
+            if (end > 0 && end < chars.length() && Character.isLetter(chars.charAt(end - 1))
+                    && Character.isLetter(chars.charAt(end))) {
+                issue = "breaks inside a word";
+            }
+        }
         if (issue == null && t.getHeight() < l.getHeight() + t.getTotalPaddingTop() + t.getTotalPaddingBottom() - 1) {
             issue = "taller than its box";
         }
