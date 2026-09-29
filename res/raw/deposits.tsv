@@ -3,15 +3,12 @@
 # 15 on dairy products: Open Food Facts states dairy, glass and reusable (tools/dairy_jar_rule.py)
 # barcodes and product names: (c) Open Food Facts contributors, Open Database License (ODbL) 1.0, https://opendatacommons.org/licenses/odbl/1-0/
 # this list as a whole is made available under the ODbL 1.0, separately from the app's GPL-3.0 code
-00064181	8	Erfurter brückenn Bier
 0016229901141	25	Foco Coconut Juice
 0038900009472	25	Dole Pineapple 100% Juice
 0048111527498	25	Fanta Orange
 0049000075144	25	Fanta Green Apple
 0201222588028	15	Bissinger Auerquelle Silber
 03213483	25	Red Bull
-0431304273474	15	Solidrinks SOLICOLA
-0506033563529	25	Monster Energy
 0613008715267	25	Arizona Green Tea with Ginseng and Honey
 0722306648952	8	Brauwerk Hamburg Fastmoker
 0730977048032	15	Davidweidehof
@@ -32,19 +29,10 @@
 10001776	25	Coca-Cola Zero
 1005149190000	25	Ikea Dryck rabarber
 10576403	25	Volvic Hibiskus
-10618628	25	Aldi Iso Light - Grapefruit-Citrus
 11038504	15	Rapp's Roter Traubensaft
-11051204	8	Weihenstephaner Hefeweißbier Alkoholfrei
 1210002013000	25	Tropicana Orangensaft ohne Fruchtfleisch
 12706754	15	Rhön Sprudel RhönSprudel leicht&fruchtig
-13238214	15	Mineau
 14392153	25	Saskia Mineralwasser Still
-19613337	25	Mountain Dew
-2000000022610	15	Der Reyerhof Rohmilch-Speisequark
-2000000023959	15	Der Reyerhof Joghurt mild
-2000000032318	8	Wielands 's Gmender Näpperle
-2000000059816	25	Monster Juiced Energy + Juice
-2000000120138	15	Der Reyerhof Erdbeere Joghurt mild
 20030995	25	Saskia mineralwasser classic
 20036935	25	Lidl Milbona Latte Macchiato
 20036959	25	Lidl Milbona Cappuccino
@@ -1719,7 +1707,6 @@
 42213253	25	WIESGART Activ Schorle Apfel-Himbeere-Granatap
 42214403	15	Gerolsteiner Medium
 42214410	15	Gerolsteiner Naturell
-42217093	25	Flirt Zero Orange
 42221418	8	Lübzer Schwarzbier
 42227922	25	Penny Ready Super Smoothie + Chiasamen
 42228035	25	REWE to go Apfel Mango Maracuja Smoothie

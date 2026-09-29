@@ -68,13 +68,21 @@ CARTONS = {"en:brick", "en:tetra-pak", "en:paperboard", "en:cardboard"}
 # A monastery name says nothing about the cap.
 SWING_TOP = ("flensburger", "grolsch", "buegel", "bügel")
 
+def gtin_ok(code):
+    """The GS1 check digit adds up. A code that fails it is a typo in Open Food Facts or a short
+    UPC-E read off an EAN-13 (29.09.2026: 11051204 for a 4105120... beer); either way no scan of
+    a German bottle should match it, and a UPC-E phantom would count the wrong bottle."""
+    n = len(code)
+    total = sum((3 if (n - 1 - i) % 2 == 1 else 1) * int(code[i]) for i in range(n - 1))
+    return (10 - total % 10) % 10 == int(code[-1])
+
 def norm_code(code):
     code = (code or "").strip()
     if not code.isdigit():
         return None
     if len(code) == 12:          # UPC-A is read as a 13 digit EAN with a leading zero
         code = "0" + code
-    return code if len(code) in (8, 13) else None
+    return code if len(code) in (8, 13) and gtin_ok(code) else None
 
 def litres(quantity):
     q = (quantity or "").lower().replace(",", ".")
