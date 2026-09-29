@@ -1122,6 +1122,12 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         wrap.addView(statsButton, pp);
         Button learnedButton = sheetButton(R.drawable.ic_h_scan, R.string.learned_open);
         wrap.addView(learnedButton, pp);
+        // Jev and About sit here, not under the page: three buttons down there stacked up and
+        // had to be scrolled once the page grew (29.09.2026).
+        Button jevButton = sheetButton(R.drawable.ic_b_ai, R.string.jev_settings);
+        wrap.addView(jevButton, pp);
+        Button aboutButton = sheetButton(R.drawable.ic_b_info, R.string.settings_about);
+        wrap.addView(aboutButton, pp);
         Button mapButton = sheetButton(R.drawable.ic_h_shop, R.string.map_open);
         wrap.addView(mapButton, pp);
         TextView mapNote = new TextView(this);
@@ -1222,24 +1228,6 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
                 .setTitle(R.string.settings)
                 .setView(scroll)
                 .setPositiveButton(R.string.close, null)
-                .setNeutralButton(R.string.jev_settings, new DialogInterface.OnClickListener() {
-                    @Override public void onClick(DialogInterface d, int which) {
-                        openLater(new Runnable() {
-                            @Override public void run() {
-                                showJevSettings();
-                            }
-                        });
-                    }
-                })
-                .setNegativeButton(R.string.settings_about, new DialogInterface.OnClickListener() {
-                    @Override public void onClick(DialogInterface d, int which) {
-                        openLater(new Runnable() {
-                            @Override public void run() {
-                                showAbout();
-                            }
-                        });
-                    }
-                })
                 .setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override public void onDismiss(DialogInterface d) {
                         if (openDialog == d) openDialog = null;
@@ -1270,6 +1258,26 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 openMapSearch();
+            }
+        });
+        jevButton.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                dialog.dismiss();
+                openLater(new Runnable() {
+                    @Override public void run() {
+                        showJevSettings();
+                    }
+                });
+            }
+        });
+        aboutButton.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                dialog.dismiss();
+                openLater(new Runnable() {
+                    @Override public void run() {
+                        showAbout();
+                    }
+                });
             }
         });
         learnedButton.setOnClickListener(new View.OnClickListener() {
