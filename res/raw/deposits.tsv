@@ -1,0 +1,2796 @@
+# Pfand Counter — shipped deposit list, built by tools/seed-build.py
+# code<TAB>cents<TAB>name   |  25 = single-use can (law), 8 = German glass beer (custom)
+# 15 on dairy products: Open Food Facts states dairy, glass and reusable (tools/dairy_jar_rule.py)
+# barcodes and product names: (c) Open Food Facts contributors, Open Database License (ODbL) 1.0, https://opendatacommons.org/licenses/odbl/1-0/
+# this list as a whole is made available under the ODbL 1.0, separately from the app's GPL-3.0 code
+00064181	8	Erfurter brückenn Bier
+0016229901141	25	Foco Coconut Juice
+0038900009472	25	Dole Pineapple 100% Juice
+0048111527498	25	Fanta Orange
+0049000075144	25	Fanta Green Apple
+0201222588028	15	Bissinger Auerquelle Silber
+03213483	25	Red Bull
+0431304273474	15	Solidrinks SOLICOLA
+0506033563529	25	Monster Energy
+0613008715267	25	Arizona Green Tea with Ginseng and Honey
+0722306648952	8	Brauwerk Hamburg Fastmoker
+0730977048032	15	Davidweidehof
+0745760683550	8	Kraftpaule Dunkles
+0768114024755	8	The Baltic Brewery Chameleon India Pale Ale
+0768114024809	8	The Baltic Brewery Voyage Pale Ale
+0776029706093	25	Moosehead Tropical Punch Neon Radler
+07818707	25	A&W Root Beer
+08011145	25	Türtamek Mango Nektar
+08223012	25	Lipton ZERO Ice Tea Pfirsich
+08419866	25	Red Bull sugar-free
+0842595113105	25	C4 Explosive Energy Drink
+0842595113129	25	C4 Energy zuckerfrei Frozen Bombsicle
+0889392010190	25	CELSIUS Peach Vibe Sparkling White Peach Editi
+0890545555154	8	CBS Studios Inc. Syndicate
+0898999000022	25	Vita Coco Coconut Water
+09270756	15	Club-Mate
+10001776	25	Coca-Cola Zero
+1005149190000	25	Ikea Dryck rabarber
+10576403	25	Volvic Hibiskus
+10618628	25	Aldi Iso Light - Grapefruit-Citrus
+11038504	15	Rapp's Roter Traubensaft
+11051204	8	Weihenstephaner Hefeweißbier Alkoholfrei
+1210002013000	25	Tropicana Orangensaft ohne Fruchtfleisch
+12706754	15	Rhön Sprudel RhönSprudel leicht&fruchtig
+13238214	15	Mineau
+14392153	25	Saskia Mineralwasser Still
+19613337	25	Mountain Dew
+2000000022610	15	Der Reyerhof Rohmilch-Speisequark
+2000000023959	15	Der Reyerhof Joghurt mild
+2000000032318	8	Wielands 's Gmender Näpperle
+2000000059816	25	Monster Juiced Energy + Juice
+2000000120138	15	Der Reyerhof Erdbeere Joghurt mild
+20030995	25	Saskia mineralwasser classic
+20036935	25	Lidl Milbona Latte Macchiato
+20036959	25	Lidl Milbona Cappuccino
+20147075	25	BIO SONNE Bio-Kokusnussmilch
+20171124	25	Saguaro Saskia mineralwasser
+20173807	25	Solevita Nectar d'orange à base concentré
+20302719	25	Saguaro Mineral
+20458942	25	Solevita Appelnectar
+20917609	25	Lidl Kong Strong Wild Power Energy Drink Sugar
+21107443	25	Aldi Fanta Lemon
+21936159	25	BULLIT Energy Drink Berry Mix
+22129284	25	rio d'oro Apfelsaft
+22171221	25	Milfina Ayran
+23293823	25	San Benedetto Ben‘s Bitter Rosso
+25190182	25	Aldi Zero Sugar Cola
+2717188100351	25	Krumbach Naturell
+28301004	25	Penny Ready Direksaft Blutorange
+29001170	25	Frucht Oase Mango Maracuja Nektar
+3057640186158	25	Wasser Volvic naturelle, 6erPack
+3057640222108	25	Volvic Mediumperlig 1,5 L EW
+3057640257773	25	Volvic Eau Minérale Naturelle
+3057640257858	25	Volvic Eau minérale naturelle volcanique
+3057640348938	25	Volvic TOUCH Frucht Rote Früchte 1,5l PET
+3057640349263	25	Volvic Tee création 1,5 L Pfirsich
+3057640376153	25	Danone Volvic Touch Rote Früchte 1,5L
+3057640376498	25	Danone Volvic Tee Pfirsich 1,5 L EW
+3057640423833	25	Danone volvic Volvic Touch
+3057640443893	25	Volvic Tee Granatapfel
+3057640450808	25	Volvic Tee Minz Geschmack
+3057640451133	25	Volvic Tee mit Grüntee-Extrakt & Minz-Geschmac
+3057640453298	25	Danone Volvic Touch Pfirsich, 1,5 l
+3057640484148	25	Volvic Tee mit Grüntee Honig Ingwer
+3057640485053	25	Volvic Touch Refresh Edition Holunderblüte
+3057640503283	25	Volvic essence Apfel-Zitrone-Ingwer 0,75L
+3057640503528	25	Volvic essence Gurke-Minze-Basilikum 0,75L
+3057640549403	25	Volvic Essence Orange-Holunderblüte 1,25L
+3057640549748	25	Volvic essence Gurke-Minze-Basilikum 1,25L PET
+3057640574658	25	Volvic Tee Sugarfree ZERO Pfirsich 1,5 L EW
+3068320018409	25	Danone evian
+3068320040127	25	Evian Natural mineral water
+3068320055022	25	Evian 6x50cl PET
+3068320084602	25	Evian Mineralwasser, PET, 1.5L
+3068320113029	25	Danone Evian 0,5L Premium, ohne Kohlensäure - 
+3068320120263	25	Evian
+3124480182746	25	Orangina Schweppes Tonic Indian
+3124480184337	25	Orangina
+3124480184344	25	Orangina et sa pulpe
+3174780000431	25	Coca-Cola Boisson rafraîchissante aux extraits
+3174780006235	25	Sprite
+3179732353511	25	Vittel Natürliches Mineralwasser
+3179732354020	25	Contrex Mineralwasser, Pet
+3179732361202	25	Vittel Natürliches Mineralwasser
+3244851002579	8	Licorne Black
+3250393058615	25	Kingsbräu Panaché 6x33cl <0.5%
+3502110008329	25	Pepsi 1,5L
+3502110009357	25	Pepsi Max
+3664320011510	25	Quézac L\'originale
+3830001710991	25	Heineken Lasko
+3838471037037	25	Cockta Free
+3838999151390	25	Sola Ice Tea
+3850131400609	25	Zagrebacka pivovara Ožujsko
+4000140012754	25	Schweppes Tonic Water
+4000140700118	25	Schweppes Bitter Lemon
+4000140700170	25	Schweppes American Ginger Ale
+4000140700583	15	Schweppes Russian Wild Berry
+4000140700637	25	Schweppes Wild Berry
+4000140701498	25	Orangina Rouge
+4000140702501	25	Dr Pepper Dr. Pepper CLASSI 330ml 0.75€ plus P
+4000140702846	25	Dr Pepper Cherry
+4000140703881	25	Orangina original
+4000140706202	15	Schweppes Ginger Beer
+4000140708008	25	Schweppes Dry Tonic Water
+4000140710582	25	Schweppes Tonic - Zero Indian Tonic Water
+4000140710612	25	Schweppes Bitter Lemon Zero
+4000140711763	25	Dr Pepper Zero Sugar
+4000140711916	25	Cab Drinks GmbH Dr Pepper - Zero
+4000140711947	25	Schweppes Ginger Ale Zero
+4000140712319	15	Schweppes Indian Tonic Water Zero
+4000140713392	25	Schweppes wild Berry Zero
+4000140714757	25	Cab Drinks GmbH Dr Pepper - Vanilla Float
+4000140714900	25	Schweppes Virgin Mojito
+4000140722226	25	Dr Pepper Strawberries & Cream
+4000173134102	8	Will Bräu Weizen alkoholfrei
+4000173135000	8	Hochstiftliches Brauhaus Bayern Rhön Radler Na
+4000173335059	8	Rhön Radler Natur alkoholfrei
+4000269003350	25	Pitu Premium Caipirinha
+4000547090577	15	Auburg Urquelle
+4000732001166	8	Hochdorfer Maibock
+4000732001463	8	Hochdorfer MaiBock
+4000856002964	8	Warsteiner Alkoholfreies Bier
+4000856003787	25	Warsteiner Radler
+4000856003831	25	Warsteiner Naturradler Zitrone
+4000856005422	8	Warsteiner Pilsener 6erPack
+4000856005446	8	Warsteiner Pilsner
+4000856005958	8	Warsteiner alkoholfrei
+4000856005972	8	Warsteiner Pilsener Alkoholfrei
+4000856007129	8	Warsteiner Radler alkoholfrei
+4000856008423	8	Warsteiner Herb Doppelt gehopft
+4000856008751	25	Warsteiner Brewers Gold Landbier
+4000856107133	8	Warsteiner Radler Zitrone Alkoholfrei
+4000856108734	8	Warsteiner Brewers Gold
+4001029000503	8	untergärige Bierspezialitat Zoller-Hof
+4001179001634	8	Hirsch Natürliches Donau Radler
+4001186801432	15	Residenz Quelle Medium
+4001217003507	15	Emsland Quelle Classic Natürliches Mineralwass
+4001217003620	15	Vivaris Getränke GmbH & Co. KG Emsland Perle l
+4001228511077	15	Alstertaler Natürliches Mineralwasser ohne Koh
+4001228511176	15	Alstertaler medium
+4001228511275	15	Alstertaler Mineralwasser
+4001228513088	15	Magnus Mineralwasser
+4001228513095	15	Magnus Natürliches Mineralwasser still
+4001228513170	15	Magnus classic
+4001228513774	15	Magnus Brause Waldmeister
+4001246031045	15	Dreiser medium natürliches Mineralwasser
+4001246091063	25	Dreiser Medium
+4001325002058	15	Göppinger Medium
+4001325002911	15	Naturpark Quelle Water Medium
+4001325064759	15	Aqua Römer Zitronen Limonade
+4001325065459	15	Aqua Römer Direktsaft Apfelschorle
+4001325088311	15	Deit Zuckerfrei Zitrone
+4001354240216	15	Aquarissima Naturquelle Medium
+4001354240612	15	Rhenser Mineralbrunnen Classic
+4001354243316	15	Rhenser Mineralbrunnen Drusus Quelle Classic
+4001428000302	15	alwa medium
+4001428001880	15	Alwa Naturelle
+4001428002283	25	Aqua Vitale Naturelle
+4001428004317	15	Markgrafen Mineralwasser Medium
+4001428004393	15	Alwa Classic
+4001428004454	15	Alwa medium
+4001428065400	15	Aqua Vitale Classic
+4001428065417	15	Aqua Vitale medium
+4001486049633	25	Spezi Spritz Deluxe
+4001486070101	25	Katlenburger Tropica - Sex on the Beach
+4001513001115	25	Gerolsteiner Orangen Limonade
+4001513001504	25	Gerolsteiner Gesprudelter Lemon Geschmack
+4001513005830	25	Gerolsteiner Medium
+4001513007629	25	Gerolsteiner Sprudel
+4001513007650	25	ALDI GEROLSTEINER Mineralwasser Sprudel Classi
+4001513007704	25	Gerolsteiner Medium 1,5 Liter
+4001513008053	25	Gerolsteiner Sprudelnder Himbeere Geschmack
+4001513008589	25	Gerolsteiner und Frucht
+4001513008602	25	Gerolsteiner Linée, Litschi Limette
+4001513009708	25	Gerolsteiner Sprudel
+4001513009722	25	Gerolsteiner Medium
+4001513101396	25	Gerolsteiner Brunnen Gerolsteiner Sprudel 6 x 
+4001568200518	15	Vitamalz Malzbier
+4001568702050	25	Vitamalz GmbH Vitamalz
+4001653001518	15	Bad Pyrmonter Medium
+4001716011126	15	beckers bester Klarer Apfelsaft
+4001716011225	15	beckers bester Cranberry
+4001716014523	15	Beckers bester Tomatensaft
+4001716014721	15	Beckers Kirsch Saft
+4001716015728	15	beckers bester Apfelsinensaft
+4001716016527	15	beckers bester Multivitaminsaft
+4001716017920	15	Beckers Bester Frühstücksvitamine ACE
+4001716017937	15	Beckers Bester Roter Kinderpunsch
+4001716062722	15	Ohlenhof Sauerkirsch Nektar
+4001716065327	15	Unser Norden Naturtrüber Apfelsaft
+4001716065341	15	coop Feine Lebensmittel Multivitamin-Mehrfruch
+4001766001337	15	Kumpf Apfel-Johannisbeer-Saft
+4001766031556	15	Kumpf Starke Früchtchen
+4001784010410	15	Bad Brückenauer MW Spritzig
+4001784010458	15	Bad Brückenauer Orange-Maracuja
+4001784010519	15	Bad Brückenauer Mineralwasser
+4001982148182	8	Dortmunder Actien-Brauerei DAB Pilsener
+4002103000044	8	ERDINGER Pikantus
+4002103000105	8	Erdinger Weissbier
+4002103019107	8	Erdinger Alkoholfreies Weizen
+4002103217275	8	ERDINGER Alkoholfrei
+4002103236122	8	ERDINGER Urweisse 0,5l
+4002103248118	8	Erdinger Alkoholfrei
+4002103248323	8	Erdinger Dunkel-weizen
+4002103249535	8	Erdinger Alkoholfrei
+4002103295686	25	ERDINGER alkoholfrei (Dose)
+4002103296775	8	Erdinger Weissbräu ERDINGER Alkoholfrei Zitron
+4002103296782	8	ERDINGER Alkoholfrei Zitrone
+4002103297512	8	ERDINGER Alkoholfrei Grapefruit
+4002208017404	25	Gaffel Kölsch
+4002208017947	8	Gaffel Sonnen Hopfen
+4002227002641	8	Dithmarscher naturtrüb
+4002343000200	15	Ensinger Zitrone
+4002343022905	25	Ensinger Heimat Spritz
+4002453000473	8	Stauder Alkoholfrei
+4002453001104	8	Stauder Pils Beer
+4002453001111	8	Stauder tut gut alkoholfrei
+4002547178828	25	Carissima Ice Tea Peach & Wine Spritz
+4002566004191	25	Gazi Ayran
+4002627400856	25	Ileburger Ilis Brause
+4002627400894	25	Ileburger Ilis Brause
+4002627403659	25	Franken Brunnen Natürliches Mineralwasser Spri
+4002627405752	25	Sachsenquelle fruit & water Brombeere
+4002627405769	25	Ileburger Sachsen Quelle fruit & water Pfirsic
+4002627800267	15	Frankenbrunnen Naturelle Silvana Quelle
+4002627800731	15	Basinus Zitronenlimonade
+4002627803824	15	Frankenbrunnen Select Pink Grapefruit-Cranberr
+4002627803855	15	Franken Brunnen Mineralwasser medium + Brombee
+4002627806610	15	Cascada Medium
+4002627806627	15	Cascada Classic aus der Bonaris Quelle
+4002631015077	8	Karlsberg Urpils
+4002631015275	8	Karlsberg Weizen Radler
+4002631015688	8	Karlsberg Natur Radler
+4002631015909	8	Karlsberg Mixery Cola
+4002631015916	8	Karlsberger Mixery
+4002631016715	8	Karlsberg Mixery Iced Blue
+4002631019143	8	Zischke Kellerbier Original
+4002631021207	25	Karlsberg Mixery Ultimate Iced Tea Peach
+4002631022334	25	Karlsberg Mixery - Cola-Bier-Orange
+4002631023096	25	Karlsberg Grapefruit alkoholfrei
+4002631028039	25	Karlsberg Mixery Bier + Cola
+4002631028114	25	Karlsberg Mixery Iced Blue
+4002798021225	8	Licher 1854 Kellerbier
+4002798021294	8	Licher Natur Radler
+4002817025609	8	Glaabsbräu Naturradler
+4002846034306	15	Mio Mio Cola Original
+4002846034504	15	Berentzen Mio Mio Mate Original
+4002846034542	15	Mio Mio Mate Zero
+4002846034559	15	Mio Mio Mate MioMio Mate Banana
+4002846034603	15	Mio Mio Mate Ginger
+4002846034702	15	Mio Mio Lapacho Lemongrass
+4002846034757	15	Mio Mio Pomegranate + Guarana
+4002846034887	15	Mio Mio Orange + Koffein
+4002846034894	15	Mio Mio GmbH Lemon +
+4002846034962	15	Mio Mio Misch Masch
+4002919000832	15	Steinsieker Medium
+4002919001167	15	Heiligentaler medium
+4002968004522	15	Tönissteiner Apfelschorle
+4002971006308	15	Ehrmann Allgäuer Joghurt
+4002971840407	15	Ehrmann Almigurt Fruchtjoghurt Himbeere
+4002971840704	15	Almighurt Joghurt mild, Stracciatella
+4002971842104	15	Ehrmann Almighurt Schokolade
+4002971842708	15	Almighurt Fantasie - Vanilla-Himbeere
+4002974011507	8	Herrenhäuser Premium Pilsener Alkoholfrei
+4003227023100	8	Früh Kölsch 0,0% alkoholfrei
+4003227031105	8	Früh Radler
+4003227802019	8	Schreckenskammer
+4003240036002	25	Albi Milder Apfel
+4003304086004	25	Prinz Luipold Brauerei König Ludwig Weissbier 
+4003304122009	8	König Ludwig Brauerei König Ludwig Dunkel
+4003304142205	8	König Ludwig Brauerei König Ludwig Weissbier h
+4003310019201	25	Söhnlein Brillant Sparkling - Pink Ice
+4003351400464	15	Godehard Urquelle Classic
+4003490014546	25	Hochwald Eiskaffee
+4003490090106	25	Hochwald Eisschoko
+4003490099376	25	Hochwald Eiskaffee
+4003490099406	25	Hochwald Espresso
+4003669016203	8	Schneider Weisse, Weissbier, Original
+4003669016708	8	Schneider Weisse Leichte Weisse Weissbier Tap1
+4003669016807	8	G. Schneider & Sohn Schneider Weisse Weissbier
+4003704002185	15	Stengers Saurer Apfelwein
+4003767003877	8	Braustübl Weißbier Alkoholfrei
+4003840001820	25	Hitschies Saure Drachenzungen Brizzl Brause Pf
+4003883594808	8	EKU 28
+4003892013512	8	Jacobinus Klosterbiere Classic
+4003904033514	15	Bad Liebenzeller Fit & Fresh Apfelschorle
+4003904937034	25	Bad Liebenzeller Medium
+4004019014115	8	Fentimans Lemon Shandy
+4004019073013	25	Prime Blue Raspberry Flavour
+4004042010603	15	Elisabethen Quelle Elisabethen
+4004042010627	15	Hassia Getränke Wasser Elisabethen Mineralwass
+4004042014274	15	Elisabethenquelle Spritzig natriumarm Mineralw
+4004042016100	15	Rosbacher isofit
+4004042020213	15	hassia Zitronenlimonade
+4004042055130	25	bizzl Zitronenlimonade
+4004042055154	25	bizzel Bizzl Mandarine Mango
+4004042210010	15	Hassia Sprudel
+4004042210140	15	hassia Sprudel
+4004042210324	15	hassia Wasser
+4004042227322	15	Bizzl Cola - Mix
+4004042240321	15	Bizzl lemon kalorienarm
+4004042241328	15	bizzl COLA-MIX ZUCKERFREI
+4004042243322	15	Bizzl orange
+4004042245425	15	Bizzl Naturherbe Zitrone Zuckerfrei
+4004042245432	15	Bizzl Pink Grapefruit
+4004042249324	15	Bizzl Apfelsaftschorle
+4004042251327	15	bizzl Vitamin
+4004042254038	15	Hassia Mineralquelle Premium Limonade Feine Jo
+4004042410212	15	Azur wasser
+4004042410229	15	Azur Mineralwasser
+4004042412025	15	Orion Medium
+4004042453127	15	TERRA - Mineralwasser - spritzig
+4004042640077	25	Rosbacher Naturell Ohne Kohlensäure
+4004042640411	25	Hassia Mineralquellen Azur Spritzig, Natürlich
+4004042641333	25	Rosbacher Klassisch: Natürliches Mineralwassr 
+4004042977203	25	Rosbacher Klassisch: Natürliches Mineralwasser
+4004078001392	25	Einbecker Brauhaus AG Einbecker Brauherren Pil
+4004078004201	8	Einbecker Brauhaus AG Einbecker Brauherren Pil
+4004078004508	8	Einbecker Mai Ur Bock
+4004154010027	15	Burkhardt Apfel
+4004154015602	15	Burkhardt Fruchtsäfte Birnensaft Direktsaft Na
+4004154016333	15	Burkhardt “Von der Alb” Streuobst Apfelsaft Sc
+4004154018627	15	Burkhardt Streuobst-Bio-Apfel
+4004154020101	15	burkhart Orangensaft
+4004154020231	15	Fauna Orangensaft
+4004154020620	15	Burkhardt Orange Direkt
+4004154021375	15	Burkhardt Orange-Mandarine Mild
+4004154030025	15	Burkhardt Johannisbeere
+4004154035204	15	Burkhardt Cranberry Nektar
+4004154050023	15	Burkhardt Saft Sauerkirsche
+4004154070205	15	Burkhardt Guten morgen drink
+4004154070304	15	burkhardt Frühstücks-Vitamine (Ballaststoffhal
+4004154072506	15	Burkhardt Roter Mehrfruchtsaft
+4004154074029	15	Burkhardt Vital Trunk ACE
+4004154084028	15	Burkhardt Maracuja
+4004160005338	8	Berliner Pilsner
+4004160019410	8	Berliner Pilsner Berliner Pilsener Bier
+4004191001224	15	Rabenhorst Heisser Rabe
+4004191001248	15	Rabenhorst Heißer Apfel-Ingwer
+4004191001941	15	Rabenhorst Traube & Kirsche
+4004191005536	15	Rotbäckchen Immunstark
+4004191005659	15	Rabenhorst 11 PLUS 11 OBST & GEMÜSE
+4004191015863	25	Rabenhorst Lernstark
+4004191505296	25	Rabenhorst Antioxidantien
+4004209003417	8	Gilden Kölsch
+4004210000528	15	Sinziger
+4004210000665	15	Gerri Grapefruit light
+4004210805208	15	Gerri Zero Orange
+4004315000119	15	Possmann Frankfurter Äpfelwein Der Klassiker
+4004315000317	15	Possmann Apfelsaft Naturtrüb
+4004315005022	25	FAW Vetriebsges. mbh Naturtrüber Apfelsaft Dir
+4004661066319	15	Jacoby Apfelsaft naturtrüb
+4004661066814	15	Apfelgarten Apfelsaft aus Apfelsaftkonzentrat
+4004661067019	15	Jacoby Apfelmost
+4004768250048	15	Allgäuer Alpenwasser s'middlere
+4004866361554	25	Hacker Pschorr Münchner Hell
+4004866721204	8	hacker pschorr Münchner Kellerbier
+4004866721556	8	Hacker Pschorr Hell
+4004880029003	15	Bad Dürrheimer Légère
+4004880048400	15	Bad Dürrheimer Natürliches Mineralwasser Natur
+4005154001053	8	Arcobräu Pilsener
+4005154008007	8	Arcobräu Schloss Dunkel
+4005154011243	8	Arcobräu Moos Mooser Liesl
+4005154101203	8	Arcobräu Zwicklbier
+4005163055207	15	DAUNER ORange Kalorienarm
+4005249000343	8	Veltins Pilsener Bier
+4005249001340	8	Grevensteiner Natur-Radler
+4005249002019	8	Grevensteiner C. & A. Veltins
+4005249002521	8	Veltins Pilsner Alkoholfrei
+4005249005102	8	Veltins Pilsener
+4005249007472	8	Veltins V+ Cola
+4005249008882	8	Veltins Radler
+4005249061702	8	Veltins Pülleken
+4005249061733	8	Veltins Helles Pülleken
+4005249062525	25	Veltins V+ Lemon
+4005249063294	8	Veltins Sprizz Bitter-Orange
+4005249065076	8	Helles Pülleken alkoholfrei
+4005338000575	8	Hofbrauhaus Freising Lagerbier alkoholfrei
+4005338000759	8	Graf zu Toerring-Jettenbach Moy Bier Helles
+4005686001156	8	Hofbräu Helles Bier Münchiner art
+4005686001361	8	Hofbräuhaus Helles Vollbier
+4005720000862	25	Volvic Tee Zitrone 1,5 L EW
+4005773002257	8	Hütt Radler
+4005873210040	8	ERDINGER Brauhaus Helles
+4005906002109	15	Adelholzener Mineralwasser naturell
+4005906002123	15	Adelholzener Mineralwasser classic
+4005906002215	15	Adelholzner Lemon Sport
+4005906002246	15	Adelholzener Orange sport
+4005906002277	15	Adelholzner Pfirsich Holunderblüte
+4005906002529	15	Adelholzener Bio Rhabarber
+4005906002628	15	Adelholzener Limette
+4005906002642	15	Adelholzener Zitrone Limonade mit Zitronengesc
+4005906002758	15	Adelholzener Bio Apfelschorle
+4005906002765	15	Adelholzener Apfelschorle
+4005906002819	15	Adelholzener Holler Vitamin-Getränk
+4005906002857	15	Adelholzener Eistee Zitrone
+4005906002956	15	Adelholzener Bio Orange
+4005906003724	15	Adelholzener Wasser naturell
+4005906004370	15	Adelholzener Cherry + Sport
+4005906005094	15	Adelholzener Heimische Apfelschorle
+4005906005469	15	Adelholzener bio Schorle Apfel
+4005906215462	15	Adelholzener Bio Apfelschorle
+4005906274766	25	Active O2 Orange Sternfrucht
+4005906275466	15	Adelholzener Apfelschorle bio
+4005971394307	25	Havana Club Cuban Rum Mixed With Cola
+4006220015035	25	Valensina Pink grapefruit
+4006298002104	8	Tucher Urbräu Nürnberger Hell
+4006298002708	8	Tucher Nürnberger Christkindlesmarkt Bier
+4006298008007	8	Tucher Reifbräu
+4006298013605	8	Tucher Nürnberg Lager Hell
+4006298512009	8	Hasen-Bräu Oster-Festbier
+4006693800114	8	Auerbräu Rosenheimer Helles
+4006693800190	8	Auerbräu 111 Zwickl Naturtrüb
+4006714105013	25	Sugar Mami Sugarmami peach
+4006770310260	25	Fürstenberg Getränke Natur Radler
+4007416090256	8	Ganter Urtrunk
+4007416900524	8	Ganter Brauerei Freiburg Biere
+4007452000028	15	Bittenfelder Birnensaft
+4007452000066	15	Bittenfelder Traubensaft
+4007452000257	15	Bittenfelder Apfel-Holunder-Saft
+4007452000318	15	Bittenfelder Spezialitäten Biramost
+4007452000912	15	Rottenburger Apfelsaft
+4007452000943	15	Bittenfelder Filder Apfelsaft Direktsaft
+4007606000157	8	Schwaben Bräu Das Kellerpils
+4007606000324	8	Schwaben Bräu Das Echte Märzen
+4007606000348	8	Schwaben Bräu Original
+4007606000355	8	Schwaben Bräu Das Schwarze
+4007606000478	8	Schwaben Bräu Das Herbe
+4007656021003	15	Schwarzwald Sprudel medium
+4007656063263	25	Vitrex Naturelle - Natürliches Mineralwasser o
+4007656063324	25	Vitrex mit Erdbeer Geschmack
+4007656063362	25	Vitrex Pfirsich
+4007656063386	25	Schwarzwald-Sprudel Wildberg Vitrex Wasser mit
+4007656063522	25	Schwarzwald Sprudel Vitrex; Mango-Maracuja
+4007675882333	25	SL Premium Soda The Classics Lemonade Zitronen
+4008073107103	15	Frische Brise Marius Mineral Quelle
+4008109434500	8	hoepfner Radler
+4008109446107	8	Höpfner Rosébock
+4008109600554	25	hoepfner Pilsner
+4008287050134	25	Krombacher Pils
+4008287052022	8	Krombacher Brauerei Alkoholfrei Pils 400828705
+4008287052527	8	Krombacher Pils alkoholfrei
+4008287052930	25	Krombacher Alkoholfrei 0,5l
+4008287054026	8	Krombacher Pils
+4008287056020	8	Krombacher Pils
+4008287062021	8	Krombacher Weizen
+4008287064025	8	Krombacher Weizen Alkoholfrei
+4008287070026	8	Cab Drinks GmbH Cab, Cola-Beer
+4008287070439	25	Cab Cola & Beer
+4008287073225	8	Krombacher Radler alkoholfrei
+4008287073522	8	Krombacher Radler
+4008287910582	8	Krombacher Radler naturtrüb
+4008287910650	8	Krombacher Dunkel
+4008287914498	8	Krombacher Pils isotonisch
+4008287919554	25	Krombacher‘s Fassbrause (Cola & Orange)
+4008287927276	8	Krombacher Limobier Mango-Maracuja
+4008287949544	25	Krombacher Spezi
+4008287959192	25	Drinks & More GmbH & Co. KG Knabe Malz
+4008287962079	25	Krombacher Naturradler 0,0 % alkoholfrei
+4008451800503	15	Unsere kleine Molkerei Vollmilch Bio
+4008451800558	15	Unsere kleine Molkerei Fettarme Milch
+4008458038008	15	OberSelters Mineralbrunnen Nassauer Land Class
+4008471492825	15	Paul Söbbeke Söbbeke Bio Rahmjoghurt mild 10 %
+4008471493587	15	Söbbeke Mango cremejoghurt mild
+4008471494706	15	Söbbeke Joghurt mild Mandarine Guave
+4008471494775	15	Söbbeke Bio Pfirsich Ananas Joghurt mild
+4008471494782	15	Söbbeke Bio Birne-Zimt Joghurt mild
+4008471494843	15	Söbbeke Bio-Weidemilch Yoghurt Feige-Walnuss
+4008471499473	15	Söbbecke Pauls Biomolkerei Frische Wiesenmilch
+4008471499510	15	Paul Söbbeke NRW Vollmilch
+4008471500087	15	Söbbeke Bio frische Vollmilch
+4008471500124	15	Söbbeke Bio Joghurt mild stichfest 3,8%
+4008471500148	15	Söbbeke Bio fettarmer Joghurt mild
+4008471500193	15	Söbbeke Joghurt
+4008471505006	15	SÖBBEKE BIO Weidemilch Joghurt mild
+4008471507925	15	Söbbeke Bio Cremejoghurt mild Himbeere 4008471
+4008471508779	15	Söbbeke Bio Mohn Vanille Joghurt mild
+4008471508823	15	Söbbeke Bio Erdbeere Weiße Schokolade
+4008486000046	15	Dietz Birnensaft
+4008486000367	15	Dietz Bio Apfelsaft
+4008486000732	15	Dietz Multivitamin-Mehrfruchtsaft
+4008486002811	15	Dietz Holunderbeeren-Nektar
+4008486003412	15	Neuhöfer Johannisbeer Nektar
+4008486003801	15	Dietz Traubensaft
+4008486004501	15	Dietz Johannisbeer-Nektar
+4008486005607	15	Neuhöfer Orangensaft
+4008948023019	8	Jever Pilsener
+4008948027000	8	Jever Pilsener
+4008948191015	8	Pilsner Alkoholfrei Jever Fun Alkoholfrei
+4008948194016	8	Jever Fun
+4009228021046	15	Teinacher Classic
+4009228022050	15	Hirschquelle Heilwasser
+4009228023040	15	Teinacher Medium Wasser
+4009228040054	25	Teinacher Medium
+4009228040078	25	Teinacher Medium
+4009228040153	25	Teinacher Medium
+4009228040542	15	Teinacher Schorle Apfel
+4009228105920	25	Teinacher Schorle Apfel-Johannisbeere
+4009228120114	25	Krumbach Naturell
+4009228120572	25	Krumbach Naturell ohne Kohlensäure
+4009228121258	25	Krumbach Medium
+4009228121432	25	Krumbach Natürliches Mineralwasser Medium
+4009228240010	25	Bluna Orange
+4009300015451	25	Teekanne Fresh Echter Früchtetee Waldbeere-Lim
+4009401560508	15	Caldener Medium
+4009418288976	25	Tip Orangemlimonade
+4009418290313	25	Felsgold Bier
+4009491010556	25	Valensina Vaboo Citrus Mix
+4009491021231	25	Valensina Fruits + Apfel-Kirsche-Traube-Aronia
+4009491021958	25	Valensina Orange-Mango-Honig
+4009491021972	25	Valensina Mangosaft
+4009491022016	25	Valensina Orangensaft Frühstücksorange ohne Fr
+4009491022023	25	Valensina Mildes-Frühstück Multi-Vitamin
+4009491022047	25	Valensina Multivitaminsaft
+4009491022078	25	Valensina Mildes-Frühstück Orange
+4009491022085	25	Valensina Orange Mango Ananas
+4009491022122	25	Valensina Saft - Grapefruit - Pink Grapefruit
+4009491028100	25	Valensina Jus d'Orange
+4009491028148	25	Valensina Mildes-Frühstück Apfel-Orange-Apriko
+4009491028155	25	Valensina Vitamin-Frühstück Multi-Vitamin Saft
+4009491028179	25	Valensina Frühstücks-Orange - Blutorange Saft
+4009491028186	25	Valensina Mildes-Frühstück Orange
+4009491028209	25	Valensina Saft - Mildes-Frühstück - Orange-Man
+4009491028322	25	Valensina Tropical-Frühstück
+4009700036810	25	Danone Actimel Granatapfel
+4010223012212	8	Brauerei Bischofshof Dunkles Radler
+4010223012625	8	Weltenburger Kloster Asam Bock
+4010223013318	8	Weltenburger Kloster Barock Dunkel
+4011094104099	8	Hachenburger Hell
+4011116003287	15	Coca-Cola Urbacher medium
+4011116004284	15	Coca-Cola Urbacher classic
+4011116004901	15	Coca-Cola Urbacher Sport Grapefruit-Zitrone
+4011116009012	15	Coca-Cola Urbacher ACE
+4011116028709	25	Coca-Cola Urbacher classic
+4011470004005	15	Romina Mineralbrunnen Schönrain Medium Mineral
+4011470005200	15	GEFAKO Burgenperle Spritzig
+4011470006108	15	Romina Mineralbrunnen Silberbrunnen Saurer Spr
+4011470006207	15	Silber Brunnen Saurer Sprudel - Spritzig
+4011470006306	15	Silber Brunnen Süßer Sprudel
+4011470007112	15	EiszeitQuell medium
+4011470502983	25	GEFAKO Burgenperle Spritzig
+4011470609989	25	Silber Brunnen Saurer Sprudel
+4011470620991	15	Silber Brunnen Still‘s Wasser
+4011470729984	25	EiszeitQuell Eiszeit Quell Naturelle
+4011470950999	15	Eisvogel Colamixx - Koffeinhaltiges Erfrischun
+4011470960998	15	Eisvogel Apfelschorle
+4011584000740	15	Streker Orange mild
+4011584001402	15	Unsere Heimat Apfelsaft
+4011584001419	15	Unsere Heimat Apfelsaft naturtrüb
+4011698021136	8	Schmucker Doppel Bock Dunkel
+4011803092174	15	Spezi
+4012268000315	15	Thüringer Land Frische Fettarme Milch 1,5% Fet
+4012297003271	25	Merkur Medium Mineralwasser
+4012545101490	8	Schönbuch Braumanufaktur Schönbuch Jäger Spezi
+4012545101865	8	Schönbuch Braumanufaktur Helles alkoholfrei
+4012545201312	8	Schönbuch Braumanufaktur
+4012545201602	8	Schönbuch Braumanufaktur Schönbuch Hefeweizen 
+4012545201855	8	Schönbuch Braumanufaktur Schönbuch Hefeweizen 
+4012545501467	8	Schönbuch Braumanufaktur Naturpark-Radler
+4012750610640	25	Unser Norden Natürliches Mineralwasser spritzi
+4012750620649	25	Unser Norden Natürliches Mineralwasser medium
+4012750670620	25	Rewe Unser Norden Apfelschorle
+4012852001018	8	Neumarkter Lammsbräu Dunkel
+4012852001049	8	Lammsbräu Bière
+4012852001056	8	Neumarkter Lammsbräu Zzzisch Bio-Edelpils
+4012852001100	8	Neumarkter Lammsbräu Urstoff
+4012852001520	8	Neumarkter Lammsbräu Weiße
+4012852001551	8	Neumarkter Lammsbräu Dunkle Weiße
+4012852001612	8	Neumarkter Lammsbräu Leichtes Helles
+4012852001636	8	Neumarkter Lammsbräu Dunkle Weiße alkoholfrei
+4012852001650	8	Neumarkter Lammsbräu alkoholfrei
+4012852001681	8	Neumarkter Lammsbräu Lammsbräu Bier , glutenfr
+4012852001698	8	Neumarkter Lammsbräu Glutenfrei
+4012852001766	8	Neumarkter Lammsbräu Weisse & Grapefruit (alko
+4012852001797	8	Neumarkter Lammsbräu Bio Glutenfrei Zitrone al
+4012852201715	8	Lammsbräu Radler
+4012852201722	8	Neumarkter Lammsbräu Radler
+4012852203672	15	Bio Kristall Schorle Apfel
+4012852204242	8	Lammsbräu Now Limonade Orange
+4012852204266	8	Lammsbräu Now Limonade Orange Cola
+4012852204297	8	Now by Lammsbräu Now Holler Blüte
+4012852204822	8	now Golden Peach
+4012852204938	8	Neumarkter Lammsbräu Cherry Cola (Bio)
+4013024001317	8	Kloster Andechs Hefeweissbier hell
+4013024001713	8	Klosterbrauerei Andechs Kloster Andechs Weissb
+4013143010054	15	Bad Liebenwerda Mineralquellen Spritzig
+4013143010061	15	Bad Liebenwerda Medium
+4013143010078	15	Bad Liebenwerda Wasser Naturell
+4013143010368	15	Bad Liebenwerda Medium
+4013143010467	15	Bad Liebenwerda Landträume Kirsch-Wacholder
+4013143010818	25	Bad Liebenwerda Teeträume Pfirsich
+4013143011525	25	Bad Liebenwerda Medium - mit wenig Kohlensäure
+4013143080064	15	Bad Liebenwerda Alasia Mineralwasser Medium
+4013143082037	15	ADELLO Mineralwasser
+4013143112185	15	Bad Liebenwerda Apfelschorle 60%
+4013246102106	8	Freiberger Export Bier
+4013246205241	8	Freiberger Radler
+4013256010996	15	Lichtenauer Pur 1 Liter
+4013256011443	15	Lichtenauer Premium Limonade Feine Zitrone
+4013256012082	15	Lichtenauer Mandarine Mango
+4013256642067	25	Lichtenauer Mineralquellen
+4013256642128	25	Lichtenauer Fresh’n Fruity Orange-Melone
+4013256642760	25	Lichtenauer Fresh and fruity
+4013256642791	25	Lichtenauer Granatapfel Cranberry
+4013256647062	25	Lichtenauer Natürliches Mineralwasser mit Kohl
+4013256647079	25	Lichtenauer Medium Natriumarm
+4013299701066	15	Satower Apfel-Mango-Saft
+4013554002266	8	Ketterer Black Forest Summer Ale
+4013595055177	25	Thüringer Waldquell Vita Cola Original
+4013595055191	25	Vita Energy Rote Traube Acai
+4013595055207	25	Vita Energy
+4013595055214	25	Vita Engery Mango Orange
+4013595325171	15	Thüringer Waldquell Rennsteig Himbeerbrause
+4013595644296	25	Thüringer Waldquell Wellness Beauty
+4013595644371	25	Vita Cola Pur 1,5 Liter
+4013595644425	25	Vita Cola Original Zuckerfrei
+4013595644623	25	Thüringer Waldquell Aqua Plus Kirsch
+4013595644630	25	Thüringer Waldquell Vita Cola Mix
+4013595644678	25	Thüringer Waldquell Mineralbrunnen GmbH Rennst
+4013595644685	25	Vita Orange
+4013595644722	25	Thüringer Waldquell Granatapfel
+4013595644814	25	Vita Cola
+4013595644852	25	Thüringer Waldquell Wellness Vitality
+4013595644869	25	Thüringer Waldquelle Aquaplus Pfirsich
+4013595644975	25	Vita Caribic
+4013595645101	25	Thüringer Waldquell Kaktusfeige und Kiwi
+4013595645248	25	Thüringer Waldquell Mineralbrunnen GmbH Medium
+4014086010316	8	Oettinger Helles
+4014086010330	8	Oettinger Export
+4014086010347	8	Oettinger Ottinger Urtyp
+4014086010354	8	Oettinger Dunkles Hefeweizen Naturtrüb
+4014086010453	8	Oettinger Mixed
+4014086010460	8	Oettinger Weissbier Alkoholfrei
+4014086010477	8	Oettinger Winterbier
+4014086010491	8	Oettinger Kellerbier
+4014086011634	15	Oettinger Glorietta Cola Mix
+4014086011801	8	Oettinger OeTea Pfirsich
+4014086020339	25	Oettinger Export
+4014086093234	25	5.0 Biervertriebs-GmbH Citrus-Bier
+4014086093319	25	5.0 Original 5,0 Bier Hell
+4014086093333	25	5,0 Original Bier
+4014086093364	25	5,0 Original Pils
+4014086093432	25	2,5 Original Lemon
+4014212703006	15	Hofmann Apfelschorle
+4014388001036	8	Radeberger Pilsner
+4014472005001	25	Bionade Litschi
+4014472005049	25	Bionade Holunder
+4014558322961	8	Hasseröder Premium pils
+4014558326839	8	Hasseröder Premium Pils
+4014566001353	8	Spalter Nr. 1 Pils
+4014741631740	25	Rotkäppchen Fruchtsecco Granatapfel alkoholfre
+4014741633744	25	Rotkäppchen Fruchtsecco Mango alkoholfrei
+4014807001029	8	Störtebeker Kellerbier 1402
+4014807001036	8	Störtebeker Alkoholfreies Bier nach Pilsener B
+4014807001043	8	Störtebeker Roggen-Weizen
+4014807001067	8	Störtebecker Bernstein Weizen Alkoholfrei 4014
+4014807050492	8	Störtebecker Keller-Bier
+4014807102566	8	Störtebeker Brauspezialitäten Bier Saisonal Gl
+4014807202600	8	Störtebeker Stark-Bier
+4014807203461	8	Störtebeker Frei-Bier
+4014807204789	8	Störtebeker Atlantik-ale
+4014807204840	8	Störtebeker Atlantik Ale
+4014807206295	8	Störtebeker Scotch-Ale
+4014807206578	8	Störtebecker Strandräuber BioBiermix
+4014807206684	8	Störtebeker Braumanufaktur Strandräuber Sanddo
+4014807207391	8	Störtebeker Hanse-Porter
+4014807207650	8	Störtebeker Baltik-Lager
+4014807207742	8	Störtebeker Baltik-Lager
+4014807210896	8	Alkohol Störtebeker Atlantik Ale alkoholfrei
+4014807211268	8	Strandräuber Naturradler Zitrone & Kellerbier
+4014807211565	8	Störtebeker Übersee-Pils
+4014807220864	25	Stralsunder Prost! Bio Pils
+4014807220888	8	Stralsunder Prost! Bio Pils (alkoholfrei) 0,0 
+4014807364001	8	Störtebeker Pilsener-Bier
+4014807364025	8	Störtebeker Schwarz-Bier 5,0% 4014807364025 Sc
+4014819010705	15	Wittenseer Natürliches Mineralwasser
+4014819030703	15	Wittenseer Flaute
+4014819040702	15	Wittenseer Stille
+4014819500701	15	Wittenseer ISO Sport Vital , Grapefruit - Zitr
+4014819600777	15	Wittenseer Küstenbrause
+4014964014887	8	Köstritzer Kellerbier
+4014964111340	8	Köstritzer Edel Pils
+4014964111524	8	Köstritzer Schwarzbier
+4014964111555	8	Köstritzer Schwarzbier
+4015042031055	8	Darguner Brauerei Stier-Bier Export
+4015042100317	25	Splish Orange
+4015042100331	25	Mecklenburger Quelle Wasser
+4015042101932	25	AQUA Wellness Kirsch
+4015042101987	25	Kingsway Multi Vitamin
+4015042102809	25	Fruit 'n Fit Apfel-Traube-Mirabelle
+4015042104902	25	Kingsway Apfelsaft 100%
+4015042108474	25	AQUA Wellness Yumberry Litschi Geschmack
+4015042111344	25	Darguner Brauerei Splish Apfel-Guave
+4015042111412	25	AMPER Juiced Mango
+4015042111481	25	Amper Energy Drink Kokos Blaubeere
+4015042111733	25	AMPER ENERGY DRINK
+4015042112341	8	Darguner Brauerei Naturradler Grapfruit
+4015237006318	15	Tiefenherster Bergwaldquell Classic
+4015345132534	8	Waldhaus Ohne Filter alkoholfrei
+4015345530002	8	Waldhaus Diplom Pils
+4015444000017	8	Wernesgrüner Pils
+4015533000089	15	Voelkel Multi-Natur 100% Direktsaft
+4015533000225	15	Voelkel Gemüse Komposition Direktsaft
+4015533000508	15	Voelkel Traubensaft
+4015533000621	15	Voelkel Grapefruitsaft, 0,7 LTR Flasche
+4015533000645	15	Voelkel Zitronensaft
+4015533000737	15	Voelkel Chardonnay Trauben Direktsaft
+4015533011702	15	Voelkel Rhabarber Trunk
+4015533011719	15	Voelkel Blutorange 100% Direktsaft
+4015533011771	15	Voelkel Apfel-Mango-Saft
+4015533014215	15	Voelkel Bio Apfelsaft
+4015533014499	15	Voelkel BioZisch Blutorange
+4015533019258	15	Voelkel Holunder pur
+4015533019340	15	Voelkel Apfel Banane
+4015533025556	15	Margret & Karl Voelkel Apfelsaft naturtrüb
+4015533026706	15	Voelkel Apfel-Aprikose-Pfirsich
+4015533033476	25	Voelkel Die faire Limo
+4015533035395	15	Voelkel Bio Family Apfel
+4015533037641	15	Voelkel Hygge Punsch
+4015533041525	15	Voelkel Haferdrink
+4015533042805	15	Voelkel Hygge Punsch Aeble Mandarin
+4015533043703	15	Voelkel Hafer Barista
+4015533043963	15	Voelkel Haferdrink Calcium
+4015533045684	15	Voelkel Ingwer Shot
+4015533046285	15	Voelkel Familien Punsch
+4015533047961	15	Voelkel Reis Drink
+4015533053863	15	Voelkel Rote Bete 100% Direktsaft
+4015533054167	15	Voelkel Orange 100% Direktsaft
+4015533060267	15	Voelkel Granatapfel Muttersaft
+4015732004031	25	SpreeQuell Naturell - Natürliches Mineralwasse
+4015732006462	15	Spreequell Spree Quell Medium
+4015732009128	15	Spreequell Aktiv Vital
+4015732009135	15	SpreeQuell Orangenlimonade
+4015732104021	25	Spreequell Natürliches Mineralwasser
+4015732204028	25	Spreequell medium
+4015732204035	25	Spreequell Naturell
+4016084030006	8	Kirner Pils
+4016084033007	8	Kirner Weizenradler alkoholfrei
+4016188000295	8	Haller Löwenbräu Oster-Bier
+4016262020614	8	Quartiermeister'in Pils
+4016670000154	8	Engelbräu Grünten-Pils
+4016670005630	15	Allgäu Spritziges Gebirgswasser
+4016670030311	8	Engelbräu Engel Hell
+4016729059027	15	St. Georgen Bräu Naturtrübe Zitrone Hauslimona
+4016762214056	8	Leikeim Wintertraum
+4016843002008	8	Flötzinger Bräu Hell
+4016843002251	8	flötzinger Weihnachts bier
+4016843002947	8	Flötzinger 1543 Hefe Weißbier kellertrüb
+4016843003999	8	Flötzinger Weißbier Alkoholfrei
+4016855002010	8	Detmolder Pilsner
+4016855002102	8	Brauerei Strate Thusnelda-Bier
+4017051248912	25	Maluma Guayusa Bio-Tee
+4017074131703	25	Sawell Wasser
+4017074223507	25	Apodis Adonis Classic
+4017170006011	8	Pyraser Angerwirts Weizen Alkoholfrei
+4017188127173	8	Peters Kölsch
+4017194009111	15	Schrozberger Milchbauern Lait entier frais
+4017194009159	15	Schrozberger Milchbauern frische fettarme Milc
+4017194009388	15	Molkereigenossenschaft Hohenlohe-Franken eG Sc
+4017194009418	15	Demeter Frische Schlagsahne
+4017194464217	15	Schrozberger Milchbauern Natur Joghurt mild
+4017194465337	15	Pflaume Vanille Joghurt mild
+4017194471109	15	Schrozberger Milchbauern Skyr Natur
+40173283	8	Bayreuther Brauhaus Bock-Bier
+40173306	8	Maisel & Friends Pale Ale
+40173702	8	Maisel Marc's Chocolate Bock
+40173801	8	Bayreuther Bierbrauerei AG Aktien Zwick'l Kell
+40173962	8	Bayreuther Bio-Brauer Bayreuther Bio-Weisse na
+40173979	8	Bayreuther Bierbrauerei Aktien Landbier
+4017434003046	15	Bad Brambacher Garten-Limonade Pink Grapefruit
+4017665000395	8	Bürgerbräu Hersbruck Natur-Radler mit Zitronen
+4017665002375	8	Bürgerbräu Hersbruck Hersbrucker Albradler
+4017719001156	8	ABK Hell Das Blaue
+4017719020010	8	ABK Hell Das Blaue
+4017719021321	8	ABK Allgäu Stoff
+40179322	8	Hasen-Bräu Hasen hell
+4017943004008	15	Mona Classic Natürliches Mineralwasser
+4017943110075	15	Landpark Bio-Quelle Bio-Limo Orange
+40179643	8	Kloster Scheyern Kloster-Gold Hell
+4018387111000	8	Hochstift Pils
+4018588003302	8	Lausitzer Brauspezialitäten Lausitzer Porter
+4018715002550	15	Sinalco Apfelschorle 12x
+4018715002833	25	Sinalco Orange
+4018715002864	25	Sinalco Cola Mix
+4018715004714	15	Sinalco Orangenlimonade Zero
+4018715004738	15	Sinalco Cola Zero
+4018715527008	25	Sinalco Orange Maracuja
+4018722527077	25	Sinalco EXTRA zuckerfrei Passionsfrucht
+4018863300010	25	Ständer
+4018905375839	25	aro Natürliches Mineralwasser classic
+4018905375860	25	aro Mineralwasser medium
+4018905375983	25	aro Natürliches Mineralwasser , Still
+4019046402521	8	Bolten Ur-Weizen
+4019313015058	25	Spezi - Koffeinhaltige Limonade mit Cola-Orang
+4019437009414	8	Funky Forelle GbR Pretty Pottwal Naturradler
+4020356005944	15	Engelbräu Wintergold
+4020803020209	8	Pott's Landbier
+4020803020377	8	Pott's Weizen alkoholfrei
+4020803020704	8	Pott's Land hier Hell
+4020803020803	8	Pott's Leeze
+4021155100564	25	Action Energy ACTION Regular
+4021155116206	25	Leynau Brause Himbeer
+4021155160179	25	Action Energy Green Apple
+4021155161350	25	Action
+4021315000109	8	Eichhofener Helles
+4021375009111	15	Vaihinger Bio Smoothie
+4021483021005	8	Löwenbrauerei Passau AG Urtyp Hell
+4021851102091	15	Schlagsahne dennree 32% wärmebehandelt
+4021851712023	15	dennree Apfel Mango Saft
+4021912006023	8	Cannabia Der Hanftrunk
+4021974000076	8	Schäffler Bräu Schäffler Weissbier
+4021974001400	8	Schäffler Winterzauber
+4021974005170	8	Schäffler Bräu Allgäuer Hell
+4022013010100	15	auer Apfelsaft
+4022013011107	15	auer Bio Apfelsaft klar
+4022013050106	15	auer Traubensaft
+4022013109101	15	Geislinger Apfelsaft Bio-Apfel-Holundersaft na
+4022396000019	8	Herzoglich Bayerisches Brauhaus Tegernsee Tege
+4022396000026	8	Herzoglich Bayerisches Brauhaus Tegernsee Tege
+4022396000033	8	Herzoglich Bayerisches Brauhaus Tegernsee Spez
+4022396000125	8	Herzoglich Bayerisches Brauhaus Tegernsee Tege
+4022569100003	15	St. Leonhards Quelle St. Leonhard medium
+4022593110344	8	Warburger Landbier
+4022753031571	8	steini2 Albert Hell
+4022894000016	15	Ökodorf Brodowin Bio Vollmilch
+4023121002209	8	Hacklberg Urhell
+4023216000042	8	Pinkus Hefe Weizen naturtrüb
+4023216001230	8	Pinkus Bock
+4024215009876	8	Alpirsbacher Nagolder Wichtel
+4024308001008	8	Brauerei C. Wittmann Urhell Unser Original
+4024478235838	8	Schalchner Ursprung
+4025127014866	25	Salitos Bier mit Tequilageschmack
+4025127014972	8	Salitos Tequila
+4025127020027	25	MBG International Premium Brands Effect energy
+4025127020683	25	Effect Zero
+4025127020799	25	Effect
+4025127020997	25	Effect
+4025127089444	25	Ripped pear boost
+4025127089468	25	effect® BCAA ENERGY TROPICAL BLAST
+4025127089482	25	effect Shredded Cola Crush
+4025127089505	25	effect Performance super berry
+4025127091928	25	Effect Black Açaí
+4025303101106	15	Steinmeier Apfelsaft klar (Direktsaft)
+4025303102103	15	Steinmeier Apfelsaft
+4025303103100	15	Steinmeier Winter-Apfel
+4025303105104	15	Steinmeier Johannisbeer-Nektar schwarz
+4025303107108	15	Steinmeier Johannisbeer-Nektar Rot
+4025303110108	15	Steinmeier Traubensaft Direktsaft
+4025303115103	15	Orangensaft-Steinmeier
+4025303119101	15	Steinmeier Tomatensaft
+4025303121104	15	Steinmeier Kirschnektar
+4025303124105	15	Steinmeier Bananen-Nektar
+4025303126109	15	Steinmeier KIBA Banane- Kirsch- Drink
+4025303127106	15	Steinmeier Apfel-Grape
+4025303131103	15	Steinmeier Zaubertrunk
+4025303132100	15	Steinmeier Guave-Erdbeer-Drink
+4025303134104	15	Steinmeier Apfel-Mango
+4025303136108	15	Steinmeier Rhabarber-Nektar
+4025303139109	15	Steinmeier Apfel-Himbeer-Drink
+4025303141102	15	Steinmeier Frucht-Beeren-Minz Drink
+4025303142109	15	Steinmeier Apfel-Ingwer
+4025303149108	15	Steinmeier Eisfeuer
+4025435101173	8	Steiner Alkoholfreies Bio Zwickl
+4025471002359	8	Wiesener Räuberbock
+4026088001711	15	nagler Maracuja Nektar
+4026088001919	15	Nagler Vital Orange Apfel Kürbis Melone
+4026285000128	15	Bissinger Auerquelle Bissinger naturell
+4026285000241	15	Bissinger Auerquelle Sanft
+4026285000340	15	Bissinger Auerquelle Natürliches Mineralwasser
+4026285000449	15	Bissinger Auerquelle Silber
+4026285000623	15	Bissinger Auerquelle ACE
+4026285000647	15	Bissinger Auerquelle Caruso
+4026285000807	15	Bissinger Auerquelle Bissinger Cola
+4026285000845	15	Bissinger Auerquelle Apfel schörle
+4026285000920	15	Bissinger Auerquelle Eistee Pfirsich
+4026285001026	15	Bissinger Auerquelle Blutorange
+4026285001224	15	Bissinger Auerquelle Bissinger Mandarine
+4026285001323	15	Bissinger Auerquelle Sport
+4026285001422	15	Bissinger Auerquelle Rote Schorle
+4026285001620	15	Bissinger Auerquelle Früchte-Tee
+4026285002023	15	Bissinger Auerquelle Schwarzer Johannisbeer Sp
+4026285002733	15	Bissinger Auerquelle Bissinger Limette
+4026285002832	15	Bissinger Auerqurlle Citronella
+4026285005239	15	Bissinger Auerquelle QioQuell
+4026285010219	25	Bissinger Auerquelle sanft
+4026637000004	8	Landsberger Stolzer Hahn
+4026800023007	15	Frische Brise Reinbeker Klosterquelle spritzig
+4026800023106	15	Frische Brise Reinbeker Klosterquelle wenig Ko
+40268163	15	Fürst Bismarck Classic
+40268422	15	Fürst Bismarck Medium
+40268477	15	Fürst Bismarck Still
+4026915010053	8	Riegele Biermanufaktur Riegele Weisse alkoholf
+4027013016015	8	Riedenburger Radler Alkoholfrei
+4027013023013	8	Riedenburger Dinkelmalz
+4027013035030	8	Riedenburger Brauhaus Riedenb Dolden Sud Bavar
+4027013038031	8	Riedenburger Brauhaus Dolden Dark
+4027013040034	8	Riedenburger Brauhaus Dolden Null
+4027109001017	15	Husumer Joa Gher so alla
+4027109001024	15	Unser Gutes Husumer medium
+4027109005503	15	Unser Norden Mineralwasser Medium
+4027109005510	15	Unser Norden Mineralwasser Classic
+4027109908354	25	Aqua Nordic Aquarium Nordic
+4027483000088	8	Der dunkle Reh-Bock
+4027732130375	8	Engel Naturradler
+4027752000269	25	Volt Cola
+4028268011015	8	Asgaard Premium Pils
+4028268012012	8	Asgaard Das Göttliche
+4028324002483	15	Autenrieder Johannisbeer-Spritzer
+4028577200186	25	Privatbrauerei Schimpfle Lösch-Zwerg Würzig
+4028996911335	8	Vulkan Bio Hell
+4029257012242	8	Berg Bier Natur-Radler
+4029257012372	8	Berg Mai-Bock
+4029257012433	8	Berg Maria - Anna
+4029594003019	25	BEMBEL WITH CARE Apfelwein Pur
+4029594003040	25	Bembel with Care Apfelwein Kirsche 4,2 %
+4029764001401	15	Club-Mate Granat 0.5 l
+4029764001418	15	Club-Mate Granat
+4029764001616	15	Brauerei Loscher Loscher Mehrfruchtsaftgetränk
+4029764001807	15	Club-Mate 0.5 l
+4029764001814	15	Club-Mate Ice-T 0.5 l
+4029764001821	15	Club-Mate 0.33 l
+4029764001838	15	Club-Mate Ice-T Kraftstoff
+4029764001869	15	Club-Mate Winter Edition 0.5 l
+4029764001906	15	Club-Mate Zero 0.5 l
+4029764001913	15	Club-Mate Beere 0.5 l
+4029764444956	15	Club-Mate 0.5 l (Loscher)
+4029855001013	8	Zötler Bier Zötler Bayerisch Hell
+4029855001075	8	Zötler Gold
+4029855001082	8	Zötler Gold Export
+4029855001471	8	Zötler Bier Zötler Gold alkoholfrei
+4030439002005	8	Gutmann Leichtes Weizen
+4030439003002	8	Gutmann Weizenbock
+4030439008007	8	Gutmann Hefeweizen Alkoholfrei
+4030493000276	8	Klosterbräu Bamberger Braunbier
+4030493000368	8	Klosterbräu Bamberger Kellerbier
+4030493000375	8	Klosterbräu Bamberger Rauchbier
+4030541005116	8	Lang Bräu Hell - Bier untergärig
+4030541005123	8	Lang Bräu Pils
+4030541005185	8	Lang Bräu Burggraf Dunkel -Urfranke- Bier unte
+4031818101005	15	Klaus Fruchtsäfte Naturtrüber Apfelsaft
+4031818726000	15	Klaus Fruchtsäfte Bio-Birnensaft
+4031818762008	15	Klaus Fruchtsäfte Bio-Apfel-Mango-Saft
+4032006112209	15	Kelterei Walther GmbH Sonnenklarer Apfelsaft
+4032303001206	8	Schnitzlbaumer Lagerbier Hell
+4032549003736	25	Dovgan Kwas
+4032549012523	25	Dovgan Plombir Eiskaffee
+4032549014909	25	B Tree Birkensaft
+4032549020184	25	Chernogolovka Baikal
+4032549020276	25	Dovgan Kwas
+4033804000019	8	Bruckmüller Hell
+40341217	25	Underberg 12er-Pack Schmuckdose
+4034457002207	8	Härle Finest wheat beer
+4035287052028	8	Schimpf Gäu Radler
+4035287052035	8	Schimpf Kleines Radler naturtrüb
+4035626100366	15	bioladen* Orangensaft
+4035626102438	15	bioladen* Frische fettarme Bio-Milch; 1,5% Fet
+4035626102445	15	bioladen* Frische Vollmilch
+4035626102513	15	bioladen* Traubensaft
+4035626102773	15	bioladen* Frühstück Saft
+4035626111645	15	bioladen* Joghurt
+4035626112291	15	bioladen* Schlagsahne
+4035626114561	15	bioladen* Schlagsahne
+4035661163326	15	bioladen Hafer Drink ungesüßt
+4036172000070	8	Maxlrainer Engerl hell alkoholfrei
+4036328000060	8	Private Landbrauerei Schönram Schönramer Pils
+4036776012554	25	ok pride
+4036776101074	25	Ok engery
+4037387001081	15	Mayer Apfelsaft
+4037387001128	15	Mayer Apfelsaft Mit Mangomark
+4037387013015	15	Mayer Stuttgarter Apfelsaft
+4037387016016	15	Mayer Traubensaft
+4037458000012	8	Brauerei Heller Aecht Schlenkerla Rauchbier Mä
+4038745603718	25	Monolith Buratino
+4038745603756	25	Monolith Dyushes Lemonade
+4039401741270	25	Karls Erdbeer Nektar
+4039454003349	15	Alpina-C Tafelwasser Medium
+4040600001249	15	Landliebe Joghurt mild 3,8 % Fett
+4040600001324	15	Landliebe Joghurt - Kirschen
+4040600003380	15	Landliebe Frische Kakaomilch
+4040600008958	15	Landliebe Frische Landmilch 1,5% Fett
+4040600009559	15	Landliebe Joghurt Mit Echter Vanille
+4040600012948	15	Landliebe Joghurt - Heidelbeeren
+4040600033912	15	Landliebe Joghurt, Mohn Marzipan
+4040600068242	15	Landliebe Rahmjoghurt
+4040600081029	15	Landliebe Pfirsich und Maracuja
+4040600134305	25	Chocomel
+4040900110559	15	Frankenland Frische Schlagsahne
+4040942000016	8	Privatbrauerei Stöttner Neues Helles
+4041473432802	8	Ratsherrn Belgian White Ale
+4041473908512	8	Ratsherrn Helles
+4041473908918	8	Ratsherrn Pilsener Alkoholfrei
+4041875000753	15	Ankertau Cola
+4041888011500	8	Osser Ostern hell
+4042134000026	8	Grünbacher Altweisse Dunkel
+4042134000057	8	Grünbacher Prinzen-Bock Weisse
+4042134000200	8	Grünbacher Alkoholfreie Weisse
+4042269111369	8	Pilsator Beer
+4042269121207	8	Pilsator Pilsner
+4042472000047	15	Avanus Orangen-Limonade
+4042595001327	8	Hofmühle Original Rother Kellerbier
+4042600370387	25	Christinen Multi-vitamin
+4042616270008	8	Gasthof Zwönitz Stout Craft Beer
+4043533013334	15	Oppacher Leichte Schorle, Früchte des Gartens
+4044703004978	25	Booster Water melon
+4044703005487	25	The Real Cola
+4044703005715	25	Multivitamin
+4044703009300	25	Booster Curuba-Elderflower
+4044703009362	25	Booster Juneberry
+4044703011594	25	Veritas Black Cat Energydrink Original
+4044703012140	25	Booster pome granate
+4044703013871	25	Booster Energy Drink Alpha strawberry vanilla 
+4044703014175	25	Booster Fusion
+4044703014496	25	Veritas Cola Orange
+4044703014540	25	Veritas Limo Orange
+4044703014595	25	The Real Limo Lemon
+4044703014649	25	Veritas The Real Limo - Strawberry-Kiwi
+4044703014687	25	Veritas The Real Limo - Mandarin
+4044703017312	25	Veritas Black Cat Original 4er-Pack
+4044703048248	25	Booster Hemp Energy Drink
+4044703049160	25	The Real Cola Zero by Booster
+4044703049191	25	Booster The Real Cola Zero
+4044703049405	25	Booster Energy drink Absolute Zero
+4045145240207	25	hohes C Heimische Früchte Apfel & Johannisbeer
+4045145245400	25	Hohes C PLUS Eisen
+4045145270501	25	Hohes C, Roter Multivitamin
+4045145275100	25	granini Traube
+4045145287400	25	hohes C Milder Multivitamin
+4045145287707	25	Eckes-Granini Milde Grapefruit
+4045145295009	25	granini Die Limo Orange + Lemongras
+4045145295108	25	Granini Die Limo Limette-Zitrone
+4045145295207	25	granini Die Limo, Pink Grapefruit & Cranberry
+4045317054007	25	Bärenmarke Eiskaffee mit Vanillegeschmack
+4045317054656	25	Bärenmarke Der Eiskaffee
+4046700001080	25	Schwarzwald Haltbare Weidemilch
+4046700004265	15	Schwarzwaldmilch BIO Sahne
+4046700006184	15	Schwarzwaldmilch BIO Joghurt
+4046700006306	15	Schwarzwaldmilch BIO-Fruchtjoghurt Erdbeere
+4046700006399	15	Schwarzwaldmilch Bio Fruchtjoghurt Schwarze Jo
+4046700007549	15	Schwarzwaldmilch Weidemilch Joghurt Natur 3,5%
+4046700026519	15	Landliebe frische Landmilch, länger haltbar, 3
+4046700500583	15	Schwarzwaldmilch Frische Weidemilch 3,8%
+4046700500965	15	Schwarzwaldmilch BIO Frische Vollmilch
+4046700500972	15	Schwarzwaldmilch Bio Frische fettarme Milch 🍀
+4047247001144	25	Quellbrunn Aqua Plus Kirschgeschmack
+4047247003803	25	River Cola Zero
+4047247021074	25	Schulten Bräu Radler alkoholfrei
+4047247110051	25	Schultenbräu Dunkles Starkbier
+4047247274050	25	Rio d'oro Orangennektar
+4047247274135	25	Rio d'oro Multivitaminsaft
+4047247339742	25	Flying Power X-TREME Energy Drink mit Sauerkir
+4047247339759	25	Flying Power Energydrink Original
+4047247339766	25	Flying Power Zero Energy
+4047247339773	25	Flying Power Fling Power Energy
+4047247384476	25	Flirt Tonic Water
+4047247384544	25	River Mix Zero
+4047247672054	25	Schultenbräu Helles Helles (4,7%)
+4047247926447	25	Flying Power X-TREME Energy Drink Lotus mit Ka
+4047247926454	25	Flying Power X-TREME Apple Cinnamon - Energy D
+4047247926461	25	Flying Power X-TREME Cherry Vanilla - Energy D
+40477114	8	Alpirsbacher Klosterbräu Spezial
+40477213	8	Alpirsbacher Kloster Dunkel
+40477756	8	Alpirsbacher Kloster Helles
+4047900201607	8	Würzburger Hofbräu alkoholfrei
+4048517607202	25	hohes C Mildes Frühstück
+4048517625312	25	Granini Die Limo, Dark Berries + Guarana
+4048517629730	25	Hohes C Plus Antioxidantien
+4048517630873	25	Granini Schwarze Johannisbeere
+4048517634840	25	Granini Maracuja Selection
+4048517634963	25	Granini Die Limo
+4048517689567	25	Granini Die Limo - Ultra Leicht Orange
+4048517701269	25	Hohes C Saft - PLus Magnesium&B-Vitamine
+4048517701818	25	hohes C Orangensaft PETE 1 0.25€ Pfand hohes C
+4048517701825	25	Hohes C Orange mit Fruchtfleisch
+4048517701832	25	Hohes C Multivitamin
+4048517701924	25	Hohes C E/Milde Orange
+4048517701955	25	Eckes-Granini Hohes C Multivitamin
+4048517702341	25	hohes C Milde Orange mit Fruchtfleisch Orangen
+4048517702358	25	Hohes C Milder roter Multivitamin
+4048517702785	25	granini Trinkgenuss Pfirsich
+4048517702815	25	Granini Bananensaft
+4048517702846	25	Granini Tomatensaft
+4048517702976	25	Granini Saft - Apfelsaft
+4048517702983	25	Granini Saft - Multivitamin
+4048517703119	25	Granini Saft - Apfel-Kirsche
+4048517733246	25	Granini Fresh Maracuja
+4048517733406	25	Granini Fresh Kirsche
+4048517742040	25	Granini Multivitaminsaft
+4048517742682	25	granini Die Limo Orange-Lemongras
+4048517742767	25	Die Limo Pink Grapefruit-Cranberry
+4048517743085	25	hohes C Milder roter Multi
+4048517746161	25	Hohes C Plus Sonnenvitamin D
+4048517751851	25	Granini Pfirsichsaft
+4048517758508	25	granini Die Limo Kirsche-Zitrone
+4048517780042	25	Granini Die Limo - Kirsche-Zitrone
+4048517802577	25	Granini Die Speziallimo Cola-Orange
+4049768009500	25	Food IQ Take Off Classic
+4050182453787	15	Terra Mineralwasser naturell
+4051454000012	25	Moloko Softdrink
+4051454000883	25	Blue Ice Heidelbeeren Eisbonbon
+4051500870798	25	Dominikaner Pilsener Premium
+4051522177776	8	BraufactuM Palor
+4051522177783	25	Braufactum Marzus
+4051522177806	8	Braufactum Roog
+4051522181179	8	BraufactuM The Brale
+4051800116312	25	Karamalz Malzdrink
+40518169	15	Eichbaum Karamalz
+4051913101892	15	Teinacher Genuss Eistee Pfirsich
+4052197001175	8	Benediktiner Hefeweissbier hell
+4052197002455	25	Benediktiner Original
+4052197005203	8	Benediktiner hell
+4052745000025	25	Coffee Jungle Koffeinhaltiges Erfrischungsgetr
+4053400003504	8	Binding Clausthaler - Extra Herb
+4053400003528	8	Clausthaler Extra Herb - 0,33 L
+4053400015415	8	Clausthaler Radler alkoholfrei naturtrüb
+4053400201634	8	Bionade Schwarze Johannisbeere Rosmarin
+4053400201696	8	Jever FUN Zitrone (Alkoholfrei)
+4053400205212	8	Berliner Pilsner Berliner Radler Naturtrüb
+4053400205496	25	Jever Fun Pilsener alkoholfrei
+4053400206615	8	Jever Fun Blutorange (Akloholfrei)
+4053400206660	8	Binding Radler naturtrüb
+4053400206707	8	Ur-Krostitzer alkoholfrei
+4053400208527	8	Radeberger Pilsner Alkoholfrei
+4053400208534	8	Radeberger Pilsener Alkoholfrei
+4053400209531	8	Cyberz Beer Mix Limez
+4053400211411	8	Guinness Bier &quot;Irish Red Ale&quot;
+4053400211428	8	Guinness Extra Stout 4053400211428 Schankbier 
+4053400256818	8	Binding Römer Pils
+4053400257181	8	Schöfferhofer Hefeweizen alkoholfrei
+4053400257501	25	Jever GT-Mobility - Tankstelle , KFZ-Service ,
+4053400257662	25	8%vol Bier
+4053400257679	25	Schöfferhofer Hefeweizen naturtrüb
+4053400257853	25	Krostitzer Brauerei Ur-Krostitzer
+4053400258515	8	Schöfferhofer Weizen-Mix - Grapefruit
+4053400271729	25	Schöfferhofer Weizen-Mix Grapefruit
+4053400278827	8	Schöfferhofer Weizen-Mix Zitrone naturtrüb
+4053400281834	8	Schöfferhofer Weizen-Mix Grapefruit Alkoholfre
+4053400281858	25	Schöfferhofer Weizen-Mix Grapefruit alkoholfre
+4053400287287	8	Captain Morgan Mutineer Rum Flavoured Beer
+4053400287324	8	Stuttgarter Hofbräu Kellerbier
+4053400287348	8	Berliner Kindl Zwickel naturtrüb
+4053400287355	8	Berliner Kindl Radler Naturtrüb
+4053400287515	8	Sternburg Export Alkoholfrei
+4053400288611	8	Rostocker Radler naturtrüb
+4053400290034	8	Ti Grüner Tee Mango
+40534534	8	Clausthaler Classic Premium Alkoholfrei
+40535562	25	MSK Vodka & Maracuja
+4054500114725	25	Eichbaum Radler 0,0% Holunder
+4054500114930	25	Eichbaum Braumeisters Limonade Zitrone-Naturtr
+4054500115012	8	Eichbaum Kurpfälzer NaturRadler
+4054500115081	8	Eichbaum Kurpfälzer Naturradler
+4054500115166	8	Eichbaum Natur Radler alkoholfrei
+4054500121426	25	Steam Brew German Red Steam Brew - German Red
+4054500121433	25	Imperial IPA
+4054500140144	25	Steam Brew Session IPA
+4054500140496	25	Privatbrauerei Eichbaum GmbH & Co. KG Birra
+4054500142230	25	beeraclez IPA Session
+4054500142254	25	beeraclez IPA Imperial
+4054500243104	25	Steam Brew Summer Ale
+4055646000316	25	St. Jakobus-Quelle Trendic naturell
+4056489005957	8	Lidl Perlembourg et mix saveur citron
+4056489181415	25	Solevita Organic Ginger Turmeric Shot
+4056489249023	25	Solevita Orangen Nektar
+4056489289524	25	Solevita Bio Limonade Himbeer Cassis
+4056489304623	25	Select & Go Latte Haselnuss-Geschmack
+4056489577867	25	Solevita Bio-Ingwershot
+4056489577874	25	Solevita Bio Ingwer Kurkuma Shot
+4056489578369	25	Solevita Orangennektar
+4056489578383	25	Lidl Apfel Nektar
+4056489591528	25	Vemondo Kaffee Hafer
+4056489607823	25	Kong Strong Sugar Free Energy Drink XXL
+4056489644842	25	Lidl Orange Premium
+4056489745693	25	Saskia Boneau Water peach flavour
+4056489791805	25	Hermann PF Getränke Bio-Shot - Ingwer-Mango-Li
+4056489846499	25	Freeway Grapefruit Flavour
+4056489884101	25	Milbona Milch Drink Erdbeer
+4056489962984	25	Kong Strong Kokos Blaubeere Energy Drink
+4056489963356	25	Naturis Refresco sabor mora frambuesa &hibisco
+4056489973140	25	Freeway Eistee Pfirsich Geschmack
+4056489973157	25	Freeway Eistee Zitrone
+4056489973164	25	Freeway Eistee Zitronengeschmack
+4056622205442	15	Pepsi MAX
+4058172927492	25	Ivorell Natürliches Mineralwasser Medium
+4058300002831	15	Selters Wasser Classic
+4058300256296	15	Selters Apfelschorle
+4060148023657	8	Brauwerk Export Hell
+4060800104021	25	Pepsi Max NO SUGAR
+4060800105189	25	Pepsi Max
+4060800111890	15	Pepsi zero
+4060800111951	15	Mirinda
+4060800139665	15	Pepsi Light
+4060800148766	25	Pepsi Max
+4060800148780	25	Pepsico Schwip Schwap
+4060800148841	25	Pepsi Light
+4060800148926	25	Pepsi
+4060800148933	25	Pepsi Light
+4060800150714	25	Pepsi Schwip Schwap - Cola + Orange
+4060800150745	25	Pepsi Mountain Dew
+4060800151377	25	Pepsi light
+4060800151384	25	Pepsi Max
+4060800151391	25	Cola - Pepsi Twist
+4060800151407	25	PepsiCo Schwip Schwap - Cola & Orange
+4060800151438	25	PepsiCo Schwip Schwap Zero
+4060800153838	25	Pepsi Schwip Schwap Zero - Cola & Orange
+4060800154170	25	PepsiCo Schwip-Schwap
+4060800154842	15	Pepsi Schwip Schwap Zero - Cola & Orange
+4060800156273	25	7up
+4060800156488	25	7 Up Free - 1,5 L
+4060800156495	25	Mirinda light
+4060800157331	25	Pepsi Mirinda light Orange Geschmack
+4060800157416	25	Pepsi Schwip Schwap Zero - Lemon Taste
+4060800157447	25	Schwip Schwap Cola + Orange Lemontaste ohne Zu
+4060800158482	25	Pepsi light lemon
+4060800158925	25	PepsiCo Schwip Schwap Zero - Ohne Koffein
+4060800158956	25	Pepsi Schwip Schwap Zero ohne Koffein
+4060800159816	25	Pepsi Max Cherry
+4060800160003	25	Rockstar Energy Drink Original
+4060800160126	25	Rockstar Tropical Guava Flavour
+4060800160300	25	Rockstar Organic Strawberry Flavour
+4060800160683	25	PepsiCo Rockstar Blueberry Pomegranate Acai Fl
+4060800166531	25	Pepsi Cola - Cherry 2L
+4060800175472	25	Mountain Dew
+4060800175823	25	Pepsi max ginger
+4060800175878	25	7 up
+4060800176721	25	Pepsi Max Lemon
+4060800176752	25	Pepsi-Max Lemon
+4060800178008	25	Pepsi Max
+4060800178015	25	Pepsi Max Cherry
+4060800178602	25	Rockstar Super Sours Energy Drink Green Apple
+4060800178701	25	PepsiCo Rockstar Sour Raspberry Flavour
+4060800179111	25	Rockstar Energy Revolt Killer Cherry
+4060800179678	25	Rockstar Freeze Energy
+4060800180018	25	Rockstar Killer Mandarin
+4060800200228	25	Rockstar Energy - Guava Pineapple
+4060800200297	25	Rockstar
+4060800200372	25	Rockstar Passion Frutas Baja Juiced Energie
+4060800200501	25	PepsiCo Rockstar Energy Waldmeister
+4060800200532	25	PepsiCo Rockstar Energy Apple
+4060800200631	25	Rockstar Energy Drink Juiced Machu Peachu Flav
+4060800300324	25	Lipton Ice Tea Zero, No Sugar Peach
+4060800300850	25	Lipton Sparkling Ice Tea Zero
+4060800301345	25	Lipton Zero Ice Tea Zitrone
+4060800302182	25	Lipton Sparkling mit Kohlensäure ice tea
+4060800302427	25	Lipton Sparkling eistea
+4060800302465	25	Lipton Sparkling ice tea
+4060800302557	25	Lipton Peach Ice Tea
+4060800302595	25	Lipton Ice Tea Lemon
+4060800303448	25	Coca Cola Co. 7up free cherry flavour
+4061458020114	25	Aldi Reine Buttermilch
+4061458061131	25	rio d'oro Orangen Nektar
+4061458072700	25	Aldi Milchdrink - Schokolade
+4061458072731	25	Aldi Milchdrink - Bananen-Geschmack
+4061458129312	25	Schultenbräu Biermix mit Hanfextrakt
+4061458130745	25	Aldi Lagerbier Hell
+4061458153003	25	rio d'oro Stille Limo
+4061458202022	25	River Cola Classic 0,33 Dose
+4061458202039	25	River Cola Zero
+4061458207843	25	Statesman Whisky & Cola - Mixed Drink
+4061458212311	25	Aldi Winterbock
+4061458229678	25	Rio d'Oro Fruit Fusion Multivitamin
+4061458235372	25	Westminster Juiced Tea! Pure
+4061458235389	25	Westminster Juiced Tea! Green
+4061458235396	25	Westminster Juiced Tea! Fruit
+4061458248679	25	Refresco Apfel Schorle
+4061458248686	25	Aldi Bio-Limonade - Rhabarber-Schwarze Johanni
+4061458252577	25	Aldi Eistee Zitrone
+4061458252584	25	Eistee Pfirsich light
+4061458252614	25	Flying Power Raspberry Strike
+4061458252652	25	Flying Power Energydrink - Zero
+4061458252676	25	Quellbrunn Sprudel / Mineralwasser
+4061458252683	25	Quellbrunn A/Mineralwasser Medium
+4061458252843	25	River Cola Zero Sugar 1,5 Liter
+4061458278973	25	Quellbrunn Ski-Wasser
+4061458279093	25	KARLSKRONE Weissbier Alkoholfrei
+4061458279123	25	KarlsKrone Bier
+4061458279147	25	Karlskrone Weissbier
+4061458283656	25	Aldi A/Orangenlimo Zero
+4061458286114	25	Aldi Der Milde - Apfel mit Acerola
+4061458286305	25	Gut bio Apfel-Rhabarberschorle
+4061459666472	25	Flying Power Think Big Energy - Heidelbeere-Ka
+4061459767087	25	Aldi Free-Secco - White
+4061459786552	25	Vive Tropical Blast Zero Sugar - Pineapple & G
+4061459906035	25	Flying Power Edition - Juneberry
+4061459906240	25	Flying Power Edition - Blaubeere-Kokos
+4061461584535	25	Ravini Secco trocken
+4061461584672	25	Ravini Rosato fruchtig
+4061461833299	25	Flying Power Energydrink Kokos-Blaubeere
+4061462013522	25	Rio d'Oro Orangen-Direktsaft mit Fruchtfleisch
+4061462020285	25	Rio d'Oro Smoothie Plus - Apfel-Drachenfrucht-
+4061462020322	25	Rio d'Oro Smoothie Plus - Apfel-Mango-Kiwi + L
+4061462020346	25	Aldi Smoothie Plus - Orange-Mango-Ingwer + Vit
+4061462020742	25	Aldi Smoothie Red #7
+4061462020773	25	Aldi Smoothie Yellow #6
+4061462020957	25	Aldi Smoothie Green #5
+4061462088735	25	Aldi Secco Frizzante - Rosato
+4061462088766	25	Aldi Secco Frizzante - Bianco
+4061462355264	25	Flying Power X-treme Energy Drink Guave
+4061462459719	25	Aldi Bio-Limonade - Apfel-Zitronen-Ingwergesch
+4061462582462	25	Flirt Tonic Water
+4061462582813	25	Flirt Tonic Water Zero
+4061462761713	25	Aldi Gin & Tonic Mixed-Drink
+4061462761737	25	Aldi Spiced Rum & Cola Dose
+4061463048844	25	Aldi Orangenlimonade
+4061463049469	25	Aldi Bio Limonade mit Zitronen-Holunderbeeren-
+40617435	8	Dinkelacker alkoholfrei
+4062073999915	25	City Sunset maracuja Frizzante
+4062139000548	25	Pepsi Max Vanilla
+4062139000791	25	Pepsi
+4062139000852	25	Pepsi Cola
+4062139001620	25	Pepsi
+4062139001644	25	Pepsi light
+4062139001668	25	Pepsi Twist
+4062139001682	25	Pepsi light Lemon
+4062139001705	25	Pepsi Zero
+4062139001729	25	Pepsi Cola - Max Cherry Zero
+4062139001743	25	Pepsi Max Lemon
+4062139001767	25	Pepsi Max Vanilla
+4062139001781	25	PepsiCo Schwip Schwap Zero - Cola & Orange
+4062139001828	25	PepsiCo Schwip Schwap Zero Lemon Taste
+4062139001903	25	Mirinda Orange
+4062139001927	25	PepsiCo Deutschland GmbH Mirinda Zero
+4062139002214	25	Pepsi zero zucker
+4062139002252	25	Pepsi Max, Cherry Geschmack
+4062139002443	25	Rockstar Energy+Hemp Tropical Burst Flavour
+4062139002788	25	Lipton Ice Tea Sparkling - Zitrone-Geschmack
+4062139002825	25	lipton Sparkling ICE TEA Pfirsich
+4062139003013	25	Mountain Dew
+4062139003037	25	Pepsi Cola
+4062139003075	25	PepsiCo Schwip Schwap - Cola & Orange
+4062139003310	25	Lipton zitrone ice tea
+4062139004072	25	Rockstar Original
+4062139004256	25	PepsiCo Pepsi
+4062139004270	25	PepsiCo Pepsi Max
+4062139004294	25	PepsiCo schwip schwap Cola & Orange
+4062139004454	25	PepsiCo Rockstar Original
+4062139007158	25	Lipton Green tea Zero
+4062139009916	25	Lipton Ice tea Pfirsich
+4062139017324	25	Pepsi
+4062139025114	25	Pepsi Cola Zero Zucker
+4062139025510	25	Schwip Schwap Zero Zitrone
+4062139025671	25	Pepsi Zero
+4062139025886	25	Lipton Pfirsich Ice Tea Zero Zucker
+4062139026210	25	PepsiCo Peach
+4062139026234	25	Rockstar Blueberry Mint
+4062139026524	25	Pepsi
+4062139028139	25	Pepsico Energy Drink Mocktail Mojito Flavour
+4062139028153	25	Rockstar Berry Spritz Flavour
+4063367130922	25	Crazy Wolf Energy Drink
+4063367130984	25	Crazy Wolf Crazywolf Himbeere
+4063367130991	25	Crazywolf Tropical Guave
+4063367139536	25	Krynica Vitamin S.A. Crazy Wolf Ginseng + Guar
+4063367244643	25	K-Classic Apfelnektar
+4063367249747	25	K-Classic Orangen Nektar
+4063367353840	25	Crazy Wolf Energy Drink Classic
+4063367353925	25	Crazy Wolf Strong Cola
+4063367353949	25	Crazy Wolf Energy Drink Tropical Geschmack
+4063367353963	25	Kaufland Energy Drink Apfel
+4063367354335	25	Crazy Wolf Energy Ginseng + Guarana
+4063608500217	15	Velike! Frischer Bio Haferdrink Natur
+4063608500262	15	Velike Frischer Bio Haferdrink Barista
+4066600141150	8	Paulaner Weißbier-Zitrone naturtrüb
+4066600198291	8	Paulaner zwickl
+4066600201199	25	Paulaner Natur-Radler
+4066600201922	25	Paulaner Hefe-Weißbier naturtrüb
+4066600202028	25	Paulaner Weißbier-Zitrone 0,0%
+4066600203735	25	Paulaner Limo Orange
+4066600203834	25	Paulaner Limo Zitrone
+4066600204435	25	Paulaner Spezi Zero
+4066600204459	25	Paulaner Spezi zero
+4066600209430	25	Paulaner Cola
+4066600242918	8	Paulaner Weißbier 0,0% Alkoholfrei
+4066600251101	8	Paulaner Münchner Hell
+4066600300458	25	Paulaner Spezi
+4066600301110	25	Paulaner Münchner Hell
+4066600311683	25	Paulaner Oktoberfest-Bier
+4066600341123	8	Paulaner Natur Grapefruit Biermix
+4066600392811	25	Paulaner Weissbier
+4066600610663	25	PAULANER München PAULANER Oktoberfest Bier
+4066600611349	8	Paulaner Salvator
+4066600641018	8	Paulaner Münchner Hell alkoholfrei
+4066600641605	8	Paulaner Oktoberfest-Bier
+4066600641919	8	Paulaner Hefe weißbier Alkoholfrei
+4066600641971	8	Paulaner Hefe-weißbier Dunkel 0,5 L
+4066600941910	8	Paulaner Hefeweissbier Alkoholfree 0,5l flaske
+4067517001551	15	Landliebe Joghurt Heidelbeere,4067517001551 Jo
+4067517001643	15	Landliebe Joghurt Aprikose, Joghurt mit 13,5 %
+4067517001773	15	Landliebe Mango 4067517001773 Joghurt mit 13,5
+4067776091416	25	K-Classic Cola
+40678085	8	Holsten Pilsener Premium
+40678313	8	Holsten Alkoholfrei
+40678337	8	Lübzer Pils
+4068706683985	25	Golden Power Energydrink Sugarfree
+4069365771235	25	Flying Power Edition - Waldbeere Sugarfree
+4069800005871	8	Nörten-Hardenberger Pils
+4069800005949	8	Nörten-Hardenberger Weizen
+4070757292672	25	River Protein Soda Blueberry Cassis Flavour
+40716886	8	Brauerei Simon Spezial
+4072700001089	8	Spaten Oktoberfestbier
+4072700001126	8	Franziskaner Premium Weissbier Naturtrüb
+4072700001188	8	Franziskaner PREMIUM WEISSBIER DUNKEL
+4072700001249	8	Franziskaner Premium Weißbier
+4072700005315	8	Spaten Münchner Hell
+4072700005780	25	Spaten Münchner Hell
+4072700802518	8	Franziskaner Hefe-Weissbier Leicht
+4072700803829	25	Franziskaner Hefe-Weißbier naturtrüb
+4072800010592	8	Brauerei Brinkhoff GmbH Dortmunder Union Expor
+4076300001524	8	Grüner Vollbier
+4076300015804	8	Zirndorfer Kellerbier
+4076300207933	8	Das gute Zirndorfer Landbier alkoholfrei
+4076300209043	8	Grüner Radler Natur alkoholfrei
+40779027	25	Drink fit Choco Drink
+4078600012972	25	Löwenbräu Original, Hell
+4078600015973	8	Löwenbräu Oktoberfestbier
+40786179	25	Löwenbräu original
+4079400305325	8	Wolters Premium Pilsener Alkoholfrei
+4079400305547	8	Wolters Premium Pilsener
+4079400308272	8	Hemelinger Malz
+4079400329857	8	Wolters Radler
+4079400389882	8	Hemelinger Spezial
+4079400995175	25	Wolters Pilsener
+4082100003453	8	Mönchshof Bayrisch Hell
+4082100005044	8	Mönchshof Natur Radler
+4082100006508	8	Mönchshof Natur Radler 0,0%
+4082100007154	25	Mönchshof Naturradler
+4082100009097	8	Mönchshof Kellerbier
+40821931	15	Mönchshof Original Pils
+40885032	25	Schultenbräu Natur-Radler naturtrüb
+4099200056432	25	Tiroler Quelle - mild
+4099200122274	25	Tiroler Quelle Nutzwasser
+4100060012725	25	Extaler Mineralquell ohne Kohlensäure
+4100060018321	15	WeserGold Extaler Classic
+4100080000931	8	Berliner Kindl Jubiläums Pilsener
+4100130002410	8	Beck's Pale Ale
+4100130009167	25	Beck’s Alkoholfrei
+4100130010224	25	Corona extra
+4100130011436	25	Becks Lemon Brew
+4100130012952	8	Beck‘s Beck's Unfiltered
+4100130021558	8	Anheuer-Busch Bud 0,3 Mehrwegflasche
+4100130021565	25	Anheuser-Busch Anheuer-Busch Bud 0,33 Dose
+41001301	8	Beck's Pils
+41001318	8	Beck's Pils
+41001356	25	Anheuser-Busch Inbev Beck's
+4100320151300	8	Wulle Biere Vollbier Hell
+4100460011106	8	Stuttgarter Hofbräu Pilsner
+4100460041103	8	Stuttgarter Hofbräu Alkoholfrei
+4100460082007	8	Malteser Weizen Hefe Hell
+4100590110410	15	Apollinaris Heppinger extra
+4100590153332	25	Apollinaris ViO still
+4100590153400	25	Apollinaris ViO still
+41005941	25	Vio Medium
+41005958	25	Apollinaris Stilles Mineralwasser
+41007716	8	König Pilsener alkoholfrei
+41007723	8	König Pilsener Bier
+4101010002834	25	Somersby Cider 4er-Pack - Apple
+4101010007518	25	Naturradler Grapfruit
+4101010009284	8	Grimbergen Double Ambree
+4101010010624	8	Carlsberg 0.0 Lager Beer
+4101090000607	15	Staatl. Fachingen Wasser; Staatl.Faching. Stil
+4101090000638	15	Staatl. Fachingen Wasser; Staatl.Faching. Medi
+4101120006579	8	Paderborner Malz
+4101120006661	8	Paderborner Pilsener
+4101120006685	8	Paderborner Brauerei Paderborner Pilsener
+4101120006777	8	Paderborner Brauerei Haus Cramer GmbH Paderbor
+4101130000956	15	Reinoldus
+4101130001885	15	Rheinfels Quelle Rheinfels Lemon
+4101130001946	15	Aquintus Mineralwasser classic
+4101130003438	25	Rheinfels Quelle Klassik - Natürliches Mineral
+4101130525107	25	RheinfelsQuellen Limette Minze
+4101530001089	15	Berchtesgadener Land Frische Vollmilch, 3,5 % 
+4101530001157	15	Berchtesgadener Land Frische Bio-Alpenmilch 3,
+4101530001737	15	Berchtesgadener Land Feinster Schlagrahm
+4101530002840	15	Berchtesgadener Land Feinster BIO Schlagrahm
+4101530009238	15	Berchtesgadener Land Feinster Schlagrahm
+4102080007651	8	Kauzen-Bräu Käuzle Urhell
+4102380023009	15	Hansa Mineralbrunnen Jakobus Classic
+4102380026031	25	Hansa Hella Wasser Erdbeer, still
+4102380027892	25	Hella Pfirsicharoma
+4102380042284	25	Marinus-Quelle trendic classic
+4102380502801	15	Bismarck Apfelschorle
+41024300	25	Bitburger Premium Pils
+4102430013653	8	Bitburger Radler
+4102430015107	8	Bitburger Pilsener Steinie
+4102430015206	8	Bitburger Premium Pils
+4102430064761	8	Craft Werk Lager Mad Callista
+4102430072360	8	Bitburger Winterbock
+4102430075637	25	Bitburger Fassbrause Waldmeister
+4102430076740	25	Bitburger Apfel Cider
+4102430079512	8	Bitburger Herb 0.0
+4102430083571	8	Bitburger Pils alkoholfrei herb
+4102430315009	8	Bitburger 0.0% Pils Alkoholfrei
+4102430315207	8	Bitburger Pils alkoholfrei, 0,0% 4102430315207
+4102560010072	15	RhönSprudel Naturell
+4102560010287	15	Rhön Sprudel Sanft wasser
+4102560010362	15	Rhön Sprudel — Medium — Mineralbrunnen Rhönspr
+4102560010935	15	Rhönsprudel Rhön Sprudel Mineralwasser Zitrone
+4102560010942	15	Rhönsprudel wasser
+4102560010959	15	Rhönsprudel Apfel
+4102560010966	15	Rhön Sprudel Pink Grape
+4102560020910	15	Rhön Sprudel Juicy still Zitrone-Limette
+4102560020927	15	Rhön Sprudel Juicy Still Grapefruit - Himbeere
+4102560080044	15	Alasia Mineralwasser Medium
+4102560080068	15	Alasia Mineralwasser Medium
+4102560081522	25	Alasia Mineralwasser Medium
+4102560081546	25	Alasia Orangenlimonade
+4102560081560	25	Alaska Cola
+4102560081577	25	Alasia Pur
+41025680	15	Mineralbrunnen Rhönsprudel GmbH Wasser Medium
+4102610504803	25	Rhodius Medium
+4102610507088	25	Rhodius Maya Mate
+4102610507422	25	Afri Cola
+4103020148014	15	Afri Cola
+4103080000017	15	Flensburger Frühlingsbock
+4103080000628	15	Flensburger Wasser
+4103080000727	15	Flensburger Winterbock - 0,33l
+4103080063630	15	Flensburger Blonde
+4103080063647	15	Flensburger Dark Amber
+41030806	15	Flensburger Pilsener
+41030820	15	Flensburger catch the cat
+41030837	15	Flensburger Pilsener Beer Swingtop
+41030844	15	Flensburger frei – Pilsner alkoholfrei
+41030851	15	Flensburger Dunkel
+41030875	15	Flensburger -Edles helles
+41030882	15	Flensburger Weizen
+41030899	15	Flensburger Flens Fassbrause
+4103210001297	8	Allgäuer Brauhaus Büble Bier Edelbräu
+4103210068207	8	Allgäuer Brauhaus Allgäuer Büble Edelbräu 4x0.
+4103210201567	8	Allgäuer Brauhaus Allgäuer Büble Edelweissbier
+4103210274547	8	Büble Bayrisch Hell Bier
+4103210283853	8	Allgäuer Brauhaus Urtyp Export
+4103660630030	8	Kronen Privatbrauerei Dortmunder Kronen Export
+4103850000285	15	Rapp's Orangensaft
+4103850000421	15	Rapp's Rapp‘s Apfelsaft
+4103850000575	15	Rapp's Ananas
+4103850001305	15	Rapp's Bio Apfel Direktsaft
+41039601	8	Herforder Pils
+4103960301777	8	Herforder Pils
+4104060011184	15	Andechser Natur Bio-Joghurt mild - Himbeere-Ho
+4104060011245	15	Andechser Natur Jogurt mild - Natur 3,8 % Fett
+4104060029066	15	ANDECHSER NATUR Joghurt mild - Mango
+4104060029196	15	Andechser Natur Bio-Joghurt mild - Pflaume-Zim
+4104060029264	15	Andechser Natur Ziegenjoghurt Natur Bio
+4104060029806	15	Andechser natur Joghurt mild Pfirsich
+4104170020007	8	Ayinger Lager Hell
+4104170020021	8	Ayinger Kellerbier
+4104170020700	8	Ayinger Altbayrisch Dunkel
+4104170022209	8	Ayinger Jahrhundert Bier
+4104170030006	8	Ayinger Urweisse
+4104170030204	8	Ayinger Bräuweisse
+4104250700003	8	Kaiser Export 1881
+4104420074101	15	Alnatura Weidemilch Joghurt Natur 3,8%
+4104420240346	15	Alnatura Weide Joghurt Nat. 1,5%
+4104450001009	15	Vilsa Natürliches Mineralwasser
+4104450001023	15	vilsa nat 0,7
+4104450002075	15	Vilsa Brunnen Vilsa Cassic
+4104450003263	15	Deit Tropische Früchte
+4104450003270	15	deit Orange
+4104640010354	15	Förstina Sprudel Plus Lemon
+4104640010538	15	Justus Brunnen Mineralwasser Medium
+4104640015113	15	Förstina Sprudel Spritzig
+4104640025020	15	Förstina Sprudel Iso aktiv pink grapefruit
+4104640026621	15	Förstina Sprudel Himbeere
+4104640055119	15	Rudolf Quelle Natürliches Mineralwasser
+4104670004262	8	Moritz Fiege Radler
+4104670004804	8	Moritz Fiege
+4104740010353	8	Sünner Kölsch
+4104760429210	25	Black Forest Still
+4104770600166	8	Hofmark Bayrisch Hell
+4104850000336	15	ace vital ACE-Getränk
+4104850003252	8	Herrnbräu
+4104850003474	8	Herrnbräu Jubiläums-Sud
+4104950260005	8	Heubacher Uralb Spezial
+4104950290002	8	Mutlanger Gold Spezial
+4105120003903	8	Weihenstephaner Hefeweissbier hell
+41051801	8	Rothaus Tannenzäpfle alkoholfrei
+41051818	8	Badische Staatsbrauerei Rothaus Pils
+41051825	8	Rothaus Tannenzäpfle
+41051832	8	Rothaus Märzen
+4105250022003	8	Augustiner-Bräu Lagerbier Hell
+4105250022331	8	Augustiner-Bräu Augustiner Lagerbier Hell
+4105250024007	8	Augustiner-Bräu Bier Edelstoff
+4105250024335	8	Augustiner-Bräu Augustiner Edelstoff
+4105250027008	8	Augustiner-Bräu Augustiner Heller Bock
+4105250027336	8	Augustiner-Bräu Heller Bock
+4105250028005	8	Augustiner-Bräu Augustiner Weißbier
+4105250028333	8	Augustiner-Bräu Augustiner Weißbier
+4105250029002	8	Augustiner-Bräu Augustiner Alkoholfrei Hell
+4105460323044	15	Margon Sanf
+4105490643167	25	Glashäger Mineralwasser Medium
+4105550287706	25	A. Dohrn & A. Timm GmbH & Co. KG Pflaumentrunk
+4105670000865	8	Meckatzer alkoholfreies Hell
+4105670001008	8	Meckatzer Weiss-Gold
+4105670006003	8	Meckatzer Hell
+4105680006505	8	Braustolz Radler
+4105750000839	8	Schweiger 1516 Bayrisch Hell
+4105760127144	8	Sternburg Doppelkaramel
+41057759	8	Sternburg Export
+41058145	8	Ur-Krostitzer Pilsner
+41059197	8	Weißenoher Klosterbrauerei Classic Export
+41060568	8	Schloßbräu Odin-Trunk Honigbier
+4106060045039	15	Beutelsbacher Apfel-Ingwer
+4106060049280	15	Beutelsbacher Birne-Apfel Direktsaft
+4106070310257	8	Wüllner's Braumeister Premium Pilsener
+4106120004020	8	Faust Winter Festbier
+4106180113144	8	Neunspringer Grenzenlos Wandern im Eichsfeld H
+41211786	8	Frankenfelser Weizen alkoholfrei
+41411797	8	Diebels Premium Altbier
+42001850	25	Albi Pfirsich Nektar
+42002055	25	Carstens-Haefelin's Rebling Peach
+42002604	15	Gerolsteiner Sprudel
+42002611	15	Gerolsteiner Medium
+42006206	8	Ustersbacher Bier Ustersbacher Urhell
+42007227	8	Brauerei Kesselring Urfränkisches Landbier
+42007852	8	Dithmarscher Pilsener
+42011859	8	Freiberger Pils
+42021322	8	Beck'sAnheuser-Busch Inbev Beck's Alkoholfrei 
+42026303	8	Dithmarscher Urtyp
+42026327	8	Dithmarscher Dunkel
+42026341	8	Achtern Diek Landbier Pils
+42039815	15	Carolinen Mineralwasser
+42042143	15	Engelbert Medium
+42045748	8	Berg Original Hell
+42045755	8	Berg Spezial
+42045786	8	Berg Hefe-Weizen
+42058144	8	Roth-Bier bleifrei alkoholfrei
+42065210	8	Maxlrainer Schloss Gold
+42065227	8	Maxlrainer Helles
+42071631	8	Berg Radler
+42077442	8	Beck’s BECK'S Gold
+42080220	8	Schlossbrauerei Maxlrain Maxlrainer Zwickl Max
+42095033	8	Bölkstoff
+42095057	15	Flensburger Kellerbier
+42095064	15	Flensburger Malz
+42095071	15	Flensburger Gold
+42095088	15	FLENSBURGER RADLER
+42095880	8	Vielanker Pilsener
+42111702	8	BECK'S Green Lemon
+42111719	8	Becks Bier
+42121770	8	Lübzer Urkraft
+42140818	25	Holsten Pilsener Premium
+42140832	25	Holsten Pilsener
+42140863	25	Lübzer Pils
+42140962	8	Astra Rotlicht
+42141105	25	Quellbrunn
+42141136	25	Karlskrone Radler 0,5 l
+42141143	25	Wiesgart Apfelschorle, 60% Fruchtgehalt
+42141150	25	Quellbrunn Mineralwasser Classic
+42141174	25	Karlskrone Gold
+42141204	25	Milbona Mineralwasser
+42141327	25	Beck's Green Lemon
+42141334	25	Beck's Gold
+42142133	25	Wiesgart Apfelschorle
+42142164	25	Sonniger Fruit fusion
+42142188	25	Wiesgart Apfelschorle
+42142195	25	Quellbrunn Naturell Mierbachquelle ohne Kohlen
+42142287	25	Quellbrunn Wasser
+42142324	25	Quellbrunn Mineralwasser medium
+42142331	25	Flirt Aldi Orange
+42143499	25	River Cola Zero Light
+42143536	25	Freeway Cola
+42143574	25	Saskia Quelle Wörth am Rein Mineralwasser Medi
+42143581	25	Freeway Cola Light
+42143611	25	Saskia Boneau Apfel Geschmack
+42143628	25	Saskia classic Mineralwasser
+42143673	25	Freeway Apfelschorle
+42143680	25	Freeway Cola
+42143697	25	Perlenbacher Radler
+42143772	25	Freeway Orange
+42143826	25	Freeway Lemon (Sprite)
+42143871	25	Freeway Sportivo Orange-Apfel-Mango
+42143895	25	Freeway MixxMax Cola & Orange
+42143949	25	Saskia Natürliches Mineralwasser Medium
+42149668	25	Surf Cola Zero
+42149675	25	surf Apfel Schorle
+42150015	8	Beck's Green Lemon Zero
+42150022	8	Beck's Ice - Lime & Mint
+42151555	25	Netto MD Cola
+42151715	25	Netto MD Apfelschorle
+42151760	25	StarDrink Apfelschorle
+42151852	25	Netto Zitrone
+42165422	25	River Zitrone
+42167211	25	Coca-Cola Urbacher medium
+42167280	25	Coca-Cola Urbacher Apfelschorle
+42173564	25	Netto Apfel Schorle
+42173588	25	StarDrink Cola Zero
+42178170	25	Anheuser-Busch Inbev Beck's Pils, 4,9 % Vol.
+42178231	25	Freeway Grapefruit Zero Sugar, 8% Fruchtgehalt
+42178279	25	Freeway up Sugarfree
+42178330	25	Solevita A+c+e Vitamingetränk
+42179856	25	StarDrink Cola-Mix
+42179863	25	Aqua Culinaris Medium
+42186816	25	Netto MD Tonic Water
+42186830	25	Netto MD Schloss Pilsener
+42186977	25	Captains Tea Eistee mit Zitronengeschmack
+42188391	25	River Westminster Tea Eistee Zitrone
+42194415	25	Freeway Citronade, Citrusgeschmack
+42200864	25	Stardrink Zitrone 0% Zucker
+42200871	25	Netto MD Orange Zero
+42200888	25	StarDrink Iso Light
+42201984	25	Surf Mineralwasser medium
+42201991	25	surf Mineral Wasser Classic
+42202707	25	TopSport Isolight - Grapefruit-Citrus
+42203414	25	Quellbrunn Mineralwasser Classic mit Kohlensäu
+42205005	25	River Eistee Light
+42213093	25	Aldi Flirt Orange Zero
+42213253	25	WIESGART Activ Schorle Apfel-Himbeere-Granatap
+42214403	15	Gerolsteiner Medium
+42214410	15	Gerolsteiner Naturell
+42217093	25	Flirt Zero Orange
+42221418	8	Lübzer Schwarzbier
+42227922	25	Penny Ready Super Smoothie + Chiasamen
+42228035	25	REWE to go Apfel Mango Maracuja Smoothie
+42228042	25	Rewe to go Ananas Banane Kokos Smoothie
+42228417	25	Penny Smoothie Creamy
+42228479	25	Penny Direktsaft Blutorange
+42228493	25	Molkerei Gropper Direktsaft Orange
+42230403	25	River Cola zero
+42253051	25	Somersby Cider - Apple
+42255611	25	Netto Breeza Pink Grapefruit
+42256021	8	Grafensteiner Pils
+42256267	25	Brauerei Braunschweig Radler alkoholfrei
+42256601	25	Freeway Grüne brause
+42256618	25	Freeway Rote Brause
+42256694	25	Freeway MixxMax Zero, Cola & Orange
+42256717	25	Freeway Bitter Lemon Original
+42256724	25	Freeway Orange Zero
+42256731	25	Freeway Lemon Zero
+42256748	25	Solevita Eistee Pfirsich
+42256755	25	Solevita Eistee Zero Pfirsich
+42256762	25	Solevita Eistee Zitrone
+42256779	25	Freeway Original Tonic Water
+42256786	25	Freeway Ginger Ale
+42259923	15	Witaquelle Mineralwasser, sanft
+42265962	25	Speedstar Energydrink Sugar Free
+42268888	8	Untergiesinger Erhellung
+42268932	8	Giesinger münchner hell
+42270188	25	Freeway IsoSport Grapefruit-Citrus
+42270386	25	Freeway Cola Zero sugar
+42272243	8	Dithmarscher alkoholfrei
+42272250	8	Dithmarscher naturtrüb
+42273011	15	Flensburger Flens Fassbrause Rhabarber-Erdbeer
+42274728	8	Crew republic
+42275169	25	Netto MD Schloss Export
+42275176	25	Netto MD Schloss Pilsener
+42275190	25	Netto MD Schloss Hell
+42275657	25	Solevita - Eistee Green Citrusgeschmack
+42275701	25	Schlossblick natürliches Mineralwasser fein pe
+42275756	25	Freeway Pink Grapefruit Light
+42276074	25	Saskia Sport Blutorange-Limetten-Geschmack 0,5
+42276098	25	Kong Strong Wild Power
+42276104	25	Kong Strong Wild Power
+42278047	25	Carlsberg Premium Bier
+42278054	8	Lübzer Alkoholfrei zitrone
+42278153	8	Astra Urtyp
+42278177	8	Astra Kiezmische
+42278207	25	Astra Kiezmische Bier
+42280316	15	Flensburger Flens Fassbrause Birne-Quitte
+42281290	25	Strong Force
+42281344	25	Quellbrunn Beeren-Mix
+42284338	25	surf Limonata Rossa
+42284468	25	Speedstar Energydrink Super Sours Cherry
+42284475	25	Speedstar Energydrink Super Sours Berry
+42287964	25	Netto Marken Discount Naturalis Classic
+42287971	25	Naturalis - Still
+42287988	25	Naturalis Mineralwasser Medium
+42287995	25	Naturalis Getränke - Mineralwasser - Classic
+42288039	25	Captains Tea (Netto) Captains Tea Eistee zero
+42289623	25	Schultenbräu Premium-Pils
+42296379	25	topstarSpitz Flying Power
+42296386	25	Strong Force X-treme Sour Apple Explosion
+42300489	15	Gerolsteiner Heilwasser
+42313830	8	Rothaus Schwarzwald Maidle
+42329350	8	Giesinger Lemondrop Triple
+42334255	15	Flensburger Blonde
+42334262	15	Flensburger Dark Amber
+42341468	25	Freeway Iso Light Sport Pink Grapefruit-Citrus
+42341727	25	Holsten Bernstein Lager
+42342632	25	Speedstar Energydrink Ultra Power
+42342649	25	Speedstar Energydrink Ultra Zero
+42346906	8	Isarkindl Naturradler
+42354734	15	Flensburger Radler alkoholfrei 6x0,33l 1l
+42359531	25	Schultenbräu Weizen-Mix Grapefruit Alkoholfrei
+42367642	25	Bio Mehrfruchtlimonade
+42368991	25	Freeway
+42369066	25	Kong Strong Energy Drink Fruity Power Typ Trop
+42369073	25	Kong Strong Energy Drink Fruity Power Typ Apfe
+42369080	25	Kong Strong Energy Drink Fruity Power Typ Heid
+42369134	25	Freeway Wild Berry
+42369929	25	Cafèt Latte Cappuccino
+42369936	25	Cafèt Latte Espresso - kräftig
+42372318	25	Solevita Eistee mango Lidl
+42372325	25	Freeway Blutorange
+42372332	25	Freeway Limette
+42372356	25	Solevita Eistee zitrone (citron)
+42372363	25	Solevita Eistee
+42372370	25	Solevita Eistee Zero 6er Pack
+42372394	25	Patronus Weissbier-Radler Grapefrucht
+42375890	25	Kong Strong Wild Power XL
+42376040	25	Kong Strong Sugar Free Energy Drink XXL
+42376064	25	Saskia Mineralwasser
+42376095	25	LIDL Mineralwasser Still
+42376101	25	Saskia Mineralwasser still
+42376118	25	Saskia Mineralwasser Still
+42376125	25	Saskia Mineralwasser Medium
+42376132	25	LIDL Saskia Mineralwasser medium
+42376149	25	Saskia Mineralwasser Mediums
+42376163	25	Saskia Mineralwasser Medium Quelle Jessen
+42376187	25	Saskia Mineralwasser Classic
+42380238	25	LöwenDrinks GbR Löwenmilch
+42382621	8	Schlossbrauerei Maxlrain Original Maxl Helles
+42391739	25	Perlenbacher Strong 7.9 %
+42391760	25	Kong Strong - Wild Power
+42391777	25	Kong Strong Kong Strong Wild Power Sugar Free
+42391845	25	Perlenbacher Export
+42391876	25	Kong Strong Lidl strong Cola Koffein drink
+42391890	25	Kong Strong KongStrong Kokos Blaubeere
+42391913	25	Lidl Radler Natur Trüb
+42391944	25	Kong Strong Colossus energy drink
+42391951	25	Kong Strong Colossus Energy Drink Zero
+42391968	25	KONG STRONG
+42392262	25	Flying Power X-TREME Raspberry Strike - Energy
+42395485	25	Speedstar Energydrink BAOBAB Power
+42400868	25	Carlsberg Apple Cider
+42400905	25	Somersby Cider - Blackberry
+42400974	25	Somersby Red Rhubarb
+42401186	25	Lidl A+C+E Vitamingetränk
+42401216	25	Perlenbacher Radler Himbeergeschmack
+42401360	25	Kong Strong Hanf Energy Drink
+42406730	25	Speedstar Energydrink Kokos-Limette
+42413912	25	Lidl Radler naturtrüb alkoholfrei
+42414025	25	Kong Strong Cold Brew Coffee Energy Drink
+42414162	25	Lidl Apfelschorle leicht 6er Pack
+42414179	25	Solevita Apfel Schorle
+42423003	15	Gerolsteiner Zitronen-Limonade
+42424277	25	Speedstar Energydrink Super Sours Apple
+42426110	25	Perlenbacher Lagerbier Hell
+42431176	8	Lübzer Münzet
+42431220	8	Holsten 0,0 % Alkoholfreies Bier 0,0
+42431329	25	Astra Rakete
+42440840	25	Somersby Sommersby- Zero Apfel Cider (alkoholf
+42440925	25	Astra Helles
+42456551	15	Gerolsteiner Limo Orange
+42491019	25	Lemonaid+ Maracuja
+4250036700016	8	Traugott Simon Pilsener
+4250155406356	25	Punica Multivitamin 17+4
+4250155406370	25	Saft - Punica Fruchtig Rot
+4250253302208	8	Meinel-Bräu Helles
+4250253302215	8	Meinel-Bräu Meinel Pils
+4250253302284	8	Meinel-Bräu Mephisto
+4250279600098	8	Naabecker Dunkel
+4250350527238	25	Body Attack Protein Coffee
+4250350530344	25	Body Attack BCAA Kick Ice Tea Lemon
+4250481904779	25	Dr. Pepper Cherry
+4250481912644	25	A.G.Barr Barr Cream Soda
+4250481920816	25	Chupa Chups Sparkling Orangengeschmack
+4250594200188	8	Feldschlößchen Urbock Starkbier
+4250594201239	8	Feldschlösschen Alkoholfrei
+4250594205695	8	Feldschlößchen Naturtrübes Radler
+4250594208030	25	Feldschlößchen Naturtrübes Radler
+4250594211191	8	Feldschlößchen Naturtrübes Grapefruit Alkoholf
+4250616677240	25	Dirtea Busty Blueberry
+4250616677271	25	DirTea Candy Shop
+4250616678087	25	Ahoj-Brause Waldmeister
+4250616682510	25	Dirtea Juicy Mango Coconut
+4250616685320	25	Drinks & More GmbH & Co. Kg Knabe Kola
+4250616685351	25	Knabe Kola - Null Zucker
+4250616686068	25	Drinks & More GmbH & Co. KG Knabe Mich NULL ZU
+4250790683037	8	Altenauer Harzer Gebirgswinter
+4250965200052	8	Schlossbrauerei Herrngiersdorf Hallertauer Hop
+4251026501002	15	Ökodorf Brodowin Vollmilch frisch 3,7%
+4251135910436	8	Insel-Brauerei Insel Kreide
+4251253110015	8	Starnberger Brauhaus Starnberger Hell
+42516002	25	Veltins Cola-Orange Remix Limonade
+4251760801673	15	Thomas Henry Dry Tonic
+4260007460023	8	Weiherer Pils
+4260025594007	25	Mask energy drink
+4260029290615	25	T400 Energy
+4260031874056	15	Reineckes Getränke Flora Mate
+4260038331019	15	Schneider Apfelsaft
+4260038331033	15	Schneider Birnensaft
+4260039370413	15	van Nahmen Ananas 100% Saft
+4260052433102	8	Brauerei Grohe GmBH Grohe Pils
+4260057160010	8	Schnoor Bräu Dunkelbier
+4260089090026	8	Gröninger Pils
+4260090531600	15	Mahlitzscher Vollmilch
+4260107222262	15	fritz-kola
+4260107222576	15	fritz-spritz Bio-Apfelschorle
+4260122520718	8	Braumanufaktur Potsdamer Stange
+4260127770026	25	Guarana Antarktika
+4260133260023	25	doc weingart DOC intelligent refresher
+4260134390057	8	Kirin Ichiban
+4260138011712	8	Beer Brauerei Fietsche Fischer's Hafenbier
+4260151921395	15	Winkler Bräu Kupfer Radler alkoholfrei
+4260154850531	15	Unser Norden Elstar
+4260154850548	15	Unser Norden Roter Boskoop
+4260154850555	15	Unser Norden Jonagold
+4260160950010	25	28 Black Acai
+4260160951666	25	28 black Sour Mango Kiwi
+4260160951758	25	Calidris 28 Guava-Passionfruit Absolute Zero
+4260160952014	25	28 Black Açaj Zero
+4260164143517	8	Klosterbrauerei Baumburg Pils
+4260172435178	8	Aktienbrauerei Simmerberg Lindauer Insel Weiss
+4260184890071	15	marcConrad Apfelsaft naturtrüb
+4260191131235	25	Bizz'up Schuhbecks Ingwerwasser still
+4260192360030	25	Lions Vertriebs GmbH Lions Energizer
+4260212911303	25	Benny Cola für Kids
+4260226251075	8	Camba 4Sessions
+4260226252300	8	Camba Hell
+4260226257596	25	Camba Chiemsee WIT
+4260231220202	25	CocaCola Lemon
+4260231222312	25	Fanta Exotic
+4260231222558	25	Temetum Grape Soda
+4260236348512	8	Schleicher Natural Helles glutenfreies Bio-Bie
+4260242620237	25	Staropramen
+4260243040805	25	Hot Blood Coffee Latte
+4260248223616	8	Chiemseer Helles Bier
+4260256411128	25	DyDo Cola
+4260259940052	8	Urstrom
+4260259940069	8	Urstrom
+4260259940250	8	Urstrom Das natürliche Ale
+4260284213404	15	Die Feine Linie Heumilch
+4260286030030	25	Michelberger's Fountain of Youth
+4260286345011	25	Apfelschorle
+4260287182363	25	NOCCO Boisson
+4260287186408	25	Nocco BCAA Drink Peach
+4260310550268	15	Thomas Henry Bitter Lemon
+4260310550282	15	Thomas Henry Spicy Ginger
+4260310553382	15	Thomas Henry Mate Mate
+4260310557571	15	Thomas Henry Tonic Water
+4260336980094	25	Tyme Out Botanical Fizz
+4260339810022	25	Acao Quitte Zitrone mit Guarana
+4260339810251	25	acáo Maracuja mit Ingwer und Guarana
+4260339812316	25	Acáo Mate Mango
+4260344212293	25	Cue Energydrink Currywurst style
+4260350480013	25	Black Tiger Strong
+4260360190124	25	T400 Energy
+4260370191135	8	Bilger Stümple
+4260370660426	25	Garage GmbH Ginger Mama
+4260370660709	25	Garage GbmH Orange Mama
+4260380240038	8	Brauerei Hetzel Frauendorfer Vollbier
+4260402580340	15	Einheimischer Rote Schorle
+4260402580562	15	Einheimischer Apfel & Birnen Glühmost mit Schl
+4260407160011	8	Held Bier Hell
+4260407951909	25	Koawach Drink weiße Schoko (Bio)
+4260416220010	25	Spezi Energy
+4260426700014	8	lille Lager
+4260426770017	8	lille Lager
+4260426770031	8	lille Pale Ale
+4260426770093	8	lille Stout
+4260429590018	8	Schädelbräu Kühles Blondes
+4260429960019	25	Exotica tropic
+4260433710068	15	Talhof Speise Quark vollfett
+4260438060717	8	Hopper Bräu Landgang
+4260439790125	8	Black Forest Ginger Bold
+4260446282057	25	#sinob Fitness Coffee
+4260449690279	25	Ahoj Brause Drink Himbeer
+4260449691559	25	Ahoj Brause Drink Blaubeer
+4260451621186	25	Stone Brewing Stone Ripper
+4260456730180	25	Gönrgy Raspberry Cheesecake
+4260456730227	25	Gönrgy Tropical Exotic
+4260456730388	25	Gönrgy Juneberry Jam Geschmack
+4260456730395	25	Gönrgy White peach
+4260456730401	25	Gönrgy Sweet Lemon
+4260456730579	25	Gönrgy Black Acai
+4260456731040	25	Gönrgy Pflaume Zimt
+4260456731385	25	Gönrgy Boost Berries mit Zucker
+4260469790027	8	Finne Pale Ale
+4260469790089	8	Finne Pils
+4260473460015	8	Wolfscraft Frisch-Pils
+4260473460039	8	Wolfscraft Super Lager
+4260473460046	8	Wolfscraft Viel Weizen
+4260473464082	8	wunderbräu Grapefruit Radler Alkoholfrei
+4260484810076	25	Silberpfeil
+4260503950042	8	Ravensberger Brauerei Flutlicht Black Label
+4260543752002	25	Caffezza Cold Brew Lemonade
+4260544050282	25	Exstase energy
+4260544050343	25	Extase Energy
+4260545620200	25	Tymbark 1936
+4260546970014	8	fleuther EINS
+4260547320412	25	Biohacks Spirit Mango & Cactus
+4260547320597	25	Spirit Energy-Drink Peach & Passion (Bio)
+4260549520100	8	ÜberQuell Lieblings Imperial lager
+4260556082196	25	Reeper B.
+4260594840154	8	Fleißbacher Brauerei Summer Pale Ale (S.P.A)
+4260604750022	8	Simseer Braumanufaktur Schloßberger Kellerpils
+4260604750053	8	Simsseer Braumanufaktur Stephanskirchener Zwic
+4260616560510	25	Chupa Chups Sparkling
+4260619940012	15	Bauernmilch Frische Vollmilch
+4260619940029	15	Bauernmilch Frische fettarme Milch 1,5 % Fett
+4260649360286	8	Brewdog Pale Ale West Coast Classic
+4260649360545	25	Brewdog Hazy Jane
+4260649362129	25	Brewdog Aldipa Bier
+4260649362525	25	Brewdog Pale Ale
+4260651640130	25	valantic brew
+4260667060007	25	ethnio IQ GmbH 4Bro Energy
+4260682450388	25	Daiquir Ish lime
+4260688920113	25	More Nutrition SYNERGY
+4260688920212	25	More Nutrition Synergy Ice Tea Lemon
+4260688920243	25	More Nutrition Synergy Tropical Passion
+4260696244072	25	Arizona Tropical ChillZicle Juice Cocktail
+4260705331175	25	UniBev Bratee Limo Mango
+4260705333599	25	Super Pop Pomegranate Raspberry
+4260712620019	15	Natur Joghurt Bioland Schauhof
+4260735440069	25	Engie Apple Berry - TikTok Energydrink
+4260742810053	25	ROY Cucumber & Mint Kombucha
+4262378650140	25	Emyo Limonade Mermaid Fantasy
+4262453621072	25	Qdol - Lime
+4262483270493	25	Edelbach Fresh Pistachio Dubai Edition
+4262505160023	25	Uludag Uludağ Gazoz - Orange
+4262523780883	25	Arizona Rizzberry Fruit Juice Cocktail
+4262523780890	25	Arizona Green Tea Cucumber and Citrus
+4270000162367	25	Live Well Beverages Chico Erfrischungsgetränk 
+4270000616334	25	ROY Lemon Kombucha
+4270000616358	25	ROY Kombucha ROY Pure Prana Kombucha
+4270001699213	25	Gojinade
+4270002540705	8	Brauhaus Hohenaschau Hell
+4270002931725	15	foodies mit Haltung Hafer Drink Chai Edition
+4280000436030	8	Fischer Landbräu Das Pils
+4280001089051	8	Genossenschaftsbrauerei Rötz e. G. Josefi März
+4280001202047	15	Naturbursche Apfel-Direktsaft
+4280001274938	15	Kolle Mate frau kolle
+4300175075572	25	K-Classic Natürliches Mineralwasser
+4300175075589	25	K-Classic natürliches Mineralwasser (medium)
+4300175075596	25	Kclassic Mineralwasser Still
+4300175503006	25	K-Classic Rote Schorle
+4300175804554	25	K-Classic K Classic Eistee, Zitrone
+4304218502339	25	Globus Natürliches Mineralwasser mit Kohlensäu
+4304218502650	25	Globus Mineralwasser
+4304218503732	25	Globus Eistee Lemon-Lime
+4304218503763	25	Globus Roter Tee
+4304218504524	25	korrekt Eistee Zitrone
+4304218505040	25	Globus Eistee Wildkirsche
+4304218505804	25	Globus Icd Black Tea & Mint
+4305615606958	25	Rossmann WellMIX
+4305720030976	25	Tegut Wasser, medium
+4305720080087	25	freppy Orangensaft
+4306188050841	25	Jeden Tag Eistee Pfirsich
+4306188061311	25	Globetrotter Eistee Pfirsich
+4306188389101	25	Real Orangensaft 100% direkt gepresst
+4306188401407	25	Globetrotter Eistee Pfirsich
+4306188416036	25	Jeden Tag Mineralwasser Medium
+4311501065488	25	Gut&Günstig H-Milch 1,5%
+4311501067109	8	Ratskrone Export
+4311501305782	25	Edeka Frucht Liebe Sauerkirsche
+4311501305843	25	Edeka Karibische Orange
+4311501305966	25	Edeka Frucht Liebe Maracuja
+4311501305997	25	Edeka Frucht Liebe Birne
+4311501306024	25	Edeka Bananen Nektar, Banane
+4311501322604	25	Edeka Feucht Liebe Roter Multi
+4311501346525	25	Edeka Fruchtig Liebe Milder Apfel
+4311501346587	25	Edeka Mango
+4311501355350	25	EDEKA Premium Orange direkt gepresst
+4311501366912	25	Edeka Limo Blutorange
+4311501394854	25	EDEKA Frucht Liebe Weisser Pfirsich
+4311501410806	25	Edeka Eistee mit Pfirsich Geschmack
+4311501410844	25	Gut & Günstig Eistee Zitrone
+4311501416303	25	Gut & Günstig Ginger Ale
+4311501416396	25	Gut & Günstig Tonic Water
+4311501421772	25	Gut&Günstig Multi Vitamin Nektar Light
+4311501453896	25	Gut & Günstig Latte Cappuccino
+4311501680896	25	Edeka Grüner Multi
+4311501732977	25	Edeka Herzstücke Mango
+4311501733004	25	Edeka Fruchtliebe Maracuja
+4311501733035	25	Edeka Frucht liebe Apfelsaft
+4311501733066	25	Edeka Fruchtliebe - Milder Multi
+4311501733110	25	Edeka Rhabarbersaft
+4311501733141	25	Edeka Roter Multi
+4311501733172	25	Edeka Fruchtliebe - Sauerkirsche
+4311501733202	25	Edeka Fruchtliebe - Weisser Pfirsich
+4311501733233	25	Edeka Fruchtliebe - Guave
+4311501733332	25	Edeka Fruchtliebe - Birne
+4311501733424	25	Edeka Fruchtliebe - Cranberry
+4311501733455	25	EDEKA Herzstücke Bananensaft
+4311501733486	25	Edeka Saft Karibische Orange Saft
+4311501733547	25	Edeka Milde Orange - Fruchtliebe
+4311501733622	25	Gut & Günstig Schwarze Johannis Beere
+4311501733783	25	Gut & Günstig Multivitamin
+4311501733813	25	Gut & günstig Osaft
+4311501735312	25	Gut & Günstig Orange direkt gepresst
+4311501747698	25	Edeka My Veggie Hafer
+4311501749784	25	Edeka Bio My Veggie Hafer ohne Zucker
+4311501759363	15	Edeka Joghurt mild Mango Vanille
+43115471	25	Gut & Günstig Quell WASSER still
+4311596027972	25	Max Balance Vitamin Water Zitronen-Limetten-Ge
+4311596435784	25	Ratskrone Pils
+4311596435821	25	Edeka Apfelschorle
+4311596435869	25	Gut & Günstig Apfel Schorle
+4311596435944	25	GUT&GÜNSTIG Mineralwasser
+4311596435968	25	G&G Mineralwasser medium 6er Pack
+4311596435982	25	Gut Gunstig Mineralwasser, still
+4311596436002	25	Gut&Günstig Mineralwasser CLASSIC
+4311596436040	25	Gut & Günstig Gut&Günstig Cola
+4311596436064	25	Edeka Cola Light
+4311596436125	25	Gut & Günstig Zitrone
+4311596436149	25	Gut&Günstig Birne & Melisse
+4311596436323	25	Gut & Günstig Bitter Lemon
+4311596447299	25	Gut & Günstig Natürliches Mineralwasser - Medi
+4311596447893	25	Edeka Cola Zero
+4311596459902	25	Gut & Günstig Mineralwasser, still
+4311596460892	25	Edeka Cola Mix Zero
+4311596460939	25	Edeka Orange zero
+4311596465194	25	Booster Original
+4311596465286	25	Booster Energy Drink
+4311596488100	25	BoosterVeritas Vertriebsges. Booster Absolute 
+4311596490172	25	Booster Juicy Energy Drink
+4311596490202	25	Booster Absolute Zero
+4311596490363	25	Booster Exotic Energy Drink
+4311596491322	25	Booster Original
+4311596495559	25	BlackCat Black Cat
+4311596604975	25	The real Cola by Booster
+4311596614394	25	All In Fruits Smoothie Hooray!
+4311596614431	25	All In Fruits Smoothie - Fresh!
+4311596631308	25	All In Fruits Direktsaft - Orange, Apfel, Karo
+4311596637935	25	All In Fruits CujaMara Split
+43115983	25	EuroPerl Quellwasser ohne Kohlensäure
+4313042492402	8	Schinkels Bio-Weizen Alkoholfreie
+4313042734755	15	Solidrinks SOLIMATE
+4313920013514	15	Unsere Heimat Bio-Joghurt mild
+4313920013545	15	Unsere Heimat Frische BIO-Heumilch
+4313920014313	15	Unsere Heimat Frische Bio-Heumilch g.t.S. Fett
+4313920018274	15	Unsere Heimat Frische fettarme Milch 1,5 %
+4316268291873	8	Falkenfelser Premium Pilsener
+4316268291880	8	Falkenfelser Export Bier
+4316268291897	8	Falkenfelser Weißbier
+4316268291903	8	Falkenfelser Weißbier Leicht
+4316268291910	8	Falkenfelser Weissbier alkoholfrei
+4316268391115	8	Stara Cervisia Superior
+4316268413756	25	Frucht Stern Direktsaft Orange
+4316268419017	25	Arktis Premium Vodka 40% vol
+4316268423632	25	Frucht Stern Traube-Apfel-Himbeere-Cranberry
+4316268437530	25	Frucht Stern Blutorangensaft mit Fruchtfleisch
+4316268444217	25	BioBio Bio-Haferdrink
+4316268451079	25	Frucht Stern Bananen-Nektar
+4316268451109	25	Frucht Stern Sauerkirsch Nektar
+4316268522045	8	Stara Cervisia Superior
+4316268592093	25	BioBio Bio-Haferdrink - Natur
+4316268611350	25	BioBio Orangensaft
+4316268611398	25	Frucht Stern Heimische Früchte Apfel-Kirsch Sc
+4316268617741	25	Gutes Land H Milch 1,5% fettarm
+4316268625609	25	Lieblings Premium Direktsaft Orange
+4316268629065	25	Frucht Stern Direktsaft Orange
+4316268631037	25	BioBio Soja Naturell Drink
+4316268631051	25	BioBio Soja-Vanilledrink
+4316268631075	25	BioBio Bio-Haferdrink - Natur
+4316268631648	25	BioBio Kokos-Reisdrink
+4316268632126	25	Netto Limette Zero
+4316268632133	25	StarDrink Zitrone Zero
+4316268637862	25	BioBio Apfel Direktsaft naturtrüb
+4316268653985	25	Fruchtstern Orangensaft
+4316268654081	25	Frucht Stern Bananen-Nektar
+4316268654104	25	Frucht Stern Schwarzer Johannisbeernektar
+4316268654166	25	Netto MD Secco Frizzante Bianco
+4316268654180	25	Netto MD Hugo Frizzante
+4316268654203	25	Lieblings Premium-Direktsaft Traube
+4316268654289	25	Netto Roter Multi
+4316268658102	25	Frucht Stern Orange Direktsaft
+4316268659703	25	Lieblings Direktsaft Mandarine
+4316268664998	25	Frucht Stern Direktsaft
+4316268666824	25	Netto FruchtStern Apfel-Kirsch
+4316268667661	25	BioBio Barista Haferdrink mit Soja
+4316268671842	25	BioBio Bio-Hafer-Mandeldrink ungesüßt
+4316268674218	25	Cafèt
+4316268686242	25	BioBio Mandeldrink gesüsst
+4316268686778	25	BioBio Haferdrink Naturell 100% Vegan
+4316268686877	25	Netto BioBio Haferdrink Schoko
+4316268697712	25	Schloss Pilsener XXL
+4316268697736	25	Schloss Export XXL
+4316268743013	25	Lieblings Frühlingsmix - Apfel, Ananas, Kiwi, 
+4334011008998	25	real Quality Cola
+4334011009056	25	real Quality Natürliches Mineralwasser medium
+4334011025964	25	real Quality Apfelschorle
+4334011037370	25	REAL Quality Tonic Water
+4334011087085	25	real Erdbeere
+4334011095240	25	real quality Birnen sprudler
+4334011190761	25	real,- Quality Pfirsichsprudler
+4335619018488	25	Kong Strong Urban Classic
+4335619077188	25	Freeway Cola Zero Sugar Zero Koffein
+4335619255326	25	Freeway Mate Zero
+4335619395497	25	Kong Strong Wild Power — Peach — Energy Drink
+4335718173408	25	TIP Natürliches Mineralwasser naturell
+4335896358956	25	K-Classic Orange Limo
+4335896631677	25	Edeka Natürliches Mineralwasser
+4335896704364	25	K-Classic Eistee Pfirsich-Geschmack
+4337182007555	25	MCC Trading International GmbH Apfelsaft aus A
+4337185051937	25	ohne Kohlensäure K-Klassic Mineralwasser
+4337185106095	25	K Classic Zero sugar Eis Tee Zitrone
+4337185147692	25	K-Classic Cola+Orange
+4337185147753	25	K-Classic Orange
+4337185148712	25	K-Classic Cola -Z
+4337185149542	25	Kaufland Tonic Water
+4337185149641	25	K-Classic Ginger Ale
+4337185151422	25	Kaufland Classic Natürliches Mineralwasser Spr
+4337185151453	25	K-Classic Natürliches Mineralwasser medium
+4337185151514	25	K-Classic K Classic Natürliches Mineral Wasser
+4337185151637	25	K-Classic Natürliches Mineralwasser
+4337185286650	25	Kaufland to go Schoko milkshake
+4337185297984	25	K to Go Latte Macchiato
+4337185361333	25	K Classic Pro Aqua Apfel Geschmack
+4337185361371	25	K Classic Pro Aqua Erdbeere
+4337185402180	25	Stephans Bräu
+4337185487088	25	K-Classic Orangennektar
+4337185500008	25	K-Favourites Apfelsaft naturtrüb
+4337185616266	25	Cracywolf Geschmack Heudelbeere
+4337185695636	25	Kaufland Crazy Wolf Cranberry Chili - Limited 
+4337185907876	25	Crazy Wolf Strong Cola
+4337256057257	25	Turmbräu Export
+4337256070461	15	REWE Bio Joghurt Mild
+4337256084994	25	REWE Beste Wahl Lamate minze
+4337256087520	25	REWE Beste Wahl LaMate
+4337256088459	25	Rewe to go Cassis Brombeer Apfel Smoothie
+4337256091633	25	Rewe Beste Wahl LaMate Ingwer
+4337256216258	25	Bullit Energydrink Sugar Free
+4337256244732	25	ja! Orangennektar aus Orangensaftkonzentrat
+4337256295727	25	Rewe to go Granatapfelsaft
+4337256301183	25	Rewe Beste Wahl Orangensaft ohne Fruchtfleisch
+4337256302869	25	Rewe Beste Wahl Orange mit Fruchtfleisch 100% 
+4337256324410	25	ja! Orangenlimonade zero
+4337256386791	25	BULLIT Energy Drink Fruity Taste Berry Mix
+4337256568883	25	ja! Apfel Nektar aus Apfelsaft Konzentrat
+4337256591461	25	Bullit Energy Drink Mango Passionsfruit
+4337256595308	25	BULLIT Energy Drink Fruity Taste Lemon Zero
+4337256621892	25	Rewe to go Apfel Mango Maracuja Smoothie
+4337256763783	25	Ja! Cola
+4337256774970	25	Brauerei Mönchengladbach Turmbräu Winterbier
+4337256776400	25	Penny Comet Cola
+4337256786409	25	Penny Comet Cola Zero
+4337256855853	25	Aquiva Mineralwasser Medium
+4337256873901	25	Comet Eistee Zitrone
+4337256883900	25	Comet Eistee Pfirsich - Teegetränk mit Pfirsic
+4337256884525	25	Comet Cola - Cherry
+4337256886703	25	Orson's London Dry Gin & Tonic
+4337256897174	25	Comet Cola
+4337256897990	25	Comet Cola Zero
+4388440065725	25	Elitess Medium
+4388440092615	25	Penny Cola Zero
+4388440093148	25	Penny Apfelschorle
+4388440093803	25	Penny In the Sun-Mix cola
+4388440096057	25	Penny Bitter lemon
+4388440096132	25	Penny Orangen Limonade, Orange 0%
+4388440096583	25	Orangen Limonade - Penny - 1,5 L
+4388441007168	25	Brauerei Mönchengladbach Naturradler
+4388441108186	25	MAYFAIR Eistee Pfirsich
+4388441118109	25	Bullit Energy Drink Original
+4388441169002	25	rewe Limonata
+4388441339207	25	Original Turmbräu Weißbier naturtrüb
+4388810057657	25	Rewe Mineralwasser
+4388810057671	25	Marathon Isotonischer Fitnessdrink
+4388810057701	25	ja! Cola
+4388810057718	25	Ja! Bitter Lemon
+4388810057725	25	Ja! Natürliches Mineralwasser
+4388810057763	15	Elitess Teuto-Quelle Classic
+4388810057770	25	Mineralwasser Baruth Quelle, Elitess, classic
+4388810057787	25	Wasser Elitess Still, Neutral
+4388810057817	25	ja! Natürliches Mineralwasser still
+4388810057848	25	ja! Apfel-Schorle
+4388810057855	25	Bullit Energy Drink Original
+4388816191898	25	Ja! Cola 0% Zucker
+4388840103942	25	ja! Natürliches Mineralwasser Medium
+4388840214341	25	ja! Cola-Mix
+4388840215829	25	Rewe Mineralwasser Medium
+4388844018709	25	Rewe Bio Fruchtsaft
+4388844022553	25	Original Turmbräu Premium Pils 0, 5L
+4388844076259	25	REWE Beste Wahl Tonic water
+4388844084964	25	Rewe Bio Eistee Alpenkräuter
+4388844102675	25	REWE Beste Wahl Kühlfrische Blutorange
+4388844105188	25	Refresco ja! Orangensaft copy
+4388844147942	25	REWE Beste Wahl Ginger Ale
+4388844154438	25	REWE Beste Wahl Aqua Mia classic Mineralwasser
+4388844154490	25	Rewe Beste Wahl Milder Orangensaft aus Orangen
+4388844154605	25	Rewe Aqua Mia CLASSIC
+4388844154636	25	REWE Beste Wahl Wasser Still
+4388844154841	25	Rewe beste Wahl Wasser
+4388844174542	25	REWE Beste Wahl Milder Multivitamin
+4388844182981	25	REWE Lamate
+4388844193116	25	Dieck & Co. Erfrischungsgetränke OHG Maximal G
+4388844254015	25	Bullit Energydrink Grapefruit
+4388844254831	25	REWE Maximal G sugarfree
+4388844267688	25	Rewe Beste Wahl Pfirsich Mango Wasser
+4388844298279	25	Rewe Beste Wahl Kühlfrische Mandarine
+4388860003956	25	Penny Stilles Wasser
+4388860003994	25	Penny classic Mineralwasser
+4388860004601	25	Penny Quintus Quelle Medium
+4388860123593	25	Bullit Energy Drink Tropical Guave mit Guarana
+4388860192933	25	ja! Eistee Zitrone
+4388860193237	25	Ja Eistee Pfirsich
+4388860193343	25	Mayfair Eistee Pfirsich
+4388860202366	25	Rewe to go Minze Tee mit Zitrone
+4388860218688	25	Brauerei Braunschweig Turmbräu Export
+4388860229042	25	Penny Cola in the Sun-Mix
+4388860229165	25	Penny cola
+4388860230697	25	Ja! Cola mix
+4388860280432	25	Barkeeper Bitter Lemon
+4388860395228	25	Bullit Energydrink Original
+4388860400694	15	Rewe Joghurt mild Stracciatella
+4388860413656	25	Brauerei Mönchengladbach Turmbräu Malz Alkohol
+4388860447248	25	Bullit Energydrink Berry mix
+4388860580730	25	Penny fanta
+4388860581003	25	ja! Zitronenlimonade
+4388860591637	25	REWE Beste Wahl LaMate Minze
+4388860591880	25	San Fabio Limonata AL Limone
+4388860598506	25	Elitess Aqua plus Eldbeer
+4388860637380	25	Ja! Apfelnektar
+4388860652420	15	REWE Bio Jogurth mild
+4607010103743	25	Моя цена Дюшес
+4710487011548	25	Chin chin PEARL Milk Tea
+4742976013474	25	Põhjala Suvila Session IPA
+4751037280267	25	Rudy's Kombucha Raspberry & Basil
+4751037280274	25	Rudy's Kombucha Mango & Passion Fruit
+4751037280281	25	Rudy's Kombucha Coconut & Pineapple
+4751037280298	25	Rudy's Kombucha Pineapple & Peach
+4751037280731	25	Rudy's Kombucha Lemon & Ginger
+4751037280830	25	Rudy’s Kombucha Rudy's Kombucha Mandarin & Yuz
+4751037280953	25	Rudy's Kombucha Pear & Fireweed
+4751037281219	25	Rudy’s Kombucha Rudy's Kombucha Rhubarb
+4809015157480	25	Bleeding Heart Rum Rum - Don Papa Baroko
+4888815173005	8	Klötenbräu - Stuttgarter Original - 5,2%Alk/vo
+4893283137985	8	Stugge Bock - Heller Sommerbock
+5000112510379	25	Coca Cola Fanta Lemon (light)
+5000112514100	25	Fanta Lemon elderflower
+5000112514124	25	Fanta Exotic 0,33 Dose
+5000112517163	25	Fanta Strawberry & Kiwi
+5000112521634	25	Fanta Orange ohne Zucker
+5000112545326	25	Coca-Cola Coke Original Taste
+5000112546415	25	Coca-Cola Original
+5000112546439	25	Coca Cola light
+5000112546477	25	Mezzo Mix
+5000112546491	25	Coca-Cola Company Sprite
+5000112546514	25	Fanta Orange
+5000112547160	25	The Coca-Cola Company Red Bull Pink sugafree
+5000112547207	25	Sprite
+5000112547221	25	Coca-Cola Company mezzo mix
+5000112547412	25	Coca-Cola Company Coca-Cola Rot / Đỏ
+5000112547450	25	Coca-Cola Mezzo Mix
+5000112547474	25	Coca Cola Sprite
+5000112547702	25	Coca-cola Cola (diet)
+5000112547726	25	Coca-Cola Cola
+5000112547788	25	ALDI Getränke Coca-Cola EDEKA Hayunga Getränke
+5000112547801	25	Coca-Cola Mezzo Mix
+5000112547825	25	Sprite Zitrone-Limette
+5000112548068	25	Coca-Cola Classic
+5000112548082	25	Fanta Orange
+5000112548129	25	Coca-Cola Sprite Zitrone-Limette
+5000112548167	25	Coca-Cola Light
+5000112548204	25	Coca-Cola Mezzo Mix
+5000112548242	25	Lift Apfel-Schorle
+5000112548303	25	Coca-Cola Coca Cola Light
+5000112548341	25	Sprite getränk
+5000112548365	25	Fanta Orange
+5000112548389	25	Coca-Cola Coca - Cola light taste koffeinfrei
+5000112552157	25	Coca Cola Company Coca-Cola Zero
+5000112552195	25	Coca-Cola Zero
+5000112552218	25	EDEKA Hayunga Getränke Coca-Cola Zero Mehrweg 
+5000112554359	25	Coca-Cola zéro
+5000112558265	25	Coca-Cola Zero
+5000112558920	25	Coca-Cola vanilla
+5000112561098	25	Coca-Cola
+5000112563108	25	Coca Cola Mezzo Mix Zero 0,5L
+5000112563788	25	Nestea Pfirsich Geschmack
+5000112576009	25	Coca-Cola Zero
+5000112576986	25	Coca-Cola MezzoMix Zero
+5000112580167	25	Fanta Orange
+5000112587340	25	Fanta Kiwi und Strawberry Limo
+5000112592153	25	Fanta Lemon & Elderflower
+5000112594041	25	Coca-Cola Zero Sugar Zero Koffeinfrei
+5000112599053	25	Apollinaris ViO medium
+5000112602029	25	Coca-Cola 0,33 Dose
+5000112603491	25	Apollinaris Vio still
+5000112604450	25	Coca-Cola Cola Zero
+5000112611311	25	Coca-Cola life
+5000112611748	25	Coca-Cola
+5000112611762	25	Coca-Cola coca cola zero 1,25L
+5000112620191	25	Fanta Lemon Ohne Zucker 1.25l
+5000112622713	25	Vio Bio Limo orange-mango-passion
+5000112622737	25	Vio Bio Limo Leicht Apfel Brombeere
+5000112626070	25	Coca-Cola Fanta Lemon ohne Zucker
+5000112626360	25	Fanta Pink Grapefruit
+5000112630299	25	Fuzetea Zitrone
+5000112630312	25	Coca-Cola Company Fuzetea - Grüner Tee Mango-K
+5000112638783	25	Fanta orange 33cl
+5000112638806	15	Coca-Cola Company CocaCola Zero Sugar – Null Z
+5000112638905	25	Fanta Mango
+5000112638912	25	Fanta Mango
+5000112639377	25	Coca-Cola Company Fanta Fanta Exotic
+5000112639384	25	Coca-Cola Cherry ohne Zucker
+5000112639421	25	Coca-Cola Cola Vanille Zero
+5000112639438	25	ALDI Getränke Coca-Cola FLAVORS Vanilla ZERO S
+5000112639445	25	Coca Cola Vanilla Zero Sugar
+5000112640168	25	Coca Cola Energy
+5000112641851	25	Coca-Cola Company Fuze Tea Zitrone 1,25 Liter
+5000112641868	25	Fuze Tea Pfirsich
+5000112642988	25	Coca-Cola Coca Cola Zimt ohne Zucker
+5000112642995	25	Coca-Cola Zimt
+5000112643008	25	Coca-Cola Zero Sugar Cinnamon
+5000112643176	25	Coca-Cola Schwarzer Tee Apfel Zimt
+5000112647341	25	Coca-Cola Vio Bio Limo (Holunder-Zitrone)
+5000112649710	25	coca cola FANTA Strawberry & Kiwi
+5000112669909	25	Absolut Vodka Sprite
+5000112672633	25	Coca-Cola Cola
+5000112677041	25	Coca-Cola Powerade Mountain Blast
+5000118558818	25	Coca-Cola Zero
+5000213009420	25	ALDI Guinness Draught Irisches Bier Zzgl. Pfan
+5000213009437	25	Guinness Draught
+5000213101223	25	Bière Brune Draught 4,2% GUINNESS
+5000267185163	25	Johnnie Walker Johnnie Blonde and Lemonade Mix
+5000281027593	25	captain morgan + cola Captain Morgan Cola
+5000281073286	25	Captain Morgan Spiced Gold & Cola
+5000281073309	25	Captain Morgan White Rum Mojito
+5010549006178	25	Abbot Ale
+5014379007404	25	Bud king of beet
+5038862135795	25	Innocent Orange avec pulpe
+5038862139861	25	innocent Orange ohne Fruchtfleisch
+5038862233736	25	innocent Guave, Ananas & Apfel
+5038862239400	25	innocent Vitaminbündel
+5038862430135	25	innocent Orangensaft mit Fruchtfleisch
+5038862430906	25	innocent Direktsaft Orange ohne Fruchtfleisch
+5038862439121	25	innocent Blaubeere, Apfel, Johannisbeere & Cra
+5038862439220	25	Innocent Direktsaft
+5040446076189	25	Take Off Zombie Attack
+5056025440449	25	Alus BREWDOG PUNK ipa
+5056225900156	8	Kingfisher Premium
+5056784907269	25	Monster Energy Lando Norris
+5056784908754	25	Monster Energy Zero Sugar VR 46
+5060045587213	25	Jim Beam Kentucky Straight Bourbon Whiskey & C
+5060108450935	25	Fever Tree Premium Indian Tonic Water
+5060166697716	25	Monster Energy Absolute Zero
+5060335635228	25	Monster Energy Original
+5060335635235	25	Monster Energy Assault
+5060335635242	25	Monster Energy Monster Energy Absolutely Zero
+5060335635259	25	Monster Ripper
+5060335635266	25	Monster Energy The Doctor
+5060335635273	25	Monster Rehab
+5060335635280	25	Monster Punch MIXXD
+5060337500401	25	Monster Energy Ultra
+5060337500456	25	Monster Energy Ultra Sunrise
+5060337500609	25	Monster Energy Ultra Red
+5060337505017	25	Monster Ultra Zero Zucker weiß
+5060337507608	25	Monster Rehab Tea + Peach
+5060337507639	25	Monster Energy Ultra Citron
+5060337508872	25	Monster - Lewis Hamilton
+5060386620044	25	Beavertown Gamma Ray American Pale Ale
+5060517883607	25	Monster Paradise
+5060517883638	25	Monster Energydrink &quot;Ultra Violet&quot;
+5060517888510	25	Monster Juiced
+5060608742332	25	Reign Total Body Fuel - Lemon HDZ
+5060608742936	25	Reign energy Razzle Berry
+5060608742967	25	Reign Beverage Company LLC. Total Body Fuel - 
+5060639120918	25	Monster Espresso triple shot
+5060639120949	25	Espresso Monster
+5060639123551	25	Mega Monster Energy Ultra
+5060639123643	25	Mega Monster Energy
+5060639126682	25	Monster Pacific Punch
+5060639126897	25	Monster Energy Company Ultra Paradise
+5060751211631	25	Monster Energy Mule Ginger Brew
+5060751212249	25	Monster Ultra Fiesta Mango Flavour
+5060751212393	25	Monster Energy Monarch
+5060751216520	25	Monster Energy Nitro
+5060751219095	25	Monster Energy Monster Ultra Watermelon
+5060895742213	25	Reign Energydrink &quot;Mang-o-Matic&quot;
+5060896622132	25	Monster Energy Nitro
+5060896622859	25	Monster Energy Khaotic
+5060896624877	25	Monster Energy Monster Ultra Golden Pineapple 
+5060896625829	25	Monster Top Speed Zero Sugar
+5060896628790	25	Monster Energy Reserve Watermelon
+5060947541153	25	Monster Ultra Rosa Zero Zucker
+5060947541986	25	Monster Energy Juiced Aussie Lemonade Style
+5060947549555	25	Monster Energy Zero Sugar
+5061013941815	25	Monster Energy Ultra Peachy Keen
+5061013944809	25	Monster Energy Bad Apple
+5099873010280	25	Jack Daniel's Lynchburg Lemonade
+5099873015049	25	Jack Daniel's jack daniels Cola
+5201309628796	25	Mythos Bier
+5232713637838	15	Coca-Cola Schurwald medium
+5400606947665	25	Amazon EU SARL Waldenberger Premium Pilsner Bi
+54007826	25	Coca Cola Zero
+5410228197089	25	Leffe Rituel 9°
+5410228253624	25	Leffe Blonde 0,0% alcool
+5410228292876	8	Corona Cero 0,0%
+5449000000286	25	Coca-Cola Coca Cola
+5449000000439	25	Coca-Cola Coca Cola Original taste
+5449000000965	25	Coca-Cola 6 x 330ml
+5449000000996	25	COCA-COLA SERVICES SA/NV Coca-Cola
+5449000004840	25	Fanta Naranja
+5449000006271	15	Fanta orange
+5449000011527	25	fanta Orange 0,33
+5449000017888	15	Coca-Cola 1 Liter
+5449000017895	15	Coca-Cola Light Mehrweg Pet 1L
+5449000017901	15	Coca-Cola light koffeinfrei
+5449000017918	15	Fanta Orange
+5449000017932	15	Sprite
+5449000017956	15	EDEKA Hayunga Getränke Coca-Cola MEZZO MIX Meh
+5449000021205	15	Fanta Lemon
+5449000025173	25	Coca-Cola Less Sugar
+5449000025500	15	vio Bio Limo
+5449000038715	15	Coca-Cola Lift, Apfelschorle
+5449000042101	25	Fanta fruit twist
+5449000044709	25	Schweppes
+5449000050205	25	Coca-Cola Light
+5449000050212	15	Coca-Cola Light
+5449000051400	25	Vanilla Coca-Cola
+5449000051684	25	Coca cola Coca-cola Standard
+5449000052926	25	Fanta orange 1.5l
+5449000053565	25	Coca-Cola Coca Cola Light
+5449000054227	15	COCA-COLA SERVICES SA/NV Coca-Cola Original Ta
+5449000081711	15	Cola-Cola Fanta Mango-Geschmack
+5449000091659	15	Coca Cola Life 1L MW
+5449000101549	15	EDEKA Hayunga Getränke Coca-Cola Vanilla Coca-
+5449000102379	25	Coca Cola Co. Dr Pepper 1.5Lt .
+5449000110039	25	Sprite Zero 1,5L
+5449000118301	25	Coca-Cola Sprite
+5449000118349	25	Fanta
+5449000123008	15	Vio Bio Limo Zitrone-limette
+5449000130389	25	Coca-Cola Coca Cola
+5449000131805	25	COCA-COLA SERVICES SA/NV Coca-Cola Zero Azúcar
+5449000131812	25	Coca-Cola Coca Cola zero
+5449000131843	25	Coca-Cola Zero
+5449000132499	25	Fanta Orange 1.75
+5449000132505	25	Coca-Cola Sprite
+5449000133328	15	COCA-COLA SERVICES SA/NV Cocacola zero sugar
+5449000133335	25	Coca-Cola Zero
+5449000134059	15	Coca-Cola Cola zero
+5449000134264	15	Coca-Cola Zero
+5449000134424	15	Coca-Cola zero
+5449000137609	25	Coca-Cola Zero
+5449000138170	15	Fanta Orange Zero
+5449000146571	25	Vio BIO LIMO Orange
+5449000162861	25	Coca-Cola light koffeinfrei
+5449000171771	25	Aquarius zero
+5449000187390	15	Coca-Cola Zero Sugar koffeinfrei
+5449000214799	25	COCA-COLA SERVICES SA/NV Coca-Cola sans sucres
+5449000216489	25	ViO BiO LiMO Grapefruit
+5449000227621	15	Vio Medium
+5449000229168	25	Appletiser
+5449000241764	25	Coca Cola Coca zéro lemon
+5449000266088	15	Coca Cola light Taste exotic Mango
+5449000266101	15	Coca-Cola light taste ginger lime
+5449000267412	25	Coca-Cola goût original
+5449000286703	15	Coca-Cola Schwarzer Tee Himbeer-Minze, ohne Zu
+5449000294760	25	Coca-Cola European Partners DE Fuze Tea Schwar
+5449000294784	25	Coca-Cola Fuzetea - Schwarzer Tee Pfirsich-Hol
+5449000294791	15	Coca-Cola Schwarzer Tee Pfirsich- & Holunderbl
+5449000303028	25	Sprite No Sugar
+5449000308740	25	The Coca Cola Company Sprite
+5449000665928	15	Fanta Lemon ohne Zucker
+54490123	15	Coca-Cola
+54491014	25	Coca-Cola Company Cocacola mini original taste
+54491229	15	Coca-Cola
+54492028	15	Sprite
+54493896	25	Mezzo Mix
+5450154069012	25	Gambrinus Beer - Battin / Beier Wei Freier
+5600821261717	25	The GUTsy Captain Kombucha
+5601045001318	25	SUMOL+COMPAL Maracujá
+5601045300008	25	Guaraná Antarctica
+56529562	25	Red Bull
+5712874957032	25	Kingsway Apfelsaft
+5740600510350	25	Carlsberg Elephant (7,5%)
+5740600510602	8	Carlsberg Premium Lager Beer
+5740600514143	8	Carlsberg
+5740700410116	25	Tuborg Pilsener
+5740700410345	25	Carlsberg Tuborg
+5740700987984	25	Fanta - Straberry & Kiwi
+5740700988349	25	Coca-Cola Original Taste
+5740700992827	25	Somersby Pear Sparkling Cider
+5740700996153	25	Fanta - Exotic
+5741000011539	25	Royal Unibrew Thor Blå Thor Export
+5741000122853	25	Faxe Premium
+5900334006233	25	Tymbark Jabłko Wiśnia 2l
+5900497310338	25	Pepsi, Cola
+5900877000293	25	Piwo Żubr 0,5L Pusz.
+5901359074269	25	Belkę Popovice Polnische Bier (Dose)
+5901359084282	25	Tyskie Radler
+5902837700175	25	Allnutrition BCAA Power Drink
+5902860411062	25	schweppes Eau tonique
+5905927000513	25	Perła - Browary Lubelskie Perła Chmielowa
+5942321000213	25	Fanta Madness 2 l
+5999571053285	25	Hell Energy Ice Coffee - Cappuccino
+5999571053292	25	Hell Energy Ice Coffee - Latte
+64111971	25	SUMOL+COMPAL Marcas Sumol
+6932512600369	25	Guang's Pineapple beer
+7310070001849	25	Ramlösa Wasser
+7310070006332	25	Pepsi Max Lemon
+7340131601671	25	Nocco Miami Strawberry
+7350086120073	25	IKEA Cider Äpple
+7424957245285	25	De Man Browerij De Pannekoekenman
+7610007210895	25	Lipton ice tea lemon
+7610057023490	25	De la Région Apfelsaft
+7610097111188	25	Rivella Rot Original
+7610097126182	25	Rivella Refresh
+7610200337375	25	Aproz Migros Cristal
+7610200337450	25	M-Budget Eau minérale avec CO2
+7610335000069	25	Mineralwasser Valser
+7610827887079	25	Coop Prix Garantie Energy Drink
+7611330874488	25	Farmer Beer
+7611331039770	25	Farmer Mate
+76129810	25	Feldschlösschen Original
+7613035675537	25	Nescafé Xpress Typ Vanilla
+7613269164395	25	M-Budget Energy Drink
+76137099	25	Dose Schützengarten
+76137211	25	Klosterbräu Schützengarten
+7616200083502	25	Feldschlösschen Panache Bilz No Alcohol
+76400698	25	Feldschlösschen Zitrone 0.0%
+7640115250933	25	Coop Eau minérale
+7640115250964	25	Prix Garantie Mineralwasser ohne
+7640115251145	25	Coop Prix Garantie Citron light
+7640150491001	25	El Tony Mate
+7640150491407	25	El Tony Mate & Mint
+7640175742485	25	Bombay Gin tonic
+76403095	25	Feldschlösschen Pale Ale
+8000845065457	25	Fonti di Crodo Lemon soda mojito
+80008576	25	San Benedetto Acqua naturale
+8001300122319	25	Despar Bevanda analcolica gassata
+8001435440012	25	Heineken Bier Birra Moretti Ricetta 33 cl
+80015529	25	Levissima Aqua Naturale
+8001620015049	25	San Benedetto The eistee
+8002270000058	25	Nestlé San Pellegrino
+8002270001857	25	Nestlé S. Pellegrinio
+8002270015380	25	Nestlé S. Pellegrino
+8002270096686	25	Nestlé Essenza Zitrone & Zitronenzeste
+8002270106545	25	Nestlé Sanpellegrino Pompelmo
+8002270156687	25	Nestlé S.PELLEGRINO ESSENZA
+8002270386794	25	San Pellegrino Sanpellegrino limone
+8002270396502	25	Nestlé Limonata
+8002270636585	25	Nestlé Italian Sparkling Drinks Limone & Menta
+8002270646799	25	Nestlé Naturali Aranciata
+8002270876790	25	Nestlé Chinò
+8002270946561	25	Nestlé Boisson aranciata amara
+8002270946783	25	San Pellegrino Limone & Menta
+8002705035556	25	Acqua Levia
+8006890758481	25	Heineken Birra Ichnusa
+8008440049186	25	Asahi
+8008440410214	25	Peroni Birra
+8008440412508	25	Nastro Azzurro Nasto azzuro
+8008440449108	25	Asahi
+80141402	25	PIODA Acqua Naturale
+80145424	25	Oran-Soda Oran Soda
+80145455	25	Freedea Lemon soda la limonata solo da limoni 
+8017596057105	25	Eurospin Acqua naturale naturale
+8050327350007	25	Fonti di Crodo Lemon Soda
+8050327350014	25	Fonti di Crodo Oran Soda
+8050327350021	25	Fonti di Crodo Lemon Soda Mojito alkoholfrei
+8050327350038	25	Crodo Lemon Soda
+8050327350328	25	CRODO Mojito soda
+8057192000419	25	Terme di Crodo Lemon soda
+8057192002901	25	Terme di Crodo Oransoda zero
+8057192007104	25	Fonti di Crodo Oran Soda Spritz alkoholfrei
+8410221902885	25	43 Milk
+8410408051368	25	Kas citron 🍋1,5 L
+8410494300043	25	Pepsi Max zeri
+8410569510001	25	Amstel Cerveza rubia Radler 0,0% con zumo natu
+8410569615614	25	Cerveza Amstel Radler
+8410655007040	25	San miguel
+8410728180120	25	AGUAS DANONE S.A. Water
+8586000987708	25	Corgon 🍺
+8586001762939	25	Birelláda cola
+8588000346790	25	fit baba víz
+8591036550376	25	Březňák Premium Pils
+8591036550918	25	Zlatopramen 11
+8594030013168	25	Svijany Svijanský Máz
+8594404005782	25	Kozel Lager Premium
+8594404012698	25	pivo Radegast 10°
+8690690171771	25	Aroma Sour Cherry drink
+8690723162301	25	Erbak-Uludağ Uludağ Gazoz
+8690723312300	25	Uludag ORANGE
+8690723373400	25	Uludağ Uludag
+8711000511039	25	Jacobs Icepresso
+8711900013992	25	boisson énergisante regular 250ml rodeo can
+8712000757298	25	Desperados Tropical Daiquiri
+8712000900663	8	Heineken Bier
+87120462	25	Heineken Original
+8712857978440	25	Chupa Chups Sparkling GRAPE FLAVOUR
+8717700001009	25	Seven up 7up
+8718612000609	25	Arizona Green Tea with Honey
+8718612000630	25	Arizona Pomegranate Green Tea
+8718612001071	25	Arizona green tea and honey
+8718612001132	25	AriZona Iced tea With Peach Flavor
+8718612002061	25	Arizona Blueberry White Tea
+8718612005253	25	Arizona Raspberry Iced Tea XXL
+8718612005444	25	Arizona Green Tea with Honey & Lemon
+8720211190025	25	Bang energy drink
+8720211190049	25	Bang Energy B. V. Peach Mango
+8720892511119	25	Rudy's Kombucha Mango & Passion Fruit
+8720892511126	25	Rudy's Kombucha Pineapple & Peach
+8720892511133	25	Rudy's Kombucha Rhubarb
+8720892511140	25	Rudy's Kombucha Coconut & Pineapple
+8720892511157	25	Rudy's Kombucha Lemon & Ginger
+8720892511171	25	Rudy's Kombucha Pear & Fireweed
+8720892511188	25	Rudy's Kombucha Raspberry & Basil
+87222050	25	United Sport Drinks BV All Activity Drink
+8801069402451	25	Chupa Chups Strawberry & Cream
+8850999113005	25	Singha, lager, 5%
+8850999320007	25	SINGHA Drinking Water
+8851959132173	25	Fanta แฟนต้ากลิ่นสตรอเบอร์รี
+8853662023410	25	Exotic Food Coconut with pulp drink
+8855199132658	25	schweppes Tonic Water
+9002349000827	25	Schartner Bombe Spezi
+9002490100070	25	Red Bull
+9002490200220	25	Red Bull Sugarfree
+9002490205973	25	25 cl Red Bull - Energy Drink
+9002490206840	25	Red Bull
+9002490228736	25	Red Bull Original
+9002490242329	25	Red Bull Zero
+9002490247805	25	Red Bull The White Edition (Kokos-Blaubeere)
+9002490278984	25	Organics By Red Bull Simply Cola
+9002999037037	25	Egger mate original
+9003100159020	8	Wieselburger Bier Stammbräu
+90034558	25	Stiegl Goldbräu
+9003740071027	25	clever Energy Drink
+9007175006005	25	Waldquelle Kobersdorf Traubi soda
+9008700192972	25	Rauch Eistee Zitrone
+9008700193566	25	Juicebar Schwarz Tee Ingwer- Zitrone
+9008700193580	25	Rauch Früchte Tee
+9008700193634	25	Carpe Diem Kombucha classic
+9008700200585	25	Rauch Eistee Pfirsich
+9008700219945	25	Eistee Cola Gums Orange Taste Julien Bam Editi
+9008700219983	25	Rauch Julien Bam Eistee
+9009700145104	25	Vöslauer Mineralwasser, mild
+9009700300206	25	Vöslauer Mineralwasser ohne 1,5l
+9009700307267	15	Vöslauer Mineralwasser prickelnd
+90097935	25	Vöslauer Himbeere
+9010158005940	25	Clever Energydrink Sugarfree
+9010158012160	15	Ja! natürlich Milch
+9010437008938	15	Ja! Natürlich Joghurt natur
+9010800903037	25	Privatquelle Grouper GmbH Orange
+9011084083002	25	5,0 Original Weizen
+90140150	25	Frastanzer Dark
+9015160105398	25	Almdudler Mate & Guarana
+90162480	25	Red Bull Sugarfree
+90162565	25	Red Bull Energydrink Classic
+90162909	25	Red Bull Energy Drink
+90167126	25	Pfanner Ice tea-Pfirsich
+90169069	25	Rauch Eistee Zitrone
+9022100001191	25	DrinkStar GmbH Gröbi Orange-Maracuja
+90280443	25	Carpe Diem Kombucha Classic Schorle
+9028800607855	25	Gösser Natur Radler
+9028800616482	25	Gösser NaturRadler
+9028800638590	25	Gösser Natur-Radler Alkoholfrei
+9028800638644	25	Gösser Natur Radler
+9028800651773	25	Gösser Natur-Radler
+90311789	25	Römerquelle Mineralwasser prickelnd
+90311796	25	Römerquelle Mineralwasser
+90357350	25	Coca-Cola Powerade Mountain - Blue
+90357473	25	Coke ZERO Cocacola mini zero sugar
+90376139	25	Red Bull 473ml
+90376603	25	Red Bull Heidelbeere
+9040400017629	25	Foxx Still Mineralwasser
+9040400018800	25	Convivo Koffeinhaltiges Erfrischungsgetränk mi
+90415296	25	Red Bull GmbH RedBull zero
+90415722	25	Red Bull Tropical
+90424892	25	Red Bull Organics Ginger Ale
+90424922	25	Organics by Red Bull simply cola
+90426698	25	Pfanner ice tea sparkling zero zitrone
+90433160	25	simply Cola (Organics by Red Bull) (Bio)
+90433221	25	Red Bull Acai
+90433627	25	Red Bull Kokos Blaubeere (Weiß)
+90433689	25	Red Bull Kokos Blaubeere
+90435607	25	RedBull Winter Edition Spekulatius-Kirsch
+90435973	25	Red Bull Wassermelone (Rot)
+90446535	25	Red Bull The Peach edition
+90446832	25	Red Bull Kaktusfrucht
+90453793	25	Red Bull Feige-Apfel
+90453885	25	Red Bull The Sea Blue Edition Juneberry
+90454790	25	Red Bull iced vanilla berry zero
+90457494	25	Red Bull
+90457623	25	Red bull winter edition Sugarfree
+90474323	25	Red Bull The Lilac Edition Sugarfree
+9066001120605	15	Schärdinger Bergbauern Milch
+9100000043364	25	S-Budget Energy Drink Sugarfree
+9100000837116	25	S-Budget Energydrink Classic
+9100000899077	15	Spar Natur*pur Bergbauern Bio-Halbfettmilch
+9100000899640	25	Budget Energy Drink
+9100000938738	25	S-Budget Energy Drink Tutti Frutti
+9120018535767	25	Frutex Golden Eagle
+9120033164362	25	dc Energy Drink
+9120033164959	25	SV Natural Drinks Sovit
+9120037087568	25	Delikatessa Oxxen Kracherl
+9120046090016	25	all i need Green Tea
+9120046090405	25	All I need Black tea
+9120046090504	25	Mate tea all i need
+9120048491170	25	ich bin Österreich Naturquelle prickelnd
+9120087120017	25	SweedPower
+9311493004491	25	Bundaberg Ginger Brew
+9311493004507	25	Bundaberg Blood Orange Brew
+93213202	8	Mahn & Ohlerich M&O Bier
+9421030100057	25	Carlsberg elephant

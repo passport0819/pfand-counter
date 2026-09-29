@@ -1,0 +1,8 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="40dp" android:height="40dp"
+    android:viewportWidth="48" android:viewportHeight="48">
+    <!-- A generic deposit sign: a circular arrow around a euro sign. Deliberately without the bottle
+         and can of the DPG's own mark. -->
+    <path android:strokeColor="@color/accent" android:strokeWidth="2.6" android:strokeLineJoin="round" android:strokeLineCap="round" android:fillColor="#00000000" android:pathData="M24,8A16,16 0 1 1 10.14,16 M11,20.9L10.14,16L5.44,17.7" />
+    <path android:strokeColor="@color/text" android:strokeWidth="2.6" android:strokeLineJoin="round" android:strokeLineCap="round" android:fillColor="#00000000" android:pathData="M30.1,19.4A6.5,6.5 0 1 0 30.1,28.6 M17.5,22.5h8 M17.5,25.5h8" />
+</vector>

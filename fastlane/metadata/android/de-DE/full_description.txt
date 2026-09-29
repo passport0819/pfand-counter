@@ -1,0 +1,27 @@
+Pfand Counter ist ein Pfandrechner für dein Leergut: Die App zählt Flaschenpfand, Dosenpfand und Kastenpfand (Einweg- und Mehrwegpfand) zusammen, während du die Barcodes scannst. So weißt du schon vor dem Pfandautomaten, was ungefähr herauskommt.
+
+Ein Barcode verrät das Pfand nicht. Deshalb bringt die App eine Liste bekannter Barcodes mit, schlägt unbekannte in offenen Produktdatenbanken nach und merkt sich jede Antwort, die du ihr gibst.
+
+<b>Was sie kann</b>
+<ul>
+<li>Barcodes mit der Kamera scannen; die Summe steht mit Aufschlüsselung nach Pfandbetrag da (0,08 €, 0,15 €, 0,25 €).</li>
+<li>Eine mitgelieferte Liste von Barcodes mit bekanntem Pfand, gebaut aus Open Food Facts.</li>
+<li>Unbekannte Barcodes werden bei Open Food Facts, Open Beauty Facts und Open Products Facts nachgeschlagen. Was eindeutig kein Getränk ist, und Sirup, wird nicht gezählt.</li>
+<li>Bei Getränken, die sie nicht entscheiden kann, fragt eine kurze Hilfe nach dem Behälter und merkt sich deine Antwort für diesen Barcode.</li>
+<li>Kästen: Kastenpfand, volle Kästen samt Flaschen mit einem Tippen, eigene Kastengrößen.</li>
+<li>Eine Statistik, die auf dem Handy bleibt.</li>
+<li>Mit TalkBack nutzbar: Jeder Scan wird angesagt, und gezählt, kein Pfand und unbekannt rütteln unterschiedlich (Töne lassen sich in den Einstellungen einschalten).</li>
+<li>„Supermarkt in der Nähe“ öffnet deine Karten-App; die App selbst braucht keine Standort-Berechtigung.</li>
+<li>11 Sprachen: Deutsch, English, Türkçe, Русский, العربية, Polski, Українська, Français, Español, فارسی, Tiếng Việt (maschinell übersetzt, Verbesserungen willkommen).</li>
+</ul>
+
+<b>Freiwilliger KI-Vorschlag („Jev“)</b>
+Nach der Installation ausgeschaltet. Wenn du ihn einschaltest und einen eigenen Schlüssel für OpenRouter oder TypeSafe einträgst (beides kostenpflichtige Dienste, keine freie Software), schickt „Jev fragen“ die Produktbeschreibung, nie den Barcode, und zeigt einen Pfand-Vorschlag mit seiner gemessenen Zuverlässigkeit. Entscheiden tust weiter du.
+
+<b>Datenschutz</b>
+Kein Konto, keine Werbung, keine Überwachung, kein eigener Server. Deine Zählung bleibt auf deinem Handy. Nur der gescannte Barcode geht an Open Food Facts, um den Produktnamen zu finden.
+
+<b>Bitte beachten</b>
+Die App kann sich irren. Es zählt, was der Automat auszahlt. Mit KI von einem Laien geschrieben, nicht fachlich geprüft.
+
+Produktdaten © Mitwirkende von Open Food Facts, Open Database License (ODbL).

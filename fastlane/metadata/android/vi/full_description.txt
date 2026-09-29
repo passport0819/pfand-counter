@@ -1,0 +1,27 @@
+Pfand Counter là ứng dụng tính tiền cọc chai lon cho nước Đức: cộng dồn tiền cọc (Pfand) của chai, lon và két rỗng trong khi bạn quét mã vạch, để bạn biết trước sẽ nhận được bao nhiêu trước khi đến máy trả vỏ.
+
+Mã vạch không chứa số tiền cọc. Vì vậy ứng dụng đi kèm một danh sách mã vạch đã biết tiền cọc, tra cứu mã chưa biết trong các cơ sở dữ liệu sản phẩm mở và ghi nhớ mọi câu trả lời bạn đưa ra.
+
+<b>Ứng dụng làm được gì</b>
+<ul>
+<li>Quét mã vạch bằng camera; tổng tiền được hiển thị kèm phân loại theo số tiền cọc (0,08 €, 0,15 €, 0,25 €).</li>
+<li>Danh sách mã vạch đã biết tiền cọc đi kèm, được xây dựng từ Open Food Facts.</li>
+<li>Mã vạch chưa biết được tra trên Open Food Facts, Open Beauty Facts và Open Products Facts. Những thứ rõ ràng không phải đồ uống, và siro, không được tính.</li>
+<li>Với đồ uống chưa xác định được, một hướng dẫn ngắn hỏi về vỏ chứa và ghi nhớ câu trả lời của bạn cho mã vạch đó.</li>
+<li>Két: tiền cọc két, két đầy kèm chai chỉ với một chạm, và kích cỡ két của riêng bạn.</li>
+<li>Trang thống kê nằm lại trên điện thoại.</li>
+<li>Dùng được với TalkBack: mỗi lần quét đều được đọc lên, và "đã tính", "không cọc", "chưa biết" rung khác nhau (có thể bật âm thanh trong Cài đặt).</li>
+<li>"Siêu thị gần đây" mở ứng dụng bản đồ của bạn; bản thân ứng dụng không cần quyền vị trí.</li>
+<li>11 ngôn ngữ: Deutsch, English, Türkçe, Русский, العربية, Polski, Українська, Français, Español, فارسی, Tiếng Việt (dịch máy, rất hoan nghênh góp ý cải thiện).</li>
+</ul>
+
+<b>Gợi ý AI tùy chọn ("Jev")</b>
+Tắt sau khi cài đặt. Nếu bạn bật và nhập khóa riêng cho OpenRouter hoặc TypeSafe (cả hai đều là dịch vụ trả phí, không phải phần mềm tự do), "Hỏi Jev" sẽ gửi mô tả sản phẩm, không bao giờ gửi mã vạch, và hiển thị mức cọc gợi ý cùng độ tin cậy đã đo. Bạn vẫn là người quyết định.
+
+<b>Quyền riêng tư</b>
+Không tài khoản, không quảng cáo, không theo dõi, không máy chủ riêng. Số liệu đếm của bạn nằm trên điện thoại. Chỉ mã vạch được quét mới được gửi đến Open Food Facts để tìm tên sản phẩm.
+
+<b>Lưu ý</b>
+Ứng dụng có thể sai. Điều quyết định là số tiền máy trả. Do một người không chuyên viết cùng AI, chưa được chuyên gia kiểm tra.
+
+Dữ liệu sản phẩm © những người đóng góp cho Open Food Facts, Open Database License (ODbL).

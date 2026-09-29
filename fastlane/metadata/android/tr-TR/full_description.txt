@@ -1,0 +1,27 @@
+Pfand Counter, Almanya için bir depozito hesaplayıcıdır: barkodlarını tararken boş şişe, kutu ve kasalarındaki depozitoyu (Pfand) toplar. Böylece iade makinesine gitmeden önce ne alacağını bilirsin.
+
+Barkod depozito tutarını taşımaz. Bu yüzden uygulama, depozitosu bilinen barkodların bir listesiyle gelir, bilinmeyenleri açık ürün veritabanlarında arar ve verdiğin her cevabı hatırlar.
+
+<b>Neler yapar</b>
+<ul>
+<li>Barkodları kamerayla tara; toplam tutar, depozito tutarına göre dökümüyle gösterilir (0,08 €, 0,15 €, 0,25 €).</li>
+<li>Open Food Facts verilerinden oluşturulmuş, depozitosu bilinen barkodların hazır listesi.</li>
+<li>Bilinmeyen barkodlar Open Food Facts, Open Beauty Facts ve Open Products Facts'te aranır. Açıkça içecek olmayan ürünler ve şuruplar sayılmaz.</li>
+<li>Karar veremediği içeceklerde kısa bir rehber kabı sorar ve o barkod için cevabını hatırlar.</li>
+<li>Kasalar: kasa depozitosu, tek dokunuşla şişeleriyle dolu kasalar ve kendi kasa boyutların.</li>
+<li>Telefonda kalan bir istatistik sayfası.</li>
+<li>TalkBack ile çalışır: her tarama sesli bildirilir; sayıldı, depozito yok ve bilinmiyor farklı titreşir (sesler Ayarlar'dan açılabilir).</li>
+<li>"Yakındaki süpermarket" harita uygulamanı açar; uygulamanın kendisi konum izni istemez.</li>
+<li>11 dil: Deutsch, English, Türkçe, Русский, العربية, Polski, Українська, Français, Español, فارسی, Tiếng Việt (makine çevirisi, iyileştirmeler memnuniyetle karşılanır).</li>
+</ul>
+
+<b>İsteğe bağlı yapay zekâ önerisi ("Jev")</b>
+Kurulumdan sonra kapalıdır. Açarsan ve OpenRouter ya da TypeSafe için kendi anahtarını girersen (ikisi de ücretli hizmet, özgür yazılım değil), "Jev'e sor" düğmesi yalnızca ürün açıklamasını gönderir, barkodu asla göndermez ve ölçülmüş güvenilirliğiyle birlikte bir depozito önerisi gösterir. Kararı yine sen verirsin.
+
+<b>Gizlilik</b>
+Hesap yok, reklam yok, izleme yok, kendi sunucusu yok. Sayımın telefonunda kalır. Ürün adını bulmak için yalnızca taranan barkod Open Food Facts'e gönderilir.
+
+<b>Lütfen dikkat</b>
+Uygulama yanılabilir. Geçerli olan, iade makinesinin ödediğidir. Bir amatör tarafından yapay zekâ ile yazıldı, uzmanlarca kontrol edilmedi.
+
+Ürün verileri © Open Food Facts katkıda bulunanları, Open Database License (ODbL).

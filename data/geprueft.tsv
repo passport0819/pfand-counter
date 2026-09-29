@@ -1,0 +1,23 @@
+# Hand-checked barcodes. Everything else in res/raw/deposits.tsv is derived by the rules in
+# tools/seed-build.py; the entries here were looked at one by one, so they override the rules.
+# tools/seed-build.py merges every data/geprueft*.tsv in — they are the ONLY hand-written source.
+#
+# code<TAB>cents<TAB>name<TAB>evidence
+#
+# One mate-soda maker (GS1 prefix 4029764) sells only in returnable glass; the deposit is
+# 0.15 EUR, which is exactly the case a plain "glass bottle = 0.08" guess gets wrong.
+# Source: pfandpirat.com, deposit entry for the maker's 0.5 l returnable bottle, checked 22.09.2026.
+4029764001807	15	Club-Mate 0.5 l	Open Food Facts 22.09.2026: clear glass bottle, reuse
+4029764001401	15	Club-Mate Granat 0.5 l	Open Food Facts 22.09.2026: glass bottle
+4029764001814	15	Club-Mate Ice-T 0.5 l	Open Food Facts 22.09.2026: glass
+4029764001869	15	Club-Mate Winter Edition 0.5 l	checked 22.09.2026
+4029764001906	15	Club-Mate Zero 0.5 l	checked 22.09.2026
+4029764001418	15	Club-Mate Granat	checked 22.09.2026
+4029764001838	15	Club-Mate Ice-T Kraftstoff	checked 22.09.2026
+4029764001821	15	Club-Mate 0.33 l	Open Food Facts 22.09.2026: glass bottle, returnable
+4029764444956	15	Club-Mate 0.5 l (Loscher)	Open Food Facts 22.09.2026: glass bottle
+4029764001913	15	Club-Mate Beere 0.5 l	Loscher returnable glass range, 22.09.2026
+# Two 0.33 l Mehrweg beers the "kloster" swing-top guess got wrong (23.09.2026): both are the
+# ordinary 0.08 EUR bottle.
+4260164143517	8	Klosterbrauerei Baumburg Pils	biershop-bayern.de 23.09.2026: 9 x 0,33 l, "MEHRWEG 0,72 €" = 9 x 0,08
+4010223012625	8	Weltenburger Kloster Asam Bock	weltenburgershop.de 23.09.2026: 0,33 l, "Pfandwert: zzgl. 0,08 €"

@@ -1,0 +1,17 @@
+# Build output and signing key: never in the repository
+build/
+keys/
+*.apk
+*.idsig
+*.keystore
+*.jks
+
+# Fetched by build.sh from Maven Central, pinned by SHA-256
+libs/*.jar
+
+# Local build identity (see build.sh)
+app-id.local
+
+# Python
+__pycache__/
+*.pyc

@@ -1,0 +1,27 @@
+Pfand Counter to kalkulator kaucji za butelki na Niemcy: sumuje kaucję (Pfand) za puste butelki, puszki i skrzynki, gdy skanujesz ich kody kreskowe. Dzięki temu jeszcze przed butelkomatem wiesz, czego się spodziewać.
+
+Kod kreskowy nie zawiera kwoty kaucji. Dlatego aplikacja ma wbudowaną listę kodów ze znaną kaucją, szuka nieznanych w otwartych bazach produktów i zapamiętuje każdą twoją odpowiedź.
+
+<b>Co potrafi</b>
+<ul>
+<li>Skanowanie kodów aparatem; suma jest pokazywana z podziałem na kwoty kaucji (0,08 €, 0,15 €, 0,25 €).</li>
+<li>Dołączona lista kodów ze znaną kaucją, zbudowana z danych Open Food Facts.</li>
+<li>Nieznane kody są wyszukiwane w Open Food Facts, Open Beauty Facts i Open Products Facts. To, co wyraźnie nie jest napojem, oraz syropy nie są liczone.</li>
+<li>Przy napojach, o których nie może zdecydować, krótki przewodnik pyta o opakowanie i zapamiętuje twoją odpowiedź dla tego kodu.</li>
+<li>Skrzynki: kaucja za skrzynkę, pełne skrzynki z butelkami jednym stuknięciem i własne rozmiary skrzynek.</li>
+<li>Strona statystyk, która zostaje na telefonie.</li>
+<li>Działa z TalkBack: każde skanowanie jest ogłaszane, a „policzono”, „bez kaucji” i „nieznany” różnią się wibracją (dźwięki można włączyć w ustawieniach).</li>
+<li>„Supermarket w pobliżu” otwiera aplikację map; sama aplikacja nie potrzebuje uprawnień do lokalizacji.</li>
+<li>11 języków: Deutsch, English, Türkçe, Русский, العربية, Polski, Українська, Français, Español, فارسی, Tiếng Việt (tłumaczenie maszynowe, poprawki mile widziane).</li>
+</ul>
+
+<b>Opcjonalna propozycja AI („Jev”)</b>
+Po instalacji wyłączona. Jeśli ją włączysz i wpiszesz własny klucz do OpenRouter lub TypeSafe (obie usługi są płatne i nie są wolnym oprogramowaniem), „Zapytaj Jev” wyśle opis produktu, nigdy kod kreskowy, i pokaże proponowaną kaucję z jej zmierzoną wiarygodnością. Decyzja nadal należy do ciebie.
+
+<b>Prywatność</b>
+Bez konta, bez reklam, bez śledzenia, bez własnego serwera. Twoje liczenie zostaje na telefonie. Do Open Food Facts trafia tylko zeskanowany kod, żeby znaleźć nazwę produktu.
+
+<b>Uwaga</b>
+Aplikacja może się mylić. Liczy się to, co wypłaci automat. Napisane z pomocą AI przez amatora, niesprawdzone przez specjalistę.
+
+Dane produktów © współtwórcy Open Food Facts, Open Database License (ODbL).

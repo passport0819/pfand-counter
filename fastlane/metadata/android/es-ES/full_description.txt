@@ -1,0 +1,27 @@
+Pfand Counter es una calculadora del depósito de envases para Alemania: suma el depósito (Pfand) de tus botellas, latas y cajas vacías mientras escaneas sus códigos de barras. Así sabes qué esperar antes de ir a la máquina de devolución de envases.
+
+Un código de barras no indica el depósito. Por eso la aplicación trae una lista de códigos con depósito conocido, busca los desconocidos en bases de datos abiertas de productos y recuerda cada respuesta que le das.
+
+<b>Qué hace</b>
+<ul>
+<li>Escanea códigos de barras con la cámara; el total se muestra desglosado por importe de depósito (0,08 €, 0,15 €, 0,25 €).</li>
+<li>Una lista incluida de códigos con depósito conocido, creada a partir de Open Food Facts.</li>
+<li>Los códigos desconocidos se buscan en Open Food Facts, Open Beauty Facts y Open Products Facts. Lo que claramente no es una bebida, y los siropes, no se cuentan.</li>
+<li>Para las bebidas que no puede decidir, una breve guía pregunta por el envase y recuerda tu respuesta para ese código.</li>
+<li>Cajas: depósito de la caja, cajas llenas con sus botellas con un toque y tus propios tamaños de caja.</li>
+<li>Una página de estadísticas que se queda en el teléfono.</li>
+<li>Funciona con TalkBack: cada escaneo se anuncia, y «contado», «sin depósito» y «desconocido» vibran de forma distinta (los sonidos se pueden activar en Ajustes).</li>
+<li>«Supermercado cercano» abre tu aplicación de mapas; la aplicación en sí no necesita permiso de ubicación.</li>
+<li>11 idiomas: Deutsch, English, Türkçe, Русский, العربية, Polski, Українська, Français, Español, فارسی, Tiếng Việt (traducción automática, se agradecen mejoras).</li>
+</ul>
+
+<b>Sugerencia opcional con IA («Jev»)</b>
+Desactivada tras la instalación. Si la activas e introduces tu propia clave de OpenRouter o TypeSafe (ambos son servicios de pago, no software libre), «Preguntar a Jev» envía la descripción del producto, nunca el código de barras, y muestra un importe de depósito sugerido con su fiabilidad medida. Tú sigues decidiendo.
+
+<b>Privacidad</b>
+Sin cuenta, sin anuncios, sin rastreo, sin servidor propio. Tu recuento se queda en tu teléfono. Solo el código escaneado se envía a Open Food Facts para encontrar el nombre del producto.
+
+<b>Ten en cuenta</b>
+La aplicación puede equivocarse. Lo que cuenta es lo que paga la máquina. Escrita con IA por un aficionado, sin revisión de un experto.
+
+Datos de productos © colaboradores de Open Food Facts, Open Database License (ODbL).

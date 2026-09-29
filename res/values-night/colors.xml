@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Dark design: the colours the app had before it learned a light one. -->
+<resources>
+    <color name="bg">#FF101314</color>
+    <color name="surface">#FF1B2022</color>
+    <color name="surface_high">#FF262D30</color>
+    <color name="accent">#FF4CD07A</color>
+    <color name="accent_dim">#FF2E7D4F</color>
+    <color name="text">#FFF2F5F4</color>
+    <color name="text_dim">#FF9AA5A2</color>
+    <color name="warn">#FFE8B33C</color>
+    <color name="bad">#FFE0645A</color>
+    <color name="bad_dim">#FF9E3A33</color>
+</resources>

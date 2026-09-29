@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Pfand Counter</string>
+
+    <!-- Settings (MainActivity.showSettings). Language names stay in their own language. -->
+    <string name="settings">Settings</string>
+    <string name="settings_theme">Design</string>
+    <string name="theme_system">Follow system</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="settings_language">Language</string>
+    <string name="lang_system">Follow system</string>
+    <string name="lang_de" translatable="false">Deutsch</string>
+    <string name="lang_en" translatable="false">English</string>
+    <string name="lang_tr" translatable="false">Türkçe</string>
+    <string name="lang_ru" translatable="false">Русский</string>
+    <string name="lang_ar" translatable="false">العربية</string>
+    <string name="lang_pl" translatable="false">Polski</string>
+    <string name="lang_uk" translatable="false">Українська</string>
+    <string name="lang_fr" translatable="false">Français</string>
+    <string name="lang_es" translatable="false">Español</string>
+    <string name="lang_fa" translatable="false">فارسی</string>
+    <string name="lang_vi" translatable="false">Tiếng Việt</string>
+    <string name="machine_translated">This translation was made by machine and may contain mistakes.</string>
+    <string name="settings_about">About and data sources</string>
+
+    <string name="total_label">Total refund</string>
+    <string name="items_none">No bottles yet</string>
+    <string name="aim_hint">Point the camera at a barcode</string>
+    <string name="camera_needed">Camera permission is needed to scan barcodes. You can still add bottles by hand.</string>
+    <string name="camera_failed">Camera unavailable — use the buttons below to count by hand.</string>
+    <string name="torch">Light</string>
+
+    <string name="btn_8">+0,08€</string>
+    <string name="btn_15">+0,15€</string>
+    <string name="btn_25">+0,25€</string>
+    <string name="btn_crate">+Crate</string>
+    <string name="btn_guide">Not sure?</string>
+    <string name="guide_title">No barcode — help me decide</string>
+
+    <string name="btn_reset">Reset</string>
+    <string name="btn_undo_reset">Undo reset</string>
+    <string name="reset_done">List reset to 0,00€. Tap “Undo reset” to get it back.</string>
+    <string name="reset_undone">List restored.</string>
+    <string name="already_empty">The list is already empty.</string>
+
+    <string name="checking">Checking what this is…</string>
+    <string name="other_code">Not a product barcode — aim at the stripes with the numbers</string>
+    <string name="not_a_drink_title">Not a drink</string>
+    <string name="not_a_drink_fmt">%1$s lists this as “%2$s”, not as a drink — so there is no deposit on it. Nothing was added.</string>
+    <string name="not_a_drink_plain">%1$s does not list this as a drink — so there is no deposit on it. Nothing was added.</string>
+    <string name="syrup_title">Syrup — no deposit</string>
+    <string name="syrup_why">This looks like a drink syrup or concentrate. It is mixed with water before drinking, so there is no deposit on the bottle. Nothing was added.</string>
+    <string name="set_deposit_anyway">Set a deposit anyway</string>
+
+    <string name="manual_8">Reusable bottle (by hand)</string>
+    <string name="manual_25">Single-use bottle or can (by hand)</string>
+    <string name="crate_name">Crate</string>
+
+    <string name="new_code_title">New barcode</string>
+    <string name="looking_up">Looking up product name…</string>
+    <string name="no_name">Name unknown (no internet or not in the database)</string>
+    <string name="choose_deposit">How much deposit is on this one?</string>
+    <string name="d8">0,08€ — reusable bottle, up to 0.5 l (beer)</string>
+    <string name="d15">0,15€ — reusable bottle (water, juice, soft drinks)</string>
+    <string name="d25">0,25€ — single-use bottle or can</string>
+    <string name="d0">No deposit — do not count this one</string>
+    <string name="cancel">Cancel</string>
+    <string name="skip_once">Skip this scan</string>
+
+    <string name="edit_title">Edit line</string>
+    <string name="qty_plus">One more</string>
+    <string name="qty_minus">One less</string>
+    <string name="change_deposit">Change deposit value</string>
+    <string name="remove_line">Remove line</string>
+    <string name="forget_code">Forget what I taught the app about this barcode</string>
+    <string name="close">Close</string>
+
+    <string name="forgotten">Barcode forgotten — the app will ask again next time.</string>
+    <string name="no_deposit_toast">No deposit on this one — not counted.</string>
+    <string name="unknown_product">Unknown product</string>
+    <string name="scanned_fmt">%1$s · %2$s</string>
+
+    <string name="d150">1,50€ — crate</string>
+    <string name="added_by_hand">Added by hand</string>
+    <string name="each">each</string>
+    <string name="plus">+</string>
+    <string name="minus">−</string>
+    <string name="no_deposit_title">No deposit</string>
+    <string name="change_this">Change this</string>
+    <string name="ok">OK</string>
+    <string name="off_credit">Product names and packaging data: Open Food Facts, Open Beauty Facts and Open Products Facts, used under the Open Database License (ODbL).</string>
+    <string name="about_title">Pfand Counter</string>
+    <string name="about_body">Counts German bottle deposits.\n\nA barcode does not carry its deposit — single-use containers are marked with the DPG security label, not in the number. So this app ships a list of what can be decided (cans are single-use by law, 0,25€) and learns the rest from you: asked once, remembered for good.\n\n%1$d barcodes shipped, %2$d learned by you.\n\nProduct names and packaging data: Open Food Facts, Open Beauty Facts and Open Products Facts, used under the Open Database License (ODbL). Barcode reading: ZXing (Apache 2.0).</string>
+
+    <!-- Help me decide: the deposit guide (DepositGuide.java). Law: § 46 VerpackDG. -->
+    <string name="g_open">Help me decide</string>
+    <string name="g_back">‹ Back</string>
+    <string name="g_q_material">What is it made of?</string>
+    <string name="g_h_material">Look at the empty container in your hand.</string>
+    <string name="g_o_can">Can</string>
+    <string name="g_d_can">Metal, any drink, any size</string>
+    <string name="g_o_plastic">Plastic bottle</string>
+    <string name="g_d_plastic">Squeezable, light, usually PET</string>
+    <string name="g_o_glass">Glass bottle</string>
+    <string name="g_d_glass">Beer, water, juice, wine …</string>
+    <string name="g_o_carton">Carton or pouch</string>
+    <string name="g_d_carton">Juice or milk carton, drink pouch</string>
+
+    <string name="g_q_plastic">What does the label say?</string>
+    <string name="g_h_plastic">Look near the barcode and on the back of the label.</string>
+    <string name="g_o_dpg">Deposit logo</string>
+    <string name="g_d_dpg">A small logo of a bottle and a can with a curved arrow (DPG)</string>
+    <string name="g_o_reuse">The word “Mehrweg”</string>
+    <string name="g_d_reuse_plastic">Or a reusable-bottle logo — typical for water or soft drinks from a crate</string>
+    <string name="g_o_nomark">Neither</string>
+    <string name="g_d_nomark_plastic">No deposit logo and no “Mehrweg” anywhere</string>
+
+    <string name="jar_pick">Reusable jar: 0,15€</string>
+    <string name="maker_pick">Same maker: %1$s</string>
+    <string name="maker_why">All %1$d products of this maker in the list carry %2$s. A guess from the maker number in the barcode, right about 9 times in 10 when tested. Check the bottle.</string>
+    <string name="jar_why">Open Food Facts lists it as yogurt or cream in glass marked “Mehrweg” or “Pfand”. Such jars usually carry 0,15€.</string>
+    <string name="g_o_jar">Glass jar</string>
+    <string name="g_d_jar">Yogurt, cream, quark or milk in a jar</string>
+    <string name="g_q_jar">What does the jar say?</string>
+    <string name="g_h_jar">Look near the barcode, on the label or on the lid.</string>
+    <string name="g_o_jar_reuse">“Mehrweg” or “Pfand”</string>
+    <string name="g_d_jar_reuse">Often “Mehrwegglas”, “Pfandglas” or a reusable-glass logo</string>
+    <string name="g_o_jar_none">Neither — or “Einweg”</string>
+    <string name="g_d_jar_none">Many jars are single-use, some yogurts too</string>
+    <string name="g_why_jar_reuse">Reusable jars for yogurt, cream and quark usually carry 0,15€ — many dairies share the same reusable jar.</string>
+    <string name="g_why_jar_none">A jar without a reusable mark is single-use and carries no deposit. It goes into the bottle bank.</string>
+    <string name="g_q_glass">Which glass bottle is it?</string>
+    <string name="g_h_glass">Pick the first one that fits.</string>
+    <string name="g_o_swing">Swing-top</string>
+    <string name="g_d_swing">Flip cap with a wire clip</string>
+    <string name="g_d_reuse_glass">Water, juice or soft drink, marked as reusable</string>
+    <string name="g_o_beer">Beer bottle up to 0.5 l</string>
+    <string name="g_d_beer">Crown cap, brown or green glass — also shandy and alcohol-free beer</string>
+    <string name="g_d_dpg_glass">Rare on glass: a one-way bottle of beer, water or soft drink</string>
+    <string name="g_o_glass_none">Wine, sparkling wine, spirits — or juice without “Mehrweg”</string>
+    <string name="g_d_glass_none">Also any glass bottle without a deposit mark</string>
+
+    <string name="g_why_can">Every drink can from 0.1 to 3 litres carries 0,25€ by law — whatever is inside.</string>
+    <string name="g_why_carton">Cartons and pouches carry no deposit by law. Put it in the recycling bin.</string>
+    <string name="g_why_plastic_dpg">This logo marks every single-use bottle with deposit. By law it is 0,25€ — whatever is inside, juice and milk included.</string>
+    <string name="g_why_plastic_reuse">Reusable plastic bottles go back to the bottler and are refilled. They usually carry 0,15€.</string>
+    <string name="g_why_plastic_none">Single-use bottles with deposit must be marked. No mark usually means it was not sold with German deposit — often an import. The machine will likely refuse it.</string>
+    <string name="g_why_swing">Swing-top bottles are reusable and usually carry 0,15€.</string>
+    <string name="g_why_beer">Standard beer bottles from the shared German pool carry 0,08€.</string>
+    <string name="g_why_glass_reuse">Reusable glass for water, juice and soft drinks usually carries 0,15€.</string>
+    <string name="g_why_glass_dpg">A single-use glass bottle of beer, water or soft drink carries 0,25€ by law, like a can.</string>
+    <string name="g_why_glass_none">Wine, sparkling wine, spirits, and juice in single-use glass carry no deposit by law. Glass goes into the bottle bank.</string>
+    <string name="g_r_none">No deposit</string>
+    <string name="g_use_fmt">Count it as %1$s</string>
+    <string name="g_use_none">OK — do not count it</string>
+    <string name="g_custom_note">Deposit on reusable bottles and jars is set by the bottler, not by law. 0,08€ and 0,15€ are the usual amounts; the app remembers what you choose, and you can change it later.</string>
+
+    <!-- Jev's suggestion (JevClient.java, JevTrust.java) -->
+    <string name="jev_ask">Ask Jev</string>
+    <string name="jev_asking">Asking Jev…</string>
+    <string name="jev_ask_again">Ask Jev again</string>
+    <string name="jev_suggests">Jev suggests %1$s</string>
+    <string name="jev_no_deposit">no deposit</string>
+    <string name="jev_not_a_drink">Jev: probably not a drink — no deposit</string>
+    <string name="jev_trust_high">Very likely right</string>
+    <string name="jev_trust_good">Likely right</string>
+    <string name="jev_trust_mid">Maybe right</string>
+    <string name="jev_trust_low">Just a guess</string>
+    <string name="jev_why_no_key">Jev is off: no key yet. Add one under Settings › Jev suggestions.</string>
+    <string name="jev_why_grey">Grey because the product data don\'t sound like a drink. You can still ask.</string>
+    <string name="jev_no_data">Jev can\'t judge this one: no product data.</string>
+    <string name="jev_key_rejected">Jev: key rejected (%1$s)</string>
+    <string name="jev_no_credit">Jev: no credit left</string>
+    <string name="jev_busy">Jev is busy</string>
+    <string name="jev_timeout">Jev: no answer</string>
+    <string name="jev_offline">Jev: no internet</string>
+    <string name="jev_failed">Jev: failed (%1$s)</string>
+    <string name="jev_settings">Jev suggestions</string>
+    <string name="jev_use">Use Jev (AI suggestions)</string>
+    <string name="jev_settings_body">Tap “Ask Jev” on an unknown drink to send it to Jev (jev-1.13 by TypeSafe) for a deposit suggestion — through OpenRouter or directly at TypeSafe, whichever key you give. What goes out: the product name, size, packaging and category from Open Food Facts — not the barcode, nothing about you. Jev only suggests; you still tap the answer.\n\nEach question costs a fraction of a cent on that account. Asked so far on this phone: %1$d, cost %2$s.\n\nEach key stays on this phone, is left out of backups and is never shown again. Tip: make a separate key with a spending limit.</string>
+    <string name="jev_key_hint">Paste OpenRouter API key</string>
+    <string name="jev_key_hint_typesafe">Paste TypeSafe API key</string>
+    <string name="jev_via_openrouter">Through OpenRouter (key from openrouter.ai)</string>
+    <string name="jev_via_typesafe">Directly at TypeSafe (key from typesafe.ai, not tested yet)</string>
+    <string name="jev_key_set">A key is set.</string>
+    <string name="jev_key_none">No key set — Jev is off.</string>
+    <string name="save">Save</string>
+    <string name="jev_remove_key">Remove key</string>
+    <string name="jev_saved">Key saved. Tap “Ask Jev” on the next unknown barcode to use it.</string>
+    <string name="jev_removed">Key removed. Jev is off.</string>
+    <string name="jev_removed_other">Key removed. Jev keeps asking the other way.</string>
+    <string name="jev_switched">Jev is now asked %1$s.</string>
+    <string name="jev_way_openrouter">through OpenRouter</string>
+    <string name="jev_way_typesafe">directly at TypeSafe</string>
+
+    <!-- How the app works (MainActivity.showHowTo): one card per topic, opened from Settings. -->
+    <string name="howto_open">How the app works</string>
+    <string name="howto_title">How Pfand Counter works</string>
+    <string name="h_scan_t">Scan</string>
+    <string name="h_scan">Point the camera at the barcode. Known drinks are counted at once, with their deposit.</string>
+    <string name="h_new_t">New barcode</string>
+    <string name="h_new">The app asks once how much deposit is on it and remembers your answer for good.</string>
+    <string name="h_hand_t">No barcode</string>
+    <string name="h_hand">Count by hand with +0,08€, +0,15€, +0,25€ and +Crate. “Not sure?” asks a few questions about the bottle and tells you its deposit.</string>
+    <string name="h_list_t">Your list</string>
+    <string name="h_list">Tap a line to change it, use − and + for the number. “Reset” clears the list; tap it again to get it back. “Share” sends the count as text.</string>
+    <string name="h_jev_t">Jev, the AI suggestion (optional)</string>
+    <string name="h_jev">For a drink the app does not know, “Ask Jev” suggests a deposit and shows how sure it is. You still decide.</string>
+    <string name="h_jev_data_t">What Jev gets</string>
+    <string name="h_jev_data">Only the product name, size, packaging and category. No barcode, nothing about you, and only when you tap. You need your own key from OpenRouter or TypeSafe; each question costs a fraction of a cent. Jev is off until you switch it on under Settings › Jev suggestions.</string>
+    <string name="h_names_t">Product names</string>
+    <string name="h_names">Names come from Open Food Facts: to look one up, the app sends the barcode there. Your list and your answers stay on your phone.</string>
+    <string name="h_rules">By law every single-use bottle and can carries 0,25€. Reusable bottles usually carry 0,08€ (beer) or 0,15€.</string>
+
+    <!-- How deposit works in Germany (MainActivity.showPfand). Checked 28.09.2026 against § 46 VerpackDG
+         (gesetze-im-internet.de/verpackdg/__46.html) and the consumer advice centre's page on deposits. -->
+    <string name="pfand_open">How deposit works</string>
+    <string name="pfand_title">Deposit in Germany</string>
+    <string name="p_single_t">Single-use: 0,25€</string>
+    <string name="p_single">Plastic bottles, cans and single-use glass bottles from 0.1 to 3 litres carry 0,25€ by law. They are marked, usually with the deposit logo (a bottle and a can with a curved arrow) next to the barcode.</string>
+    <string name="p_beer_t">Reusable beer bottle: usually 0,08€</string>
+    <string name="p_beer">Glass beer bottles up to 0.5 l from the shared pool, with a crown cap.</string>
+    <string name="p_reuse_t">Other reusable bottles: usually 0,15€</string>
+    <string name="p_reuse">Water, juice and soft drinks in reusable glass or plastic, swing-top bottles and many yogurt jars. Look for the word “Mehrweg”. The bottler sets these amounts, not the law.</string>
+    <string name="p_crate_t">Crates</string>
+    <string name="p_crate">A crate has its own deposit on top of the bottles in it, often 1,50€. The bottler sets it.</string>
+    <string name="p_none_t">No deposit</string>
+    <string name="p_none">Cartons and drink pouches; wine, sparkling wine and spirits; milk, juice and nectar in glass or cartons; drinks for babies. But in a plastic bottle or a can, milk and juice carry 0,25€ too.</string>
+    <string name="p_return_t">Where to return</string>
+    <string name="p_return">Any shop that sells single-use drinks in the same material (plastic, glass or cans) must take them back, wherever you bought them. Shops smaller than 200 m² only take back the brands they sell. Reusable bottles go back to shops that sell them.</string>
+    <string name="p_receipt_t">The deposit receipt</string>
+    <string name="p_receipt">The machine prints a receipt; you get the money at the checkout or take it off your shopping. It stays valid for years, so there is no rush.</string>
+    <string name="p_source">Law: § 46 VerpackDG. Only the 0,25€ for single-use is set by law.</string>
+
+    <!-- First start: the app can be wrong (MainActivity.showDisclaimer). -->
+    <string name="disclaimer_title">Before you start</string>
+    <string name="disclaimer_body">Pfand Counter helps you estimate your deposit, but it can be wrong. A barcode does not carry its deposit, so the list, the guesses and Jev\'s suggestions can make mistakes. What counts is what the machine or the shop pays out. Check unusual bottles yourself.</string>
+    <string name="disclaimer_check">I understand that the app can make mistakes</string>
+    <string name="disclaimer_ok">Continue</string>
+
+    <!-- Sharing the count as text, and the number of bottles with the language's plural forms. -->
+    <string name="share">Share</string>
+    <string name="share_title">Share count</string>
+    <string name="share_footer">Counted with Pfand Counter</string>
+    <plurals name="items">
+        <item quantity="one">%1$d item</item>
+        <item quantity="other">%1$d items</item>
+    </plurals>
+    <string name="sort_newest">Newest first</string>
+    <string name="sort_oldest">Oldest first</string>
+    <string name="share_intro">I made this deposit receipt:</string>
+    <string name="about_vibe">Written with AI by a layperson, not reviewed by an expert.</string>
+
+    <!-- Crates (CrateSheet.java). Sources: Wikipedia „Getränkekiste“ and the consumer advice centre's
+         page on deposits, both read 28.09.2026. -->
+    <string name="crate_tag">(crate)</string>
+    <plurals name="crates">
+        <item quantity="one">%1$d crate</item>
+        <item quantity="other">%1$d crates</item>
+    </plurals>
+    <string name="d_crate_fmt">%1$s — a crate with its own barcode</string>
+    <string name="c_title">Crates</string>
+    <string name="c_value">Crate deposit</string>
+    <string name="c_value_usual">%1$s — the usual amount</string>
+    <string name="c_value_half">%1$s — half of a crate that splits in two</string>
+    <string name="c_value_other">Other amount</string>
+    <string name="c_value_hint">Amount in €, e.g. 3,00</string>
+    <string name="c_value_invalid">Type an amount, e.g. 1,50</string>
+    <string name="c_empty">+1 empty crate · %1$s</string>
+    <string name="c_full">Full crate</string>
+    <string name="c_full_hint">The crate and all its bottles with one tap.</string>
+    <string name="c_bottle">Deposit per bottle</string>
+    <string name="c_bottle_listed">Usual</string>
+    <string name="c_beer">Beer</string>
+    <string name="c_water">Water</string>
+    <string name="c_water_pet">Water, plastic</string>
+    <string name="c_juice">Juice</string>
+    <string name="c_own_add">+ Save my own crate size</string>
+    <string name="c_help">Help me decide</string>
+    <string name="c_barcode_hint">Does the crate have its own barcode? Scan it and choose “crate” — the app remembers it.</string>
+    <string name="c_own_title">My own crate size</string>
+    <string name="c_own_name">Name, e.g. Lemonade</string>
+    <string name="c_own_count">Bottles in the crate</string>
+    <string name="c_own_crate">Crate deposit in €</string>
+    <string name="c_own_invalid">Please fill in a name, 1 to 60 bottles and an amount.</string>
+    <string name="c_own_delete">Delete</string>
+    <string name="c_h_title">Crate: help me decide</string>
+    <string name="c_h_intro">A crate carries no mark that tells its deposit. The bottler sets it; most crates carry 1,50€.</string>
+    <string name="c_h_q">Can the crate be pulled apart into two halves?</string>
+    <string name="c_h_one">No, it is one piece</string>
+    <string name="c_h_one_d">The usual crate for beer, water or juice</string>
+    <string name="c_h_one_why">Crates usually carry 1,50€ of their own, on top of the bottles in them.</string>
+    <string name="c_h_split">Yes, it splits in two</string>
+    <string name="c_h_split_d">Two halves that clip together</string>
+    <string name="c_h_split_why">Each half of such a crate gives back half the deposit; the whole crate gives 1,50€.</string>
+    <string name="c_h_use">Use %1$s</string>
+    <string name="c_h_note">If the machine or the shop pays another amount, choose “Other amount” and type it in.</string>
+    <string name="c_h_single_t">Single-use bottles in a crate</string>
+    <string name="c_h_single">Some crates hold single-use plastic bottles, often with the PET-Cycle mark. They carry 0,25€ each: choose 0,25€ under “Deposit per bottle”.</string>
+    <string name="c_h_broken_t">A bottle broke?</string>
+    <string name="c_h_broken">The shop must still take the crate back. It may only keep the deposit of the broken bottle.</string>
+    <string name="c_h_source">Sources: Wikipedia “Getränkekiste”; consumer advice centre, “Mehrweg oder Einweg”.</string>
+
+    <!-- Statistics (MainActivity.showStats, Stats.java). -->
+    <string name="stats_open">Statistics</string>
+    <string name="stats_title">Statistics</string>
+    <string name="stats_since">Counted since %1$s</string>
+    <string name="stats_since_now">Counting starts with the next bottle.</string>
+    <string name="stats_bottles">Bottles</string>
+    <string name="stats_split">%1$d scanned, %2$d by hand</string>
+    <string name="stats_per_value">By deposit</string>
+    <string name="stats_none">Nothing counted yet.</string>
+    <string name="stats_months">Per month</string>
+    <string name="stats_more">More</string>
+    <string name="stats_learned">Barcodes you taught the app: %1$d</string>
+    <string name="stats_jev">Questions to Jev: %1$d, cost %2$s</string>
+    <string name="stats_note">Counted on this phone only, from this version on. Resetting the list does not change these numbers; − and removing a line take them back.</string>
+    <string name="stats_reset">Reset statistics</string>
+    <string name="stats_reset_q">All numbers on this page start again from zero. Your list, the barcodes you taught and Jev\'s count stay. This cannot be undone.</string>
+    <string name="stats_reset_yes">Reset</string>
+    <string name="stats_reset_done">Statistics reset.</string>
+    <string name="say_counted">%1$s, %2$s. Total %3$s</string>
+    <string name="privacy_open">Privacy</string>
+    <string name="privacy_title">Privacy</string>
+    <string name="report_translation">Report a translation mistake</string>
+    <string name="translations_welcome">The translations were made by machine. Improvements are welcome, on GitHub or by e-mail to pfand-counter@tuta.com.</string>
+    <string name="licenses_open">Licenses</string>
+    <string name="lic_intro">Pfand Counter is free software under the GNU General Public License, version 3 (GPL-3.0).\n\nBarcode reading: ZXing, Apache License 2.0.\nSettings gear icon: Material Design Icons 3.0.1, Apache License 2.0.\n\nProduct names and packaging data: © Open Food Facts, Open Beauty Facts and Open Products Facts contributors, under the Open Database License (ODbL) 1.0; individual contents under the Database Contents License (DbCL) 1.0. The shipped deposit list is derived from Open Food Facts and is available as a whole under the ODbL 1.0: https://opendatacommons.org/licenses/odbl/1-0/</string>
+    <string name="lic_originals">Below are the full texts of the Apache License 2.0 and the GPL-3.0, in the original English.</string>
+    <string name="no_browser">No browser found to open the page.</string>
+    <string name="map_open">Supermarket nearby</string>
+    <string name="map_note">Opens your map app. Shops that sell single-use drinks with deposit must take back empty ones of the same material (plastic, glass or can), wherever you bought them. Shops under 200 m² only take back the brands they sell.</string>
+    <string name="sound_switch">Sounds when scanning</string>
+    <string name="sound_note">Off unless you switch them on here, also with a screen reader, so they do not talk over it. The phone vibrates either way.</string>
+    <string name="map_query">supermarket</string>
+    <string name="no_map_app">No map app found. Install one to search for shops nearby.</string>
+    <string name="pv_short_t">In short</string>
+    <string name="pv_short">No account, no ads, no tracking and no server of its own. Your count stays on your phone. Only the scanned barcode goes to the open database Open Food Facts, to show the product name.</string>
+    <string name="pv_camera_t">Camera</string>
+    <string name="pv_camera">The camera only reads barcodes. The images are checked in the phone\'s memory; no photo is saved or sent.</string>
+    <string name="pv_off_t">Open Food Facts</string>
+    <string name="pv_off">To find a product name, the app sends the barcode, an app name and, as with any internet request, your IP address to Open Food Facts, a non-profit association in France. If it does not know the product, the same goes to its sister databases Open Beauty Facts and Open Products Facts. Their privacy policy: https://world.openfoodfacts.org/privacy</string>
+    <string name="pv_jev_t">Jev, the AI suggestion (optional)</string>
+    <string name="pv_jev">Only if you switched Jev on in Settings, entered your own key for OpenRouter or TypeSafe and tap “Ask Jev”. The chosen provider then gets a product description (name, size, packaging, up to three categories), your key and your IP address, but not the barcode. Their privacy policies: https://openrouter.ai/privacy and https://typesafe.ai/legal/privacy-policy</string>
+    <string name="pv_out_t">Only when you tap</string>
+    <string name="pv_out">“Share” hands your count as text to the app you pick. “Supermarket nearby” hands the word “supermarket” to your map app; what it does with your location is up to that app. “Report a translation mistake” opens a GitHub page in your browser; nothing is sent until you send it there.</string>
+    <string name="pv_stored_t">Stored on your phone</string>
+    <string name="pv_stored">In the app\'s private storage, which other apps cannot read: your list and one step for undo, the barcodes you taught, crate deposit and crate sizes, your settings, the statistics page and, if entered, your Jev key and question counter. The key is left out of Android backups; the rest may be backed up if you turned backups on. Uninstalling the app or clearing its data deletes everything.</string>
+    <string name="pv_not_t">What the app does not do</string>
+    <string name="pv_not">No ads, no analytics, no crash reports. The statistics page is only for you and never leaves the phone. No account, no location, no contacts, no photos or files. Permissions: camera, internet, vibration.</string>
+    <string name="pv_rights_t">Your rights</string>
+    <string name="pv_rights">The developer receives no data from the app, so there is nothing to disclose or delete. You delete the data on your phone yourself; for data at Open Food Facts or the AI provider, contact them. You may complain to a data protection authority.</string>
+    <string name="pv_contact">Questions: pfand-counter@tuta.com or https://github.com/passport0819/pfand-counter/issues\nThe full text is in PRIVACY.md in the source code.</string>
+</resources>

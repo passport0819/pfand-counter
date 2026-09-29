@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingStart="14dp"
+    android:paddingEnd="8dp"
+    android:descendantFocusability="blocksDescendants"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:id="@+id/row_qty"
+        android:layout_width="46dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/accent"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:text="1x" />
+
+    <!-- The gap keeps a shortened name ("…") clear of the amount, in either reading direction. -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginEnd="12dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/row_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text"
+            android:textSize="15sp"
+            android:maxLines="1"
+            android:ellipsize="end" />
+
+        <TextView
+            android:id="@+id/row_sub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_dim"
+            android:textSize="12sp"
+            android:maxLines="1"
+            android:ellipsize="end" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/row_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="6dp"
+        android:textColor="@color/text"
+        android:textSize="17sp" />
+
+    <Button
+        android:id="@+id/row_minus"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="2dp"
+        android:background="@drawable/btn_bg"
+        android:focusable="false"
+        android:textColor="@color/text"
+        android:textSize="20sp"
+        android:padding="0dp"
+        android:text="@string/minus"
+        android:contentDescription="@string/qty_minus" />
+
+    <Button
+        android:id="@+id/row_plus"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="4dp"
+        android:background="@drawable/btn_bg"
+        android:focusable="false"
+        android:textColor="@color/text"
+        android:textSize="20sp"
+        android:padding="0dp"
+        android:text="@string/plus"
+        android:contentDescription="@string/qty_plus" />
+</LinearLayout>

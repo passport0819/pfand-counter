@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Light design. The dark one is in values-night; Settings picks light, dark or the system's. -->
+<resources>
+    <color name="bg">#FFF4F6F5</color>
+    <color name="surface">#FFFFFFFF</color>
+    <color name="surface_high">#FFE2E8E5</color>
+    <color name="accent">#FF1E8449</color>
+    <color name="accent_dim">#FFBDE5CB</color>
+    <color name="text">#FF141A18</color>
+    <color name="text_dim">#FF56625E</color>
+    <color name="warn">#FF9A6700</color>
+    <color name="bad">#FFC0392B</color>
+    <color name="bad_dim">#FFF5C4BE</color>
+    <!-- The same in both designs: the launcher icon, and text on the dark pills over the camera. -->
+    <color name="icon_bg">#FF2E7D4F</color>
+    <color name="on_camera">#FFF2F5F4</color>
+</resources>
