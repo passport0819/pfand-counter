@@ -5,6 +5,7 @@
     <string name="theme_system">حسب النظام</string>
     <string name="theme_light">فاتح</string>
     <string name="theme_dark">داكن</string>
+    <string name="theme_black">أسود</string>
     <string name="settings_language">اللغة</string>
     <string name="lang_system">حسب النظام</string>
     <string name="machine_translated">هذه الترجمة آلية وقد تحتوي على أخطاء.</string>
@@ -14,7 +15,14 @@
     <string name="items_none">لا توجد زجاجات بعد</string>
     <string name="aim_hint">وجّه الكاميرا نحو الباركود</string>
     <string name="camera_needed">يلزم إذن الكاميرا لمسح الباركود. لا يزال بإمكانك إضافة الزجاجات يدويًا.</string>
+    <string name="camera_tap">اضغط هنا للسماح باستخدام الكاميرا.</string>
     <string name="camera_failed">الكاميرا غير متاحة — استخدم الأزرار أدناه للعدّ يدويًا.</string>
+    <string name="camera_none">لم يتم العثور على كاميرا في هذا الهاتف.</string>
+    <string name="camera_busy">الكاميرا مستخدمة من تطبيق آخر.</string>
+    <string name="camera_disabled">الكاميرا معطّلة على هذا الهاتف.</string>
+    <string name="camera_permission">إذن الكاميرا غير ممنوح.</string>
+    <string name="camera_preview">تعذّر بدء معاينة الكاميرا.</string>
+    <string name="camera_error">أبلغت الكاميرا عن خطأ.</string>
     <string name="torch">ضوء</string>
 
     <string name="btn_8">+0,08€</string>
@@ -166,6 +174,7 @@
     <string name="jev_why_no_key">Jev متوقف: لا يوجد مفتاح بعد. أضِف مفتاحًا من الإعدادات › اقتراحات Jev.</string>
     <string name="jev_why_grey">رمادي لأن بيانات المنتج لا تشير إلى مشروب. لا يزال بإمكانك السؤال.</string>
     <string name="jev_no_data">لا يستطيع Jev الحكم على هذا: لا توجد بيانات عن المنتج.</string>
+    <string name="jev_lookup_failed">لم تصل بيانات المنتج. حاول مرة أخرى.</string>
     <string name="jev_key_rejected">Jev: تم رفض المفتاح (%1$s)</string>
     <string name="jev_no_credit">Jev: لم يتبقَّ رصيد</string>
     <string name="jev_busy">Jev مشغول</string>
@@ -321,7 +330,7 @@
     <string name="report_translation">الإبلاغ عن خطأ في الترجمة</string>
     <string name="translations_welcome">الترجمات مُعدّة آليًا. التحسينات مرحّب بها، على GitHub أو بالبريد الإلكتروني إلى pfand-counter@tuta.com.</string>
     <string name="licenses_open">التراخيص</string>
-    <string name="lic_intro">Pfand Counter برنامج حر مرخّص بموجب GNU General Public License، الإصدار 3 (GPL-3.0).\n\nقراءة الباركود: ZXing، ترخيص Apache License 2.0.\nأيقونة الترس في الإعدادات: Material Design Icons 3.0.1، ترخيص Apache License 2.0.\n\nأسماء المنتجات وبيانات العبوات: © المساهمون في Open Food Facts وOpen Beauty Facts وOpen Products Facts، بموجب Open Database License (ODbL) 1.0؛ والمحتويات المفردة بموجب Database Contents License (DbCL) 1.0. قائمة مبالغ التأمين على العبوات المرفقة بالتطبيق مشتقة من Open Food Facts ومتاحة بأكملها بموجب ODbL 1.0: https://opendatacommons.org/licenses/odbl/1-0/</string>
+    <string name="lic_intro">Pfand Counter برنامج حر مرخّص بموجب GNU General Public License، الإصدار 3 (GPL-3.0).\n\nقراءة الباركود: ZXing، ترخيص Apache License 2.0.\nواجهة المستخدم: AndroidX AppCompat وMaterial Components for Android، ترخيص Apache License 2.0.\nأيقونة الترس في الإعدادات: Material Design Icons 3.0.1، ترخيص Apache License 2.0.\n\nأسماء المنتجات وبيانات العبوات: © المساهمون في Open Food Facts وOpen Beauty Facts وOpen Products Facts، بموجب Open Database License (ODbL) 1.0؛ والمحتويات المفردة بموجب Database Contents License (DbCL) 1.0. قائمة مبالغ التأمين على العبوات المرفقة بالتطبيق مشتقة من Open Food Facts ومتاحة بأكملها بموجب ODbL 1.0: https://opendatacommons.org/licenses/odbl/1-0/</string>
     <string name="lic_originals">فيما يلي النصان الكاملان لترخيص Apache License 2.0 وترخيص GPL-3.0 بلغتهما الإنجليزية الأصلية.</string>
     <string name="no_browser">لم يُعثر على متصفح لفتح الصفحة.</string>
     <string name="map_open">سوبرماركت قريب</string>

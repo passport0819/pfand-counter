@@ -1,6 +1,7 @@
 package app.pfandcounter;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.text.Editable;
 import android.text.InputType;
@@ -16,6 +17,10 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.radiobutton.MaterialRadioButton;
+import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -76,8 +81,13 @@ final class CrateSheet {
         /** "Beer · 20 × 0,5 l", in the reader's decimal writing. An own pack has no size, so just its
          *  name: the line below already starts with the bottle count. */
         String label() {
+            return label(Locale.getDefault());
+        }
+
+        /** As above, with the decimal writing of `locale`. */
+        String label(Locale locale) {
             if (litres <= 0) return name;
-            NumberFormat f = NumberFormat.getNumberInstance(Locale.getDefault());
+            NumberFormat f = NumberFormat.getNumberInstance(locale);
             f.setMaximumFractionDigits(2);
             return name + " · " + bottles + " × " + f.format(litres) + " l";
         }
@@ -126,6 +136,11 @@ final class CrateSheet {
     }
 
     List<Pack> presets() {
+        return presets(context);
+    }
+
+    /** The preset crates, named in the language of `context`. */
+    static List<Pack> presets(Context context) {
         List<Pack> p = new ArrayList<Pack>();
         p.add(new Pack("beer20", context.getString(R.string.c_beer), 20, 0.5, DepositRules.REUSABLE_SMALL, -1));
         p.add(new Pack("beer24", context.getString(R.string.c_beer), 24, 0.33, DepositRules.REUSABLE_SMALL, -1));
@@ -151,18 +166,18 @@ final class CrateSheet {
         values.addView(other);
         host.addView(values);
         final EditText typed = amountField();
-        typed.setHint(R.string.c_value_hint);
-        host.addView(typed);
+        final View typedBox = MainActivity.boxed(context, typed, R.string.c_value_hint);
+        host.addView(typedBox, full(4));
         if (crateCents == DepositRules.CRATE) values.check(usual.getId());
         else if (crateCents == DepositRules.HALF_CRATE) values.check(half.getId());
         else {
             values.check(other.getId());
             typed.setText(plain(crateCents));
         }
-        typed.setVisibility(values.getCheckedRadioButtonId() == other.getId() ? View.VISIBLE : View.GONE);
+        typedBox.setVisibility(values.getCheckedRadioButtonId() == other.getId() ? View.VISIBLE : View.GONE);
         values.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override public void onCheckedChanged(RadioGroup group, int id) {
-                typed.setVisibility(id == other.getId() ? View.VISIBLE : View.GONE);
+                typedBox.setVisibility(id == other.getId() ? View.VISIBLE : View.GONE);
                 if (id == usual.getId()) setCrate(DepositRules.CRATE);
                 else if (id == half.getId()) setCrate(DepositRules.HALF_CRATE);
                 else {
@@ -179,7 +194,7 @@ final class CrateSheet {
             }
         });
 
-        emptyButton = button(R.drawable.btn_accent);
+        emptyButton = button(true);
         emptyButton.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 if (crateValid) listener.onEmptyCrate(crateCents);
@@ -207,7 +222,7 @@ final class CrateSheet {
         host.addView(rows, full(4));
         fillRows();
 
-        Button add = button(R.drawable.btn_bg);
+        Button add = button(false);
         add.setText(R.string.c_own_add);
         // One line in every language: long words shrink a little instead of wrapping.
         add.setMaxLines(1);
@@ -219,7 +234,7 @@ final class CrateSheet {
         });
         host.addView(add, full(2));
 
-        Button help = button(R.drawable.btn_accent);
+        Button help = button(false);
         MainActivity.withIcon(context, help, R.drawable.ic_b_help, context.getString(R.string.c_help));
         help.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
@@ -263,8 +278,10 @@ final class CrateSheet {
             LinearLayout line = new LinearLayout(context);
             line.setOrientation(LinearLayout.HORIZONTAL);
             line.setGravity(Gravity.CENTER_VERTICAL);
-            Button b = button(R.drawable.btn_bg);
+            Button b = button(false);
             b.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
+            // A pack is a row to tap, not a word: as round as the other rows.
+            ((MaterialButton) b).setCornerRadius(dp(16));
             String sum = p.bottles + " × " + MainActivity.money(bottle)
                     + (crate > 0 ? " + " + MainActivity.money(crate) : "")
                     + " = " + MainActivity.money(p.bottles * bottle + Math.max(0, crate));
@@ -277,7 +294,7 @@ final class CrateSheet {
             });
             line.addView(b, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
             if (p.own()) {
-                final Button remove = button(R.drawable.btn_bg);
+                final MaterialButton remove = button(false);
                 remove.setText("✕");
                 remove.setContentDescription(context.getString(R.string.c_own_delete) + ": " + p.name);
                 remove.setOnClickListener(new View.OnClickListener() {
@@ -286,7 +303,8 @@ final class CrateSheet {
                         if (remove.getTag() == null) {
                             remove.setTag(Boolean.TRUE);
                             remove.setText(R.string.c_own_delete);
-                            remove.setBackgroundResource(R.drawable.btn_bad);
+                            remove.setBackgroundTintList(ColorStateList.valueOf(context.getColor(R.color.bad_dim)));
+                            remove.setTextColor(context.getColor(R.color.text));
                         } else {
                             own.remove(p);
                             saveOwn();
@@ -308,15 +326,13 @@ final class CrateSheet {
     void showForm() {
         host.removeAllViews();
         host.addView(title(R.string.c_own_title));
-        final EditText name = new EditText(context);
-        name.setHint(R.string.c_own_name);
+        final EditText name = new TextInputEditText(context);
         name.setSingleLine(true);
         name.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-        host.addView(name, full(0));
-        final EditText count = new EditText(context);
-        count.setHint(R.string.c_own_count);
+        host.addView(MainActivity.boxed(context, name, R.string.c_own_name), full(6));
+        final EditText count = new TextInputEditText(context);
         count.setInputType(InputType.TYPE_CLASS_NUMBER);
-        host.addView(count, full(0));
+        host.addView(MainActivity.boxed(context, count, R.string.c_own_count), full(0));
         host.addView(small(R.string.c_bottle));
         final int[] bottlePick = {1};
         String[] names = new String[BOTTLE_VALUES.length];
@@ -329,13 +345,13 @@ final class CrateSheet {
         host.addView(small(R.string.c_own_crate));
         final EditText crate = amountField();
         crate.setText(plain(crateCents));
-        host.addView(crate, full(0));
+        host.addView(MainActivity.boxed(context, crate, 0), full(0));
         final TextView problem = dim(R.string.c_own_invalid);
         problem.setTextColor(context.getColor(R.color.bad));
         problem.setVisibility(View.GONE);
         host.addView(problem);
 
-        Button save = button(R.drawable.btn_accent);
+        Button save = button(true);
         save.setText(R.string.save);
         save.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
@@ -442,7 +458,7 @@ final class CrateSheet {
         TextView reason = text(why, 14, R.color.text);
         reason.setPadding(0, dp(6), 0, dp(14));
         host.addView(reason);
-        Button use = button(R.drawable.btn_accent);
+        Button use = button(true);
         use.setText(context.getString(R.string.c_h_use, MainActivity.money(cents)));
         use.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
@@ -482,11 +498,13 @@ final class CrateSheet {
         row.setBaselineAligned(false);
         for (int i = 0; i < names.length; i++) {
             final int index = i;
-            Button b = new Button(context);
-            b.setAllCaps(false);
+            MaterialButton b = button(false);
             b.setText(names[i]);
-            b.setTextColor(context.getColor(R.color.text));
             b.setMaxLines(1);
+            b.setInsetTop(0);
+            b.setInsetBottom(0);
+            b.setMinWidth(0);
+            b.setMinimumWidth(0);
             b.setAutoSizeTextTypeUniformWithConfiguration(9, 15, 1, android.util.TypedValue.COMPLEX_UNIT_SP);
             b.setPadding(dp(4), dp(10), dp(4), dp(10));
             // A word gets more room than an amount such as "0,25€".
@@ -507,8 +525,10 @@ final class CrateSheet {
 
     private void mark(LinearLayout row, int picked) {
         for (int i = 0; i < row.getChildCount(); i++) {
-            Button b = (Button) row.getChildAt(i);
-            b.setBackgroundResource(i == picked ? R.drawable.btn_picked : R.drawable.btn_bg);
+            MaterialButton b = (MaterialButton) row.getChildAt(i);
+            // The picked one gets the accent ring, as before.
+            b.setStrokeColor(ColorStateList.valueOf(context.getColor(R.color.accent)));
+            b.setStrokeWidth(i == picked ? dp(2) : 0);
             b.setTypeface(i == picked ? Typeface.DEFAULT_BOLD : Typeface.DEFAULT);
             b.setSelected(i == picked);
         }
@@ -526,7 +546,7 @@ final class CrateSheet {
     }
 
     private EditText amountField() {
-        EditText e = new EditText(context);
+        EditText e = new TextInputEditText(context);
         e.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         // The number keyboard offers only a point on some phones; a comma is read the same way.
         e.setKeyListener(android.text.method.DigitsKeyListener.getInstance("0123456789,."));
@@ -550,8 +570,8 @@ final class CrateSheet {
         LinearLayout row = new LinearLayout(context);
         row.setOrientation(LinearLayout.HORIZONTAL);
         row.setGravity(Gravity.CENTER_VERTICAL);
-        row.setBackgroundResource(R.drawable.btn_bg);
-        row.setPadding(dp(10), dp(8), dp(10), dp(8));
+        row.setBackgroundResource(R.drawable.choice);
+        row.setPadding(dp(12), dp(10), dp(12), dp(10));
         row.setLayoutParams(full(6));
         ImageView pic = new ImageView(context);
         pic.setImageResource(icon);
@@ -568,18 +588,15 @@ final class CrateSheet {
         return row;
     }
 
-    private Button button(int background) {
-        Button b = new Button(context);
-        b.setAllCaps(false);
-        b.setTextSize(15);
-        b.setTextColor(context.getColor(R.color.text));
-        b.setBackgroundResource(background);
+    /** A Material button; filled for the page's main action, tonal otherwise. */
+    private MaterialButton button(boolean filled) {
+        MaterialButton b = MainActivity.dialogButton(context, filled);
         b.setPadding(dp(12), dp(10), dp(12), dp(10));
         return b;
     }
 
     private RadioButton radio(String label) {
-        RadioButton b = new RadioButton(context);
+        RadioButton b = new MaterialRadioButton(context);
         b.setId(View.generateViewId());
         b.setText(label);
         b.setTextColor(context.getColor(R.color.text));

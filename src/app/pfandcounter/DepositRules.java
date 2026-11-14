@@ -125,6 +125,10 @@ class DepositRules {
             for (Iterator<String> it = o.keys(); it.hasNext(); ) {
                 String code = it.next();
                 JSONObject e = o.getJSONObject(code);
+                // The same article saved under both forms (before keys were matched): the later
+                // entry wins, under its own key. The file changes only with the next save.
+                String other = otherForm(code);
+                if (other != null) learned.remove(other);
                 learned.put(code, new Rule(e.getInt("c"), e.optString("n", ""), true,
                         "crate".equals(e.optString("k"))));
             }
@@ -150,23 +154,41 @@ class DepositRules {
         store.write("rules.json", o.toString());
     }
 
+    /**
+     * The same article written the other way, or null: a 12-digit UPC-A and the 13-digit GS1
+     * form with a leading 0 (as a GS1 QR code carries it) name one product.
+     */
+    static String otherForm(String code) {
+        if (code == null) return null;
+        if (code.length() == 12) return "0" + code;
+        if (code.length() == 13 && code.charAt(0) == '0') return code.substring(1);
+        return null;
+    }
+
+    /** The key `code` is learned under (itself or its other form), or null. */
+    private String learnedKey(String code) {
+        if (learned.containsKey(code)) return code;
+        String other = otherForm(code);
+        return other != null && learned.containsKey(other) ? other : null;
+    }
+
     /** Null means: we do not know this barcode and have to ask. */
     synchronized Rule lookup(String code) {
-        Rule r = learned.get(code);           // what the user taught always wins
-        if (r != null) return r;
+        String key = learnedKey(code);        // what the user taught always wins
+        if (key != null) return learned.get(key);
         // Every other bottle is looked up the same way, in one list: one place to look and
         // nothing to keep in step.
-        String normalised = code.length() == 12 ? "0" + code : code; // UPC-A read as EAN-13
-        r = shippedList().get(code);
-        if (r == null && !normalised.equals(code)) r = shippedList().get(normalised);
+        Rule r = shippedList().get(code);
+        String other = otherForm(code);
+        if (r == null && other != null) r = shippedList().get(other);
         return r;
     }
 
     /** True when the shipped list says this barcode must always be asked about. */
     boolean mustAsk(String code) {
         shippedList();
-        String normalised = code.length() == 12 ? "0" + code : code;
-        return askAlways.contains(code) || askAlways.contains(normalised);
+        String other = otherForm(code);
+        return askAlways.contains(code) || (other != null && askAlways.contains(other));
     }
 
     private Map<String, int[]> makerIndex;
@@ -199,20 +221,24 @@ class DepositRules {
         learn(code, cents, name, false);
     }
 
+    /** Kept under the key the article is already learned under, so it never shows twice. */
     synchronized void learn(String code, int cents, String name, boolean crate) {
-        learned.put(code, new Rule(cents, name, true, crate));
+        String key = learnedKey(code);
+        learned.put(key != null ? key : code, new Rule(cents, name, true, crate));
         save();
     }
 
     /** Only drops what the user taught; a seeded rule stays. */
     synchronized boolean forget(String code) {
         boolean had = learned.remove(code) != null;
+        String other = otherForm(code);
+        if (other != null && learned.remove(other) != null) had = true;
         if (had) save();
         return had;
     }
 
     synchronized boolean isLearned(String code) {
-        return learned.containsKey(code);
+        return learnedKey(code) != null;
     }
 
     /** What the user taught, newest last; a copy, so the caller may show it at leisure. */

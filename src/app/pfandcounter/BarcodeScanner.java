@@ -17,6 +17,7 @@ import android.media.ImageReader;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
+import android.os.SystemClock;
 import android.util.Log;
 import android.util.Size;
 import android.view.Surface;
@@ -41,12 +42,19 @@ class BarcodeScanner implements TextureView.SurfaceTextureListener {
         void onCode(String code);
         /** A code that is not a product number — a web-address QR code, say. Scanning goes on. */
         void onOtherCode();
-        void onProblem(String message);
+        /** One of the CAM_ reasons; the app shows its own text, in the phone's language. */
+        void onProblem(int reason);
+        /** Whether the camera just opened has a flash; main thread, after every open. */
+        void onTorchKnown(boolean available);
         /** The first frame after a problem: the camera works again, whatever onProblem said. */
         void onCameraBack();
         /** Asked on the camera thread: a code the app already knows needs less proof. */
         boolean isKnown(String code);
     }
+
+    /** Why the camera does not work; the raw text goes to the log only. */
+    static final int CAM_NONE = 0, CAM_BUSY = 1, CAM_DISABLED = 2, CAM_PERMISSION = 3,
+            CAM_PREVIEW = 4, CAM_ERROR = 5;
 
     private static final long DECODE_INTERVAL_MS = 120;
     private static final long SAME_CODE_COOLDOWN_MS = 1500;
@@ -62,9 +70,27 @@ class BarcodeScanner implements TextureView.SurfaceTextureListener {
     private final Handler main = new Handler(Looper.getMainLooper());
     private final Decoder decoder = new Decoder();
 
+    /** Automatic reopens after a lost camera, refilled by a preview that ran for STABLE_MS. */
+    private static final int REOPEN_BUDGET = 5;
+    /** A preview lost sooner than this counts as part of the same failure. */
+    private static final long STABLE_MS = 10000;
+    /**
+     * Reopens after another app took the camera; they do not spend REOPEN_BUDGET (split-screen
+     * focus switches would use it up), but a device that keeps reporting itself taken stops here.
+     */
+    private static final int BUSY_BUDGET = 30;
+    /** One timed retry after a loss, in case no availability report comes. */
+    private static final long FALLBACK_MS = 3000;
+
+    // Camera state below is touched on the main thread only: start/stop, the surface listener,
+    // and every camera, session and availability callback run there. The background thread
+    // only decodes frames. The main looper never quits, so a late onOpened always gets closed.
     private HandlerThread thread;
     private Handler background;
+    private CameraManager manager;
     private CameraDevice camera;
+    /** The open in flight; any other callback that turns up is stale and only closes its device. */
+    private DeviceCallback opening;
     private CameraCaptureSession session;
     private CaptureRequest.Builder request;
     private ImageReader imageReader;
@@ -73,6 +99,22 @@ class BarcodeScanner implements TextureView.SurfaceTextureListener {
     private boolean torchOn;
     private boolean torchAvailable;
     private boolean started;
+    /** The camera was taken away or failed; reopen once it is free again. */
+    private boolean waiting;
+    private int reopensLeft;
+    private int busyReopensLeft;
+    /** The CAM_ reason of the last loss or failed open, or -1. */
+    private int lastReason = -1;
+    /** When the current preview started (elapsedRealtime), or -1 while none runs. */
+    private long configuredAt = -1;
+    /** Bumped by every new or dropped session; a callback of an older one only cleans up. */
+    private int sessionGen;
+    /** The preview surface of the current session, released when it is replaced or closed. */
+    private Surface previewSurface;
+    /** Set during start(): the availability callback's first reports are ignored. */
+    private boolean settling;
+    /** Bumped by start() and stop(); only the settle runnable of the current start clears settling. */
+    private int settleToken;
 
     private volatile boolean paused;
     /** Set by a problem, cleared by the next frame — so a short outage does not leave its notice behind. */
@@ -93,20 +135,44 @@ class BarcodeScanner implements TextureView.SurfaceTextureListener {
         this.listener = listener;
     }
 
+    /** Main thread. */
     void start() {
         if (started) return;
         started = true;
+        waiting = false;
+        reopensLeft = REOPEN_BUDGET;
+        busyReopensLeft = BUSY_BUDGET;
+        lastReason = -1;
         thread = new HandlerThread("camera");
         thread.start();
         background = new Handler(thread.getLooper());
+        manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
         view.setSurfaceTextureListener(this);
+        // Registered first; its initial reports land on the main queue now and are ignored, so a
+        // failed first open is not retried (and reported) a second time at once.
+        settling = true;
+        final int token = ++settleToken;
+        if (manager != null) manager.registerAvailabilityCallback(availability, main);
+        main.post(new Runnable() {
+            @Override public void run() {
+                if (token == settleToken) settling = false;
+            }
+        });
         if (view.isAvailable()) {
             openCamera(view.getWidth(), view.getHeight());
         }
     }
 
+    /** Main thread. Safe to call twice, and while the camera is still opening. */
     void stop() {
         started = false;
+        waiting = false;
+        settleToken++;
+        main.removeCallbacks(fallback);
+        opening = null; // its onOpened will close the device
+        if (manager != null) manager.unregisterAvailabilityCallback(availability);
+        // A surface that turns ready after this must not open the camera in the background.
+        view.setSurfaceTextureListener(null);
         closeCamera();
         if (thread != null) {
             thread.quitSafely();
@@ -145,42 +211,128 @@ class BarcodeScanner implements TextureView.SurfaceTextureListener {
 
     // --- camera plumbing ---------------------------------------------------
 
+    /** Main thread. Does nothing when stopped, already open, or an open is in flight. */
     private void openCamera(int viewWidth, int viewHeight) {
-        CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
+        if (!started || camera != null || opening != null) return;
         if (manager == null) {
-            problem("No camera service");
+            problem(CAM_NONE, "no camera service");
             return;
         }
         try {
             cameraId = pickBackCamera(manager);
             if (cameraId == null) {
-                problem("No camera found");
+                problem(CAM_NONE, "no camera found");
                 return;
             }
             CameraCharacteristics chars = manager.getCameraCharacteristics(cameraId);
             Boolean flash = chars.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
             torchAvailable = flash != null && flash;
+            final boolean torch = torchAvailable;
+            main.post(new Runnable() {
+                @Override public void run() {
+                    if (started) listener.onTorchKnown(torch);
+                }
+            });
             StreamConfigurationMap map = chars.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
             if (map == null) {
-                problem("Camera has no usable configuration");
+                problem(CAM_ERROR, "camera has no usable configuration");
                 return;
             }
             frameSize = pickSize(map.getOutputSizes(ImageFormat.YUV_420_888));
+            if (imageReader != null) imageReader.close();
             imageReader = ImageReader.newInstance(frameSize.getWidth(), frameSize.getHeight(),
                     ImageFormat.YUV_420_888, 2);
             imageReader.setOnImageAvailableListener(onFrame, background);
             configureTransform(viewWidth, viewHeight);
-            manager.openCamera(cameraId, stateCallback, background);
+            DeviceCallback callback = new DeviceCallback();
+            opening = callback;
+            manager.openCamera(cameraId, callback, main);
         } catch (CameraAccessException e) {
-            problem("Camera busy or blocked");
+            opening = null;
+            waiting = true; // disabled or in use: try again once it is free
+            lastReason = accessReason(e);
             Log.w(Store.TAG, "openCamera failed", e);
+            problem(lastReason, "openCamera: reason " + e.getReason());
         } catch (SecurityException e) {
-            problem("Camera permission missing");
-        } catch (IllegalArgumentException e) {
-            problem("Camera cannot be opened");
+            opening = null;
             Log.w(Store.TAG, "openCamera failed", e);
+            problem(CAM_PERMISSION, "openCamera: no permission");
+        } catch (IllegalArgumentException e) {
+            opening = null;
+            Log.w(Store.TAG, "openCamera failed", e);
+            problem(CAM_ERROR, "openCamera: bad argument");
         }
     }
+
+    /**
+     * Main thread: an automatic reopen after a lost camera, within the budget. Only an
+     * availability report (`timed` false) may reopen for free after another app took the camera;
+     * the timed fallback always spends REOPEN_BUDGET, so nothing loops on a timer.
+     */
+    private void reopen(boolean timed) {
+        if (settling || !started || !waiting || camera != null || opening != null) return;
+        // No surface yet: onSurfaceTextureAvailable opens the camera when it comes.
+        if (!view.isAvailable()) return;
+        boolean busy = lastReason == CAM_BUSY && !timed;
+        if (busy ? busyReopensLeft <= 0 : reopensLeft <= 0) {
+            // A spent timer leaves the wait to the availability callback, which may be free.
+            if (timed) return;
+            waiting = false;
+            main.removeCallbacks(fallback);
+            Log.w(Store.TAG, "camera reopen given up until the app comes back");
+            return;
+        }
+        if (busy) {
+            busyReopensLeft--;
+        } else {
+            reopensLeft--;
+        }
+        waiting = false;
+        main.removeCallbacks(fallback);
+        Log.i(Store.TAG, "camera free again, reopening");
+        openCamera(view.getWidth(), view.getHeight());
+    }
+
+    private final Runnable fallback = new Runnable() {
+        @Override public void run() {
+            reopen(true);
+        }
+    };
+
+    /** Main thread: the camera is gone or unusable; reopen once it is free (or after a while). */
+    private void waitForCamera(int reason) {
+        lastReason = reason;
+        waiting = true;
+        main.removeCallbacks(fallback);
+        main.postDelayed(fallback, FALLBACK_MS);
+    }
+
+    /** Main thread: drops what belonged to a device that is gone, keeps the frame reader. */
+    private void forgetDevice() {
+        torchOn = false;
+        sessionGen++; // a session still configuring for it only cleans up
+        session = null; // closed with its device
+        releasePreview();
+        camera = null;
+        request = null;
+    }
+
+    private void releasePreview() {
+        if (previewSurface != null) previewSurface.release();
+        previewSurface = null;
+    }
+
+    private final CameraManager.AvailabilityCallback availability = new CameraManager.AvailabilityCallback() {
+        /** After MAX_CAMERAS_IN_USE another camera closing frees ours too, so any id counts then. */
+        @Override public void onCameraAvailable(String id) {
+            if (id.equals(cameraId) || lastReason == CAM_BUSY) reopen(false);
+        }
+
+        /** Focus moved between apps sharing the screen: now we may win the camera back. */
+        @Override public void onCameraAccessPrioritiesChanged() {
+            reopen(false);
+        }
+    };
 
     private String pickBackCamera(CameraManager manager) throws CameraAccessException {
         String fallback = null;
@@ -207,58 +359,170 @@ class BarcodeScanner implements TextureView.SurfaceTextureListener {
         return best;
     }
 
-    private final CameraDevice.StateCallback stateCallback = new CameraDevice.StateCallback() {
+    /** One per open, delivered on the main thread; only the current one may touch the state. */
+    private final class DeviceCallback extends CameraDevice.StateCallback {
         @Override public void onOpened(CameraDevice device) {
+            if (opening != this || !started) {
+                device.close(); // stopped (or superseded) while it was opening
+                return;
+            }
+            opening = null;
             camera = device;
             createSession();
         }
 
         @Override public void onDisconnected(CameraDevice device) {
-            device.close();
-            camera = null;
+            lost(device, CAM_BUSY, "disconnected");
         }
 
         @Override public void onError(CameraDevice device, int error) {
-            device.close();
-            camera = null;
-            problem("Camera error " + error);
+            lost(device, errorReason(error), "device error " + error);
         }
-    };
 
+        /** Closing twice is harmless; only a current device reports and waits to come back. */
+        private void lost(CameraDevice device, int reason, String detail) {
+            device.close();
+            boolean current = opening == this || camera == device;
+            if (!current) return;
+            if (opening == this) opening = null;
+            if (camera == device) forgetDevice();
+            // Only a preview that ran a while earns new reopens; one that dies right after it
+            // starts would otherwise loop open, configure, lose for ever.
+            if (configuredAt >= 0 && SystemClock.elapsedRealtime() - configuredAt > STABLE_MS) {
+                reopensLeft = REOPEN_BUDGET;
+                busyReopensLeft = BUSY_BUDGET;
+            }
+            configuredAt = -1;
+            if (!started) return;
+            Log.w(Store.TAG, "camera lost: " + detail);
+            problem(reason, detail);
+            // The availability callback reopens: when the other app lets go, or, after a fault
+            // of our own, as soon as the close above has gone through. A timer backs it up once.
+            waitForCamera(reason);
+        }
+    }
+
+    private static int errorReason(int error) {
+        switch (error) {
+            case CameraDevice.StateCallback.ERROR_CAMERA_IN_USE:
+            case CameraDevice.StateCallback.ERROR_MAX_CAMERAS_IN_USE:
+                return CAM_BUSY;
+            case CameraDevice.StateCallback.ERROR_CAMERA_DISABLED:
+                return CAM_DISABLED;
+            default:
+                return CAM_ERROR;
+        }
+    }
+
+    private static int accessReason(CameraAccessException e) {
+        switch (e.getReason()) {
+            case CameraAccessException.CAMERA_IN_USE:
+            case CameraAccessException.MAX_CAMERAS_IN_USE:
+                return CAM_BUSY;
+            case CameraAccessException.CAMERA_DISABLED:
+                return CAM_DISABLED;
+            default:
+                return CAM_ERROR;
+        }
+    }
+
+    /** Main thread. Needs an open camera and a ready surface; a new session replaces the old. */
     private void createSession() {
         SurfaceTexture texture = view.getSurfaceTexture();
-        if (texture == null || camera == null || imageReader == null) return;
+        if (texture == null || camera == null || imageReader == null || background == null) return;
         texture.setDefaultBufferSize(frameSize.getWidth(), frameSize.getHeight());
-        Surface preview = new Surface(texture);
+        final Surface preview = new Surface(texture);
+        final Surface frames = imageReader.getSurface();
+        final CameraDevice device = camera;
+        final int gen = ++sessionGen;
+        // Setting up the streams blocks for a while: keep it off the main thread. stop() closes
+        // the device first, so a late run here fails harmlessly or meets the checks below.
+        background.post(new Runnable() {
+            @Override public void run() {
+                configureSession(device, preview, frames, gen);
+            }
+        });
+    }
+
+    /**
+     * Main thread: the open camera got no session. Closing it lets the availability callback
+     * (or the timer) reopen within the budget instead of leaving an open camera with no preview.
+     */
+    private void giveUpDevice(int reason, String detail) {
+        CameraDevice d = camera;
+        forgetDevice();
+        configuredAt = -1;
+        d.close();
+        waitForCamera(reason);
+        problem(reason, detail);
+    }
+
+    /** Main thread: frees the surface of a session that failed or was replaced before it ran. */
+    private void dropped(Surface preview) {
+        if (preview != previewSurface) preview.release();
+    }
+
+    /** Camera thread. The session callbacks come back on the main thread. */
+    private void configureSession(final CameraDevice device, final Surface preview, Surface frames,
+            final int gen) {
         try {
-            request = camera.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
-            request.addTarget(preview);
-            request.addTarget(imageReader.getSurface());
-            request.set(CaptureRequest.CONTROL_AF_MODE,
+            final CaptureRequest.Builder builder = device.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
+            builder.addTarget(preview);
+            builder.addTarget(frames);
+            builder.set(CaptureRequest.CONTROL_AF_MODE,
                     CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
-            camera.createCaptureSession(Arrays.asList(preview, imageReader.getSurface()),
+            device.createCaptureSession(Arrays.asList(preview, frames),
                     new CameraCaptureSession.StateCallback() {
                         @Override public void onConfigured(CameraCaptureSession configured) {
+                            if (gen != sessionGen || !started || camera != device) {
+                                configured.close(); // stopped, lost or replaced meanwhile
+                                dropped(preview);
+                                return;
+                            }
+                            if (previewSurface != preview) releasePreview(); // the old session's
+                            previewSurface = preview;
+                            // A replacing session keeps the light as the button shows it.
+                            if (torchOn) {
+                                builder.set(CaptureRequest.FLASH_MODE, CaptureRequest.FLASH_MODE_TORCH);
+                            }
+                            request = builder;
                             session = configured;
+                            configuredAt = SystemClock.elapsedRealtime();
+                            main.removeCallbacks(fallback);
                             repeat();
                         }
 
                         @Override public void onConfigureFailed(CameraCaptureSession configured) {
-                            problem("Camera preview could not start");
+                            configured.close();
+                            dropped(preview);
+                            if (gen != sessionGen || !started || camera != device) return;
+                            giveUpDevice(CAM_PREVIEW, "configure failed");
                         }
-                    }, background);
-        } catch (CameraAccessException e) {
-            problem("Camera busy or blocked");
+                    }, main);
+        } catch (final CameraAccessException e) {
             Log.w(Store.TAG, "createSession failed", e);
-        } catch (IllegalStateException e) {
+            main.post(new Runnable() {
+                @Override public void run() {
+                    dropped(preview);
+                    if (gen == sessionGen && started && camera == device) {
+                        giveUpDevice(accessReason(e), "createSession: reason " + e.getReason());
+                    }
+                }
+            });
+        } catch (IllegalStateException | IllegalArgumentException e) {
             Log.w(Store.TAG, "createSession on a closed camera", e);
+            main.post(new Runnable() {
+                @Override public void run() {
+                    dropped(preview);
+                }
+            });
         }
     }
 
     private void repeat() {
         if (session == null || request == null) return;
         try {
-            session.setRepeatingRequest(request.build(), null, background);
+            session.setRepeatingRequest(request.build(), null, null);
         } catch (CameraAccessException e) {
             Log.w(Store.TAG, "setRepeatingRequest failed", e);
         } catch (IllegalStateException e) {
@@ -266,32 +530,28 @@ class BarcodeScanner implements TextureView.SurfaceTextureListener {
         }
     }
 
+    /** Main thread. Idempotent. */
     private void closeCamera() {
-        torchOn = false;
-        if (session != null) {
-            session.close();
-            session = null;
-        }
-        if (camera != null) {
-            camera.close();
-            camera = null;
-        }
+        if (session != null) session.close();
+        if (camera != null) camera.close();
+        forgetDevice();
+        configuredAt = -1;
         if (imageReader != null) {
             imageReader.close();
             imageReader = null;
         }
-        request = null;
     }
 
     /** For the test intent: the same path a real camera error takes. */
     void simulateProblem() {
-        problem("Test: camera problem");
+        problem(CAM_ERROR, "test");
     }
 
-    private void problem(final String message) {
+    private void problem(final int reason, String detail) {
+        Log.w(Store.TAG, "camera problem " + reason + ": " + detail);
         main.post(new Runnable() {
             @Override public void run() {
-                listener.onProblem(message);
+                listener.onProblem(reason);
                 // Only now: a frame arriving earlier would take back a notice not yet shown.
                 troubled = true;
             }
@@ -387,7 +647,13 @@ class BarcodeScanner implements TextureView.SurfaceTextureListener {
     // --- TextureView -------------------------------------------------------
 
     @Override public void onSurfaceTextureAvailable(SurfaceTexture texture, int width, int height) {
-        openCamera(width, height);
+        // stop() removes this listener; the check covers a call already under way.
+        if (!started) return;
+        if (camera != null) {
+            createSession(); // a new surface for the camera that is already open
+        } else {
+            openCamera(width, height);
+        }
     }
 
     @Override public void onSurfaceTextureSizeChanged(SurfaceTexture texture, int width, int height) {

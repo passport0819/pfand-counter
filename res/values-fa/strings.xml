@@ -5,6 +5,7 @@
     <string name="theme_system">مطابق سیستم</string>
     <string name="theme_light">روشن</string>
     <string name="theme_dark">تیره</string>
+    <string name="theme_black">سیاه</string>
     <string name="settings_language">زبان</string>
     <string name="lang_system">مطابق سیستم</string>
     <string name="machine_translated">این ترجمه با ماشین انجام شده و ممکن است اشتباه داشته باشد.</string>
@@ -14,7 +15,14 @@
     <string name="items_none">هنوز بطری‌ای ثبت نشده</string>
     <string name="aim_hint">دوربین را به طرف بارکد بگیرید</string>
     <string name="camera_needed">برای اسکن بارکد، دسترسی به دوربین لازم است. می‌توانید بطری‌ها را دستی هم اضافه کنید.</string>
+    <string name="camera_tap">برای اجازه‌ی دسترسی به دوربین، اینجا بزنید.</string>
     <string name="camera_failed">دوربین در دسترس نیست — با دکمه‌های پایین دستی بشمارید.</string>
+    <string name="camera_none">هیچ دوربینی روی این گوشی پیدا نشد.</string>
+    <string name="camera_busy">برنامه‌ی دیگری از دوربین استفاده می‌کند.</string>
+    <string name="camera_disabled">دوربین روی این گوشی غیرفعال است.</string>
+    <string name="camera_permission">اجازه‌ی دسترسی به دوربین داده نشده است.</string>
+    <string name="camera_preview">پیش‌نمایش دوربین شروع نشد.</string>
+    <string name="camera_error">دوربین خطا گزارش داد.</string>
     <string name="torch">چراغ</string>
 
     <string name="btn_8">+0,08€</string>
@@ -166,6 +174,7 @@
     <string name="jev_why_no_key">Jev خاموش است: هنوز کلیدی ثبت نشده. از تنظیمات › پیشنهادهای Jev یکی اضافه کنید.</string>
     <string name="jev_why_grey">خاکستری است، چون اطلاعات محصول به نوشیدنی شباهت ندارد. با این حال می‌توانید بپرسید.</string>
     <string name="jev_no_data">Jev نمی‌تواند درباره‌ی این یکی نظر بدهد: اطلاعات محصول نیست.</string>
+    <string name="jev_lookup_failed">اطلاعات محصول نرسید. دوباره امتحان کنید.</string>
     <string name="jev_key_rejected">Jev: کلید پذیرفته نشد (%1$s)</string>
     <string name="jev_no_credit">Jev: اعتبار تمام شده</string>
     <string name="jev_busy">Jev مشغول است</string>
@@ -312,7 +321,7 @@
     <string name="report_translation">گزارش اشتباه ترجمه</string>
     <string name="translations_welcome">ترجمه‌ها ماشینی انجام شده‌اند. از پیشنهادهای اصلاحی استقبال می‌شود، در GitHub یا با ایمیل به pfand-counter@tuta.com.</string>
     <string name="licenses_open">مجوزها</string>
-    <string name="lic_intro">Pfand Counter نرم‌افزاری آزاد تحت مجوز GNU General Public License نسخه‌ی ۳ (GPL-3.0) است.\n\nخواندن بارکد: ZXing، مجوز Apache License 2.0.\nنماد چرخ‌دنده‌ی تنظیمات: Material Design Icons 3.0.1، مجوز Apache License 2.0.\n\nنام محصولات و اطلاعات بسته‌بندی: © مشارکت‌کنندگان Open Food Facts، Open Beauty Facts و Open Products Facts، تحت Open Database License (ODbL) 1.0؛ محتواهای تکی تحت Database Contents License (DbCL) 1.0. فهرست ودیعه‌ای که همراه برنامه است از Open Food Facts گرفته شده و به‌طور کامل تحت ODbL 1.0 در دسترس است: https://opendatacommons.org/licenses/odbl/1-0/</string>
+    <string name="lic_intro">Pfand Counter نرم‌افزاری آزاد تحت مجوز GNU General Public License نسخه‌ی ۳ (GPL-3.0) است.\n\nخواندن بارکد: ZXing، مجوز Apache License 2.0.\nرابط کاربری: AndroidX AppCompat و Material Components for Android، مجوز Apache License 2.0.\nنماد چرخ‌دنده‌ی تنظیمات: Material Design Icons 3.0.1، مجوز Apache License 2.0.\n\nنام محصولات و اطلاعات بسته‌بندی: © مشارکت‌کنندگان Open Food Facts، Open Beauty Facts و Open Products Facts، تحت Open Database License (ODbL) 1.0؛ محتواهای تکی تحت Database Contents License (DbCL) 1.0. فهرست ودیعه‌ای که همراه برنامه است از Open Food Facts گرفته شده و به‌طور کامل تحت ODbL 1.0 در دسترس است: https://opendatacommons.org/licenses/odbl/1-0/</string>
     <string name="lic_originals">در ادامه متن کامل Apache License 2.0 و GPL-3.0 به زبان اصلی (انگلیسی) آمده است.</string>
     <string name="no_browser">مرورگری برای باز کردن صفحه پیدا نشد.</string>
     <string name="map_open">سوپرمارکت در این نزدیکی</string>

@@ -5,8 +5,8 @@ import android.util.Log;
 /**
  * An optional second source of deposits, asked for a barcode that neither the shipped list nor
  * the user's answers know, before Open Food Facts. The app ships without one. A local build may
- * add a class app.pfandcounter.LocalSource implementing this interface (build.sh compiles
- * src-local/ when it exists); its answer is counted like a list entry and remembered.
+ * add a class app.pfandcounter.LocalSource implementing this interface (src-local/ when built
+ * with --with-local / -PwithLocal); its answer is counted like a list entry and remembered.
  */
 interface ExtraSource {
 

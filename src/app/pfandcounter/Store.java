@@ -18,6 +18,11 @@ class Store {
         dir = ctx.getFilesDir();
     }
 
+    /** Files in `dir` instead, e.g. Context.getNoBackupFilesDir() for what must stay on this phone. */
+    Store(File dir) {
+        this.dir = dir;
+    }
+
     String read(String name) {
         File f = new File(dir, name);
         if (!f.exists()) return null;

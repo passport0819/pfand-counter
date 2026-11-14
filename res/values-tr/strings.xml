@@ -5,6 +5,7 @@
     <string name="theme_system">Sisteme uy</string>
     <string name="theme_light">Açık</string>
     <string name="theme_dark">Koyu</string>
+    <string name="theme_black">Siyah</string>
     <string name="settings_language">Dil</string>
     <string name="lang_system">Sisteme uy</string>
     <string name="machine_translated">Bu çeviri makine tarafından yapılmıştır ve hatalar içerebilir.</string>
@@ -13,7 +14,14 @@
     <string name="items_none">Henüz şişe yok</string>
     <string name="aim_hint">Kamerayı bir barkoda tut</string>
     <string name="camera_needed">Barkod taramak için kamera izni gerekiyor. Şişeleri yine de elle ekleyebilirsin.</string>
+    <string name="camera_tap">Kameraya izin vermek için buraya dokun.</string>
     <string name="camera_failed">Kamera kullanılamıyor — elle saymak için aşağıdaki düğmeleri kullan.</string>
+    <string name="camera_none">Bu telefonda kamera bulunamadı.</string>
+    <string name="camera_busy">Kamera başka bir uygulama tarafından kullanılıyor.</string>
+    <string name="camera_disabled">Kamera bu telefonda kapalı.</string>
+    <string name="camera_permission">Kamera izni yok.</string>
+    <string name="camera_preview">Kamera önizlemesi başlatılamadı.</string>
+    <string name="camera_error">Kamera bir hata bildirdi.</string>
     <string name="torch">Işık</string>
     <string name="btn_8">+0,08€</string>
     <string name="btn_15">+0,15€</string>
@@ -152,6 +160,7 @@
     <string name="jev_why_no_key">Jev kapalı: henüz anahtar yok. Ayarlar › Jev önerileri bölümünden ekle.</string>
     <string name="jev_why_grey">Gri, çünkü ürün verileri bir içeceğe benzemiyor. Yine de sorabilirsin.</string>
     <string name="jev_no_data">Jev bunu değerlendiremiyor: ürün verisi yok.</string>
+    <string name="jev_lookup_failed">Ürün verisi gelmedi. Tekrar dene.</string>
     <string name="jev_key_rejected">Jev: anahtar reddedildi (%1$s)</string>
     <string name="jev_no_credit">Jev: bakiye kalmadı</string>
     <string name="jev_busy">Jev meşgul</string>
@@ -299,7 +308,7 @@
     <string name="report_translation">Çeviri hatası bildir</string>
     <string name="translations_welcome">Çeviriler makine ile yapıldı. İyileştirmeler memnuniyetle karşılanır: GitHub\'da ya da pfand-counter@tuta.com adresine e-postayla.</string>
     <string name="licenses_open">Lisanslar</string>
-    <string name="lic_intro">Pfand Counter, GNU General Public License sürüm 3 (GPL-3.0) kapsamında özgür bir yazılımdır.\n\nBarkod okuma: ZXing, Apache License 2.0.\nAyarlar dişli simgesi: Material Design Icons 3.0.1, Apache License 2.0.\n\nÜrün adları ve ambalaj verileri: © Open Food Facts, Open Beauty Facts ve Open Products Facts katkıda bulunanları, Open Database License (ODbL) 1.0 kapsamında; tek tek içerikler Database Contents License (DbCL) 1.0 kapsamında. Uygulamayla gelen şişe depozitosu listesi Open Food Facts verilerinden türetilmiştir ve bir bütün olarak ODbL 1.0 kapsamında sunulur: https://opendatacommons.org/licenses/odbl/1-0/</string>
+    <string name="lic_intro">Pfand Counter, GNU General Public License sürüm 3 (GPL-3.0) kapsamında özgür bir yazılımdır.\n\nBarkod okuma: ZXing, Apache License 2.0.\nArayüz: AndroidX AppCompat, Material Components for Android, Apache License 2.0.\nAyarlar dişli simgesi: Material Design Icons 3.0.1, Apache License 2.0.\n\nÜrün adları ve ambalaj verileri: © Open Food Facts, Open Beauty Facts ve Open Products Facts katkıda bulunanları, Open Database License (ODbL) 1.0 kapsamında; tek tek içerikler Database Contents License (DbCL) 1.0 kapsamında. Uygulamayla gelen şişe depozitosu listesi Open Food Facts verilerinden türetilmiştir ve bir bütün olarak ODbL 1.0 kapsamında sunulur: https://opendatacommons.org/licenses/odbl/1-0/</string>
     <string name="lic_originals">Aşağıda Apache License 2.0 ve GPL-3.0 metinlerinin tamamı İngilizce asıllarıyla yer alır.</string>
     <string name="no_browser">Sayfayı açacak bir tarayıcı bulunamadı.</string>
     <string name="map_open">Yakındaki süpermarket</string>

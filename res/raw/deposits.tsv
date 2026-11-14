@@ -27,7 +27,7 @@
 0898999000022	25	Vita Coco Coconut Water
 09270756	15	Club-Mate
 10001776	25	Coca-Cola Zero
-1005149190000	25	Ikea Dryck rabarber
+1005149190000	25	IKEA Dryck rabarber
 10576403	25	Volvic Hibiskus
 11038504	15	Rapp's Roter Traubensaft
 1210002013000	25	Tropicana Orangensaft ohne Fruchtfleisch
@@ -202,7 +202,7 @@
 4002103000105	8	Erdinger Weissbier
 4002103019107	8	Erdinger Alkoholfreies Weizen
 4002103217275	8	ERDINGER Alkoholfrei
-4002103236122	8	ERDINGER Urweisse 0,5l
+4002103236122	8	ERDINGER Urweisse
 4002103248118	8	Erdinger Alkoholfrei
 4002103248323	8	Erdinger Dunkel-weizen
 4002103249535	8	Erdinger Alkoholfrei
@@ -514,7 +514,7 @@
 4009491021972	25	Valensina Mangosaft
 4009491022016	25	Valensina Orangensaft Frühstücksorange ohne Fr
 4009491022023	25	Valensina Mildes-Frühstück Multi-Vitamin
-4009491022047	25	Valensina Multivitaminsaft
+4009491022047	25	ALDI VALENSINA Multivitaminsaft
 4009491022078	25	Valensina Mildes-Frühstück Orange
 4009491022085	25	Valensina Orange Mango Ananas
 4009491022122	25	Valensina Saft - Grapefruit - Pink Grapefruit
@@ -1008,7 +1008,9 @@
 4044703005487	25	The Real Cola
 4044703005715	25	Multivitamin
 4044703009300	25	Booster Curuba-Elderflower
+4044703009331	25	Booster Blueberry Coconut
 4044703009362	25	Booster Juneberry
+4044703011532	25	Booster energy drink
 4044703011594	25	Veritas Black Cat Energydrink Original
 4044703012140	25	Booster pome granate
 4044703013871	25	Booster Energy Drink Alpha strawberry vanilla 
@@ -1123,10 +1125,11 @@
 4053400206660	8	Binding Radler naturtrüb
 4053400206707	8	Ur-Krostitzer alkoholfrei
 4053400208527	8	Radeberger Pilsner Alkoholfrei
-4053400208534	8	Radeberger Pilsener Alkoholfrei
+4053400208534	8	Radeberger Pilsner Alkoholfrei (&lt;0,5%)
 4053400209531	8	Cyberz Beer Mix Limez
 4053400211411	8	Guinness Bier &quot;Irish Red Ale&quot;
 4053400211428	8	Guinness Extra Stout 4053400211428 Schankbier 
+4053400250380	8	Jever Fun 0,0% Pilsener
 4053400256818	8	Binding Römer Pils
 4053400257181	8	Schöfferhofer Hefeweizen alkoholfrei
 4053400257501	25	Jever GT-Mobility - Tankstelle , KFZ-Service ,
@@ -1379,6 +1382,7 @@
 4066600392811	25	Paulaner Weissbier
 4066600610663	25	PAULANER München PAULANER Oktoberfest Bier
 4066600611349	8	Paulaner Salvator
+4066600611981	8	Paulaner Weissbier
 4066600641018	8	Paulaner Münchner Hell alkoholfrei
 4066600641605	8	Paulaner Oktoberfest-Bier
 4066600641919	8	Paulaner Hefe weißbier Alkoholfrei
@@ -1391,7 +1395,9 @@
 40678085	8	Holsten Pilsener Premium
 40678313	8	Holsten Alkoholfrei
 40678337	8	Lübzer Pils
+4068706677328	25	Golden Power Sauerkirsche
 4068706683985	25	Golden Power Energydrink Sugarfree
+4068706711732	25	Aldi Ice Tea Pfirsich
 4069365771235	25	Flying Power Edition - Waldbeere Sugarfree
 4069800005871	8	Nörten-Hardenberger Pils
 4069800005949	8	Nörten-Hardenberger Weizen
@@ -1765,7 +1771,7 @@
 42287988	25	Naturalis Mineralwasser Medium
 42287995	25	Naturalis Getränke - Mineralwasser - Classic
 42288039	25	Captains Tea (Netto) Captains Tea Eistee zero
-42289623	25	Schultenbräu Premium-Pils
+42289623	25	Brauerei Mönchengladbach Premium-Pils
 42296379	25	topstarSpitz Flying Power
 42296386	25	Strong Force X-treme Sour Apple Explosion
 42300489	15	Gerolsteiner Heilwasser
@@ -1966,6 +1972,7 @@
 4260456731385	25	Gönrgy Boost Berries mit Zucker
 4260469790027	8	Finne Pale Ale
 4260469790089	8	Finne Pils
+4260469790256	8	Finne Beach Brew
 4260473460015	8	Wolfscraft Frisch-Pils
 4260473460039	8	Wolfscraft Super Lager
 4260473460046	8	Wolfscraft Viel Weizen
@@ -2166,6 +2173,7 @@
 4316268697712	25	Schloss Pilsener XXL
 4316268697736	25	Schloss Export XXL
 4316268743013	25	Lieblings Frühlingsmix - Apfel, Ananas, Kiwi, 
+4316268745970	25	Schloss Radler alkoholfrei 0,0 naturtrüb
 4334011008998	25	real Quality Cola
 4334011009056	25	real Quality Natürliches Mineralwasser medium
 4334011025964	25	real Quality Apfelschorle
@@ -2320,7 +2328,7 @@
 5000112514124	25	Fanta Exotic 0,33 Dose
 5000112517163	25	Fanta Strawberry & Kiwi
 5000112521634	25	Fanta Orange ohne Zucker
-5000112545326	25	Coca-Cola Coke Original Taste
+5000112545326	25	Coca-Cola Europacific Partners Services Bulgar
 5000112546415	25	Coca-Cola Original
 5000112546439	25	Coca Cola light
 5000112546477	25	Mezzo Mix
@@ -2372,7 +2380,7 @@
 5000112620191	25	Fanta Lemon Ohne Zucker 1.25l
 5000112622713	25	Vio Bio Limo orange-mango-passion
 5000112622737	25	Vio Bio Limo Leicht Apfel Brombeere
-5000112626070	25	Coca-Cola Fanta Lemon ohne Zucker
+5000112626070	25	Fanta Lemon ohne Zucker
 5000112626360	25	Fanta Pink Grapefruit
 5000112630299	25	Fuzetea Zitrone
 5000112630312	25	Coca-Cola Company Fuzetea - Grüner Tee Mango-K
@@ -2407,7 +2415,7 @@
 5000281073309	25	Captain Morgan White Rum Mojito
 5010549006178	25	Abbot Ale
 5014379007404	25	Bud king of beet
-5038862135795	25	Innocent Orange avec pulpe
+5038862135795	25	innocent Orange avec pulpe
 5038862139861	25	innocent Orange ohne Fruchtfleisch
 5038862233736	25	innocent Guave, Ananas & Apfel
 5038862239400	25	innocent Vitaminbündel
@@ -2478,10 +2486,10 @@
 5449000000286	25	Coca-Cola Coca Cola
 5449000000439	25	Coca-Cola Coca Cola Original taste
 5449000000965	25	Coca-Cola 6 x 330ml
-5449000000996	25	COCA-COLA SERVICES SA/NV Coca-Cola
-5449000004840	25	Fanta Naranja
+5449000000996	25	COCA-COLA SERVICES SA/NV Coca-Cola Original
+5449000004840	25	COCA-COLA SERVICES SA/NV Fanta Naranja
 5449000006271	15	Fanta orange
-5449000011527	25	fanta Orange 0,33
+5449000011527	25	COCA-COLA SERVICES SA/NV fanta Orange 0,33
 5449000017888	15	Coca-Cola 1 Liter
 5449000017895	15	Coca-Cola Light Mehrweg Pet 1L
 5449000017901	15	Coca-Cola light koffeinfrei
@@ -2494,7 +2502,7 @@
 5449000038715	15	Coca-Cola Lift, Apfelschorle
 5449000042101	25	Fanta fruit twist
 5449000044709	25	Schweppes
-5449000050205	25	Coca-Cola Light
+5449000050205	25	COCA-COLA SERVICES SA/NV Coca-Cola Light
 5449000050212	15	Coca-Cola Light
 5449000051400	25	Vanilla Coca-Cola
 5449000051684	25	Coca cola Coca-cola Standard
@@ -2510,9 +2518,9 @@
 5449000118349	25	Fanta
 5449000123008	15	Vio Bio Limo Zitrone-limette
 5449000130389	25	Coca-Cola Coca Cola
-5449000131805	25	COCA-COLA SERVICES SA/NV Coca-Cola Zero Azúcar
+5449000131805	25	COCA-COLA SERVICES SA/NV Coca-Cola Zero Sugar
 5449000131812	25	Coca-Cola Coca Cola zero
-5449000131843	25	Coca-Cola Zero
+5449000131843	25	COCA-COLA SERVICES SA/NV Coca-Cola Zero
 5449000132499	25	Fanta Orange 1.75
 5449000132505	25	Coca-Cola Sprite
 5449000133328	15	COCA-COLA SERVICES SA/NV Cocacola zero sugar
@@ -2524,7 +2532,7 @@
 5449000138170	15	Fanta Orange Zero
 5449000146571	25	Vio BIO LIMO Orange
 5449000162861	25	Coca-Cola light koffeinfrei
-5449000171771	25	Aquarius zero
+5449000171771	25	COCA-COLA SERVICES SA/NV Aquarius zero
 5449000187390	15	Coca-Cola Zero Sugar koffeinfrei
 5449000214799	25	COCA-COLA SERVICES SA/NV Coca-Cola sans sucres
 5449000216489	25	ViO BiO LiMO Grapefruit
@@ -2558,7 +2566,7 @@
 5740700410116	25	Tuborg Pilsener
 5740700410345	25	Carlsberg Tuborg
 5740700987984	25	Fanta - Straberry & Kiwi
-5740700988349	25	Coca-Cola Original Taste
+5740700988349	25	Carlsberg Danmark A/S Coca-Cola Original Taste
 5740700992827	25	Somersby Pear Sparkling Cider
 5740700996153	25	Fanta - Exotic
 5741000011539	25	Royal Unibrew Thor Blå Thor Export
@@ -2599,13 +2607,13 @@
 7616200083502	25	Feldschlösschen Panache Bilz No Alcohol
 76400698	25	Feldschlösschen Zitrone 0.0%
 7640115250933	25	Coop Eau minérale
-7640115250964	25	Prix Garantie Mineralwasser ohne
+7640115250964	25	Coop Mineralwasser ohne
 7640115251145	25	Coop Prix Garantie Citron light
 7640150491001	25	El Tony Mate
 7640150491407	25	El Tony Mate & Mint
 7640175742485	25	Bombay Gin tonic
 76403095	25	Feldschlösschen Pale Ale
-8000845065457	25	Fonti di Crodo Lemon soda mojito
+8000845065457	25	Fonti di Crodo Freedea mojito soda il mojito a
 80008576	25	San Benedetto Acqua naturale
 8001300122319	25	Despar Bevanda analcolica gassata
 8001435440012	25	Heineken Bier Birra Moretti Ricetta 33 cl
@@ -2648,7 +2656,6 @@
 8410569510001	25	Amstel Cerveza rubia Radler 0,0% con zumo natu
 8410569615614	25	Cerveza Amstel Radler
 8410655007040	25	San miguel
-8410728180120	25	AGUAS DANONE S.A. Water
 8586000987708	25	Corgon 🍺
 8586001762939	25	Birelláda cola
 8588000346790	25	fit baba víz
@@ -2692,7 +2699,7 @@
 8853662023410	25	Exotic Food Coconut with pulp drink
 8855199132658	25	schweppes Tonic Water
 9002349000827	25	Schartner Bombe Spezi
-9002490100070	25	Red Bull
+9002490100070	25	Red Bull GmbH Red Bull
 9002490200220	25	Red Bull Sugarfree
 9002490205973	25	25 cl Red Bull - Energy Drink
 9002490206840	25	Red Bull

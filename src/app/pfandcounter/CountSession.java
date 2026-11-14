@@ -53,7 +53,7 @@ class CountSession {
     /** `qty` of one kind at once — a full crate brings its bottles in one tap. */
     Line add(String code, String name, int cents, int qty, boolean crate) {
         for (Line l : lines) {
-            if (l.code.equals(code) && l.cents == cents && l.crate == crate) {
+            if (sameCode(l.code, code) && l.cents == cents && l.crate == crate) {
                 l.qty += qty;
                 if (isBetterName(name, l.name)) l.name = name;
                 lines.remove(l);
@@ -66,6 +66,22 @@ class CountSession {
         return l;
     }
 
+    /**
+     * The same article: equal, or one the 12-digit UPC-A and the other its 13-digit GS1 form with
+     * a leading 0 (the camera reads the one, a GS1 QR code gives the other). As DepositRules.otherForm.
+     * UPC-E is not expanded to its UPC-A form: an accepted gap, the camera ignores unknown UPC-E.
+     */
+    static boolean sameCode(String a, String b) {
+        if (a.equals(b)) return true;
+        if (a.length() == 12 && b.length() == 13) return b.equals("0" + a);
+        if (a.length() == 13 && b.length() == 12) return a.equals("0" + b);
+        return false;
+    }
+
+    /**
+     * Null or empty never wins. Callers pass a stand-in ("Unknown product", "Crate") as null,
+     * so a stand-in never replaces a real name.
+     */
     private static boolean isBetterName(String candidate, String current) {
         return candidate != null && !candidate.isEmpty() && !candidate.equals(current);
     }
@@ -74,7 +90,7 @@ class CountSession {
     boolean renameCode(String code, String name) {
         boolean touched = false;
         for (Line l : lines) {
-            if (l.code.equals(code) && isBetterName(name, l.name)) {
+            if (sameCode(l.code, code) && isBetterName(name, l.name)) {
                 l.name = name;
                 touched = true;
             }
@@ -97,7 +113,7 @@ class CountSession {
         for (int i = 0; i < lines.size(); i++) {
             for (int j = lines.size() - 1; j > i; j--) {
                 Line a = lines.get(i), b = lines.get(j);
-                if (a.code.equals(b.code) && a.cents == b.cents && a.crate == b.crate) {
+                if (sameCode(a.code, b.code) && a.cents == b.cents && a.crate == b.crate) {
                     a.qty += b.qty;
                     lines.remove(j);
                 }

@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="@android:style/Theme.Material.NoActionBar">
-        <item name="android:colorBackground">@color/bg</item>
+    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Material 3. On phones that offer wallpaper colours they replace these (DynamicColors);
+             elsewhere the app keeps its own green. -->
+        <item name="colorPrimary">@color/accent</item>
+        <item name="colorOnPrimary">@color/on_accent</item>
+        <item name="colorPrimaryContainer">@color/accent_dim</item>
+        <item name="colorOnPrimaryContainer">@color/text</item>
+        <item name="colorSecondary">@color/accent</item>
+        <item name="colorSecondaryContainer">@color/accent_dim</item>
+        <item name="colorOnSecondaryContainer">@color/text</item>
+        <item name="colorSurface">?attr/pfandSurface</item>
+        <item name="colorOnSurface">@color/text</item>
+        <item name="colorOnSurfaceVariant">@color/text_dim</item>
+        <item name="colorError">@color/bad</item>
+        <item name="pfandBg">@android:color/system_surface_dark</item>
+        <item name="pfandSurface">@android:color/system_surface_container_dark</item>
+        <item name="pfandSurfaceHigh">@android:color/system_surface_container_highest_dark</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.Pfand.Dialog</item>
+        <item name="android:colorBackground">?attr/pfandBg</item>
         <item name="android:textColorPrimary">@color/text</item>
         <item name="android:colorAccent">@color/accent</item>
-        <item name="android:windowBackground">@color/bg</item>
+        <item name="android:windowBackground">?attr/pfandBg</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowLightNavigationBar">false</item>
     </style>

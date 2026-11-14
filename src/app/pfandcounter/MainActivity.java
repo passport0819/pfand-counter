@@ -1,8 +1,6 @@
 package app.pfandcounter;
 
 import android.Manifest;
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.LocaleManager;
 import android.app.UiModeManager;
 import android.content.Context;
@@ -34,6 +32,14 @@ import android.widget.TextView;
 
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.color.DynamicColors;
+import com.google.android.material.color.MaterialColors;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.materialswitch.MaterialSwitch;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -47,7 +53,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /** The whole app: preview on top, running total, the lines, and the by-hand buttons. */
-public class MainActivity extends Activity implements BarcodeScanner.Listener {
+public class MainActivity extends AppCompatActivity implements BarcodeScanner.Listener {
 
     private static final int REQUEST_CAMERA = 11;
     /** How long an unknown barcode waits for Open Food Facts before the app asks anyway. */
@@ -79,12 +85,18 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
     private LineAdapter adapter;
 
     private AlertDialog openDialog;
+    /** The reset button's own text colour, for when it offers undo instead of clearing. */
+    private android.content.res.ColorStateList resetPlain;
     /** The unknown barcode being looked up right now, before anything is asked. */
     private String checking;
     private ToneGenerator tone;
     private Vibrator vibrator;
 
     @Override protected void onCreate(Bundle state) {
+        // Wallpaper colours where the phone offers them (Android 12 and later); the theme's own otherwise.
+        DynamicColors.applyToActivityIfAvailable(this);
+        // The black design lies over the wallpaper colours: pure black instead of their dark grey.
+        if (isBlack(this)) getTheme().applyStyle(R.style.ThemeOverlay_Pfand_Black, true);
         super.onCreate(state);
         setContentView(R.layout.main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -92,6 +104,7 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         store = new Store(this);
         rules = new DepositRules(store, getResources());
         session = CountSession.load(store);
+        renameBuiltInLines();
         stats = Stats.load(store);
         lookup = new ProductLookup();
         jev = new JevClient(this);
@@ -193,7 +206,9 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         refresh();
-        handleTestIntent(getIntent());
+        // Only on a fresh start: a screen rebuilt after the app was ended gets the system's copy of
+        // the first intent back, extras and all, and must not scan or check a second time.
+        if (state == null) handleTestIntent(getIntent());
         if (state == null && !store.exists(HOWTO_FILE) && !store.exists("current.json")) {
             howToPending = true; // shown once the camera question is out of the way, see onResume
         } else if (state != null && state.getBoolean("reopen_settings")) {
@@ -205,7 +220,11 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         }
     }
 
-    /** A change of design or language rebuilds the screen; the old one lets go of what it holds. */
+    /**
+     * A change of design or language rebuilds the screen; the old one lets go of what it holds.
+     * Answers still on their way to it are dropped from then on (isDestroyed), so its stale lists
+     * never overwrite what the new screen has saved since.
+     */
     @Override protected void onDestroy() {
         if (tone != null) tone.release();
         extraPool.shutdownNow();
@@ -219,25 +238,35 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
     }
 
     /**
+     * The test way in (AndroidManifest.xml): an alias of this screen that only holders of the DUMP
+     * permission may start, which adb has and an app on the phone cannot get on its own. Extras
+     * sent to the screen itself, from the launcher or from another app, are ignored.
+     */
+    static final String TEST_ENTRY = "app.pfandcounter.TestEntry";
+
+    /**
      * A way in for checking the app without holding a bottle in front of the lens:
-     * adb shell am start -n app.pfandcounter/.MainActivity --es scan 4000000000006
-     * Text that is not a product number (a web address) goes the way a QR code from the camera
-     * goes: ProductCode decides, exactly as for a real read.
+     * adb shell am start -n app.pfandcounter/app.pfandcounter.TestEntry --es scan 4000000000006
+     * (a build with its own id in app-id.local puts that id before the slash). Text that is not a
+     * product number (a web address) goes the way a QR code from the camera goes: ProductCode
+     * decides, exactly as for a real read.
      */
     private void handleTestIntent(Intent intent) {
         if (intent == null) return;
-        // adb shell am start -n … --ez layout_check true: every language measured, results in logcat.
+        android.content.ComponentName via = intent.getComponent();
+        if (via == null || !TEST_ENTRY.equals(via.getClassName())) return;
+        // …/app.pfandcounter.TestEntry --ez layout_check true: every language measured, results in logcat.
         if (intent.getBooleanExtra("layout_check", false)) {
             intent.removeExtra("layout_check");
             LayoutCheck.run(this, LANGUAGES);
         }
-        // adb shell am start -n … --ez page_check true: every window opened in every language.
+        // …/app.pfandcounter.TestEntry --ez page_check true: every window opened in every language.
         if (intent.getBooleanExtra("page_check", false)) {
             intent.removeExtra("page_check");
             LocaleList was = getSystemService(LocaleManager.class).getApplicationLocales();
             pageCheckNext(0, 0, was.toLanguageTags());
         }
-        // adb shell am start -n … --ez camera_problem true: the notice must go once frames arrive.
+        // …/app.pfandcounter.TestEntry --ez camera_problem true: the notice must go once frames arrive.
         if (intent.getBooleanExtra("camera_problem", false)) {
             intent.removeExtra("camera_problem");
             scanner.simulateProblem();
@@ -263,17 +292,26 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
             }, 1000);
         }
         if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            deviceStore().delete(CAMERA_DENIED_FILE);
+            cameraBack(); // allowed in the phone's settings meanwhile
             scanner.start();
             firstStartNotesLater();
-        } else {
+        } else if (!cameraAsked && !CAMERA_BLOCKED.equals(cameraDenied())) {
+            // Once per app start: coming back from the question resumes the screen, and asking
+            // again from here made the question flash up over and over after a "Don't allow".
+            cameraAsked = true;
+            askedFromNotice = false;
             requestPermissions(new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA);
+        } else {
+            cameraMissing();
+            firstStartNotesLater();
         }
     }
 
     @Override protected void onPause() {
         if (checking != null) {
             checking = null; // the late answer is dropped; the next scan asks afresh
-            hintView.setText(R.string.aim_hint);
+            resetHint.run();
             scanner.setPaused(false);
         }
         session.save(store);
@@ -286,13 +324,96 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
     @Override public void onRequestPermissionsResult(int code, String[] permissions, int[] results) {
         if (code != REQUEST_CAMERA) return;
         if (results.length > 0 && results[0] == PackageManager.PERMISSION_GRANTED) {
+            deviceStore().delete(CAMERA_DENIED_FILE);
+            cameraBack();
             scanner.start();
         } else {
-            hintView.setText(R.string.camera_needed);
-            findViewById(R.id.aim_line).setVisibility(View.GONE);
-            torchButton.setVisibility(View.GONE);
-            firstStartNotesLater();
+            boolean fromNotice = askedFromNotice;
+            askedFromNotice = false;
+            if (results.length > 0) {
+                // A "No" this fast came from the system, not from a person: it showed no question.
+                boolean noQuestion = fromNotice
+                        && android.os.SystemClock.uptimeMillis() - cameraAskedAt < NO_QUESTION_MS;
+                // A second "Don't allow" is final: the system then shows no question any more
+                // (and no rationale). From then on only the phone's settings can allow it.
+                boolean noMoreQuestions = noQuestion || (cameraDenied() != null
+                        && !shouldShowRequestPermissionRationale(Manifest.permission.CAMERA));
+                deviceStore().write(CAMERA_DENIED_FILE, noMoreQuestions ? CAMERA_BLOCKED : "denied");
+                if (noQuestion) openAppSettings();
+            }
+            cameraMissing(); // the first-start notes follow in onResume, which comes next
         }
+    }
+
+    /** Whether the camera was asked for in this app run; static, so a rebuilt screen does not ask again. */
+    private static boolean cameraAsked;
+    /**
+     * "denied" after a refusal, CAMERA_BLOCKED once the system seems not to ask any more; gone when
+     * allowed. Only a hint (the phone's settings can change it unseen), so a tap on the notice
+     * still asks, and it lives where backups do not reach: a new phone starts without it.
+     */
+    private static final String CAMERA_DENIED_FILE = "camera.denied";
+    private static final String CAMERA_BLOCKED = "blocked";
+    /** A refusal faster than this came without a question on screen; nobody taps that fast. */
+    private static final long NO_QUESTION_MS = 500;
+    /** True while the notice about the missing camera permission is up. */
+    private boolean cameraMissingShown;
+    /** The last question came from a tap on the notice, at cameraAskedAt (uptime). */
+    private boolean askedFromNotice;
+    private long cameraAskedAt;
+    private Store deviceStore;
+
+    /** Files of this phone only, left out of backups (getNoBackupFilesDir). */
+    private Store deviceStore() {
+        if (deviceStore == null) deviceStore = new Store(getNoBackupFilesDir());
+        return deviceStore;
+    }
+
+    private String cameraDenied() {
+        String s = deviceStore().read(CAMERA_DENIED_FILE);
+        return s == null ? null : s.trim();
+    }
+
+    private void openAppSettings() {
+        try {
+            startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                    android.net.Uri.fromParts("package", getPackageName(), null)));
+        } catch (android.content.ActivityNotFoundException e) {
+            android.util.Log.w(Store.TAG, "no settings page for the app", e);
+        }
+    }
+
+    /**
+     * No camera: the notice instead of the aiming line. A tap on it asks again; when the system
+     * answers "no" at once without showing the question, the app's page in the phone's settings
+     * opens instead. Counting by hand works as before.
+     */
+    private void cameraMissing() {
+        cameraMissingShown = true;
+        hintView.removeCallbacks(resetHint);
+        hintView.setText(getString(R.string.camera_needed) + "\n" + getString(R.string.camera_tap));
+        findViewById(R.id.aim_line).setVisibility(View.GONE);
+        torchButton.setVisibility(View.GONE);
+        hintView.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                cameraAsked = true;
+                askedFromNotice = true;
+                cameraAskedAt = android.os.SystemClock.uptimeMillis();
+                requestPermissions(new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA);
+            }
+        });
+    }
+
+    /** The camera is allowed (again): the notice goes, the aiming line and the torch come back. */
+    private void cameraBack() {
+        if (!cameraMissingShown) return;
+        cameraMissingShown = false;
+        hintView.setOnClickListener(null);
+        hintView.setClickable(false);
+        hintView.setText(R.string.aim_hint);
+        findViewById(R.id.aim_line).setVisibility(View.VISIBLE);
+        // Known from an earlier open; otherwise onTorchKnown shows it once the camera has opened.
+        if (scanner.isTorchAvailable()) torchButton.setVisibility(View.VISIBLE);
     }
 
     /** Set once the user has ticked that the app can make mistakes; until then the notice comes back. */
@@ -327,12 +448,13 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         understood.setText(R.string.disclaimer_check);
         understood.setTextColor(getColor(R.color.text));
         LinearLayout wrap = new LinearLayout(this);
-        wrap.setPadding(pad, pad / 2, pad, 0);
+        wrap.setOrientation(LinearLayout.VERTICAL);
+        wrap.setPadding(pad, 0, pad, 0);
+        wrap.addView(dialogText(getString(R.string.disclaimer_body)));
         wrap.addView(understood);
-        final AlertDialog dialog = new AlertDialog.Builder(this)
+        final AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.disclaimer_title)
-                .setMessage(R.string.disclaimer_body)
-                .setView(wrap)
+                .setView(scrolling(wrap))
                 .setCancelable(false)
                 .setPositiveButton(R.string.disclaimer_ok, new DialogInterface.OnClickListener() {
                     @Override public void onClick(DialogInterface d, int which) {
@@ -370,7 +492,7 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         if (rule.cents == DepositRules.NONE) {
             // Taught as "no deposit": say so instead of adding a worthless line — but offer the
             // way back, because such a barcode never gets a row whose menu could undo it.
-            showNoDeposit(code, rule.name);
+            showNoDeposit(code, hasName(rule.name) ? rule.name : null);
             return;
         }
         // A name the user gave (or learned before) wins over whatever the online lookup says.
@@ -378,14 +500,63 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
             add(code, rule.name, rule.cents, 1, rule.crate);
             return;
         }
+        // A stand-in learned before (another language's "Unknown product") is no name: add() shows
+        // today's stand-in until the lookup brings the real one.
         String cached = lookup.cached(code);
-        add(code, cached != null ? cached : rule.name, rule.cents, 1, rule.crate);
+        if (cached == null && DepositRules.otherForm(code) != null) {
+            cached = lookup.cached(DepositRules.otherForm(code));
+        }
+        add(code, cached != null ? cached : hasName(rule.name) ? rule.name : null, rule.cents, 1, rule.crate);
         fetchNameLater(code);
     }
 
-    /** A real name, not empty and not the "Unknown product" stand-in. */
+    /**
+     * A real name: not empty, and not a stand-in the app gives in any of its languages ("Unknown
+     * product", or "Crate" for a crate without a name of its own).
+     */
     private boolean hasName(String name) {
-        return name != null && !name.trim().isEmpty() && !name.equals(getString(R.string.unknown_product));
+        return name != null && !name.trim().isEmpty() && !isPlaceholder(name) && !isCrateStandIn(name);
+    }
+
+    /** "Unknown product" and "Crate" in every language the app speaks; filled on first use. */
+    private static Set<String> placeholders, crateNames;
+
+    private boolean isPlaceholder(String name) {
+        if (placeholders == null) placeholders = inEveryLanguage(R.string.unknown_product);
+        return name != null && placeholders.contains(name.trim());
+    }
+
+    private boolean isCrateStandIn(String name) {
+        if (crateNames == null) crateNames = inEveryLanguage(R.string.crate_name);
+        return name != null && crateNames.contains(name.trim());
+    }
+
+    private Set<String> inEveryLanguage(int id) {
+        Set<String> all = new HashSet<String>();
+        all.add(getString(id));
+        for (String tag : LANGUAGES) all.add(inLanguage(this, tag).getString(id));
+        return all;
+    }
+
+    /** What a line or learned entry without a name of its own is called today. */
+    private String standIn(boolean crate) {
+        return getString(crate ? R.string.crate_name : R.string.unknown_product);
+    }
+
+    /** `ctx` with its texts in the language `tag`. */
+    private static Context inLanguage(Context ctx, String tag) {
+        android.content.res.Configuration c = new android.content.res.Configuration(
+                ctx.getResources().getConfiguration());
+        c.setLocales(LocaleList.forLanguageTags(tag));
+        return ctx.createConfigurationContext(c);
+    }
+
+    /**
+     * What a learned entry keeps as its name: the stand-in is stored as no name, so it shows in
+     * the language of the day and a real name from the lookup still replaces it later.
+     */
+    private String nameToLearn(String name) {
+        return hasName(name) ? name : "";
     }
 
     /**
@@ -401,10 +572,30 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         hintView.postDelayed(resetHint, 2500);
     }
 
-    @Override public void onProblem(String message) {
+    /** Set by a camera problem, cleared by the first frame after it; resetHint keeps the notice. */
+    private boolean cameraProblem;
+
+    @Override public void onProblem(int reason) {
+        cameraProblem = true;
         hintView.setText(getString(R.string.camera_failed));
         torchButton.setVisibility(View.GONE);
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, problemText(reason), Toast.LENGTH_SHORT).show();
+    }
+
+    private static int problemText(int reason) {
+        switch (reason) {
+            case BarcodeScanner.CAM_NONE: return R.string.camera_none;
+            case BarcodeScanner.CAM_BUSY: return R.string.camera_busy;
+            case BarcodeScanner.CAM_DISABLED: return R.string.camera_disabled;
+            case BarcodeScanner.CAM_PERMISSION: return R.string.camera_permission;
+            case BarcodeScanner.CAM_PREVIEW: return R.string.camera_preview;
+            default: return R.string.camera_error;
+        }
+    }
+
+    @Override public void onTorchKnown(boolean available) {
+        if (cameraMissingShown || cameraProblem) return;
+        torchButton.setVisibility(available ? View.VISIBLE : View.GONE);
     }
 
     /** Camera thread: an unknown code must agree in three frames, a known one in two. */
@@ -413,6 +604,7 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
     }
 
     @Override public void onCameraBack() {
+        cameraProblem = false;
         // Only take back what onProblem put there; a scan notice or "checking" stays.
         if (getString(R.string.camera_failed).contentEquals(hintView.getText())) {
             hintView.setText(R.string.aim_hint);
@@ -446,7 +638,7 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
             @Override public void run() {
                 if (!code.equals(checking)) return;
                 checking = null;
-                hintView.setText(R.string.aim_hint);
+                resetHint.run(); // the camera notice stays up while the camera is not allowed
                 feedback(UNKNOWN);
                 askAboutNewCode(code);
             }
@@ -457,7 +649,7 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
                 if (!code.equals(checking)) return; // gave up waiting, or the app was left
                 checking = null;
                 hintView.removeCallbacks(giveUp);
-                hintView.setText(R.string.aim_hint);
+                resetHint.run();
                 decide(code, info);
             }
         });
@@ -492,10 +684,10 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
                         if (answer != null && (answer.cents == DepositRules.REUSABLE_SMALL
                                 || answer.cents == DepositRules.REUSABLE || answer.cents == DepositRules.SINGLE_USE)) {
                             android.util.Log.i(Store.TAG, "extra source: " + answer.cents + " cents");
-                            hintView.setText(R.string.aim_hint);
+                            resetHint.run();
                             scanner.setPaused(false);
-                            rules.learn(code, answer.cents, answer.name);
-                            add(code, answer.name, answer.cents);
+                            rules.learn(code, answer.cents, nameToLearn(answer.name));
+                            add(code, hasName(answer.name) ? answer.name : null, answer.cents);
                             fetchNameLater(code);
                         } else {
                             android.util.Log.i(Store.TAG, "extra source: no answer");
@@ -536,7 +728,7 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         if (openDialog != null && openDialog.isShowing()) return;
         scanner.setPaused(true);
         String shown = shownForDialog(code, info.name);
-        AlertDialog dialog = new AlertDialog.Builder(this)
+        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(title)
                 .setMessage(shown + "\n\n" + why)
                 .setPositiveButton(R.string.ok, null)
@@ -568,6 +760,7 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         final View content = LayoutInflater.from(this).inflate(R.layout.dialog_new, null);
         final TextView nameView = (TextView) content.findViewById(R.id.dlg_name);
         final EditText ownName = (EditText) content.findViewById(R.id.dlg_name_edit);
+        final View ownNameBox = content.findViewById(R.id.dlg_name_box);
         ((TextView) content.findViewById(R.id.dlg_code)).setText(code);
         // Taught before under a name of the user's own: offer it again for correcting.
         final DepositRules.Rule before = rules.isLearned(code) ? rules.lookup(code) : null;
@@ -582,16 +775,16 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
                 @Override public void run() {
                     if (getString(R.string.looking_up).contentEquals(nameView.getText())) {
                         nameView.setText(R.string.no_name);
-                        ownName.setVisibility(View.VISIBLE);
+                        ownNameBox.setVisibility(View.VISIBLE);
                     }
                 }
             }, 5000);
             // Looked up before without a name: nothing more will come, so no waiting.
             if (known != null) nameView.setText(R.string.no_name);
-            if (known != null || ownName.length() > 0) ownName.setVisibility(View.VISIBLE);
+            if (known != null || ownName.length() > 0) ownNameBox.setVisibility(View.VISIBLE);
         }
 
-        final AlertDialog dialog = new AlertDialog.Builder(this)
+        final AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.new_code_title)
                 .setView(content)
                 .setNegativeButton(R.string.skip_once, null)
@@ -619,11 +812,11 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
                 } else if (name.equals(getString(R.string.looking_up)) || name.equals(getString(R.string.no_name))) {
                     name = getString(R.string.unknown_product);
                 }
-                rules.learn(code, cents, name);
+                rules.learn(code, cents, nameToLearn(name));
                 if (cents == DepositRules.NONE) {
                     Toast.makeText(MainActivity.this, R.string.no_deposit_toast, Toast.LENGTH_SHORT).show();
                 } else {
-                    add(code, name, cents);
+                    add(code, hasName(name) ? name : null, cents); // a stand-in follows the language
                 }
                 if (openDialog != null) openDialog.dismiss();
             }
@@ -644,9 +837,9 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
                 if (!typed.isEmpty()) {
                     name = typed;
                 } else if (name.equals(getString(R.string.looking_up)) || name.equals(getString(R.string.no_name))) {
-                    name = getString(R.string.crate_name);
+                    name = null; // add() shows "Crate" in today's language; the lookup may still name it
                 }
-                rules.learn(code, crateCents, name, true);
+                rules.learn(code, crateCents, nameToLearn(name), true);
                 add(code, name, crateCents, 1, true);
                 if (openDialog != null) openDialog.dismiss();
             }
@@ -707,7 +900,7 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         withIcon(askJev, R.drawable.ic_b_ai, getString(R.string.jev_ask));
         withIcon((TextView) content.findViewById(R.id.dlg_help), R.drawable.ic_b_help, getString(R.string.g_open));
         if (known == null) {
-            askJev.setBackgroundResource(R.drawable.btn_bg);
+            askJev.setBackgroundTintList(android.content.res.ColorStateList.valueOf(getColor(R.color.surface_high)));
             if (!jev.enabled() || !jev.hasKey()) jevState(content, askJev, null);
             lookup.lookupInfo(code, new ProductLookup.InfoCallback() {
                 @Override public void onInfo(String forCode, ProductLookup.Info info) {
@@ -716,17 +909,17 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
                         nameView.setText(info.name);
                     } else {
                         nameView.setText(R.string.no_name);
-                        ownName.setVisibility(View.VISIBLE);
+                        ownNameBox.setVisibility(View.VISIBLE);
                     }
+                    if (info != null) content.setTag(R.id.dlg_ask_jev, info);
                     jevState(content, askJev, info);
-                    if (info != null && info.isDepositJar()) showJar(content, askJev);
-                    else showMakerHint(content, rules.makerHint(code, info));
+                    showHints(content, askJev, code, info);
                 }
             });
         } else {
+            content.setTag(R.id.dlg_ask_jev, known);
             jevState(content, askJev, known);
-            if (known.isDepositJar()) showJar(content, askJev);
-            else showMakerHint(content, rules.makerHint(code, known));
+            showHints(content, askJev, code, known);
         }
         askJev.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
@@ -738,7 +931,8 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
     /**
      * Green "Ask Jev" where the data hint at a drink. Otherwise grey, with the reason in words
      * underneath (and in the button's spoken label): off without a key or without product data,
-     * since a tap could only fail; still tappable when the data merely don't sound like a drink.
+     * since a tap could only fail; still tappable when the data merely don't sound like a drink,
+     * or when the lookup brought nothing back (info null: maybe only the network, so a tap tries again).
      */
     private void jevState(View content, Button askJev, ProductLookup.Info info) {
         TextView why = (TextView) content.findViewById(R.id.dlg_jev_why);
@@ -752,13 +946,16 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         if (!jev.hasKey()) {
             reason = R.string.jev_why_no_key;
             usable = false;
-        } else if (info == null || info.jevText == null || info.jevText.trim().isEmpty()) {
+        } else if (info == null) {
+            reason = R.string.jev_lookup_failed;
+        } else if (info.jevText == null || info.jevText.trim().isEmpty()) {
             reason = R.string.jev_no_data;
             usable = false;
         } else if (!looksLikeDrink(info)) {
             reason = R.string.jev_why_grey;
         }
-        askJev.setBackgroundResource(reason == 0 ? R.drawable.btn_accent : R.drawable.btn_bg);
+        askJev.setBackgroundTintList(android.content.res.ColorStateList.valueOf(
+                getColor(reason == 0 ? R.color.accent_dim : R.color.surface_high)));
         askJev.setEnabled(usable);
         askJev.setAlpha(usable ? 1f : 0.5f);
         if (reason == 0) {
@@ -774,13 +971,30 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
     }
 
     /**
+     * The dairy jar or the maker hint, once product data are there. None for a barcode that no
+     * database knows (name, categories and Jev's line all empty): nothing to read them from.
+     */
+    private void showHints(View content, Button askJev, String code, ProductLookup.Info info) {
+        if (info == null || noProductData(info)) return;
+        if (info.isDepositJar()) showJar(content, askJev);
+        else showMakerHint(content, rules.makerHint(code, info));
+    }
+
+    /** The databases answered, but none of them knows the barcode. */
+    private static boolean noProductData(ProductLookup.Info info) {
+        return info != null && info.name == null
+                && (info.categories == null || info.categories.isEmpty())
+                && (info.jevText == null || info.jevText.trim().isEmpty());
+    }
+
+    /**
      * A yogurt or cream jar Open Food Facts marks as reusable glass (DairyJarCheck): 0.15 gets the
      * ring, the reason sits where Jev's answer would. Jev would only repeat it — on the 36 control
      * jars with such a word it picked 0.15 every time (27.09.2026) — so its button steps back to
      * grey and saves the call. Still one tap to count.
      */
     private void showJar(View content, Button askJev) {
-        askJev.setBackgroundResource(R.drawable.btn_bg);
+        askJev.setBackgroundTintList(android.content.res.ColorStateList.valueOf(getColor(R.color.surface_high)));
         if (askJev.isEnabled()) { // the jar's own reason below says why the button stepped back
             content.findViewById(R.id.dlg_jev_why).setVisibility(View.GONE);
             askJev.setContentDescription(null);
@@ -820,7 +1034,7 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
     private void ring(Button b) {
         int left = b.getPaddingLeft(), top = b.getPaddingTop();
         int right = b.getPaddingRight(), bottom = b.getPaddingBottom();
-        b.setBackground(bar(0, getColor(R.color.accent_dim), true));
+        b.setBackground(tappable(bar(0, getColor(R.color.accent_dim), true)));
         b.setPadding(left, top, right, bottom);
         b.setTypeface(android.graphics.Typeface.DEFAULT_BOLD);
     }
@@ -840,7 +1054,7 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
      * Only on "Ask Jev": Jev needs the product data, so it waits for the lookup if that is
      * still running. Nothing is counted or learned until a button is tapped.
      */
-    private void askJev(final AlertDialog dialog, final View content, String code) {
+    private void askJev(final AlertDialog dialog, final View content, final String code) {
         final Button ask = (Button) content.findViewById(R.id.dlg_ask_jev);
         if (!jev.hasKey()) {
             Toast.makeText(this, R.string.jev_why_no_key, Toast.LENGTH_LONG).show();
@@ -851,19 +1065,41 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         lookup.lookupInfo(code, new ProductLookup.InfoCallback() {
             @Override public void onInfo(String forCode, ProductLookup.Info info) {
                 if (openDialog != dialog) return;
-                jev.ask(info != null ? info.jevText : null, new JevClient.Callback() {
+                if (info == null) { // nothing came back: no answer is not "no data", so it may be tried again
+                    jevFailed(content, ask, getString(R.string.jev_lookup_failed));
+                    return;
+                }
+                if (content.getTag(R.id.dlg_ask_jev) == null) {
+                    // This time the lookup got through: what the dialog's first lookup would have shown.
+                    content.setTag(R.id.dlg_ask_jev, info);
+                    TextView nameView = (TextView) content.findViewById(R.id.dlg_name);
+                    EditText ownName = (EditText) content.findViewById(R.id.dlg_name_edit);
+                    if (info.name != null) {
+                        nameView.setText(info.name);
+                        if (ownName.length() == 0) content.findViewById(R.id.dlg_name_box).setVisibility(View.GONE);
+                    } else {
+                        nameView.setText(R.string.no_name);
+                    }
+                    showHints(content, ask, code, info);
+                }
+                if (info.jevText == null || info.jevText.trim().isEmpty()) {
+                    noJevData(content, ask, info); // no product data: asking again would not change anything
+                    return;
+                }
+                jev.ask(info.jevText, new JevClient.Callback() {
                     @Override public void onSuggestion(JevClient.Suggestion s) {
                         if (openDialog != dialog) return;
                         ask.setVisibility(View.GONE);
-                        showJev(content, s, info != null && info.categories != null
+                        content.findViewById(R.id.dlg_jev_why).setVisibility(View.GONE); // an earlier failure
+                        showJev(content, s, info.categories != null
                                 && DairyJarCheck.isDairy(info.categories));
                     }
 
                     @Override public void onProblem(JevClient.Problem p, String detail) {
                         if (openDialog != dialog) return;
                         if (p == JevClient.Problem.NO_DATA) {
-                            ask.setText(R.string.jev_no_data);
-                            return; // asking again would not change anything
+                            noJevData(content, ask, info); // asking again would not change anything
+                            return;
                         }
                         String why;
                         switch (p) {
@@ -875,13 +1111,30 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
                             case OFFLINE: why = getString(R.string.jev_offline); break;
                             default: why = getString(R.string.jev_failed, detail);
                         }
-                        Toast.makeText(MainActivity.this, why, Toast.LENGTH_LONG).show();
-                        ask.setEnabled(true);
-                        withIcon(ask, R.drawable.ic_b_ai, getString(R.string.jev_ask_again));
+                        jevFailed(content, ask, why);
                     }
                 });
             }
         });
+    }
+
+    /** No product data for Jev: the button gets its own label back and stays off, with the reason. */
+    private void noJevData(View content, Button ask, ProductLookup.Info info) {
+        withIcon(ask, R.drawable.ic_b_ai, getString(R.string.jev_ask));
+        jevState(content, ask, info);
+    }
+
+    /** A failed ask: the reason stands in the dialog (read out once), and the button asks again. */
+    private void jevFailed(View content, Button ask, String reason) {
+        TextView why = (TextView) content.findViewById(R.id.dlg_jev_why);
+        why.setText(reason);
+        why.setVisibility(View.VISIBLE);
+        why.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
+        why.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
+        ask.setEnabled(true);
+        ask.setAlpha(1f);
+        ask.setContentDescription(null);
+        withIcon(ask, R.drawable.ic_b_ai, getString(R.string.jev_ask_again));
     }
 
     /**
@@ -922,20 +1175,28 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
             double p = Math.max(0, odds[i]);
             int left = b.getPaddingLeft(), top = b.getPaddingTop();
             int right = b.getPaddingRight(), bottom = b.getPaddingBottom();
-            b.setBackground(bar(p, getColor(R.color.accent_dim), i == pick));
+            b.setBackground(tappable(bar(p, getColor(R.color.accent_dim), i == pick)));
             b.setPadding(left, top, right, bottom);
             b.setTypeface(android.graphics.Typeface.DEFAULT); // Jev's pick replaces an earlier hint
             android.text.SpannableStringBuilder text = new android.text.SpannableStringBuilder(b.getText());
             int from = text.length();
+            // A row filled at least halfway has its text on the fill, which takes the fill's own text
+            // colour; the dim grey of the percentage would all but vanish there.
+            boolean onFill = p >= 0.5;
             if (!notADrink) {
-                text.append("   ").append(String.valueOf(Math.round(p * 100))).append(" %");
-                text.setSpan(new android.text.style.ForegroundColorSpan(getColor(R.color.text_dim)),
+                // No-break spaces: the percentage never ends up alone on a line of its own.
+                text.append("\u00A0\u00A0\u00A0").append(String.valueOf(Math.round(p * 100))).append("\u00A0%");
+                text.setSpan(new android.text.style.ForegroundColorSpan(getColor(onFill ? R.color.on_accent_dim : R.color.text_dim)),
                         from, text.length(), 0);
                 text.setSpan(new android.text.style.RelativeSizeSpan(0.85f), from, text.length(), 0);
             }
-            if (i == pick) {
+            if (onFill) {
+                b.setTextColor(getColor(R.color.on_accent_dim));
+            } else if (i == pick) {
                 // "No deposit" is dim by default; the pick always reads at full strength.
                 b.setTextColor(getColor(R.color.text));
+            }
+            if (i == pick) {
                 text.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), 0, from, 0);
             }
             b.setText(text);
@@ -944,7 +1205,8 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
 
     /** A rounded track filled from the left to `share`; with a ring when `ring` is set. */
     private android.graphics.drawable.Drawable bar(double share, int fillColor, boolean ring) {
-        float radius = 10 * getResources().getDisplayMetrics().density;
+        // As round as the rows (res/drawable/choice.xml); the thin meter comes out as a pill.
+        float radius = 16 * getResources().getDisplayMetrics().density;
         android.graphics.drawable.GradientDrawable track = new android.graphics.drawable.GradientDrawable();
         track.setColor(getColor(R.color.surface_high));
         track.setCornerRadius(radius);
@@ -960,6 +1222,15 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         if (ring) outline.setStroke((int) (3 * getResources().getDisplayMetrics().density), getColor(R.color.accent));
         return new android.graphics.drawable.LayerDrawable(
                 new android.graphics.drawable.Drawable[]{track, clip, outline});
+    }
+
+    /** A row's background that ripples under the finger within its round corners. */
+    private android.graphics.drawable.Drawable tappable(android.graphics.drawable.Drawable content) {
+        android.graphics.drawable.GradientDrawable mask = new android.graphics.drawable.GradientDrawable();
+        mask.setColor(android.graphics.Color.WHITE);
+        mask.setCornerRadius(16 * getResources().getDisplayMetrics().density);
+        return new android.graphics.drawable.RippleDrawable(android.content.res.ColorStateList.valueOf(
+                MaterialColors.getColor(this, android.R.attr.colorControlHighlight, 0)), content, mask);
     }
 
     private static int choiceIndex(int cents) {
@@ -986,30 +1257,33 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         scanner.setPaused(true);
         double[] spent = jev.spent();
         final JevClient.Provider[] chosen = {jev.provider()};
-        final EditText field = new EditText(this);
+        // The switch is only kept on "Save"; "Cancel" leaves Jev as it was.
+        final boolean[] on = {jev.enabled()};
+        final EditText field = new com.google.android.material.textfield.TextInputEditText(this);
         field.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD
                 | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         field.setSingleLine(true);
         final TextView state = new TextView(this);
         final RadioGroup ways = new RadioGroup(this);
-        final RadioButton viaOpenRouter = new RadioButton(this);
+        final RadioButton viaOpenRouter = new com.google.android.material.radiobutton.MaterialRadioButton(this);
         viaOpenRouter.setId(View.generateViewId());
         viaOpenRouter.setText(R.string.jev_via_openrouter);
-        final RadioButton viaTypeSafe = new RadioButton(this);
+        final RadioButton viaTypeSafe = new com.google.android.material.radiobutton.MaterialRadioButton(this);
         viaTypeSafe.setId(View.generateViewId());
         viaTypeSafe.setText(R.string.jev_via_typesafe);
         ways.addView(viaOpenRouter);
         ways.addView(viaTypeSafe);
+        final com.google.android.material.textfield.TextInputLayout fieldBox = boxed(this, field, 0);
         final AlertDialog[] shown = {null};
         final Runnable showState = new Runnable() {
             @Override public void run() {
                 boolean typeSafe = chosen[0] == JevClient.Provider.TYPESAFE;
                 boolean has = jev.hasKey(chosen[0]);
-                field.setHint(typeSafe ? R.string.jev_key_hint_typesafe : R.string.jev_key_hint);
+                fieldBox.setHint(getString(typeSafe ? R.string.jev_key_hint_typesafe : R.string.jev_key_hint));
                 state.setText(getString(has ? R.string.jev_key_set : R.string.jev_key_none));
                 if (shown[0] != null) {
                     Button remove = shown[0].getButton(DialogInterface.BUTTON_NEUTRAL);
-                    if (remove != null) remove.setVisibility(has && jev.enabled() ? View.VISIBLE : View.GONE);
+                    if (remove != null) remove.setVisibility(has && on[0] ? View.VISIBLE : View.GONE);
                 }
             }
         };
@@ -1025,7 +1299,8 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         wrap.setOrientation(LinearLayout.VERTICAL);
         int pad = (int) (20 * getResources().getDisplayMetrics().density);
         wrap.setPadding(pad, 0, pad, 0);
-        final android.widget.Switch use = new android.widget.Switch(this);
+        wrap.addView(dialogText(getString(R.string.jev_settings_body, (int) spent[0], euros(spent[1]))));
+        final MaterialSwitch use = new MaterialSwitch(this);
         use.setText(R.string.jev_use);
         use.setTextSize(16);
         use.setChecked(jev.enabled());
@@ -1036,24 +1311,24 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         keyPart.setOrientation(LinearLayout.VERTICAL);
         keyPart.addView(ways);
         keyPart.addView(state);
-        keyPart.addView(field, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+        keyPart.addView(fieldBox, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
         keyPart.setVisibility(jev.enabled() ? View.VISIBLE : View.GONE);
         wrap.addView(keyPart);
         use.setOnCheckedChangeListener(new android.widget.CompoundButton.OnCheckedChangeListener() {
-            @Override public void onCheckedChanged(android.widget.CompoundButton b, boolean on) {
-                jev.setEnabled(on);
-                keyPart.setVisibility(on ? View.VISIBLE : View.GONE);
+            @Override public void onCheckedChanged(android.widget.CompoundButton b, boolean checked) {
+                on[0] = checked;
+                keyPart.setVisibility(checked ? View.VISIBLE : View.GONE);
                 showState.run();
             }
         });
-        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+        AlertDialog.Builder builder = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.jev_settings)
-                .setMessage(getString(R.string.jev_settings_body, (int) spent[0], euros(spent[1])))
-                .setView(wrap)
+                .setView(scrolling(wrap))
                 .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
                     @Override public void onClick(DialogInterface d, int which) {
-                        if (!jev.enabled()) return; // switched off: nothing to save
+                        jev.setEnabled(on[0]);
+                        if (!on[0]) return; // switched off: nothing more to save
                         String key = field.getText().toString().trim();
                         jev.setProvider(chosen[0]);
                         if (!key.isEmpty()) jev.setKey(chosen[0], key);
@@ -1090,9 +1365,16 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
             R.string.lang_ru, R.string.lang_ar, R.string.lang_pl, R.string.lang_uk,
             R.string.lang_fr, R.string.lang_es, R.string.lang_fa, R.string.lang_vi};
     private static final int[] THEME_MODES = {UiModeManager.MODE_NIGHT_AUTO, UiModeManager.MODE_NIGHT_NO,
-            UiModeManager.MODE_NIGHT_YES};
+            UiModeManager.MODE_NIGHT_YES, UiModeManager.MODE_NIGHT_YES};
+    /** The index of "Black" in THEME_MODES: the dark design on pure black. */
+    private static final int THEME_BLACK = 3;
     /** The design picked in Settings, as its index in THEME_MODES; missing means the system's. */
     private static final String THEME_FILE = "theme.txt";
+    /** Whether the black design is picked; read before the screen is built. */
+    private static boolean isBlack(Context ctx) {
+        return String.valueOf(THEME_BLACK).equals(String.valueOf(new Store(ctx).read(THEME_FILE)).trim());
+    }
+
     /** Set when a change in Settings rebuilds the screen, so Settings opens again right after. */
     private boolean reopenSettings;
 
@@ -1111,24 +1393,12 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         wrap.setOrientation(LinearLayout.VERTICAL);
         wrap.setPadding(pad, pad / 2, pad, 0);
 
-        Button howTo = new Button(this);
-        howTo.setAllCaps(false);
-        withIcon(howTo, R.drawable.ic_b_book, getString(R.string.howto_open));
-        howTo.setTextColor(getColor(R.color.text));
-        howTo.setBackgroundResource(R.drawable.btn_accent);
-        Button pfand = new Button(this);
-        pfand.setAllCaps(false);
-        withIcon(pfand, R.drawable.ic_b_info, getString(R.string.pfand_open));
-        pfand.setTextColor(getColor(R.color.text));
-        pfand.setBackgroundResource(R.drawable.btn_accent);
+        Button howTo = sheetButton(R.drawable.ic_b_book, R.string.howto_open);
+        Button pfand = sheetButton(R.drawable.ic_b_info, R.string.pfand_open);
         LinearLayout.LayoutParams pp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         pp.topMargin = (int) (8 * getResources().getDisplayMetrics().density);
-        Button statsButton = new Button(this);
-        statsButton.setAllCaps(false);
-        withIcon(statsButton, R.drawable.ic_b_stats, getString(R.string.stats_open));
-        statsButton.setTextColor(getColor(R.color.text));
-        statsButton.setBackgroundResource(R.drawable.btn_accent);
+        Button statsButton = sheetButton(R.drawable.ic_b_stats, R.string.stats_open);
         Button learnedButton = sheetButton(R.drawable.ic_h_scan, R.string.learned_open);
         // Jev and About sit here, not under the page: three buttons down there stacked up and
         // had to be scrolled once the page grew. Two to a row, so the page fits on one screen.
@@ -1148,7 +1418,7 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         mapNote.setPadding(0, pad / 4, 0, 0);
         wrap.addView(mapNote);
 
-        final android.widget.Switch sounds = new android.widget.Switch(this);
+        final MaterialSwitch sounds = new MaterialSwitch(this);
         sounds.setText(R.string.sound_switch);
         sounds.setTextSize(16);
         sounds.setChecked(soundsOn());
@@ -1173,7 +1443,17 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         } catch (NumberFormatException ignored) {
             // no choice yet: the system's
         }
-        final RadioGroup themes = themeRow(this, themeNow >= 0 && themeNow < THEME_MODES.length ? themeNow : 0);
+        final LinearLayout themes = themeRow(this, themeNow >= 0 && themeNow < THEME_MODES.length ? themeNow : 0, new ThemePicked() {
+            @Override public void picked(int i) {
+                boolean wasBlack = isBlack(MainActivity.this);
+                store.write(THEME_FILE, String.valueOf(i));
+                reopenSettings = true;
+                ui.setApplicationNightMode(THEME_MODES[i]);
+                // Dark and black are both night to the system, so it rebuilds nothing between them.
+                // Where the night mode changes too, the system's own rebuild is merged with this one.
+                if (wasBlack != (i == THEME_BLACK)) recreate();
+            }
+        });
         wrap.addView(themes);
 
         wrap.addView(heading(R.string.settings_language));
@@ -1181,18 +1461,24 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         List<String> langNames = new ArrayList<String>();
         langNames.add(getString(R.string.lang_system));
         for (int name : LANGUAGE_NAMES) langNames.add(getString(name));
-        final android.widget.Spinner langs = new android.widget.Spinner(this);
-        langs.setAdapter(new android.widget.ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_dropdown_item, langNames));
+        // A Material drop-down: an outlined field that opens the list of languages.
+        com.google.android.material.textfield.TextInputLayout langBox = new com.google.android.material.textfield.TextInputLayout(
+                this, null, com.google.android.material.R.attr.textInputOutlinedExposedDropdownMenuStyle);
+        final com.google.android.material.textfield.MaterialAutoCompleteTextView langs =
+                new com.google.android.material.textfield.MaterialAutoCompleteTextView(langBox.getContext());
+        langs.setInputType(InputType.TYPE_NULL);
+        langs.setSimpleItems(langNames.toArray(new String[0]));
         LocaleList chosen = locales.getApplicationLocales();
         int langNow = 0;
         if (!chosen.isEmpty()) {
             String tag = chosen.get(0).getLanguage();
             for (int i = 0; i < LANGUAGES.length; i++) if (LANGUAGES[i].equals(tag)) langNow = i + 1;
         }
-        langs.setSelection(langNow, false);
+        langs.setText(langNames.get(langNow), false);
         langs.setContentDescription(getString(R.string.settings_language));
-        wrap.addView(langs);
+        langBox.addView(langs, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
+        wrap.addView(langBox);
 
         // Everything but English and German came from a machine translation.
         String shown = getResources().getConfiguration().getLocales().get(0).getLanguage();
@@ -1204,30 +1490,19 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
             wrap.addView(note);
         }
 
-        themes.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override public void onCheckedChanged(RadioGroup group, int id) {
-                int i = id - 1000;
-                store.write(THEME_FILE, String.valueOf(i));
-                reopenSettings = true;
-                ui.setApplicationNightMode(THEME_MODES[i]);
-            }
-        });
         final int langWas = langNow;
-        langs.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override public void onItemSelected(AdapterView<?> parent, View v, int pos, long id) {
+        langs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override public void onItemClick(AdapterView<?> parent, View v, int pos, long id) {
                 if (pos == langWas) return;
                 reopenSettings = true;
                 locales.setApplicationLocales(pos == 0 ? LocaleList.getEmptyLocaleList()
                         : LocaleList.forLanguageTags(LANGUAGES[pos - 1]));
             }
-
-            @Override public void onNothingSelected(AdapterView<?> parent) {
-            }
         });
 
         ScrollView scroll = new ScrollView(this);
         scroll.addView(wrap);
-        final AlertDialog dialog = new AlertDialog.Builder(this)
+        final AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.settings)
                 .setView(scroll)
                 .setPositiveButton(R.string.close, null)
@@ -1357,7 +1632,7 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         for (int[] card : cards) {
             LinearLayout row = new LinearLayout(this);
             row.setOrientation(LinearLayout.HORIZONTAL);
-            row.setBackgroundResource(R.drawable.btn_bg);
+            row.setBackgroundResource(R.drawable.choice);
             row.setPadding((int) (12 * density), (int) (10 * density), (int) (12 * density), (int) (10 * density));
             android.widget.ImageView icon = new android.widget.ImageView(this);
             icon.setImageResource(card[0]);
@@ -1394,7 +1669,7 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
 
         ScrollView scroll = new ScrollView(this);
         scroll.addView(wrap);
-        AlertDialog dialog = new AlertDialog.Builder(this)
+        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(titleText)
                 .setView(scroll)
                 .setPositiveButton(R.string.ok, null)
@@ -1425,7 +1700,7 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         buildStats(this, wrap, stats, rules.learnedCount(), jev.spent(), jev.enabled());
         ScrollView scroll = new ScrollView(this);
         scroll.addView(wrap);
-        AlertDialog dialog = new AlertDialog.Builder(this)
+        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.stats_title)
                 .setView(scroll)
                 .setPositiveButton(R.string.close, null)
@@ -1465,12 +1740,12 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         String[] rows = new String[codes.size()];
         for (int i = 0; i < rows.length; i++) {
             DepositRules.Rule r = learnedRules.get(i);
-            String name = hasName(r.name) ? r.name : getString(R.string.unknown_product);
+            String name = hasName(r.name) ? r.name : standIn(r.crate);
             String value = r.cents == DepositRules.NONE ? getString(R.string.no_deposit_title)
                     : money(r.cents) + (r.crate ? " " + getString(R.string.crate_tag) : "");
             rows[i] = name + "\n" + codes.get(i) + "  ·  " + value;
         }
-        AlertDialog.Builder b = new AlertDialog.Builder(this)
+        AlertDialog.Builder b = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.learned_open)
                 .setPositiveButton(R.string.close, null)
                 .setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -1532,20 +1807,21 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
                 DepositRules.SINGLE_USE, crateCents, DepositRules.NONE};
         String[] labels = {getString(R.string.d8), getString(R.string.d15), getString(R.string.d25),
                 getString(R.string.d_crate_fmt, money(crateCents)), getString(R.string.no_deposit_title)};
-        AlertDialog dialog = new AlertDialog.Builder(this)
+        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.change_deposit)
                 .setItems(labels, new DialogInterface.OnClickListener() {
                     @Override public void onClick(DialogInterface d, int which) {
                         int cents = values[which];
                         boolean crate = which == 3;
-                        rules.learn(code, cents, r.name, crate);
+                        rules.learn(code, cents, nameToLearn(r.name), crate);
                         for (CountSession.Line l : new ArrayList<CountSession.Line>(session.lines())) {
-                            if (!l.code.equals(code)) continue;
+                            if (!CountSession.sameCode(l.code, code)) continue;
                             countStats(l.code, l.crate, l.cents, -l.qty);
                             if (cents == DepositRules.NONE) {
                                 session.remove(l);
                             } else {
                                 countStats(l.code, crate, cents, l.qty);
+                                if (!hasName(l.name)) l.name = standIn(crate);
                                 session.setDeposit(l, cents, crate);
                             }
                         }
@@ -1577,8 +1853,8 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
                 showLearned();
             }
         };
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle(hasName(r.name) ? r.name : getString(R.string.unknown_product))
+        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
+                .setTitle(hasName(r.name) ? r.name : standIn(r.crate))
                 .setItems(new String[]{getString(R.string.rename_line), getString(R.string.change_deposit),
                                 getString(R.string.forget_code)},
                         new DialogInterface.OnClickListener() {
@@ -1622,7 +1898,7 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
     /** Forgetting everything taught cannot be undone, so it asks first; the count stays. */
     private void confirmForgetAll() {
         scanner.setPaused(true);
-        AlertDialog dialog = new AlertDialog.Builder(this)
+        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.forget_all)
                 .setMessage(getString(R.string.forget_all_q, rules.learnedCount()))
                 .setPositiveButton(R.string.forget_all_yes, new DialogInterface.OnClickListener() {
@@ -1646,7 +1922,7 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
     /** Clearing the statistics cannot be undone, so it asks first; the list stays as it is. */
     private void confirmStatsReset() {
         scanner.setPaused(true);
-        AlertDialog dialog = new AlertDialog.Builder(this)
+        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.stats_reset)
                 .setMessage(R.string.stats_reset_q)
                 .setPositiveButton(R.string.stats_reset_yes, new DialogInterface.OnClickListener() {
@@ -1909,7 +2185,7 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         if (openDialog != null && openDialog.isShowing()) return;
         scanner.setPaused(true);
         String shown = shownForDialog(code, name);
-        AlertDialog dialog = new AlertDialog.Builder(this)
+        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.no_deposit_title)
                 .setMessage(shown + "\n\n" + getString(R.string.no_deposit_toast))
                 .setPositiveButton(R.string.ok, null)
@@ -1934,17 +2210,19 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         dialog.show();
     }
 
-    /** Fills in a proper product name once the network answers; never blocks the count. */
+    /**
+     * Fills in a proper product name once the network answers; never blocks the count. An answer
+     * reaching a screen that was rebuilt meanwhile (language, design) is dropped: its lists are
+     * the old ones, and saving them would undo what the new screen learned since.
+     */
     private void fetchNameLater(final String code) {
         lookup.lookup(code, new ProductLookup.Callback() {
             @Override public void onName(String forCode, String name) {
+                if (isDestroyed()) return;
                 if (session.renameCode(forCode, name)) {
                     if (rules.isLearned(forCode)) {
                         DepositRules.Rule r = rules.lookup(forCode);
-                        if (r != null && (r.name == null || r.name.isEmpty()
-                                || r.name.equals(getString(R.string.unknown_product)))) {
-                            rules.learn(forCode, r.cents, name);
-                        }
+                        if (r != null && !hasName(r.name)) rules.learn(forCode, r.cents, nameToLearn(name), r.crate);
                     }
                     refresh();
                 }
@@ -1967,7 +2245,7 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         host.setPadding(pad, pad / 2, pad, pad / 2);
         android.widget.ScrollView scroll = new android.widget.ScrollView(this);
         scroll.addView(host);
-        final AlertDialog dialog = new AlertDialog.Builder(this)
+        final AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.guide_title)
                 .setView(scroll)
                 .setNegativeButton(R.string.cancel, null)
@@ -2006,11 +2284,65 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         add(code, name, cents, 1, false);
     }
 
+    /**
+     * Lines the app names itself (bottles by hand, the empty crate, preset crates) keep the name of
+     * the language they were counted in. After a language change they get the new language's name,
+     * unless the user renamed them: a name none of the app's languages would give is left alone.
+     */
+    private void renameBuiltInLines() {
+        List<Context> languages = null;
+        boolean changed = false;
+        for (CountSession.Line l : session.lines()) {
+            // A barcode still without a name: "Unknown product" (or "Crate") in the new language.
+            if (isBarcode(l.code) && (isPlaceholder(l.name) || (l.crate && isCrateStandIn(l.name)))) {
+                String now = standIn(l.crate);
+                if (!now.equals(l.name)) {
+                    l.name = now;
+                    changed = true;
+                }
+                continue;
+            }
+            String now = builtInName(this, l.code, Locale.getDefault());
+            if (now == null || now.equals(l.name)) continue;
+            if (languages == null) {
+                languages = new ArrayList<Context>();
+                for (String tag : LANGUAGES) languages.add(inLanguage(this, tag));
+            }
+            for (Context c : languages) {
+                Locale locale = c.getResources().getConfiguration().getLocales().get(0);
+                if (String.valueOf(l.name).equals(builtInName(c, l.code, locale))) {
+                    l.name = now;
+                    changed = true;
+                    break;
+                }
+            }
+        }
+        if (changed) session.save(store);
+    }
+
+    /** The name the app gives a line of `code` in the language of `c`; null for a barcode or an own crate. */
+    private static String builtInName(Context c, String code, Locale locale) {
+        if (code.startsWith("manual-")) {
+            return c.getString(code.equals("manual-" + DepositRules.SINGLE_USE)
+                    ? R.string.manual_25 : R.string.manual_8);
+        }
+        if (code.equals("crate")) return c.getString(R.string.crate_name);
+        if (code.startsWith("pack:")) {
+            for (CrateSheet.Pack p : CrateSheet.presets(c)) {
+                if (code.equals("pack:" + p.key)) return p.label(locale);
+            }
+        }
+        return null;
+    }
+
     /** `qty` bottles (or crates) of one kind; the list, the statistics and the feedback in one go. */
     private void add(String code, String name, int cents, int qty, boolean crate) {
-        String shown = name == null || name.isEmpty() ? getString(R.string.unknown_product) : name;
         store.delete(UNDO_FILE);
-        justCounted = session.add(code, shown, cents, qty, crate);
+        // A stand-in goes in as no name, so it never replaces a real one already on the row;
+        // the row gets today's stand-in only when it has no real name.
+        justCounted = session.add(code, hasName(name) ? name : null, cents, qty, crate);
+        if (!hasName(justCounted.name)) justCounted.name = standIn(crate);
+        String shown = justCounted.name;
         countStats(code, crate, cents, qty);
         session.save(store);
         refresh();
@@ -2046,7 +2378,7 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         host.setPadding(pad, pad / 2, pad, pad / 2);
         ScrollView scroll = new ScrollView(this);
         scroll.addView(host);
-        final AlertDialog dialog = new AlertDialog.Builder(this)
+        final AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.c_title)
                 .setView(scroll)
                 .setNegativeButton(R.string.close, null)
@@ -2086,7 +2418,9 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
 
     private final Runnable resetHint = new Runnable() {
         @Override public void run() {
-            hintView.setText(R.string.aim_hint);
+            if (cameraMissingShown) cameraMissing(); // a bottle added by hand: the notice comes back
+            else if (cameraProblem) hintView.setText(R.string.camera_failed); // still broken
+            else hintView.setText(R.string.aim_hint);
         }
     };
 
@@ -2163,11 +2497,13 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         shareButton.setVisibility(session.isEmpty() ? View.GONE : View.VISIBLE);
         sortButton.setVisibility(session.lines().size() < 2 ? View.GONE : View.VISIBLE);
         withIcon(sortButton, R.drawable.ic_b_sort, getString(oldestFirst ? R.string.sort_oldest : R.string.sort_newest));
-        // Red while it clears the list; plain grey while it only brings a cleared list back.
+        // Red text while it clears the list; the plain button colour while it only brings a cleared list back.
         boolean undo = session.isEmpty() && store.exists(UNDO_FILE);
         withIcon(resetButton, undo ? R.drawable.ic_b_undo : R.drawable.ic_b_trash,
                 getString(undo ? R.string.btn_undo_reset : R.string.btn_reset));
-        resetButton.setBackgroundResource(undo ? R.drawable.btn_bg : R.drawable.btn_bad);
+        if (resetPlain == null) resetPlain = resetButton.getTextColors();
+        if (undo) resetButton.setTextColor(resetPlain);
+        else resetButton.setTextColor(getColor(R.color.bad));
         adapter.notifyDataSetChanged();
     }
 
@@ -2195,7 +2531,7 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         }
 
         scanner.setPaused(true);
-        AlertDialog dialog = new AlertDialog.Builder(this)
+        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(line.name)
                 .setItems(labels.toArray(new String[0]), new DialogInterface.OnClickListener() {
                     @Override public void onClick(DialogInterface d, int which) {
@@ -2254,33 +2590,32 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
 
     /** Renames every list line of `code` and, when it was taught, the learned entry too. */
     private void renameCode(final String code, String current, final Runnable after) {
-        final EditText field = new EditText(this);
+        final EditText field = new com.google.android.material.textfield.TextInputEditText(this);
         field.setSingleLine(true);
         field.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-        field.setHint(R.string.name_field);
         field.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO);
-        if (hasName(current)) {
+        // "Crate" is offered for editing; "Unknown product" is not, it only stands in for a name.
+        if (current != null && !current.trim().isEmpty() && !isPlaceholder(current)) {
             field.setText(current);
             field.setSelection(field.length());
         }
         android.widget.FrameLayout wrap = new android.widget.FrameLayout(this);
         int pad = (int) (20 * getResources().getDisplayMetrics().density);
         wrap.setPadding(pad, pad / 2, pad, 0);
-        wrap.addView(field);
+        wrap.addView(boxed(this, field, R.string.name_field));
         scanner.setPaused(true);
-        AlertDialog dialog = new AlertDialog.Builder(this)
+        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.rename_line)
                 .setView(wrap)
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override public void onClick(DialogInterface d, int which) {
                         String typed = field.getText().toString().trim();
-                        String name = typed.isEmpty() ? getString(R.string.unknown_product) : typed;
                         for (CountSession.Line l : session.lines()) {
-                            if (l.code.equals(code)) l.name = name;
+                            if (CountSession.sameCode(l.code, code)) l.name = typed.isEmpty() ? standIn(l.crate) : typed;
                         }
                         if (rules.isLearned(code)) {
                             DepositRules.Rule r = rules.lookup(code);
-                            rules.learn(code, r.cents, name, r.crate);
+                            rules.learn(code, r.cents, nameToLearn(typed), r.crate);
                         }
                         session.save(store);
                         refresh();
@@ -2308,7 +2643,7 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
                 DepositRules.SINGLE_USE, crateCents};
         String[] labels = {getString(R.string.d8), getString(R.string.d15),
                 getString(R.string.d25), getString(R.string.d_crate_fmt, money(crateCents))};
-        AlertDialog dialog = new AlertDialog.Builder(this)
+        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.change_deposit)
                 .setItems(labels, new DialogInterface.OnClickListener() {
                     @Override public void onClick(DialogInterface d, int which) {
@@ -2316,9 +2651,11 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
                         boolean crate = which == 3;
                         countStats(line.code, line.crate, line.cents, -line.qty);
                         countStats(line.code, crate, cents, line.qty);
+                        // A stand-in follows the kind: a bottle is not called "Crate", nor the other way round.
+                        if (isBarcode(line.code) && !hasName(line.name)) line.name = standIn(crate);
                         session.setDeposit(line, cents, crate);
                         // A correction is also a lesson: remember it for the next scan.
-                        if (isBarcode(line.code)) rules.learn(line.code, cents, line.name, crate);
+                        if (isBarcode(line.code)) rules.learn(line.code, cents, nameToLearn(line.name), crate);
                         session.save(store);
                         refresh();
                     }
@@ -2401,7 +2738,7 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
 
         ScrollView scroll = new ScrollView(this);
         scroll.addView(wrap);
-        final AlertDialog dialog = new AlertDialog.Builder(this)
+        final AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.about_title)
                 .setView(scroll)
                 .setPositiveButton(R.string.close, null)
@@ -2478,7 +2815,7 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         }
         ScrollView scroll = new ScrollView(this);
         scroll.addView(wrap);
-        AlertDialog dialog = new AlertDialog.Builder(this)
+        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.licenses_open)
                 .setView(scroll)
                 .setPositiveButton(R.string.ok, null)
@@ -2510,23 +2847,53 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
     /** Marks a half-width button: its label may take two lines (LayoutCheck allows that). */
     static final String TILE = "tile";
 
-    /** The three design choices in one row; the chosen one (0 system, 1 light, 2 dark) is ticked. */
-    static RadioGroup themeRow(Context ctx, int now) {
-        RadioGroup themes = new RadioGroup(ctx);
-        themes.setOrientation(LinearLayout.HORIZONTAL); // one row instead of three
-        // Aligned by baseline, a label that wraps pushed its button down and the row cut off its second line.
-        themes.setBaselineAligned(false);
-        int[] themeNames = {R.string.theme_system, R.string.theme_light, R.string.theme_dark};
-        for (int i = 0; i < themeNames.length; i++) {
-            RadioButton b = new RadioButton(ctx);
+    /** Told which design was tapped (0 system, 1 light, 2 dark, 3 black). */
+    interface ThemePicked {
+        void picked(int index);
+    }
+
+    /**
+     * The four design choices, two to a row as in the rest of Settings (four in one row did not
+     * fit "Systemstandard" or "Selon le système"). The chosen one is checked and gets the accent
+     * ring, like the picked value in the crate window.
+     */
+    static LinearLayout themeRow(Context ctx, int now, final ThemePicked listener) {
+        int[] themeNames = {R.string.theme_system, R.string.theme_light, R.string.theme_dark, R.string.theme_black};
+        final com.google.android.material.button.MaterialButton[] all =
+                new com.google.android.material.button.MaterialButton[themeNames.length];
+        for (int i = 0; i < all.length; i++) {
+            final int index = i;
+            final com.google.android.material.button.MaterialButton b = dialogButton(ctx, false);
             b.setId(1000 + i);
             b.setText(themeNames[i]);
-            // A long word ("Systemstandard") is split at a syllable with a hyphen, not anywhere.
-            b.setHyphenationFrequency(android.text.Layout.HYPHENATION_FREQUENCY_FULL);
-            themes.addView(b, new RadioGroup.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+            b.setCheckable(true); // read out as checked or not checked
+            b.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    markTheme(ctx, all, index);
+                    if (listener != null) listener.picked(index);
+                }
+            });
+            all[i] = b;
         }
-        themes.check(1000 + now);
-        return themes;
+        markTheme(ctx, all, now);
+        LinearLayout rows = new LinearLayout(ctx);
+        rows.setOrientation(LinearLayout.VERTICAL);
+        rows.addView(pair(ctx, all[0], all[1]));
+        LinearLayout.LayoutParams second = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        second.topMargin = (int) (6 * ctx.getResources().getDisplayMetrics().density);
+        rows.addView(pair(ctx, all[2], all[3]), second);
+        return rows;
+    }
+
+    private static void markTheme(Context ctx, com.google.android.material.button.MaterialButton[] all, int picked) {
+        int ring = (int) (2 * ctx.getResources().getDisplayMetrics().density);
+        for (int i = 0; i < all.length; i++) {
+            all[i].setChecked(i == picked);
+            all[i].setStrokeColor(android.content.res.ColorStateList.valueOf(ctx.getColor(R.color.accent)));
+            all[i].setStrokeWidth(i == picked ? ring : 0);
+            all[i].setTypeface(i == picked ? android.graphics.Typeface.DEFAULT_BOLD : android.graphics.Typeface.DEFAULT);
+        }
     }
 
     /** Two buttons side by side, equally wide and equally tall. */
@@ -2580,13 +2947,68 @@ public class MainActivity extends Activity implements BarcodeScanner.Listener {
         return row;
     }
 
+    /**
+     * A window's explaining text inside the window's own scrolling content. Material windows give a
+     * message and a custom part separate room, and at large font sizes the custom part was squeezed.
+     */
+    private TextView dialogText(CharSequence text) {
+        TextView t = new TextView(this);
+        t.setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_BodyMedium);
+        t.setTextColor(MaterialColors.getColor(this, com.google.android.material.R.attr.colorOnSurfaceVariant, 0));
+        t.setText(text);
+        t.setPadding(0, 0, 0, (int) (8 * getResources().getDisplayMetrics().density));
+        return t;
+    }
+
+    private ScrollView scrolling(View content) {
+        ScrollView scroll = new ScrollView(this);
+        scroll.addView(content);
+        return scroll;
+    }
+
     private Button sheetButton(int icon, int text) {
-        Button b = new Button(this);
-        b.setAllCaps(false);
-        withIcon(b, icon, getString(text));
-        b.setTextColor(getColor(R.color.text));
-        b.setBackgroundResource(R.drawable.btn_accent);
+        return sheetButton(this, icon, getString(text));
+    }
+
+    /**
+     * A full-width button with a picture (Settings, About). One line in every language: Material's
+     * letters are a little wider, and a long label ("Сообщить об ошибке перевода" at large font)
+     * shrinks a little instead of wrapping.
+     */
+    static Button sheetButton(Context ctx, int icon, CharSequence text) {
+        Button b = dialogButton(ctx, false);
+        b.setMaxLines(1);
+        b.setAutoSizeTextTypeUniformWithConfiguration(10, 14, 1, android.util.TypedValue.COMPLEX_UNIT_SP);
+        withIcon(ctx, b, icon, text);
         return b;
+    }
+
+    /** A Material button for the windows: tonal, or filled for a page's one main action. */
+    static com.google.android.material.button.MaterialButton dialogButton(Context ctx, boolean filled) {
+        com.google.android.material.button.MaterialButton b = new com.google.android.material.button.MaterialButton(
+                ctx, null, filled ? com.google.android.material.R.attr.materialButtonStyle
+                        : com.google.android.material.R.attr.materialButtonTonalStyle);
+        float density = ctx.getResources().getDisplayMetrics().density;
+        // Same letters and nearly the same room as the plain buttons before, so long words still fit.
+        b.setAllCaps(false);
+        b.setTextSize(14);
+        b.setLetterSpacing(0);
+        b.setMinHeight((int) (48 * density));
+        b.setMaxWidth(Integer.MAX_VALUE); // Material stops at 320 dp; rows here are full width
+        b.setInsetTop((int) (2 * density));
+        b.setInsetBottom((int) (2 * density));
+        b.setPadding((int) (8 * density), b.getPaddingTop(), (int) (8 * density), b.getPaddingBottom());
+        return b;
+    }
+
+    /** A text field with its label in a Material outline. The label goes on the box, not the field. */
+    static com.google.android.material.textfield.TextInputLayout boxed(Context ctx, EditText field, int label) {
+        com.google.android.material.textfield.TextInputLayout box = new com.google.android.material.textfield.TextInputLayout(
+                ctx, null, com.google.android.material.R.attr.textInputOutlinedStyle);
+        if (label != 0) box.setHint(label);
+        box.addView(field, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
+        return box;
     }
 
     /** Where the source code lives; the issue pages answer only once the repository is public. */

@@ -170,8 +170,8 @@ final class DepositGuide {
             LinearLayout row = new LinearLayout(context);
             row.setOrientation(LinearLayout.HORIZONTAL);
             row.setGravity(Gravity.CENTER_VERTICAL);
-            row.setBackgroundResource(R.drawable.btn_bg);
-            row.setPadding(dp(10), dp(8), dp(10), dp(8));
+            row.setBackgroundResource(R.drawable.choice);
+            row.setPadding(dp(12), dp(10), dp(12), dp(10));
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             lp.bottomMargin = dp(6);
@@ -214,11 +214,8 @@ final class DepositGuide {
         reason.setPadding(0, dp(6), 0, dp(14));
         host.addView(reason);
 
-        Button use = new Button(context);
-        use.setAllCaps(false);
+        Button use = MainActivity.dialogButton(context, true);
         use.setTextSize(16);
-        use.setBackgroundResource(R.drawable.btn_accent);
-        use.setTextColor(context.getColor(R.color.text));
         use.setText(step.cents == DepositRules.NONE
                 ? context.getString(R.string.g_use_none)
                 : context.getString(R.string.g_use_fmt, MainActivity.money(step.cents)));

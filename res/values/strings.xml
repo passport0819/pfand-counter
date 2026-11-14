@@ -8,6 +8,7 @@
     <string name="theme_system">Follow system</string>
     <string name="theme_light">Light</string>
     <string name="theme_dark">Dark</string>
+    <string name="theme_black">Black</string>
     <string name="settings_language">Language</string>
     <string name="lang_system">Follow system</string>
     <string name="lang_de" translatable="false">Deutsch</string>
@@ -28,7 +29,14 @@
     <string name="items_none">No bottles yet</string>
     <string name="aim_hint">Point the camera at a barcode</string>
     <string name="camera_needed">Camera permission is needed to scan barcodes. You can still add bottles by hand.</string>
+    <string name="camera_tap">Tap here to allow the camera.</string>
     <string name="camera_failed">Camera unavailable — use the buttons below to count by hand.</string>
+    <string name="camera_none">No camera found on this phone.</string>
+    <string name="camera_busy">The camera is in use by another app.</string>
+    <string name="camera_disabled">The camera is turned off on this phone.</string>
+    <string name="camera_permission">Camera permission is missing.</string>
+    <string name="camera_preview">The camera preview could not start.</string>
+    <string name="camera_error">The camera reported an error.</string>
     <string name="torch">Light</string>
 
     <string name="btn_8">+0,08€</string>
@@ -182,6 +190,7 @@
     <string name="jev_why_no_key">Jev is off: no key yet. Add one under Settings › Jev suggestions.</string>
     <string name="jev_why_grey">Grey because the product data don\'t sound like a drink. You can still ask.</string>
     <string name="jev_no_data">Jev can\'t judge this one: no product data.</string>
+    <string name="jev_lookup_failed">No product data came back. Try again.</string>
     <string name="jev_key_rejected">Jev: key rejected (%1$s)</string>
     <string name="jev_no_credit">Jev: no credit left</string>
     <string name="jev_busy">Jev is busy</string>
@@ -338,7 +347,7 @@
     <string name="report_translation">Report a translation mistake</string>
     <string name="translations_welcome">The translations were made by machine. Improvements are welcome, on GitHub or by e-mail to pfand-counter@tuta.com.</string>
     <string name="licenses_open">Licenses</string>
-    <string name="lic_intro">Pfand Counter is free software under the GNU General Public License, version 3 (GPL-3.0).\n\nBarcode reading: ZXing, Apache License 2.0.\nSettings gear icon: Material Design Icons 3.0.1, Apache License 2.0.\n\nProduct names and packaging data: © Open Food Facts, Open Beauty Facts and Open Products Facts contributors, under the Open Database License (ODbL) 1.0; individual contents under the Database Contents License (DbCL) 1.0. The shipped deposit list is derived from Open Food Facts and is available as a whole under the ODbL 1.0: https://opendatacommons.org/licenses/odbl/1-0/</string>
+    <string name="lic_intro">Pfand Counter is free software under the GNU General Public License, version 3 (GPL-3.0).\n\nBarcode reading: ZXing, Apache License 2.0.\nUser interface: AndroidX AppCompat, Material Components for Android, Apache License 2.0.\nSettings gear icon: Material Design Icons 3.0.1, Apache License 2.0.\n\nProduct names and packaging data: © Open Food Facts, Open Beauty Facts and Open Products Facts contributors, under the Open Database License (ODbL) 1.0; individual contents under the Database Contents License (DbCL) 1.0. The shipped deposit list is derived from Open Food Facts and is available as a whole under the ODbL 1.0: https://opendatacommons.org/licenses/odbl/1-0/</string>
     <string name="lic_originals">Below are the full texts of the Apache License 2.0 and the GPL-3.0, in the original English.</string>
     <string name="no_browser">No browser found to open the page.</string>
     <string name="map_open">Supermarket nearby</string>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A tappable row (a deposit choice, a question's answer, a pack): a rounded Material surface
+     that ripples under the finger. -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android" android:color="?android:attr/colorControlHighlight">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/surface_high" />
+            <corners android:radius="16dp" />
+            <padding android:top="12dp" android:bottom="12dp" android:left="12dp" android:right="12dp" />
+        </shape>
+    </item>
+</ripple>

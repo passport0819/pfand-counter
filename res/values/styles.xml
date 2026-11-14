@@ -1,26 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Light design; values-night/styles.xml holds the dark one. -->
-    <style name="AppTheme" parent="@android:style/Theme.Material.Light.NoActionBar">
-        <item name="android:colorBackground">@color/bg</item>
+    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Material 3. On phones that offer wallpaper colours they replace these (DynamicColors);
+             elsewhere the app keeps its own green. -->
+        <item name="colorPrimary">@color/accent</item>
+        <item name="colorOnPrimary">@color/on_accent</item>
+        <item name="colorPrimaryContainer">@color/accent_dim</item>
+        <item name="colorOnPrimaryContainer">@color/text</item>
+        <item name="colorSecondary">@color/accent</item>
+        <item name="colorSecondaryContainer">@color/accent_dim</item>
+        <item name="colorOnSecondaryContainer">@color/text</item>
+        <item name="colorSurface">?attr/pfandSurface</item>
+        <item name="colorOnSurface">@color/text</item>
+        <item name="colorOnSurfaceVariant">@color/text_dim</item>
+        <item name="colorError">@color/bad</item>
+        <item name="pfandBg">@android:color/system_surface_light</item>
+        <item name="pfandSurface">@android:color/system_surface_container_light</item>
+        <item name="pfandSurfaceHigh">@android:color/system_surface_container_highest_light</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.Pfand.Dialog</item>
+        <item name="android:colorBackground">?attr/pfandBg</item>
         <item name="android:textColorPrimary">@color/text</item>
         <item name="android:colorAccent">@color/accent</item>
-        <item name="android:windowBackground">@color/bg</item>
+        <item name="android:windowBackground">?attr/pfandBg</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowLightNavigationBar">true</item>
     </style>
-    <style name="PadButton">
+    <!-- The keypad under the list: round-ended Material buttons in the wallpaper's tones. -->
+    <style name="PadButton" parent="Widget.Material3.Button.TonalButton">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_margin">3dp</item>
         <item name="android:textSize">15sp</item>
-        <item name="android:textColor">@color/text</item>
-        <item name="android:background">@drawable/btn_bg</item>
+        <item name="android:paddingStart">6dp</item>
+        <item name="android:paddingEnd">6dp</item>
+        <item name="android:insetTop">2dp</item>
+        <item name="android:insetBottom">2dp</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="android:textAllCaps">false</item>
         <!-- One line in every language and font size: a long word shrinks instead of wrapping. -->
         <item name="android:maxLines">1</item>
         <item name="android:autoSizeTextType">uniform</item>
         <item name="android:autoSizeMinTextSize">9sp</item>
         <item name="android:autoSizeMaxTextSize">15sp</item>
+    </style>
+    <!-- The one filled button on the main screen ("Not sure?"). -->
+    <style name="PadButton.Filled" parent="Widget.Material3.Button">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:paddingStart">6dp</item>
+        <item name="android:paddingEnd">6dp</item>
+        <item name="android:insetTop">2dp</item>
+        <item name="android:insetBottom">2dp</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="android:textAllCaps">false</item>
+        <!-- One line in every language and font size: a long word shrinks instead of wrapping. -->
+        <item name="android:maxLines">1</item>
+        <item name="android:autoSizeTextType">uniform</item>
+        <item name="android:autoSizeMinTextSize">9sp</item>
+        <item name="android:autoSizeMaxTextSize">15sp</item>
+    </style>
+    <!-- Small tonal buttons next to the total (sort, share). -->
+    <style name="SmallButton" parent="Widget.Material3.Button.TonalButton">
+        <item name="android:minHeight">40dp</item>
+        <item name="android:minWidth">64dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingStart">14dp</item>
+        <item name="android:paddingEnd">14dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+    <!-- Round − and + in each list line. -->
+    <style name="RoundButton" parent="Widget.Material3.Button.TonalButton">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="cornerRadius">24dp</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <!-- Buttons over the camera keep their dark label shape; Material must not tint it. -->
+    <style name="CameraButton" parent="Widget.Material3.Button">
+        <item name="android:background">@drawable/pill</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/on_camera</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+    <!-- Material 3 windows keep 24 dp to each side; long words in de, ru, uk, fa need the room,
+         so they keep the 16 dp the windows had before. -->
+    <style name="ThemeOverlay.Pfand.Dialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="alertDialogStyle">@style/Pfand.Dialog</item>
+    </style>
+    <style name="Pfand.Dialog" parent="MaterialAlertDialog.Material3">
+        <item name="backgroundInsetStart">16dp</item>
+        <item name="backgroundInsetEnd">16dp</item>
+    </style>
+    <!-- Buttons inside the windows (Settings, About, crates, "Not sure?"): tonal, the one main
+         action of a page filled. Same letters and nearly the same room as before, so long words still fit. -->
+    <style name="DialogButton" parent="Widget.Material3.Button.TonalButton">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:maxWidth">10000dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:insetTop">2dp</item>
+        <item name="android:insetBottom">2dp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+    </style>
+    <style name="DialogButton.Filled" parent="Widget.Material3.Button">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:maxWidth">10000dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:insetTop">2dp</item>
+        <item name="android:insetBottom">2dp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+    </style>
+    <!-- The deposit choices in the new-barcode window: full-width rows the app fills as a bar
+         when Jev answers, so they keep their own background (res/drawable/choice.xml). -->
+    <style name="ChoiceButton" parent="Widget.Material3.Button.TextButton">
+        <item name="android:background">@drawable/choice</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:layout_marginBottom">6dp</item>
+        <item name="android:maxWidth">10000dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+    <!-- The black design (Settings, "Black"): the dark design on pure black, for OLED screens.
+         Put over the theme after the wallpaper colours, so it wins over them. Windows and rows sit
+         one step above black, so they still stand out from the page. -->
+    <style name="ThemeOverlay.Pfand.Black" parent="">
+        <item name="pfandBg">#FF000000</item>
+        <item name="pfandSurface">@android:color/system_surface_container_lowest_dark</item>
+        <item name="pfandSurfaceHigh">@android:color/system_surface_container_dark</item>
+        <item name="android:colorBackground">#FF000000</item>
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="colorSurface">#FF000000</item>
+        <item name="colorSurfaceContainerLowest">#FF000000</item>
+        <item name="colorSurfaceContainerLow">@android:color/system_surface_container_lowest_dark</item>
+        <item name="colorSurfaceContainer">@android:color/system_surface_container_lowest_dark</item>
+        <item name="colorSurfaceContainerHigh">@android:color/system_surface_container_lowest_dark</item>
+        <item name="colorSurfaceContainerHighest">@android:color/system_surface_container_low_dark</item>
     </style>
 </resources>

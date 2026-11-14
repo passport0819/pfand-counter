@@ -56,27 +56,17 @@
 
     <Button
         android:id="@+id/row_minus"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        style="@style/RoundButton"
         android:layout_marginStart="2dp"
-        android:background="@drawable/btn_bg"
         android:focusable="false"
-        android:textColor="@color/text"
-        android:textSize="20sp"
-        android:padding="0dp"
         android:text="@string/minus"
         android:contentDescription="@string/qty_minus" />
 
     <Button
         android:id="@+id/row_plus"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        style="@style/RoundButton"
         android:layout_marginStart="4dp"
-        android:background="@drawable/btn_bg"
         android:focusable="false"
-        android:textColor="@color/text"
-        android:textSize="20sp"
-        android:padding="0dp"
         android:text="@string/plus"
         android:contentDescription="@string/qty_plus" />
 </LinearLayout>

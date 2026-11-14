@@ -40,13 +40,11 @@
 
         <Button
             android:id="@+id/torch"
+            style="@style/CameraButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|end"
             android:layout_margin="8dp"
-            android:background="@drawable/pill"
-            android:textColor="@color/on_camera"
-            android:textSize="13sp"
             android:text="@string/torch" />
 
         <ImageButton
@@ -123,32 +121,18 @@
 
             <Button
                 android:id="@+id/sort"
+                style="@style/SmallButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="6dp"
-                android:minHeight="40dp"
-                android:minWidth="64dp"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:background="@drawable/btn_bg"
-                android:textAllCaps="false"
-                android:textColor="@color/text"
-                android:textSize="13sp"
                 android:visibility="gone"
                 android:text="@string/sort_newest" />
 
             <Button
                 android:id="@+id/share"
+                style="@style/SmallButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minHeight="40dp"
-                android:minWidth="64dp"
-                android:paddingStart="14dp"
-                android:paddingEnd="14dp"
-                android:background="@drawable/btn_bg"
-                android:textAllCaps="false"
-                android:textColor="@color/text"
-                android:textSize="13sp"
                 android:visibility="gone"
                 android:text="@string/share" />
             </LinearLayout>
@@ -168,6 +152,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:baselineAligned="false"
         android:paddingStart="5dp"
         android:paddingEnd="5dp"
         android:background="@color/surface">
@@ -182,6 +167,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:baselineAligned="false"
         android:paddingStart="5dp"
         android:paddingEnd="5dp"
         android:paddingBottom="8dp"
@@ -189,14 +175,13 @@
 
         <Button
             android:id="@+id/guide"
-            style="@style/PadButton"
-            android:background="@drawable/btn_accent"
+            style="@style/PadButton.Filled"
             android:text="@string/btn_guide" />
 
         <Button
             android:id="@+id/reset"
             style="@style/PadButton"
-            android:background="@drawable/btn_bad"
+            android:textColor="@color/bad"
             android:text="@string/btn_reset" />
     </LinearLayout>
 </LinearLayout>

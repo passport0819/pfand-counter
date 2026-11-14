@@ -16,8 +16,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Asks Open Food Facts what a barcode is called and which food group it belongs to. It never
@@ -29,10 +30,23 @@ import java.util.concurrent.Executors;
  * turn — Open Beauty Facts (shampoo, toothpaste) and Open Products Facts (batteries, dish tabs);
  * see NonFoodCheck. Without internet nothing more is tried. Each answered in 0,29–0,41 s
  * (measured 25.09.2026), so all three together stay well inside the app's 3 s wait.
+ *
+ * Up to PARALLEL barcodes are looked up at once, so one hanging answer does not hold up the next
+ * scan; the same barcode is never asked twice at once. Requests to the databases together start
+ * at least MIN_GAP_MS apart (shared by every instance), about the fastest answer above: no
+ * faster than one lookup after another with quick answers, as before.
  */
 class ProductLookup {
     private static final int CONNECT_TIMEOUT_MS = 4000;
     private static final int READ_TIMEOUT_MS = 4000;
+    /** Different barcodes looked up at the same time; more wait their turn. */
+    static final int PARALLEL = 3;
+    /** One lookup, all databases together, gives up after about this long (before: up to 3 × 8 s). */
+    static final long TOTAL_DEADLINE_MS = 8000;
+    /** Least time between two requests, to any of the three databases. */
+    static final long MIN_GAP_MS = 300;
+    /** Tests only: sent here instead of the databases, e.g. "http://127.0.0.1:1234". */
+    static volatile String testBase;
 
     /** Where an answer came from, and the name the "Not a drink" notice gives it. */
     enum Source {
@@ -49,7 +63,10 @@ class ProductLookup {
         }
     }
 
-    /** Stands for "the database answered: no such product", as opposed to no answer at all. */
+    /**
+     * Inside fetch only: "the database answered: no such product", as opposed to no answer at
+     * all. Never handed out (its categories are null); fetchAnywhere turns it into notFound().
+     */
     private static final Info NOT_FOUND = new Info(null, null, Source.FOOD);
 
     interface Callback {
@@ -88,14 +105,33 @@ class ProductLookup {
         }
     }
 
-    /** Called exactly once per ask, on the main thread; info is null when nothing came back. */
+    /**
+     * Called exactly once per ask, on the main thread. info is null only when no answer came
+     * (network error, timeout, deadline, unreadable answer); a later ask tries again. A barcode
+     * that every database answered "no such product" for comes back as a not-found Info
+     * (isNotFound), cached like any answer: no name, no categories, nothing for Jev.
+     */
     interface InfoCallback {
         void onInfo(String code, Info info);
     }
 
-    private final ExecutorService pool = Executors.newSingleThreadExecutor();
+    /** Idle threads end after 30 s, so an activity rebuilt with a new instance leaves none behind. */
+    private final ThreadPoolExecutor pool = newPool();
     private final Handler main = new Handler(Looper.getMainLooper());
     private final Map<String, Info> cache = new HashMap<String, Info>();
+    /** Barcodes being looked up, with everyone waiting for them; main thread only, like cache. */
+    private final Map<String, List<InfoCallback>> pending = new HashMap<String, List<InfoCallback>>();
+    /** When the last request to any database started (System.nanoTime), for MIN_GAP_MS. */
+    private static final Object gapLock = new Object();
+    private static long lastStart;
+    private static boolean started;
+
+    private static ThreadPoolExecutor newPool() {
+        ThreadPoolExecutor ex = new ThreadPoolExecutor(PARALLEL, PARALLEL, 30, TimeUnit.SECONDS,
+                new LinkedBlockingQueue<Runnable>());
+        ex.allowCoreThreadTimeOut(true);
+        return ex;
+    }
 
     String cached(String code) {
         Info hit = cache.get(code);
@@ -104,6 +140,20 @@ class ProductLookup {
 
     Info cachedInfo(String code) {
         return cache.get(code);
+    }
+
+    /** True for the answer "none of the databases knows this barcode". */
+    static boolean isNotFound(Info info) {
+        return info != null && info.name == null && info.categories != null && info.categories.isEmpty()
+                && info.jevText == null;
+    }
+
+    /**
+     * A fresh not-found answer: empty lists, never null, so the checks that read them are safe.
+     * Its source is the last database asked; it is not FOOD, so no Open Food Facts rule reads it.
+     */
+    private static Info notFound() {
+        return new Info(null, new ArrayList<String>(), Source.PRODUCTS);
     }
 
     void lookup(final String code, final Callback callback) {
@@ -120,13 +170,22 @@ class ProductLookup {
             callback.onInfo(code, hit);
             return;
         }
+        List<InfoCallback> waiting = pending.get(code);
+        if (waiting != null) {             // already on its way: wait for that answer
+            waiting.add(callback);
+            return;
+        }
+        waiting = new ArrayList<InfoCallback>();
+        waiting.add(callback);
+        pending.put(code, waiting);
         pool.execute(new Runnable() {
             @Override public void run() {
                 final Info info = fetchAnywhere(code);
                 main.post(new Runnable() {
                     @Override public void run() {
                         if (info != null) cache.put(code, info);
-                        callback.onInfo(code, info);
+                        List<InfoCallback> all = pending.remove(code);
+                        if (all != null) for (InfoCallback c : all) c.onInfo(code, info);
                     }
                 });
             }
@@ -134,21 +193,49 @@ class ProductLookup {
     }
 
     private Info fetchAnywhere(String code) {
-        Info info = fetch(Source.FOOD, code);
-        if (info == NOT_FOUND) info = fetch(Source.BEAUTY, code);
-        if (info == NOT_FOUND) info = fetch(Source.PRODUCTS, code);
-        return info == NOT_FOUND ? null : info;
+        long deadline = System.nanoTime() + TimeUnit.MILLISECONDS.toNanos(TOTAL_DEADLINE_MS);
+        Info info = fetch(Source.FOOD, code, deadline);
+        if (info == NOT_FOUND) info = fetch(Source.BEAUTY, code, deadline);
+        if (info == NOT_FOUND) info = fetch(Source.PRODUCTS, code, deadline);
+        return info == NOT_FOUND ? notFound() : info;
+    }
+
+    /** Milliseconds left until `deadline` (System.nanoTime), at least 0. */
+    private static long left(long deadline) {
+        return Math.max(0, TimeUnit.NANOSECONDS.toMillis(deadline - System.nanoTime()));
+    }
+
+    /** Waits until the databases may be asked again; false when that would pass the deadline. */
+    private static boolean waitTurn(long deadline) throws InterruptedException {
+        long wait;
+        synchronized (gapLock) {
+            long now = System.nanoTime();
+            long at = started ? Math.max(now, lastStart + TimeUnit.MILLISECONDS.toNanos(MIN_GAP_MS)) : now;
+            if (at - deadline >= 0) return false;
+            lastStart = at;
+            started = true;
+            wait = at - now;
+        }
+        if (wait > 0) TimeUnit.NANOSECONDS.sleep(wait);
+        return true;
     }
 
     /** The product, NOT_FOUND when the database says it has none, or null when nothing came. */
-    private Info fetch(Source source, String code) {
+    private Info fetch(Source source, String code, long deadline) {
         HttpURLConnection conn = null;
         try {
-            URL url = new URL("https://" + source.host + "/api/v2/product/" + code
+            if (!waitTurn(deadline)) return null;
+            String base = testBase != null ? testBase : "https://" + source.host;
+            URL url = new URL(base + "/api/v2/product/" + code
                     + ".json?fields=product_name,brands,quantity,categories_tags,packagings,packaging_tags,labels_tags");
+            long left = left(deadline);
+            if (left <= 0) return null;
             conn = (HttpURLConnection) url.openConnection();
-            conn.setConnectTimeout(CONNECT_TIMEOUT_MS);
-            conn.setReadTimeout(READ_TIMEOUT_MS);
+            // Connect and the first read share what is left, so the deadline holds for both.
+            int c = (int) Math.max(1, Math.min(CONNECT_TIMEOUT_MS, left / 2));
+            int r = (int) Math.max(1, Math.min(READ_TIMEOUT_MS, left - c));
+            conn.setConnectTimeout(c);
+            conn.setReadTimeout(r);
             conn.setRequestProperty("User-Agent", "PfandCounter/1.0 (Android; +https://github.com/passport0819/pfand-counter)");
             int status = conn.getResponseCode();
             if (status == 404) return NOT_FOUND;
@@ -157,7 +244,13 @@ class ProductLookup {
             ByteArrayOutputStream buf = new ByteArrayOutputStream();
             byte[] chunk = new byte[4096];
             int n;
-            while ((n = in.read(chunk)) > 0 && buf.size() < 256 * 1024) buf.write(chunk, 0, n);
+            while ((n = in.read(chunk)) > 0 && buf.size() < 256 * 1024) {
+                buf.write(chunk, 0, n);
+                if (left(deadline) <= 0) {          // a trickling answer stops at the deadline
+                    in.close();
+                    return null;
+                }
+            }
             in.close();
             JSONObject root = new JSONObject(new String(buf.toByteArray(), StandardCharsets.UTF_8));
             if (root.optInt("status") != 1) return NOT_FOUND;

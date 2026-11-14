@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Dark design: the colours the app had before it learned a light one. -->
+<!-- Dark design. -->
 <resources>
-    <color name="bg">#FF101314</color>
-    <color name="surface">#FF1B2022</color>
-    <color name="surface_high">#FF262D30</color>
-    <color name="accent">#FF4CD07A</color>
-    <color name="accent_dim">#FF2E7D4F</color>
-    <color name="text">#FFF2F5F4</color>
-    <color name="text_dim">#FF9AA5A2</color>
+    <!-- Material 3: the app's text and accent are Android's own colour roles, taken from the
+         wallpaper (Android 14 and later always has them). Red, warning, the camera labels and the icon stay fixed.
+         Background and surfaces come from the theme (res/color, attrs.xml). -->
+    <color name="accent">@android:color/system_primary_dark</color>
+    <color name="on_accent">@android:color/system_on_primary_dark</color>
+    <color name="accent_dim">@android:color/system_primary_container_dark</color>
+    <color name="on_accent_dim">@android:color/system_on_primary_container_dark</color>
+    <color name="text">@android:color/system_on_surface_dark</color>
+    <color name="text_dim">@android:color/system_on_surface_variant_dark</color>
     <color name="warn">#FFE8B33C</color>
     <color name="bad">#FFE0645A</color>
     <color name="bad_dim">#FF9E3A33</color>

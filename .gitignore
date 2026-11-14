@@ -6,10 +6,13 @@ keys/
 *.keystore
 *.jks
 
-# Fetched by build.sh from Maven Central, pinned by SHA-256
-libs/*.jar
+# Gradle: its output, its cache and the SDK path of the computer that builds
+build-gradle/
+.gradle/
+.kotlin/
+local.properties
 
-# Local build identity (see build.sh)
+# Local build identity (see build.gradle.kts)
 app-id.local
 
 # Python

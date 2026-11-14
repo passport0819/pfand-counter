@@ -5,6 +5,7 @@
     <string name="theme_system">Как в системе</string>
     <string name="theme_light">Светлое</string>
     <string name="theme_dark">Тёмное</string>
+    <string name="theme_black">Чёрное</string>
     <string name="settings_language">Язык</string>
     <string name="lang_system">Как в системе</string>
     <string name="machine_translated">Этот перевод выполнен машиной и может содержать ошибки.</string>
@@ -14,7 +15,14 @@
     <string name="items_none">Пока нет бутылок</string>
     <string name="aim_hint">Наведите камеру на штрихкод</string>
     <string name="camera_needed">Для сканирования штрихкодов нужен доступ к камере. Бутылки можно добавлять и вручную.</string>
+    <string name="camera_tap">Нажмите здесь, чтобы разрешить доступ к камере.</string>
     <string name="camera_failed">Камера недоступна — считайте вручную кнопками ниже.</string>
+    <string name="camera_none">Камера на этом телефоне не найдена.</string>
+    <string name="camera_busy">Камера занята другим приложением.</string>
+    <string name="camera_disabled">Камера на этом телефоне отключена.</string>
+    <string name="camera_permission">Нет разрешения на доступ к камере.</string>
+    <string name="camera_preview">Не удалось запустить предпросмотр камеры.</string>
+    <string name="camera_error">Камера сообщила об ошибке.</string>
     <string name="torch">Фонарик</string>
 
     <string name="btn_8">+0,08€</string>
@@ -166,6 +174,7 @@
     <string name="jev_why_no_key">Jev выключен: ключа ещё нет. Добавьте его в разделе Настройки › Подсказки Jev.</string>
     <string name="jev_why_grey">Кнопка серая, потому что по данным товар не похож на напиток. Спросить всё равно можно.</string>
     <string name="jev_no_data">Jev не может это оценить: нет данных о товаре.</string>
+    <string name="jev_lookup_failed">Данные о товаре не пришли. Попробуйте снова.</string>
     <string name="jev_key_rejected">Jev: ключ отклонён (%1$s)</string>
     <string name="jev_no_credit">Jev: баланс исчерпан</string>
     <string name="jev_busy">Jev занят</string>
@@ -317,7 +326,7 @@
     <string name="report_translation">Сообщить об ошибке перевода</string>
     <string name="translations_welcome">Переводы сделаны машинным способом. Улучшения приветствуются — на GitHub или по электронной почте pfand-counter@tuta.com.</string>
     <string name="licenses_open">Лицензии</string>
-    <string name="lic_intro">Pfand Counter — свободная программа под лицензией GNU General Public License версии 3 (GPL-3.0).\n\nЧтение штрихкодов: ZXing, Apache License 2.0.\nЗначок шестерёнки в настройках: Material Design Icons 3.0.1, Apache License 2.0.\n\nНазвания товаров и данные об упаковке: © участники Open Food Facts, Open Beauty Facts и Open Products Facts, по лицензии Open Database License (ODbL) 1.0; отдельные записи — по лицензии Database Contents License (DbCL) 1.0. Встроенный список залогов за тару создан на основе Open Food Facts и целиком доступен по лицензии ODbL 1.0: https://opendatacommons.org/licenses/odbl/1-0/</string>
+    <string name="lic_intro">Pfand Counter — свободная программа под лицензией GNU General Public License версии 3 (GPL-3.0).\n\nЧтение штрихкодов: ZXing, Apache License 2.0.\nИнтерфейс: AndroidX AppCompat, Material Components for Android, Apache License 2.0.\nЗначок шестерёнки в настройках: Material Design Icons 3.0.1, Apache License 2.0.\n\nНазвания товаров и данные об упаковке: © участники Open Food Facts, Open Beauty Facts и Open Products Facts, по лицензии Open Database License (ODbL) 1.0; отдельные записи — по лицензии Database Contents License (DbCL) 1.0. Встроенный список залогов за тару создан на основе Open Food Facts и целиком доступен по лицензии ODbL 1.0: https://opendatacommons.org/licenses/odbl/1-0/</string>
     <string name="lic_originals">Ниже приведены полные тексты Apache License 2.0 и GPL-3.0 на языке оригинала (английском).</string>
     <string name="no_browser">Не найден браузер для открытия страницы.</string>
     <string name="map_open">Супермаркет рядом</string>

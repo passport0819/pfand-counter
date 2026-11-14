@@ -5,6 +5,7 @@
     <string name="theme_system">Según el sistema</string>
     <string name="theme_light">Claro</string>
     <string name="theme_dark">Oscuro</string>
+    <string name="theme_black">Negro</string>
     <string name="settings_language">Idioma</string>
     <string name="lang_system">Según el sistema</string>
     <string name="machine_translated">Esta traducción se hizo de forma automática y puede contener errores.</string>
@@ -14,7 +15,14 @@
     <string name="items_none">Aún no hay botellas</string>
     <string name="aim_hint">Apunta la cámara a un código de barras</string>
     <string name="camera_needed">Se necesita permiso de cámara para escanear códigos de barras. Aun así puedes añadir botellas a mano.</string>
+    <string name="camera_tap">Toca aquí para permitir la cámara.</string>
     <string name="camera_failed">Cámara no disponible — usa los botones de abajo para contar a mano.</string>
+    <string name="camera_none">No se encontró ninguna cámara en este teléfono.</string>
+    <string name="camera_busy">Otra app está usando la cámara.</string>
+    <string name="camera_disabled">La cámara está desactivada en este teléfono.</string>
+    <string name="camera_permission">Falta el permiso de cámara.</string>
+    <string name="camera_preview">No se pudo iniciar la vista de la cámara.</string>
+    <string name="camera_error">La cámara informó de un error.</string>
     <string name="torch">Luz</string>
 
     <string name="btn_8">+0,08€</string>
@@ -166,6 +174,7 @@
     <string name="jev_why_no_key">Jev está desactivado: aún no hay clave. Añade una en Ajustes › Sugerencias de Jev.</string>
     <string name="jev_why_grey">En gris porque los datos del producto no parecen de una bebida. Aun así puedes preguntar.</string>
     <string name="jev_no_data">Jev no puede valorar este: no hay datos del producto.</string>
+    <string name="jev_lookup_failed">No llegaron datos del producto. Inténtalo de nuevo.</string>
     <string name="jev_key_rejected">Jev: clave rechazada (%1$s)</string>
     <string name="jev_no_credit">Jev: sin saldo</string>
     <string name="jev_busy">Jev está ocupado</string>
@@ -315,7 +324,7 @@
     <string name="report_translation">Reportar error de traducción</string>
     <string name="translations_welcome">Las traducciones se han hecho de forma automática. Las mejoras son bienvenidas, en GitHub o por correo a pfand-counter@tuta.com.</string>
     <string name="licenses_open">Licencias</string>
-    <string name="lic_intro">Pfand Counter es software libre bajo la GNU General Public License, versión 3 (GPL-3.0).\n\nLectura de códigos de barras: ZXing, Apache License 2.0.\nIcono de engranaje de los ajustes: Material Design Icons 3.0.1, Apache License 2.0.\n\nNombres de productos y datos de envase: © colaboradores de Open Food Facts, Open Beauty Facts y Open Products Facts, bajo la Open Database License (ODbL) 1.0; los contenidos individuales, bajo la Database Contents License (DbCL) 1.0. La lista de importes de depósito que trae la aplicación se deriva de Open Food Facts y está disponible en su conjunto bajo la ODbL 1.0: https://opendatacommons.org/licenses/odbl/1-0/</string>
+    <string name="lic_intro">Pfand Counter es software libre bajo la GNU General Public License, versión 3 (GPL-3.0).\n\nLectura de códigos de barras: ZXing, Apache License 2.0.\nInterfaz: AndroidX AppCompat, Material Components for Android, Apache License 2.0.\nIcono de engranaje de los ajustes: Material Design Icons 3.0.1, Apache License 2.0.\n\nNombres de productos y datos de envase: © colaboradores de Open Food Facts, Open Beauty Facts y Open Products Facts, bajo la Open Database License (ODbL) 1.0; los contenidos individuales, bajo la Database Contents License (DbCL) 1.0. La lista de importes de depósito que trae la aplicación se deriva de Open Food Facts y está disponible en su conjunto bajo la ODbL 1.0: https://opendatacommons.org/licenses/odbl/1-0/</string>
     <string name="lic_originals">Abajo están los textos completos de la Apache License 2.0 y de la GPL-3.0, en el original en inglés.</string>
     <string name="no_browser">No se encontró ningún navegador para abrir la página.</string>
     <string name="map_open">Supermercado cercano</string>

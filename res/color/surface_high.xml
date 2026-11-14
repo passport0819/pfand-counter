@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Taken from the theme (attrs.xml): light, dark and black each set their own. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="?attr/pfandSurfaceHigh" />
+</selector>

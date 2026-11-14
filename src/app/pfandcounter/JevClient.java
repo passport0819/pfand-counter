@@ -11,13 +11,23 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
+import java.net.NoRouteToHostException;
+import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
+import javax.net.ssl.SSLHandshakeException;
 
 /**
  * Asks Jev (jev-1.13 by TypeSafe) which deposit an unknown drink carries, either through
@@ -62,6 +72,15 @@ class JevClient {
     private static final int CONNECT_TIMEOUT_MS = 10000;
     // Measured 22.09.2026: the endpoint once took 50 s for a mere 401. Slow, not broken.
     private static final int READ_TIMEOUT_MS = 60000;
+    /**
+     * The drink question only refines the deposit answer, which is already there by then: the
+     * deposit answer waits for it at most DRINK_WAIT_MS (a Jev answer took 0.7 s when measured).
+     * A drink answer that comes later is not shown, but it is still read to the end in the
+     * background (not cancelled) so that its cost counts.
+     */
+    private static final int DRINK_CONNECT_TIMEOUT_MS = 4000;
+    private static final int DRINK_READ_TIMEOUT_MS = 30000;
+    private static final int DRINK_WAIT_MS = 5000;
 
     static final String STATE_HEAD =
             "German bottle deposit (Pfand). Each item below is one drink or dairy product sold in Germany, with "
@@ -136,6 +155,11 @@ class JevClient {
         }
     }
 
+    /**
+     * Why there is no suggestion. NO_KEY and NO_DATA come before anything is sent (NO_DATA: the
+     * product text is empty, asking again changes nothing); every other one means the request
+     * itself went wrong and asking again may help.
+     */
     enum Problem { NO_KEY, NO_DATA, KEY_REJECTED, NO_CREDIT, BUSY, TIMEOUT, OFFLINE, FAILED }
 
     /** Exactly one of the two is called, on the main thread. */
@@ -148,7 +172,11 @@ class JevClient {
     private final File providerFile;
     private final File spentFile;
     private final ExecutorService pool = Executors.newSingleThreadExecutor();
+    /** Drink questions: one that hangs must not hold up the next ask. */
+    private final ExecutorService side = Executors.newCachedThreadPool();
     private final Handler main = new Handler(Looper.getMainLooper());
+    /** Test hook (tools/JevClientTest.java): every request goes here instead. Null in the app. */
+    static String testUrl;
 
     JevClient(Context ctx) {
         dir = ctx.getNoBackupFilesDir();
@@ -218,9 +246,13 @@ class JevClient {
         }
     }
 
-    private synchronized void addSpent(double usd) {
-        double[] was = spent();
-        writeFile(spentFile, String.format(Locale.ROOT, "%d %.8f", (long) was[0] + 1, was[1] + usd));
+    /** Counts a paid answer: questions is 1 for the deposit answer of an ask, 0 for its drink answer. */
+    private void addSpent(int questions, double usd) {
+        // Class-wide: a recreated screen makes a new client while the old one's drink answer may still count.
+        synchronized (JevClient.class) {
+            double[] was = spent();
+            writeFile(spentFile, String.format(Locale.ROOT, "%d %.8f", (long) was[0] + questions, was[1] + usd));
+        }
     }
 
     void ask(final String text, final Callback callback) {
@@ -242,25 +274,42 @@ class JevClient {
                 String detail = null;
                 Log.i(Store.TAG, "Jev asked via " + provider);
                 try {
-                    s = parse(post(provider, key.trim(), requestBody(text, provider.model)));
+                    // An answer that came back is paid, even when it turns out unusable below.
+                    String answer = post(provider, key.trim(), requestBody(text, provider.model),
+                            CONNECT_TIMEOUT_MS, READ_TIMEOUT_MS);
+                    double cost = costOf(answer);
+                    addSpent(1, cost);
+                    s = parse(answer);
+                    Future<JSONObject> drinkAsked = side.submit(new Callable<JSONObject>() {
+                        @Override public JSONObject call() throws Exception {
+                            String r = post(provider, key.trim(), drinkRequestBody(text, provider.model),
+                                    DRINK_CONNECT_TIMEOUT_MS, DRINK_READ_TIMEOUT_MS);
+                            addSpent(0, costOf(r));
+                            return drinkAnswer(r);
+                        }
+                    });
                     try {
-                        JSONObject drink = drinkAnswer(post(provider, key.trim(), drinkRequestBody(text, provider.model)));
+                        JSONObject drink = drinkAsked.get(DRINK_WAIT_MS, TimeUnit.MILLISECONDS);
                         JSONObject p = drink.optJSONObject("probabilities");
                         if (p != null) s.drinkProbability = p.optDouble("drink", -1);
                         s.drinkConfidence = drink.optDouble("confidence", -1);
                         s.costUsd += drink.optDouble("cost", 0);
+                    } catch (TimeoutException e) {
+                        // Not cancelled: a late answer is paid and still counted when it arrives.
+                        Log.i(Store.TAG, "Jev drink question too slow, answer given without it");
                     } catch (Exception e) {
-                        Log.i(Store.TAG, "Jev drink question failed: " + e.getClass().getSimpleName());
+                        Throwable why = e.getCause() != null ? e.getCause() : e;
+                        Log.i(Store.TAG, "Jev drink question failed: " + why.getClass().getSimpleName());
                     }
                     s.millis = System.currentTimeMillis() - began;
-                    addSpent(s.costUsd);
                 } catch (HttpProblem e) {
                     problem = e.problem;
                     detail = e.getMessage();
+                } catch (ConnectException | NoRouteToHostException | UnknownHostException
+                         | SSLHandshakeException e) {
+                    problem = Problem.OFFLINE;
                 } catch (SocketTimeoutException e) {
                     problem = Problem.TIMEOUT;
-                } catch (java.net.UnknownHostException e) {
-                    problem = Problem.OFFLINE;
                 } catch (Exception e) {
                     problem = Problem.FAILED;
                     detail = e.getClass().getSimpleName();
@@ -355,6 +404,15 @@ class JevClient {
         return s;
     }
 
+    /** The cost of a raw answer; 0 when it is no JSON at all. */
+    static double costOf(String response) {
+        try {
+            return costOf(new JSONObject(response));
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
     /** OpenRouter's "usage.cost", else TypeSafe's billable "usage.input_tokens" at the list price. */
     static double costOf(JSONObject root) {
         JSONObject usage = root.optJSONObject("usage");
@@ -363,17 +421,24 @@ class JevClient {
         return usage.optLong("input_tokens", 0) * TYPESAFE_USD_PER_INPUT_TOKEN;
     }
 
-    private static String post(Provider provider, String key, String body) throws Exception {
+    private static String post(Provider provider, String key, String body, int connectMs, int readMs)
+            throws Exception {
         HttpURLConnection conn = null;
         try {
-            conn = (HttpURLConnection) new URL(provider.url).openConnection();
-            conn.setConnectTimeout(CONNECT_TIMEOUT_MS);
-            conn.setReadTimeout(READ_TIMEOUT_MS);
+            conn = (HttpURLConnection) new URL(testUrl != null ? testUrl : provider.url).openConnection();
+            conn.setConnectTimeout(connectMs);
+            conn.setReadTimeout(readMs);
             conn.setRequestMethod("POST");
             conn.setDoOutput(true);
             conn.setRequestProperty("Authorization", "Bearer " + key);
             conn.setRequestProperty("Content-Type", "application/json");
             if (provider == Provider.OPENROUTER) conn.setRequestProperty("X-Title", "Pfand Counter deposit list");
+            try {
+                conn.connect();
+            } catch (SocketTimeoutException | SocketException | UnknownHostException | javax.net.ssl.SSLException e) {
+                // No connection at all, or a Wi-Fi login page in the way: the phone is not online.
+                throw new HttpProblem(Problem.OFFLINE, null);
+            }
             OutputStream out = conn.getOutputStream();
             out.write(body.getBytes(StandardCharsets.UTF_8));
             out.close();

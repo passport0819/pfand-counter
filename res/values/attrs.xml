@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The app's background and its two surface steps come from the theme, so the black design
+         (ThemeOverlay.Pfand.Black) can swap them without touching the code that asks for them. -->
+    <attr name="pfandBg" format="color" />
+    <attr name="pfandSurface" format="color" />
+    <attr name="pfandSurfaceHigh" format="color" />
+</resources>

@@ -5,6 +5,7 @@
     <string name="theme_system">Selon le système</string>
     <string name="theme_light">Clair</string>
     <string name="theme_dark">Sombre</string>
+    <string name="theme_black">Noir</string>
     <string name="settings_language">Langue</string>
     <string name="lang_system">Selon le système</string>
     <string name="machine_translated">Cette traduction a été faite automatiquement et peut contenir des erreurs.</string>
@@ -14,7 +15,14 @@
     <string name="items_none">Pas encore de bouteilles</string>
     <string name="aim_hint">Pointez la caméra vers un code-barres</string>
     <string name="camera_needed">L\'accès à la caméra est nécessaire pour scanner les codes-barres. Vous pouvez quand même ajouter des bouteilles à la main.</string>
+    <string name="camera_tap">Touchez ici pour autoriser la caméra.</string>
     <string name="camera_failed">Caméra indisponible — utilisez les boutons ci-dessous pour compter à la main.</string>
+    <string name="camera_none">Aucune caméra trouvée sur ce téléphone.</string>
+    <string name="camera_busy">La caméra est utilisée par une autre application.</string>
+    <string name="camera_disabled">La caméra est désactivée sur ce téléphone.</string>
+    <string name="camera_permission">L\'accès à la caméra n\'est pas autorisé.</string>
+    <string name="camera_preview">L\'aperçu de la caméra n\'a pas pu démarrer.</string>
+    <string name="camera_error">La caméra a signalé une erreur.</string>
     <string name="torch">Lampe</string>
 
     <string name="btn_8">+0,08€</string>
@@ -166,6 +174,7 @@
     <string name="jev_why_no_key">Jev est désactivé : pas encore de clé. Ajoutez-en une dans Paramètres › Suggestions de Jev.</string>
     <string name="jev_why_grey">En gris, car les données du produit ne font pas penser à une boisson. Vous pouvez quand même demander.</string>
     <string name="jev_no_data">Jev ne peut pas juger cet article : aucune donnée produit.</string>
+    <string name="jev_lookup_failed">Aucune donnée produit reçue. Réessayez.</string>
     <string name="jev_key_rejected">Jev : clé refusée (%1$s)</string>
     <string name="jev_no_credit">Jev : plus de crédit</string>
     <string name="jev_busy">Jev est occupé</string>
@@ -315,7 +324,7 @@
     <string name="report_translation">Erreur de traduction ?</string>
     <string name="translations_welcome">Les traductions ont été faites par machine. Les améliorations sont les bienvenues, sur GitHub ou par e-mail à pfand-counter@tuta.com.</string>
     <string name="licenses_open">Licences</string>
-    <string name="lic_intro">Pfand Counter est un logiciel libre sous licence GNU General Public License, version 3 (GPL-3.0).\n\nLecture des codes-barres : ZXing, Apache License 2.0.\nIcône d\'engrenage des paramètres : Material Design Icons 3.0.1, Apache License 2.0.\n\nNoms de produits et données d\'emballage : © les contributeurs d\'Open Food Facts, Open Beauty Facts et Open Products Facts, sous Open Database License (ODbL) 1.0 ; contenus individuels sous Database Contents License (DbCL) 1.0. La liste des montants de consigne fournie avec l\'application est dérivée d\'Open Food Facts et est disponible dans son ensemble sous ODbL 1.0 : https://opendatacommons.org/licenses/odbl/1-0/</string>
+    <string name="lic_intro">Pfand Counter est un logiciel libre sous licence GNU General Public License, version 3 (GPL-3.0).\n\nLecture des codes-barres : ZXing, Apache License 2.0.\nInterface : AndroidX AppCompat, Material Components for Android, Apache License 2.0.\nIcône d\'engrenage des paramètres : Material Design Icons 3.0.1, Apache License 2.0.\n\nNoms de produits et données d\'emballage : © les contributeurs d\'Open Food Facts, Open Beauty Facts et Open Products Facts, sous Open Database License (ODbL) 1.0 ; contenus individuels sous Database Contents License (DbCL) 1.0. La liste des montants de consigne fournie avec l\'application est dérivée d\'Open Food Facts et est disponible dans son ensemble sous ODbL 1.0 : https://opendatacommons.org/licenses/odbl/1-0/</string>
     <string name="lic_originals">Ci-dessous, les textes complets de l\'Apache License 2.0 et de la GPL-3.0, dans l\'original anglais.</string>
     <string name="no_browser">Aucun navigateur trouvé pour ouvrir la page.</string>
     <string name="map_open">Supermarché à proximité</string>

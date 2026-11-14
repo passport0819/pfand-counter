@@ -19,7 +19,7 @@ import java.util.Locale;
  * was cut off, runs past its box, or (on a button) breaks into a second line. Works with the phone
  * locked, since nothing is drawn.
  *
- * adb shell am start -n …/app.pfandcounter.MainActivity --ez layout_check true
+ * adb shell am start -n …/app.pfandcounter.TestEntry --ez layout_check true
  * adb logcat -s PfandLayout
  */
 class LayoutCheck {
@@ -49,8 +49,8 @@ class LayoutCheck {
                 problems += measure(stats(ctx), inDialog, where + " stats");
                 // Inside the page's side padding, as in Settings and About.
                 problems += measure(sheetButtons(ctx), inDialog - (int) (40 * density), where + " buttons");
-                // Settings: the design choices in one row, inside the page's side padding.
-                problems += measure(MainActivity.themeRow(ctx, 0), inDialog - (int) (40 * density), where + " design");
+                // Settings: the four design choices in one row, inside the page's side padding.
+                problems += measure(MainActivity.themeRow(ctx, 0, null), inDialog - (int) (40 * density), where + " design");
                 // Every question and every answer of "Not sure?".
                 int n = 0;
                 for (DepositGuide.Step step : DepositGuide.steps()) {
@@ -102,10 +102,7 @@ class LayoutCheck {
                 {R.drawable.ic_h_lock, R.string.privacy_open}, {R.drawable.ic_b_book, R.string.report_translation},
         };
         for (int[] b : buttons) {
-            Button button = new Button(ctx);
-            button.setAllCaps(false);
-            button.setBackgroundResource(R.drawable.btn_accent);
-            MainActivity.withIcon(ctx, button, b[0], ctx.getString(b[1]));
+            Button button = MainActivity.sheetButton(ctx, b[0], ctx.getString(b[1]));
             wrap.addView(button);
         }
         // Settings shows six of them two to a row.
@@ -115,13 +112,8 @@ class LayoutCheck {
                 {R.drawable.ic_b_ai, R.string.jev_settings}, {R.drawable.ic_b_info, R.string.settings_about},
         };
         for (int i = 0; i < tiles.length; i += 2) {
-            Button a = new Button(ctx), b = new Button(ctx);
-            for (int k = 0; k < 2; k++) {
-                Button t = k == 0 ? a : b;
-                t.setAllCaps(false);
-                t.setBackgroundResource(R.drawable.btn_accent);
-                MainActivity.withIcon(ctx, t, tiles[i + k][0], ctx.getString(tiles[i + k][1]));
-            }
+            Button a = MainActivity.sheetButton(ctx, tiles[i][0], ctx.getString(tiles[i][1]));
+            Button b = MainActivity.sheetButton(ctx, tiles[i + 1][0], ctx.getString(tiles[i + 1][1]));
             wrap.addView(MainActivity.pair(ctx, a, b));
         }
         return wrap;

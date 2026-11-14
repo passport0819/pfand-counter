@@ -5,6 +5,7 @@
     <string name="theme_system">Jak w systemie</string>
     <string name="theme_light">Jasny</string>
     <string name="theme_dark">Ciemny</string>
+    <string name="theme_black">Czarny</string>
     <string name="settings_language">Język</string>
     <string name="lang_system">Jak w systemie</string>
     <string name="machine_translated">To tłumaczenie zostało wykonane maszynowo i może zawierać błędy.</string>
@@ -14,7 +15,14 @@
     <string name="items_none">Jeszcze brak butelek</string>
     <string name="aim_hint">Skieruj aparat na kod kreskowy</string>
     <string name="camera_needed">Do skanowania kodów potrzebny jest dostęp do aparatu. Butelki możesz nadal dodawać ręcznie.</string>
+    <string name="camera_tap">Stuknij tutaj, aby zezwolić na dostęp do aparatu.</string>
     <string name="camera_failed">Aparat niedostępny — licz ręcznie przyciskami poniżej.</string>
+    <string name="camera_none">Nie znaleziono aparatu w tym telefonie.</string>
+    <string name="camera_busy">Aparat jest używany przez inną aplikację.</string>
+    <string name="camera_disabled">Aparat jest wyłączony w tym telefonie.</string>
+    <string name="camera_permission">Brak uprawnienia do aparatu.</string>
+    <string name="camera_preview">Nie udało się uruchomić podglądu aparatu.</string>
+    <string name="camera_error">Aparat zgłosił błąd.</string>
     <string name="torch">Latarka</string>
 
     <string name="btn_8">+0,08€</string>
@@ -166,6 +174,7 @@
     <string name="jev_why_no_key">Jev jest wyłączony: brak klucza. Dodaj go w Ustawienia › Propozycje Jev.</string>
     <string name="jev_why_grey">Szary, bo dane produktu nie wskazują na napój. Nadal możesz zapytać.</string>
     <string name="jev_no_data">Jev nie może tego ocenić: brak danych o produkcie.</string>
+    <string name="jev_lookup_failed">Nie otrzymano danych o produkcie. Spróbuj ponownie.</string>
     <string name="jev_key_rejected">Jev: klucz odrzucony (%1$s)</string>
     <string name="jev_no_credit">Jev: brak środków</string>
     <string name="jev_busy">Jev jest zajęty</string>
@@ -317,7 +326,7 @@
     <string name="report_translation">Zgłoś błąd tłumaczenia</string>
     <string name="translations_welcome">Tłumaczenia wykonano maszynowo. Poprawki są mile widziane — w serwisie GitHub lub e-mailem na pfand-counter@tuta.com.</string>
     <string name="licenses_open">Licencje</string>
-    <string name="lic_intro">Pfand Counter to wolne oprogramowanie na licencji GNU General Public License w wersji 3 (GPL-3.0).\n\nOdczyt kodów kreskowych: ZXing, Apache License 2.0.\nIkona koła zębatego w ustawieniach: Material Design Icons 3.0.1, Apache License 2.0.\n\nNazwy produktów i dane o opakowaniach: © współtwórcy Open Food Facts, Open Beauty Facts i Open Products Facts, na licencji Open Database License (ODbL) 1.0; poszczególne treści na licencji Database Contents License (DbCL) 1.0. Dołączona lista kaucji pochodzi z Open Food Facts i jako całość jest dostępna na licencji ODbL 1.0: https://opendatacommons.org/licenses/odbl/1-0/</string>
+    <string name="lic_intro">Pfand Counter to wolne oprogramowanie na licencji GNU General Public License w wersji 3 (GPL-3.0).\n\nOdczyt kodów kreskowych: ZXing, Apache License 2.0.\nInterfejs: AndroidX AppCompat, Material Components for Android, Apache License 2.0.\nIkona koła zębatego w ustawieniach: Material Design Icons 3.0.1, Apache License 2.0.\n\nNazwy produktów i dane o opakowaniach: © współtwórcy Open Food Facts, Open Beauty Facts i Open Products Facts, na licencji Open Database License (ODbL) 1.0; poszczególne treści na licencji Database Contents License (DbCL) 1.0. Dołączona lista kaucji pochodzi z Open Food Facts i jako całość jest dostępna na licencji ODbL 1.0: https://opendatacommons.org/licenses/odbl/1-0/</string>
     <string name="lic_originals">Poniżej pełne teksty Apache License 2.0 i GPL-3.0 w angielskim oryginale.</string>
     <string name="no_browser">Nie znaleziono przeglądarki, która może otworzyć stronę.</string>
     <string name="map_open">Supermarket w pobliżu</string>

@@ -27,15 +27,23 @@
             android:textSize="13sp" />
 
         <!-- Shown once no name is found: the user's own name instead of "Unknown product". -->
-        <EditText
-            android:id="@+id/dlg_name_edit"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dlg_name_box"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:hint="@string/name_hint"
-            android:importantForAutofill="no"
-            android:inputType="textCapSentences"
-            android:singleLine="true"
-            android:visibility="gone" />
+            android:visibility="gone">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dlg_name_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:importantForAutofill="no"
+                android:inputType="textCapSentences"
+                android:singleLine="true" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:id="@+id/dlg_guide"
@@ -63,13 +71,11 @@
 
         <Button
             android:id="@+id/dlg_similar_use"
+                style="@style/DialogButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:background="@drawable/btn_bg"
-            android:textColor="@color/text"
             android:textSize="15sp"
-            android:textAllCaps="false"
             android:text="@string/similar_use"
             android:visibility="gone" />
 
@@ -91,14 +97,15 @@
 
             <Button
                 android:id="@+id/dlg_help"
+                style="@style/DialogButton"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp"
+                android:letterSpacing="0"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="6dp"
-                android:background="@drawable/btn_accent"
-                android:textColor="@color/text"
                 android:textSize="15sp"
-                android:textAllCaps="false"
                 android:text="@string/g_open"
                 android:maxLines="1"
                 android:autoSizeTextType="uniform"
@@ -107,13 +114,14 @@
 
             <Button
                 android:id="@+id/dlg_ask_jev"
+                style="@style/DialogButton"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp"
+                android:letterSpacing="0"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:background="@drawable/btn_accent"
-                android:textColor="@color/text"
                 android:textSize="15sp"
-                android:textAllCaps="false"
                 android:text="@string/jev_ask"
                 android:maxLines="1"
                 android:autoSizeTextType="uniform"
@@ -173,61 +181,38 @@
 
         <Button
             android:id="@+id/dlg_8"
+            style="@style/ChoiceButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:background="@drawable/btn_bg"
-            android:textColor="@color/text"
-            android:textSize="15sp"
-            android:textAllCaps="false"
-            android:gravity="start|center_vertical"
             android:text="@string/d8" />
 
         <Button
             android:id="@+id/dlg_15"
+            style="@style/ChoiceButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:background="@drawable/btn_bg"
-            android:textColor="@color/text"
-            android:textSize="15sp"
-            android:textAllCaps="false"
-            android:gravity="start|center_vertical"
             android:text="@string/d15" />
 
         <Button
             android:id="@+id/dlg_25"
+            style="@style/ChoiceButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:background="@drawable/btn_bg"
-            android:textColor="@color/text"
-            android:textSize="15sp"
-            android:textAllCaps="false"
-            android:gravity="start|center_vertical"
             android:text="@string/d25" />
 
         <Button
             android:id="@+id/dlg_crate"
+            style="@style/ChoiceButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:background="@drawable/btn_bg"
-            android:textColor="@color/text"
-            android:textSize="15sp"
-            android:textAllCaps="false"
-            android:gravity="start|center_vertical"
             android:text="@string/d_crate_fmt" />
 
         <Button
             android:id="@+id/dlg_0"
+            style="@style/ChoiceButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_bg"
             android:textColor="@color/text_dim"
-            android:textSize="15sp"
-            android:textAllCaps="false"
-            android:gravity="start|center_vertical"
             android:text="@string/d0" />
 
         </LinearLayout>

@@ -5,6 +5,7 @@
     <string name="theme_system">Theo hệ thống</string>
     <string name="theme_light">Sáng</string>
     <string name="theme_dark">Tối</string>
+    <string name="theme_black">Đen</string>
     <string name="settings_language">Ngôn ngữ</string>
     <string name="lang_system">Theo hệ thống</string>
     <string name="machine_translated">Bản dịch này do máy thực hiện và có thể có lỗi.</string>
@@ -14,7 +15,14 @@
     <string name="items_none">Chưa có chai nào</string>
     <string name="aim_hint">Hướng camera vào mã vạch</string>
     <string name="camera_needed">Cần quyền dùng camera để quét mã vạch. Bạn vẫn có thể thêm chai bằng tay.</string>
+    <string name="camera_tap">Chạm vào đây để cho phép dùng camera.</string>
     <string name="camera_failed">Không dùng được camera — hãy dùng các nút bên dưới để đếm bằng tay.</string>
+    <string name="camera_none">Không tìm thấy camera trên điện thoại này.</string>
+    <string name="camera_busy">Camera đang được ứng dụng khác dùng.</string>
+    <string name="camera_disabled">Camera đã bị tắt trên điện thoại này.</string>
+    <string name="camera_permission">Chưa có quyền dùng camera.</string>
+    <string name="camera_preview">Không khởi động được hình xem trước của camera.</string>
+    <string name="camera_error">Camera đã báo lỗi.</string>
     <string name="torch">Đèn</string>
 
     <string name="btn_8">+0,08€</string>
@@ -166,6 +174,7 @@
     <string name="jev_why_no_key">Jev đang tắt: chưa có khóa. Thêm khóa trong Cài đặt › Gợi ý của Jev.</string>
     <string name="jev_why_grey">Màu xám vì dữ liệu sản phẩm không giống đồ uống. Bạn vẫn có thể hỏi.</string>
     <string name="jev_no_data">Jev không đánh giá được món này: không có dữ liệu sản phẩm.</string>
+    <string name="jev_lookup_failed">Không nhận được dữ liệu sản phẩm. Hãy thử lại.</string>
     <string name="jev_key_rejected">Jev: khóa bị từ chối (%1$s)</string>
     <string name="jev_no_credit">Jev: hết số dư</string>
     <string name="jev_busy">Jev đang bận</string>
@@ -310,7 +319,7 @@
     <string name="report_translation">Báo lỗi dịch</string>
     <string name="translations_welcome">Các bản dịch được làm bằng máy. Rất hoan nghênh góp ý cải thiện, trên GitHub hoặc qua e-mail tới pfand-counter@tuta.com.</string>
     <string name="licenses_open">Giấy phép</string>
-    <string name="lic_intro">Pfand Counter là phần mềm tự do theo giấy phép GNU General Public License phiên bản 3 (GPL-3.0).\n\nĐọc mã vạch: ZXing, Apache License 2.0.\nBiểu tượng bánh răng trong Cài đặt: Material Design Icons 3.0.1, Apache License 2.0.\n\nTên sản phẩm và dữ liệu bao bì: © những người đóng góp cho Open Food Facts, Open Beauty Facts và Open Products Facts, theo Open Database License (ODbL) 1.0; từng nội dung riêng lẻ theo Database Contents License (DbCL) 1.0. Danh sách tiền cọc chai lọ đi kèm ứng dụng được lấy từ Open Food Facts và toàn bộ được cung cấp theo ODbL 1.0: https://opendatacommons.org/licenses/odbl/1-0/</string>
+    <string name="lic_intro">Pfand Counter là phần mềm tự do theo giấy phép GNU General Public License phiên bản 3 (GPL-3.0).\n\nĐọc mã vạch: ZXing, Apache License 2.0.\nGiao diện: AndroidX AppCompat, Material Components for Android, Apache License 2.0.\nBiểu tượng bánh răng trong Cài đặt: Material Design Icons 3.0.1, Apache License 2.0.\n\nTên sản phẩm và dữ liệu bao bì: © những người đóng góp cho Open Food Facts, Open Beauty Facts và Open Products Facts, theo Open Database License (ODbL) 1.0; từng nội dung riêng lẻ theo Database Contents License (DbCL) 1.0. Danh sách tiền cọc chai lọ đi kèm ứng dụng được lấy từ Open Food Facts và toàn bộ được cung cấp theo ODbL 1.0: https://opendatacommons.org/licenses/odbl/1-0/</string>
     <string name="lic_originals">Bên dưới là toàn văn Apache License 2.0 và GPL-3.0 bằng tiếng Anh nguyên bản.</string>
     <string name="no_browser">Không tìm thấy trình duyệt để mở trang.</string>
     <string name="map_open">Siêu thị gần đây</string>

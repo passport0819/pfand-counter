@@ -35,18 +35,25 @@ in open product databases, and remembers every answer you give it.
 
 ## Building
 
-The app is built without Gradle, using the Android SDK command-line tools directly:
+The app is built with Gradle through the wrapper in the repository:
 
 ```bash
-./build.sh
+./gradlew assembleRelease
 ```
 
-Requirements: Android SDK with `platforms/android-36` and a recent `build-tools` (path in
-`ANDROID_SDK`, default `/opt/android-sdk`), JDK 17 or newer, and `curl`. The ZXing core library
-(`com.google.zxing:core:3.5.3`) is not part of the repository: the script downloads it from Maven
-Central into `libs/` and refuses to build if its SHA-256 differs from the one pinned in `build.sh`.
-The script also creates a local signing key in `keys/` on its first run. That folder is not part
-of the repository either.
+The APK lands in `build-gradle/outputs/apk/release/`. Requirements: JDK 17 or newer and the Android
+SDK with `platforms/android-36` and build-tools 37.0.0 (path in `ANDROID_HOME` or in a
+`local.properties` line `sdk.dir=…`). The wrapper downloads Gradle 9.8.0 and checks it against the
+SHA-256 in `gradle/wrapper/gradle-wrapper.properties`. Every library it fetches (ZXing from Maven
+Central; AndroidX AppCompat and Material Components from Google's Maven repository) is pinned by
+SHA-256 in `gradle/verification-metadata.xml`, and the build stops if one differs.
+
+Without a key the APK stays unsigned. A local build signs it with `keys/debug.keystore` when that
+file exists; the folder is not part of the repository.
+
+An optional local extra source may live in `src-local/` (see `src/app/pfandcounter/ExtraSource.java`).
+It is compiled in only on request, with `./build.sh --with-local` (Gradle: `-PwithLocal`); without
+the flag it is left out, even when the folder exists.
 
 The APK's application id is `io.github.passport0819.pfandcounter` (the Java package stays
 `app.pfandcounter`). To build updates for an installation made under a different id, put that id
@@ -74,7 +81,8 @@ analytics, no account. The full text is in [PRIVACY.md](PRIVACY.md) (English and
 ## Licenses
 
 - Code: GNU General Public License v3.0, see [LICENSE](LICENSE).
-- ZXing (downloaded by `build.sh`, bundled into the APK): Apache License 2.0.
+- ZXing, AndroidX AppCompat and Material Components for Android (fetched by Gradle, bundled into the
+  APK): Apache License 2.0.
 - Settings gear icon (`res/drawable/ic_b_settings.xml`): `ic_settings` from Material Design Icons 3.0.1,
   Apache License 2.0.
 - Product names and packaging data: © Open Food Facts, Open Beauty Facts and Open Products Facts
