@@ -5,9 +5,11 @@
 // Signed with keys/debug.keystore when it exists (a local key); without it the APK stays
 // unsigned, which is what F-Droid wants: it builds from source and signs with its own key.
 //
-//   ./gradlew assembleRelease -PwithLocal   also compiles src-local/ (optional local extra
-//                                           source, see src/app/pfandcounter/ExtraSource.java).
-// Without -PwithLocal src-local/ is never compiled in, even when the folder exists.
+//   ./gradlew assembleRelease -PwithLocal   also compiles src-local/ (optional local extras, see
+//                                           src/app/pfandcounter/ExtraSource.java and Addon.java)
+//                                           and merges res-local/ over res/ (their texts, pictures
+//                                           and layouts, and local wording of texts in res/).
+// Without -PwithLocal neither src-local/ nor res-local/ is ever built in, even when they exist.
 plugins {
     id("com.android.application") version "9.4.1"
 }
@@ -42,14 +44,17 @@ logger.lifecycle(
 android {
     namespace = "app.pfandcounter"
     compileSdk = 36
-    buildToolsVersion = "37.0.0"
+    // No fixed build tools: the plugin picks its own (F-Droid's build server has them). A computer
+    // with only another version installed passes it on the command line: -PbuildTools=37.0.0
+    providers.gradleProperty("buildTools").orNull?.let { buildToolsVersion = it }
 
     defaultConfig {
         applicationId = appId
         minSdk = 34
         targetSdk = 36
-        versionCode = 2
-        versionName = "1.1"
+        // The only place of the version: AndroidManifest.xml carries none.
+        versionCode = 3
+        versionName = "1.2"
     }
 
     compileOptions {
@@ -65,6 +70,14 @@ android {
             if (withLocal) java.directories.add("src-local")
             res.directories.clear()
             res.directories.add("res")
+        }
+        // res-local/ in the build types' own source sets: those rank above main, so a string or
+        // layout there replaces the one of the same name in res/ (in the same source set the two
+        // would clash as duplicates).
+        if (withLocal) {
+            for (type in listOf("debug", "release")) {
+                getByName(type) { res.directories.add("res-local") }
+            }
         }
     }
 

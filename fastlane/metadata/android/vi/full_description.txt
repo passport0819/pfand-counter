@@ -15,9 +15,6 @@ Mã vạch không chứa số tiền cọc. Vì vậy ứng dụng đi kèm mộ
 <li>11 ngôn ngữ: Deutsch, English, Türkçe, Русский, العربية, Polski, Українська, Français, Español, فارسی, Tiếng Việt (dịch máy, rất hoan nghênh góp ý cải thiện).</li>
 </ul>
 
-<b>Gợi ý AI tùy chọn ("Jev")</b>
-Tắt sau khi cài đặt. Nếu bạn bật và nhập khóa riêng cho OpenRouter hoặc TypeSafe (cả hai đều là dịch vụ trả phí, không phải phần mềm tự do), "Hỏi Jev" sẽ gửi mô tả sản phẩm, không bao giờ gửi mã vạch, và hiển thị mức cọc gợi ý cùng độ tin cậy đã đo. Bạn vẫn là người quyết định.
-
 <b>Quyền riêng tư</b>
 Không tài khoản, không quảng cáo, không theo dõi, không máy chủ riêng. Số liệu đếm của bạn nằm trên điện thoại. Chỉ mã vạch được quét mới được gửi đến Open Food Facts để tìm tên sản phẩm.
 

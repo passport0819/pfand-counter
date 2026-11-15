@@ -1,0 +1,5 @@
+• Yeni Material 3 görünümü: açık, koyu ve siyah.
+• Kamera: artık sürekli izin istemez, uygulamayı kaydırıp kapattığında serbest bırakılır ve başka bir uygulama kullanıyorsa yeniden çalışır.
+• Ürün bilinmediğinde daha anlaşılır mesajlar.
+• Aynı barkodun 12 ve 13 haneli biçimleri artık tek ürün sayılır.
+• İsteğe bağlı yapay zekâ önerisi kaldırıldı.

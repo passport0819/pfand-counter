@@ -9,8 +9,7 @@ import java.util.regex.Pattern;
 
 /**
  * Yogurt, cream or milk in a reusable deposit glass: 0.15 euro (a reusable jar many dairies
- * share). Such jars are not drinks, so neither the shipped
- * list nor Jev knew them — Jev even answered "no deposit" with high confidence (27.09.2026).
+ * share). Such jars are not drinks, so the shipped list did not know them (27.09.2026).
  *
  * A jar counts only when Open Food Facts says all three: a dairy category, glass, and a reusable
  * or deposit word. Glass alone is not enough (some yogurts come in single-use glass),

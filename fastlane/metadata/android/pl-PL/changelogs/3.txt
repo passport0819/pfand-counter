@@ -1,0 +1,5 @@
+• Nowy wygląd Material 3: jasny, ciemny i czarny.
+• Aparat: nie pyta już ciągle o zgodę, zostaje zwolniony po przesunięciu aplikacji i znów działa, gdy używała go inna aplikacja.
+• Jaśniejsze komunikaty, gdy produkt jest nieznany.
+• 12- i 13-cyfrowa forma tego samego kodu kreskowego liczy się teraz jako jeden produkt.
+• Usunięto opcjonalną propozycję AI.

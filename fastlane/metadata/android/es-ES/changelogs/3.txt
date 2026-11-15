@@ -1,0 +1,5 @@
+• Nuevo aspecto Material 3: claro, oscuro y negro.
+• Cámara: ya no pide permiso una y otra vez, se libera al cerrar la aplicación deslizándola y vuelve a funcionar si otra aplicación la estaba usando.
+• Mensajes más claros cuando un producto es desconocido.
+• Las formas de 12 y 13 dígitos de un mismo código de barras cuentan ahora como un solo producto.
+• Se ha eliminado la sugerencia opcional con IA.

@@ -1,0 +1,5 @@
+• Nouveau look Material 3 : clair, sombre et noir.
+• Caméra : l’autorisation n’est plus demandée sans cesse, la caméra est libérée quand vous fermez l’appli et fonctionne à nouveau si une autre appli l’utilisait.
+• Messages plus clairs quand un produit est inconnu.
+• Les formes à 12 et 13 chiffres d’un même code-barres comptent désormais comme un seul produit.
+• La suggestion facultative par IA a été retirée.

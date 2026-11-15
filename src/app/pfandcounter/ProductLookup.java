@@ -78,8 +78,8 @@ class ProductLookup {
         final String name;
         final List<String> categories;
         final Source source;
-        /** The one line Jev judges (JevClient); null when there is nothing to judge from. */
-        String jevText;
+        /** The product in one line (describe); null when there is nothing to read it from. */
+        String summaryText;
         /** Packaging tags (material, shape, recycling of each part, then packaging_tags) and labels. */
         List<String> packaging = new ArrayList<String>();
         List<String> labels = new ArrayList<String>();
@@ -109,7 +109,7 @@ class ProductLookup {
      * Called exactly once per ask, on the main thread. info is null only when no answer came
      * (network error, timeout, deadline, unreadable answer); a later ask tries again. A barcode
      * that every database answered "no such product" for comes back as a not-found Info
-     * (isNotFound), cached like any answer: no name, no categories, nothing for Jev.
+     * (isNotFound), cached like any answer: no name, no categories, no summary line.
      */
     interface InfoCallback {
         void onInfo(String code, Info info);
@@ -145,7 +145,7 @@ class ProductLookup {
     /** True for the answer "none of the databases knows this barcode". */
     static boolean isNotFound(Info info) {
         return info != null && info.name == null && info.categories != null && info.categories.isEmpty()
-                && info.jevText == null;
+                && info.summaryText == null;
     }
 
     /**
@@ -265,7 +265,7 @@ class ProductLookup {
                     p.optString("quantity", ""));
             if (name == null && categories.isEmpty()) return null;
             Info info = new Info(name, categories, source);
-            info.jevText = describe(p, categories);
+            info.summaryText = describe(p, categories);
             info.packaging = packagingTags(p);
             info.productName = p.optString("product_name", "");
             info.quantity = p.optString("quantity", "");
@@ -302,9 +302,9 @@ class ProductLookup {
     }
 
     /**
-     * The line Jev reads, built exactly like describe() in tools/seed-open.py — the shape of
-     * the control cases its hit rates were measured on: name — size — packaging words —
-     * category. Null without a product name, because then there is nothing to judge.
+     * The product in one line, built exactly like describe() in tools/seed-open.py: name — size —
+     * packaging words — category. Null without a product name, because then there is nothing to
+     * read.
      */
     static String describe(JSONObject p, List<String> categories) {
         String brands = p.optString("brands", "");

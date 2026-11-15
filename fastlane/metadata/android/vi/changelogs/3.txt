@@ -1,0 +1,5 @@
+• Giao diện Material 3 mới: sáng, tối và đen.
+• Máy ảnh: không còn xin quyền liên tục, được giải phóng khi bạn vuốt đóng ứng dụng và hoạt động lại nếu ứng dụng khác đang dùng nó.
+• Thông báo rõ ràng hơn khi sản phẩm không xác định.
+• Dạng 12 và 13 chữ số của cùng một mã vạch giờ được tính là một sản phẩm.
+• Đã gỡ bỏ gợi ý AI tùy chọn.

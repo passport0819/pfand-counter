@@ -89,7 +89,7 @@ final class DrinkCheck {
         return true;
     }
 
-    /** True when any category (umbrella tags aside) carries a drink word — the "Ask Jev" colour. */
+    /** True when any category (umbrella tags aside) carries a drink word. */
     static boolean hasDrinkHint(List<String> tags) {
         if (tags == null) return false;
         for (String tag : tags) {

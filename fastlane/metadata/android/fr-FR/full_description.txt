@@ -15,9 +15,6 @@ Un code-barres ne contient pas le montant de la consigne. L'application est donc
 <li>11 langues : Deutsch, English, Türkçe, Русский, العربية, Polski, Українська, Français, Español, فارسی, Tiếng Việt (traduction automatique, améliorations bienvenues).</li>
 </ul>
 
-<b>Suggestion par IA facultative (« Jev »)</b>
-Désactivée après l'installation. Si vous l'activez et saisissez votre propre clé pour OpenRouter ou TypeSafe (deux services payants, pas des logiciels libres), « Demander à Jev » envoie la description du produit, jamais le code-barres, et affiche un montant de consigne suggéré avec sa fiabilité mesurée. C'est toujours vous qui décidez.
-
 <b>Confidentialité</b>
 Pas de compte, pas de publicité, pas de pistage, pas de serveur propre. Votre comptage reste sur votre téléphone. Seul le code-barres scanné est envoyé à Open Food Facts pour trouver le nom du produit.
 

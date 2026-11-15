@@ -99,8 +99,8 @@ def litres(quantity):
 # What the source SAYS, as opposed to what we infer from shape and material. For 1325 German
 # drinks, labels_tags / packaging_text / packaging_recycling_tags spell the answer out in
 # German. A stated fact beats a derived one, so these override the shape rules below — and
-# they beat a model answer too: measured 22.09.2026, they contradicted Jev in 18 cases,
-# every one of them among those Jev itself had flagged as uncertain.
+# they beat a model answer too: measured 22.09.2026, they contradicted the model in 18 cases,
+# every one of them among those the model itself had flagged as uncertain.
 # "Pfandflasche" is NOT in here. It only says the bottle carries a deposit — single-use PET
 # says it too ("1 PET-Pfandflasche. Rückgabe." on a juice and a milk drink). Found
 # 22.09.2026: it turned those into 0.15 reusable bottles, in the list and in the controls.

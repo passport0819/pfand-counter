@@ -27,6 +27,7 @@ class LayoutCheck {
 
     static void run(Context base, String[] languages) {
         int problems = 0;
+        Addon addon = Addon.Loader.load();
         int width = base.getResources().getDisplayMetrics().widthPixels;
         float density = base.getResources().getDisplayMetrics().density;
         float[] scales = {1.0f, 1.3f};
@@ -41,14 +42,14 @@ class LayoutCheck {
                 problems += check(ctx, R.layout.row, width, where + " row");
                 // Dialogs keep a margin on both sides; 24 dp each is what the platform uses on phones.
                 int inDialog = width - (int) (48 * density);
-                problems += check(ctx, R.layout.dialog_new, inDialog, where + " dialog");
+                problems += measure(dialog(ctx, addon), inDialog, where + " dialog");
                 // The crate window's three faces and the statistics page, filled as the app fills them.
                 problems += measure(crates(ctx, 0), inDialog, where + " crates");
                 problems += measure(crates(ctx, 1), inDialog, where + " crates-own");
                 problems += measure(crates(ctx, 2), inDialog, where + " crates-help");
-                problems += measure(stats(ctx), inDialog, where + " stats");
+                problems += measure(stats(ctx, addon), inDialog, where + " stats");
                 // Inside the page's side padding, as in Settings and About.
-                problems += measure(sheetButtons(ctx), inDialog - (int) (40 * density), where + " buttons");
+                problems += measure(sheetButtons(ctx, addon), inDialog - (int) (40 * density), where + " buttons");
                 // Settings: the four design choices in one row, inside the page's side padding.
                 problems += measure(MainActivity.themeRow(ctx, 0, null), inDialog - (int) (40 * density), where + " design");
                 // Every question and every answer of "Not sure?".
@@ -66,6 +67,14 @@ class LayoutCheck {
         View root = LayoutInflater.from(ctx).inflate(layout, null, false);
         fill(root, ctx);
         return measure(root, width, where);
+    }
+
+    /** The new-barcode window with whatever a local build adds to it, longest texts in place. */
+    private static View dialog(Context ctx, Addon addon) {
+        View root = LayoutInflater.from(ctx).inflate(R.layout.dialog_new, null, false);
+        addon.layoutSample(ctx, root);
+        fill(root, ctx);
+        return root;
     }
 
     /** The crate window: 0 main, 1 own pack form, 2 help. Nothing is written, nothing counted. */
@@ -93,7 +102,7 @@ class LayoutCheck {
     }
 
     /** The full-width buttons of Settings and About, each with its picture, as the app makes them. */
-    private static View sheetButtons(Context ctx) {
+    private static View sheetButtons(Context ctx, Addon addon) {
         android.widget.LinearLayout wrap = new android.widget.LinearLayout(ctx);
         wrap.setOrientation(android.widget.LinearLayout.VERTICAL);
         int[][] buttons = {
@@ -105,22 +114,28 @@ class LayoutCheck {
             Button button = MainActivity.sheetButton(ctx, b[0], ctx.getString(b[1]));
             wrap.addView(button);
         }
-        // Settings shows six of them two to a row.
+        // Settings shows them two to a row; About pairs with a local build's own button, if any.
         int[][] tiles = {
                 {R.drawable.ic_b_book, R.string.howto_open}, {R.drawable.ic_b_info, R.string.pfand_open},
                 {R.drawable.ic_b_stats, R.string.stats_open}, {R.drawable.ic_h_scan, R.string.learned_open},
-                {R.drawable.ic_b_ai, R.string.jev_settings}, {R.drawable.ic_b_info, R.string.settings_about},
         };
         for (int i = 0; i < tiles.length; i += 2) {
             Button a = MainActivity.sheetButton(ctx, tiles[i][0], ctx.getString(tiles[i][1]));
             Button b = MainActivity.sheetButton(ctx, tiles[i + 1][0], ctx.getString(tiles[i + 1][1]));
             wrap.addView(MainActivity.pair(ctx, a, b));
         }
+        Button about = MainActivity.sheetButton(ctx, R.drawable.ic_b_info, ctx.getString(R.string.settings_about));
+        if (addon.settingsLabel() != 0) {
+            Button own = MainActivity.sheetButton(ctx, addon.settingsIcon(), ctx.getString(addon.settingsLabel()));
+            wrap.addView(MainActivity.pair(ctx, own, about));
+        } else {
+            wrap.addView(about);
+        }
         return wrap;
     }
 
     /** The statistics page with every row it can have, and large numbers. */
-    private static View stats(Context ctx) {
+    private static View stats(Context ctx, Addon addon) {
         Stats s = new Stats();
         s.since = System.currentTimeMillis();
         s.count(true, false, 25, 1234);
@@ -130,7 +145,7 @@ class LayoutCheck {
         s.count(false, true, 75, 3);
         android.widget.LinearLayout wrap = new android.widget.LinearLayout(ctx);
         wrap.setOrientation(android.widget.LinearLayout.VERTICAL);
-        MainActivity.buildStats(ctx, wrap, s, 12345, new double[]{1234, 12.34}, true);
+        MainActivity.buildStats(ctx, wrap, s, 12345, addon, true);
         return wrap;
     }
 
@@ -161,7 +176,6 @@ class LayoutCheck {
             String a = ctx.getString(R.string.sort_newest), b = ctx.getString(R.string.sort_oldest);
             MainActivity.withIcon(ctx, (TextView) sort, R.drawable.ic_b_sort, a.length() >= b.length() ? a : b);
         }
-        icon(root, ctx, R.id.dlg_ask_jev, R.drawable.ic_b_ai, R.string.jev_ask_again);
         icon(root, ctx, R.id.dlg_help, R.drawable.ic_b_help, R.string.g_open);
     }
 

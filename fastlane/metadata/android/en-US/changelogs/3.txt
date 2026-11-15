@@ -1,0 +1,5 @@
+• New Material 3 look: light, dark and black.
+• Camera: no longer asks for permission again and again, is released when you swipe the app away, and recovers when another app was using it.
+• Clearer messages when a product is unknown.
+• The 12- and 13-digit forms of one barcode now count as the same product.
+• The optional AI suggestion has been removed.

@@ -1,0 +1,5 @@
+• Neues Material-3-Design: hell, dunkel und schwarz.
+• Kamera: fragt nicht mehr ständig nach der Berechtigung, wird beim Wegwischen der App freigegeben und läuft wieder, wenn eine andere App sie belegt hatte.
+• Klarere Hinweise, wenn ein Produkt unbekannt ist.
+• Die 12- und 13-stellige Form desselben Barcodes zählt jetzt als ein Produkt.
+• Der freiwillige KI-Vorschlag wurde entfernt.

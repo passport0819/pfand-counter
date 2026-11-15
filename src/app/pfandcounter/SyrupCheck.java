@@ -13,10 +13,10 @@ import java.util.regex.Pattern;
  * carries no deposit (§ 46 VerpackDG covers containers "filled with drinks"; Forum PET of the
  * IK e.V. lists "Sirupflaschen" among the containers without deposit).
  *
- * Why (25.09.2026): a SodaStream ginger ale concentrate is a syrup, yet Jev suggested
- * 0,25 €. Open Food Facts knows it by that name only, without a category. Jev also rated
- * an elderflower syrup 0,25 € — with "Sirup" in the name; the shipped list had it
- * too, by the rule "plastic bottle over 1 l". tools/seed-build.py now sweeps syrups out.
+ * Why (25.09.2026): a SodaStream ginger ale concentrate is a syrup, yet it was suggested at
+ * 0,25 €. Open Food Facts knows it by that name only, without a category. An elderflower
+ * syrup — with "Sirup" in the name — was rated 0,25 € too; the shipped list had it
+ * by the rule "plastic bottle over 1 l". tools/seed-build.py now sweeps syrups out.
  *
  * The name decides on its own ("Sirup", "syrup", "SodaStream", …): none of 110 German SodaStream
  * products is a deposit drink. A syrup category alone does not

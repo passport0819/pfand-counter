@@ -15,9 +15,6 @@ A barcode does not carry its deposit. So the app ships a list of more than 2,500
 <li>11 languages: Deutsch, English, Türkçe, Русский, العربية, Polski, Українська, Français, Español, فارسی, Tiếng Việt (machine-translated, improvements welcome).</li>
 </ul>
 
-<b>Optional AI suggestion ("Jev")</b>
-Off after installation. If you switch it on and enter your own key for OpenRouter or TypeSafe (both paid services, not free software), "Ask Jev" sends the product description, never the barcode, and shows a suggested deposit with its measured reliability. The decision stays with you.
-
 <b>Privacy</b>
 No account, no ads, no tracking, no server of its own. Your count stays on your phone. Only the scanned barcode is sent to Open Food Facts to find the product name.
 

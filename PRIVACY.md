@@ -8,8 +8,7 @@ The same text, in short cards, is in the app under Settings › About and data s
 
 **In short:** Pfand Counter has no account, no ads, no tracking and no server of its own. Your
 count stays on your phone. Only the scanned barcode is sent to the open product database Open Food
-Facts, so the app can show the product name. An AI service is asked only if you switched it on,
-entered a key yourself and tap the button. It is off when the app is installed.
+Facts, so the app can show the product name.
 
 ### Who is responsible?
 
@@ -39,27 +38,6 @@ association (France); one privacy policy covers all three: https://world.openfoo
 This happens once per barcode each time the app is started, also for barcodes the app already
 knows, to show their name. Without internet the app still counts, but shows no product names.
 
-### Jev, the AI suggestion (optional, off by default, only with your own key)
-
-The app can ask an AI service to suggest a deposit. Jev is off after installation: there is no
-"Ask Jev" button and no key field until you switch it on under Settings › Jev suggestions. Even then
-this only happens if
-
-1. you entered an access key for one of the two providers (OpenRouter or TypeSafe) in the app
-   yourself, and
-2. you tap "Ask Jev" for an unknown product.
-
-The app then sends two requests to the chosen provider. They contain only a product description
-taken from Open Food Facts: brand and product name (shortened), size, packaging details and up to
-three product categories. **The barcode is not sent.** The requests also carry your key (so the
-provider can bill you) and your IP address. The provider bills your account there; its privacy
-policy applies:
-
-- OpenRouter: https://openrouter.ai/privacy
-- TypeSafe: https://typesafe.ai/legal/privacy-policy
-
-Switched off or without a key, the app never contacts an AI service.
-
 ### Only when you tap
 
 - **Share** passes your count as text to the app you pick (messenger, notes, e-mail).
@@ -79,12 +57,9 @@ Only in the app's private storage, which other apps cannot read:
 - settings (design, sort order, whether notices were already shown); the language is kept by
   Android itself,
 - the statistics page: how many bottles and crates were counted, per deposit amount and per month,
-  how many were scanned or added by hand,
-- if entered: your AI key, the chosen provider, and a counter of how many questions you asked and
-  roughly what they cost.
+  how many were scanned or added by hand.
 
-The AI key, the provider choice and the counter are kept in an area excluded from Android backups.
-The other data may be included in your phone's backup if you turned backups on.
+This data may be included in your phone's backup if you turned backups on.
 
 Everything is deleted when you uninstall the app or clear its data in Android's settings.
 
@@ -98,14 +73,14 @@ Everything is deleted when you uninstall the app or clear its data in Android's 
 ### Permissions
 
 - **Camera:** read barcodes.
-- **Internet:** ask Open Food Facts and, if set up, the AI service.
+- **Internet:** ask Open Food Facts and its sister databases about scanned products.
 - **Vibrate:** a short buzz as feedback when scanning.
 
 ### Your rights
 
 Since the developer receives no data from you, there is nothing the developer could disclose or
-delete. You delete the data on your phone yourself (see above). For data held by Open Food Facts
-or the AI provider, contact them. You also have the right to complain to a data protection
+delete. You delete the data on your phone yourself (see above). For data held by Open Food Facts,
+contact them. You also have the right to complain to a data protection
 authority.
 
 ### Changes
@@ -117,9 +92,7 @@ in the history of this repository.
 
 **Kurz gesagt:** Pfand Counter hat kein Konto, keine Werbung, keine Überwachung und keinen eigenen
 Server. Deine Zählung bleibt auf deinem Handy. Nur der gescannte Barcode geht an die freie
-Produktdatenbank Open Food Facts, damit die App den Produktnamen anzeigen kann. Ein KI-Dienst wird
-nur gefragt, wenn du ihn eingeschaltet, selbst einen Schlüssel eingetragen hast und auf den Knopf
-tippst. Nach der Installation ist er aus.
+Produktdatenbank Open Food Facts, damit die App den Produktnamen anzeigen kann.
 
 ### Wer ist verantwortlich?
 
@@ -151,27 +124,6 @@ https://world.openfoodfacts.org/privacy
 Das geschieht einmal je Barcode und App-Start, auch bei Barcodes, die die App schon kennt, um ihren
 Namen zu zeigen. Ohne Internet zählt die App trotzdem, zeigt dann aber keine Produktnamen.
 
-### Jev, der KI-Vorschlag (freiwillig, anfangs aus, nur mit eigenem Schlüssel)
-
-Die App kann auf Wunsch einen KI-Dienst um einen Pfand-Vorschlag bitten. Nach der Installation ist
-Jev aus: Es gibt keinen Knopf „Jev fragen“ und kein Schlüsselfeld, bis du Jev unter Einstellungen ›
-Jev-Vorschläge einschaltest. Auch dann passiert es nur, wenn
-
-1. du selbst in der App einen Zugangsschlüssel für einen der beiden Anbieter eingetragen hast
-   (OpenRouter oder TypeSafe), und
-2. du bei einem unbekannten Produkt auf „Jev fragen“ tippst.
-
-Dann werden zwei Anfragen an den gewählten Anbieter geschickt. Sie enthalten nur eine
-Produktbeschreibung aus Open Food Facts: Marke und Produktname (gekürzt), Füllmenge, Angaben zur
-Verpackung und bis zu drei Produktkategorien. **Der Barcode wird nicht mitgeschickt.** Dazu kommen
-dein Schlüssel (damit der Anbieter dich abrechnen kann) und deine IP-Adresse. Die Kosten rechnet
-der Anbieter über dein Konto dort ab; es gilt dessen Datenschutzerklärung:
-
-- OpenRouter: https://openrouter.ai/privacy
-- TypeSafe: https://typesafe.ai/legal/privacy-policy
-
-Ausgeschaltet oder ohne Schlüssel schickt die App nie etwas an einen KI-Dienst.
-
 ### Nur wenn du tippst
 
 - **Teilen** gibt deine Zählung als Text an die App, die du auswählst (Messenger, Notizen, E-Mail).
@@ -191,13 +143,9 @@ Nur im privaten Speicher der App, für andere Apps nicht lesbar:
 - Einstellungen (Design, Sortierung, ob Hinweise schon gezeigt wurden); die Sprache verwaltet
   Android selbst,
 - die Statistik-Seite: wie viele Flaschen und Kästen gezählt wurden, je Pfandbetrag und Monat,
-  wie viele gescannt und wie viele von Hand,
-- falls eingetragen: dein KI-Schlüssel, die Wahl des Anbieters und ein Zähler, wie viele Fragen du
-  gestellt hast und was sie ungefähr gekostet haben.
+  wie viele gescannt und wie viele von Hand.
 
-KI-Schlüssel, Anbieterwahl und Zähler liegen in einem Bereich, der von Android-Sicherungen
-ausgenommen ist. Die übrigen Daten kann die Sicherungsfunktion deines Handys mitsichern, wenn du sie
-eingeschaltet hast.
+Diese Daten kann die Sicherungsfunktion deines Handys mitsichern, wenn du sie eingeschaltet hast.
 
 Alles wird gelöscht, wenn du die App deinstallierst oder in den Android-Einstellungen ihre Daten
 löschst.
@@ -212,14 +160,14 @@ löschst.
 ### Berechtigungen
 
 - **Kamera:** Barcodes lesen.
-- **Internet:** Open Food Facts und, falls eingerichtet, den KI-Dienst fragen.
+- **Internet:** Open Food Facts und seine Schwesterdatenbanken nach gescannten Produkten fragen.
 - **Vibration:** kurzes Rütteln als Rückmeldung beim Scannen.
 
 ### Deine Rechte
 
 Da der Entwickler keine Daten von dir erhält, kann er dazu keine Auskunft geben oder etwas löschen.
-Deine Daten auf dem Handy löschst du selbst (siehe oben). Für Daten bei Open Food Facts oder beim
-KI-Anbieter wende dich an diese. Du hast außerdem das Recht, dich bei einer
+Deine Daten auf dem Handy löschst du selbst (siehe oben). Für Daten bei Open Food Facts wende dich
+an den Verein. Du hast außerdem das Recht, dich bei einer
 Datenschutz-Aufsichtsbehörde zu beschweren.
 
 ### Änderungen

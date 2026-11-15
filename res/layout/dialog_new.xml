@@ -88,7 +88,9 @@
             android:textSize="13sp"
             android:text="@string/choose_deposit" />
 
+        <!-- "Not sure?"; a local build may add a button of its own next to it. -->
         <LinearLayout
+            android:id="@+id/dlg_actions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -111,38 +113,11 @@
                 android:autoSizeTextType="uniform"
                 android:autoSizeMinTextSize="9sp"
                 android:autoSizeMaxTextSize="15sp" />
-
-            <Button
-                android:id="@+id/dlg_ask_jev"
-                style="@style/DialogButton"
-                android:paddingStart="6dp"
-                android:paddingEnd="6dp"
-                android:letterSpacing="0"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:text="@string/jev_ask"
-                android:maxLines="1"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMinTextSize="9sp"
-                android:autoSizeMaxTextSize="15sp" />
         </LinearLayout>
 
-        <!-- Why "Ask Jev" is grey or off: no key, no product data, or data that don't sound like a drink. -->
-        <TextView
-            android:id="@+id/dlg_jev_why"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-4dp"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/text_dim"
-            android:textSize="13sp"
-            android:visibility="gone" />
-
-        <!-- Jev's answer: what it picks and, as a bar, how often such a pick was right. -->
+        <!-- A suggestion: what it picks and why, or, as a bar, how often such a pick was right. -->
         <LinearLayout
-            android:id="@+id/dlg_jev"
+            android:id="@+id/dlg_hint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -150,7 +125,7 @@
             android:visibility="gone">
 
             <TextView
-                android:id="@+id/dlg_jev_pick"
+                android:id="@+id/dlg_hint_pick"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text"
@@ -165,13 +140,13 @@
                 android:paddingTop="6dp">
 
                 <View
-                    android:id="@+id/dlg_jev_meter"
+                    android:id="@+id/dlg_hint_meter"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="10dp" />
 
                 <TextView
-                    android:id="@+id/dlg_jev_trust"
+                    android:id="@+id/dlg_hint_trust"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="10dp"

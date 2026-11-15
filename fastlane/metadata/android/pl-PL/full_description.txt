@@ -15,9 +15,6 @@ Kod kreskowy nie zawiera kwoty kaucji. Dlatego aplikacja ma wbudowaną listę po
 <li>11 języków: Deutsch, English, Türkçe, Русский, العربية, Polski, Українська, Français, Español, فارسی, Tiếng Việt (tłumaczenie maszynowe, poprawki mile widziane).</li>
 </ul>
 
-<b>Opcjonalna propozycja AI („Jev”)</b>
-Po instalacji wyłączona. Jeśli ją włączysz i wpiszesz własny klucz do OpenRouter lub TypeSafe (obie usługi są płatne i nie są wolnym oprogramowaniem), „Zapytaj Jev” wyśle opis produktu, nigdy kod kreskowy, i pokaże proponowaną kaucję z jej zmierzoną wiarygodnością. Decyzja nadal należy do ciebie.
-
 <b>Prywatność</b>
 Bez konta, bez reklam, bez śledzenia, bez własnego serwera. Twoje liczenie zostaje na telefonie. Do Open Food Facts trafia tylko zeskanowany kod, żeby znaleźć nazwę produktu.
 

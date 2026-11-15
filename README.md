@@ -20,10 +20,6 @@ in open product databases, and remembers every answer you give it.
 - If a barcode is unknown but at least three barcodes of the same maker in the list share one
   deposit, that amount is suggested (never counted until you tap it). Cartons, pouches, syrups,
   and wine or spirits in glass get no such suggestion.
-- Optional: "Ask Jev" sends the product description (never the barcode) to an AI model, either
-  through OpenRouter or directly at TypeSafe, and shows a suggestion with its measured
-  reliability. It is off after installation (switch it on under Settings › Jev suggestions), needs your own key for the way you pick, stays off without one, and runs only
-  when you tap it.
 - Crates: the crate deposit, full crates with their bottles in one tap, and your own crate sizes.
 - A statistics page that stays on the phone.
 - With TalkBack on, every scan is announced (product, deposit, new total), and the barcode digits
@@ -42,7 +38,8 @@ The app is built with Gradle through the wrapper in the repository:
 ```
 
 The APK lands in `build-gradle/outputs/apk/release/`. Requirements: JDK 17 or newer and the Android
-SDK with `platforms/android-36` and build-tools 37.0.0 (path in `ANDROID_HOME` or in a
+SDK with `platforms/android-36` and build-tools 36.0.0, the Android Gradle plugin's default (another installed version can be
+passed with `-PbuildTools=<version>`, e.g. `-PbuildTools=37.0.0`; path in `ANDROID_HOME` or in a
 `local.properties` line `sdk.dir=…`). The wrapper downloads Gradle 9.8.0 and checks it against the
 SHA-256 in `gradle/wrapper/gradle-wrapper.properties`. Every library it fetches (ZXing from Maven
 Central; AndroidX AppCompat and Material Components from Google's Maven repository) is pinned by
@@ -50,10 +47,6 @@ SHA-256 in `gradle/verification-metadata.xml`, and the build stops if one differ
 
 Without a key the APK stays unsigned. A local build signs it with `keys/debug.keystore` when that
 file exists; the folder is not part of the repository.
-
-An optional local extra source may live in `src-local/` (see `src/app/pfandcounter/ExtraSource.java`).
-It is compiled in only on request, with `./build.sh --with-local` (Gradle: `-PwithLocal`); without
-the flag it is left out, even when the folder exists.
 
 The APK's application id is `io.github.passport0819.pfandcounter` (the Java package stays
 `app.pfandcounter`). To build updates for an installation made under a different id, put that id
@@ -73,10 +66,8 @@ Anything the rules cannot settle stays out of the list, and the app asks instead
 ## Privacy
 
 The count stays on the phone. To show product names, the scanned barcode goes to Open Food Facts
-(and, if unknown there, Open Beauty Facts and Open Products Facts). "Ask Jev" sends the product
-description, never the barcode, to OpenRouter or TypeSafe, whichever way you picked, and only
-after you tap it. The keys stay on the device and are excluded from backups. No ads, no
-analytics, no account. The full text is in [PRIVACY.md](PRIVACY.md) (English and German).
+(and, if unknown there, Open Beauty Facts and Open Products Facts). No ads, no analytics, no
+account. The full text is in [PRIVACY.md](PRIVACY.md) (English and German).
 
 ## Licenses
 

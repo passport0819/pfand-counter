@@ -25,8 +25,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -65,9 +63,10 @@ public class MainActivity extends AppCompatActivity implements BarcodeScanner.Li
     private DepositRules rules;
     private CountSession session;
     private Stats stats;
-    private ProductLookup lookup;
-    private JevClient jev;
-    private BarcodeScanner scanner;
+    ProductLookup lookup;
+    /** The optional features of a local build; one that does nothing in the published app. */
+    private Addon addon;
+    BarcodeScanner scanner;
     /** Null unless this build carries one, see ExtraSource. */
     private ExtraSource extra;
     private final Set<String> extraAsked = new HashSet<String>();
@@ -84,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements BarcodeScanner.Li
     private Button sortButton;
     private LineAdapter adapter;
 
-    private AlertDialog openDialog;
+    AlertDialog openDialog;
     /** The reset button's own text colour, for when it offers undo instead of clearing. */
     private android.content.res.ColorStateList resetPlain;
     /** The unknown barcode being looked up right now, before anything is asked. */
@@ -107,8 +106,9 @@ public class MainActivity extends AppCompatActivity implements BarcodeScanner.Li
         renameBuiltInLines();
         stats = Stats.load(store);
         lookup = new ProductLookup();
-        jev = new JevClient(this);
         extra = ExtraSource.Loader.load();
+        addon = Addon.Loader.load();
+        addon.attach(this);
 
         totalView = (TextView) findViewById(R.id.total);
         breakdownView = (TextView) findViewById(R.id.breakdown);
@@ -896,12 +896,9 @@ public class MainActivity extends AppCompatActivity implements BarcodeScanner.Li
         openDialog = dialog;
         dialog.show();
 
-        final Button askJev = (Button) content.findViewById(R.id.dlg_ask_jev);
-        withIcon(askJev, R.drawable.ic_b_ai, getString(R.string.jev_ask));
         withIcon((TextView) content.findViewById(R.id.dlg_help), R.drawable.ic_b_help, getString(R.string.g_open));
+        addon.onCodeDialog(dialog, content, code, known);
         if (known == null) {
-            askJev.setBackgroundTintList(android.content.res.ColorStateList.valueOf(getColor(R.color.surface_high)));
-            if (!jev.enabled() || !jev.hasKey()) jevState(content, askJev, null);
             lookup.lookupInfo(code, new ProductLookup.InfoCallback() {
                 @Override public void onInfo(String forCode, ProductLookup.Info info) {
                     if (openDialog != dialog) return;
@@ -911,101 +908,45 @@ public class MainActivity extends AppCompatActivity implements BarcodeScanner.Li
                         nameView.setText(R.string.no_name);
                         ownNameBox.setVisibility(View.VISIBLE);
                     }
-                    if (info != null) content.setTag(R.id.dlg_ask_jev, info);
-                    jevState(content, askJev, info);
-                    showHints(content, askJev, code, info);
+                    showHints(content, code, info);
+                    addon.onProductInfo(dialog, content, code, info);
                 }
             });
         } else {
-            content.setTag(R.id.dlg_ask_jev, known);
-            jevState(content, askJev, known);
-            showHints(content, askJev, code, known);
-        }
-        askJev.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                askJev(dialog, content, code);
-            }
-        });
-    }
-
-    /**
-     * Green "Ask Jev" where the data hint at a drink. Otherwise grey, with the reason in words
-     * underneath (and in the button's spoken label): off without a key or without product data,
-     * since a tap could only fail; still tappable when the data merely don't sound like a drink,
-     * or when the lookup brought nothing back (info null: maybe only the network, so a tap tries again).
-     */
-    private void jevState(View content, Button askJev, ProductLookup.Info info) {
-        TextView why = (TextView) content.findViewById(R.id.dlg_jev_why);
-        if (!jev.enabled()) { // opt-in: nothing about Jev shows until it is switched on
-            askJev.setVisibility(View.GONE);
-            why.setVisibility(View.GONE);
-            return;
-        }
-        int reason = 0;
-        boolean usable = true;
-        if (!jev.hasKey()) {
-            reason = R.string.jev_why_no_key;
-            usable = false;
-        } else if (info == null) {
-            reason = R.string.jev_lookup_failed;
-        } else if (info.jevText == null || info.jevText.trim().isEmpty()) {
-            reason = R.string.jev_no_data;
-            usable = false;
-        } else if (!looksLikeDrink(info)) {
-            reason = R.string.jev_why_grey;
-        }
-        askJev.setBackgroundTintList(android.content.res.ColorStateList.valueOf(
-                getColor(reason == 0 ? R.color.accent_dim : R.color.surface_high)));
-        askJev.setEnabled(usable);
-        askJev.setAlpha(usable ? 1f : 0.5f);
-        if (reason == 0) {
-            why.setVisibility(View.GONE);
-            askJev.setContentDescription(null);
-        } else {
-            why.setText(reason);
-            why.setVisibility(View.VISIBLE);
-            // The reason is read with the button, so it is not read a second time on its own.
-            why.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
-            askJev.setContentDescription(getString(R.string.jev_ask) + ". " + getString(reason));
+            showHints(content, code, known);
+            addon.onProductInfo(dialog, content, code, known);
         }
     }
 
     /**
      * The dairy jar or the maker hint, once product data are there. None for a barcode that no
-     * database knows (name, categories and Jev's line all empty): nothing to read them from.
+     * database knows (name, categories and summary line all empty): nothing to read them from.
      */
-    private void showHints(View content, Button askJev, String code, ProductLookup.Info info) {
+    void showHints(View content, String code, ProductLookup.Info info) {
         if (info == null || noProductData(info)) return;
-        if (info.isDepositJar()) showJar(content, askJev);
+        if (info.isDepositJar()) showJar(content);
         else showMakerHint(content, rules.makerHint(code, info));
     }
 
     /** The databases answered, but none of them knows the barcode. */
-    private static boolean noProductData(ProductLookup.Info info) {
+    static boolean noProductData(ProductLookup.Info info) {
         return info != null && info.name == null
                 && (info.categories == null || info.categories.isEmpty())
-                && (info.jevText == null || info.jevText.trim().isEmpty());
+                && (info.summaryText == null || info.summaryText.trim().isEmpty());
     }
 
     /**
      * A yogurt or cream jar Open Food Facts marks as reusable glass (DairyJarCheck): 0.15 gets the
-     * ring, the reason sits where Jev's answer would. Jev would only repeat it — on the 36 control
-     * jars with such a word it picked 0.15 every time (27.09.2026) — so its button steps back to
-     * grey and saves the call. Still one tap to count.
+     * ring, the reason sits in the suggestion panel. Still one tap to count.
      */
-    private void showJar(View content, Button askJev) {
-        askJev.setBackgroundTintList(android.content.res.ColorStateList.valueOf(getColor(R.color.surface_high)));
-        if (askJev.isEnabled()) { // the jar's own reason below says why the button stepped back
-            content.findViewById(R.id.dlg_jev_why).setVisibility(View.GONE);
-            askJev.setContentDescription(null);
-        }
+    private void showJar(View content) {
         content.findViewById(R.id.dlg_help).setTag(DepositGuide.JAR);
-        ((TextView) content.findViewById(R.id.dlg_jev_pick)).setText(R.string.jar_pick);
-        TextView why = (TextView) content.findViewById(R.id.dlg_jev_trust);
+        ((TextView) content.findViewById(R.id.dlg_hint_pick)).setText(R.string.jar_pick);
+        TextView why = (TextView) content.findViewById(R.id.dlg_hint_trust);
         why.setText(R.string.jar_why);
         why.setTextColor(getColor(R.color.text_dim));
-        content.findViewById(R.id.dlg_jev_meter).setVisibility(View.GONE);
-        content.findViewById(R.id.dlg_jev).setVisibility(View.VISIBLE);
+        content.findViewById(R.id.dlg_hint_meter).setVisibility(View.GONE);
+        content.findViewById(R.id.dlg_hint).setVisibility(View.VISIBLE);
         ring((Button) content.findViewById(R.id.dlg_15));
         why.setPadding(0, why.getPaddingTop(), 0, why.getPaddingBottom());
         android.util.Log.i(Store.TAG, "reusable dairy jar: suggesting 0.15");
@@ -1013,19 +954,18 @@ public class MainActivity extends AppCompatActivity implements BarcodeScanner.Li
 
     /**
      * Other barcodes of the same maker in the list all carry one deposit (MakerHint): that button
-     * gets the ring, the reason sits where Jev's answer would. Only a hint — the user still taps,
-     * and "Ask Jev" stays as it was.
+     * gets the ring, the reason sits in the suggestion panel. Only a hint — the user still taps.
      */
     private void showMakerHint(View content, int[] hint) {
         if (hint == null) return;
         int cents = hint[0];
-        ((TextView) content.findViewById(R.id.dlg_jev_pick)).setText(getString(R.string.maker_pick, money(cents)));
-        TextView why = (TextView) content.findViewById(R.id.dlg_jev_trust);
+        ((TextView) content.findViewById(R.id.dlg_hint_pick)).setText(getString(R.string.maker_pick, money(cents)));
+        TextView why = (TextView) content.findViewById(R.id.dlg_hint_trust);
         why.setText(getString(R.string.maker_why, hint[1], money(cents)));
         why.setTextColor(getColor(R.color.text_dim));
         why.setPadding(0, why.getPaddingTop(), 0, why.getPaddingBottom());
-        content.findViewById(R.id.dlg_jev_meter).setVisibility(View.GONE);
-        content.findViewById(R.id.dlg_jev).setVisibility(View.VISIBLE);
+        content.findViewById(R.id.dlg_hint_meter).setVisibility(View.GONE);
+        content.findViewById(R.id.dlg_hint).setVisibility(View.VISIBLE);
         ring((Button) content.findViewById(CHOICE_IDS[choiceIndex(cents)]));
         android.util.Log.i(Store.TAG, "maker hint: " + cents + " cents from " + hint[1] + " siblings");
     }
@@ -1039,172 +979,10 @@ public class MainActivity extends AppCompatActivity implements BarcodeScanner.Li
         b.setTypeface(android.graphics.Typeface.DEFAULT_BOLD);
     }
 
-    /**
-     * Green "Ask Jev" only where the data hints at a drink; grey (but just as tappable) for
-     * things like "handschuhe m", which Open Food Facts lists with nothing but a name.
-     */
-    private static boolean looksLikeDrink(ProductLookup.Info info) {
-        return info != null && (DrinkCheck.hasDrinkHint(info.categories)
-                || NonFoodCheck.nameSoundsLikeDrink(info.name));
-    }
-
-    private static final int[] CHOICE_IDS = {R.id.dlg_8, R.id.dlg_15, R.id.dlg_25, R.id.dlg_0};
-
-    /**
-     * Only on "Ask Jev": Jev needs the product data, so it waits for the lookup if that is
-     * still running. Nothing is counted or learned until a button is tapped.
-     */
-    private void askJev(final AlertDialog dialog, final View content, final String code) {
-        final Button ask = (Button) content.findViewById(R.id.dlg_ask_jev);
-        if (!jev.hasKey()) {
-            Toast.makeText(this, R.string.jev_why_no_key, Toast.LENGTH_LONG).show();
-            return;
-        }
-        ask.setEnabled(false);
-        withIcon(ask, R.drawable.ic_b_ai, getString(R.string.jev_asking));
-        lookup.lookupInfo(code, new ProductLookup.InfoCallback() {
-            @Override public void onInfo(String forCode, ProductLookup.Info info) {
-                if (openDialog != dialog) return;
-                if (info == null) { // nothing came back: no answer is not "no data", so it may be tried again
-                    jevFailed(content, ask, getString(R.string.jev_lookup_failed));
-                    return;
-                }
-                if (content.getTag(R.id.dlg_ask_jev) == null) {
-                    // This time the lookup got through: what the dialog's first lookup would have shown.
-                    content.setTag(R.id.dlg_ask_jev, info);
-                    TextView nameView = (TextView) content.findViewById(R.id.dlg_name);
-                    EditText ownName = (EditText) content.findViewById(R.id.dlg_name_edit);
-                    if (info.name != null) {
-                        nameView.setText(info.name);
-                        if (ownName.length() == 0) content.findViewById(R.id.dlg_name_box).setVisibility(View.GONE);
-                    } else {
-                        nameView.setText(R.string.no_name);
-                    }
-                    showHints(content, ask, code, info);
-                }
-                if (info.jevText == null || info.jevText.trim().isEmpty()) {
-                    noJevData(content, ask, info); // no product data: asking again would not change anything
-                    return;
-                }
-                jev.ask(info.jevText, new JevClient.Callback() {
-                    @Override public void onSuggestion(JevClient.Suggestion s) {
-                        if (openDialog != dialog) return;
-                        ask.setVisibility(View.GONE);
-                        content.findViewById(R.id.dlg_jev_why).setVisibility(View.GONE); // an earlier failure
-                        showJev(content, s, info.categories != null
-                                && DairyJarCheck.isDairy(info.categories));
-                    }
-
-                    @Override public void onProblem(JevClient.Problem p, String detail) {
-                        if (openDialog != dialog) return;
-                        if (p == JevClient.Problem.NO_DATA) {
-                            noJevData(content, ask, info); // asking again would not change anything
-                            return;
-                        }
-                        String why;
-                        switch (p) {
-                            case NO_KEY: why = getString(R.string.jev_why_no_key); break;
-                            case KEY_REJECTED: why = getString(R.string.jev_key_rejected, detail); break;
-                            case NO_CREDIT: why = getString(R.string.jev_no_credit); break;
-                            case BUSY: why = getString(R.string.jev_busy); break;
-                            case TIMEOUT: why = getString(R.string.jev_timeout); break;
-                            case OFFLINE: why = getString(R.string.jev_offline); break;
-                            default: why = getString(R.string.jev_failed, detail);
-                        }
-                        jevFailed(content, ask, why);
-                    }
-                });
-            }
-        });
-    }
-
-    /** No product data for Jev: the button gets its own label back and stays off, with the reason. */
-    private void noJevData(View content, Button ask, ProductLookup.Info info) {
-        withIcon(ask, R.drawable.ic_b_ai, getString(R.string.jev_ask));
-        jevState(content, ask, info);
-    }
-
-    /** A failed ask: the reason stands in the dialog (read out once), and the button asks again. */
-    private void jevFailed(View content, Button ask, String reason) {
-        TextView why = (TextView) content.findViewById(R.id.dlg_jev_why);
-        why.setText(reason);
-        why.setVisibility(View.VISIBLE);
-        why.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
-        why.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
-        ask.setEnabled(true);
-        ask.setAlpha(1f);
-        ask.setContentDescription(null);
-        withIcon(ask, R.drawable.ic_b_ai, getString(R.string.jev_ask_again));
-    }
-
-    /**
-     * Jev's answer as pictures: every deposit button is filled as far as Jev thinks it likely,
-     * the pick gets a ring, and one bar shows how often a pick this sure was right in the
-     * control runs (JevTrust) — Jev's own confidence is not taken at its word. Dairy products
-     * have their own counts there: Jev is much less reliable on them below 0.95.
-     */
-    private void showJev(View content, JevClient.Suggestion s, boolean dairy) {
-        // Not a drink: the deposit odds mean nothing then (they were only measured on drinks and
-        // dairy products), so "No deposit" gets the ring and the trust bar speaks for the drink
-        // question. A yogurt is no drink either, yet its jar may carry a deposit: for dairy
-        // products and a "jar15" pick the deposit question has the say.
-        boolean notADrink = s.notADrink() && !dairy && !"jar15".equals(s.choice);
-        int pick = notADrink ? 3 : choiceIndex(s.cents);
-        double[] odds = notADrink ? new double[]{0, 0, 0, 1} : s.probabilities;
-        String what = pick == 3 ? getString(R.string.jev_no_deposit) : money(s.cents);
-        ((TextView) content.findViewById(R.id.dlg_jev_pick)).setText(notADrink
-                ? getString(R.string.jev_not_a_drink) : getString(R.string.jev_suggests, what));
-
-        double[] band = notADrink ? JevTrust.drinkBandOf(Math.max(0, s.drinkConfidence))
-                : dairy ? JevTrust.dairyBandOf(Math.max(0, s.confidence))
-                : JevTrust.bandOf(Math.max(0, s.confidence));
-        double rate = band[3] > 0 ? band[2] / band[3] : 0;
-        int label = rate >= 0.85 ? R.string.jev_trust_high : rate >= 0.75 ? R.string.jev_trust_good
-                : rate >= 0.55 ? R.string.jev_trust_mid : R.string.jev_trust_low;
-        int color = getColor(rate >= 0.75 ? R.color.accent : rate >= 0.55 ? R.color.warn : R.color.bad);
-        TextView trust = (TextView) content.findViewById(R.id.dlg_jev_trust);
-        trust.setText(label);
-        trust.setTextColor(color);
-        View meter = content.findViewById(R.id.dlg_jev_meter);
-        meter.setBackground(bar(rate, color, false));
-        meter.setVisibility(View.VISIBLE); // a jar or maker hint shown before hid it
-        content.findViewById(R.id.dlg_jev).setVisibility(View.VISIBLE);
-
-        for (int i = 0; i < CHOICE_IDS.length; i++) {
-            Button b = (Button) content.findViewById(CHOICE_IDS[i]);
-            double p = Math.max(0, odds[i]);
-            int left = b.getPaddingLeft(), top = b.getPaddingTop();
-            int right = b.getPaddingRight(), bottom = b.getPaddingBottom();
-            b.setBackground(tappable(bar(p, getColor(R.color.accent_dim), i == pick)));
-            b.setPadding(left, top, right, bottom);
-            b.setTypeface(android.graphics.Typeface.DEFAULT); // Jev's pick replaces an earlier hint
-            android.text.SpannableStringBuilder text = new android.text.SpannableStringBuilder(b.getText());
-            int from = text.length();
-            // A row filled at least halfway has its text on the fill, which takes the fill's own text
-            // colour; the dim grey of the percentage would all but vanish there.
-            boolean onFill = p >= 0.5;
-            if (!notADrink) {
-                // No-break spaces: the percentage never ends up alone on a line of its own.
-                text.append("\u00A0\u00A0\u00A0").append(String.valueOf(Math.round(p * 100))).append("\u00A0%");
-                text.setSpan(new android.text.style.ForegroundColorSpan(getColor(onFill ? R.color.on_accent_dim : R.color.text_dim)),
-                        from, text.length(), 0);
-                text.setSpan(new android.text.style.RelativeSizeSpan(0.85f), from, text.length(), 0);
-            }
-            if (onFill) {
-                b.setTextColor(getColor(R.color.on_accent_dim));
-            } else if (i == pick) {
-                // "No deposit" is dim by default; the pick always reads at full strength.
-                b.setTextColor(getColor(R.color.text));
-            }
-            if (i == pick) {
-                text.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), 0, from, 0);
-            }
-            b.setText(text);
-        }
-    }
+    static final int[] CHOICE_IDS = {R.id.dlg_8, R.id.dlg_15, R.id.dlg_25, R.id.dlg_0};
 
     /** A rounded track filled from the left to `share`; with a ring when `ring` is set. */
-    private android.graphics.drawable.Drawable bar(double share, int fillColor, boolean ring) {
+    android.graphics.drawable.Drawable bar(double share, int fillColor, boolean ring) {
         // As round as the rows (res/drawable/choice.xml); the thin meter comes out as a pill.
         float radius = 16 * getResources().getDisplayMetrics().density;
         android.graphics.drawable.GradientDrawable track = new android.graphics.drawable.GradientDrawable();
@@ -1225,7 +1003,7 @@ public class MainActivity extends AppCompatActivity implements BarcodeScanner.Li
     }
 
     /** A row's background that ripples under the finger within its round corners. */
-    private android.graphics.drawable.Drawable tappable(android.graphics.drawable.Drawable content) {
+    android.graphics.drawable.Drawable tappable(android.graphics.drawable.Drawable content) {
         android.graphics.drawable.GradientDrawable mask = new android.graphics.drawable.GradientDrawable();
         mask.setColor(android.graphics.Color.WHITE);
         mask.setCornerRadius(16 * getResources().getDisplayMetrics().density);
@@ -1233,130 +1011,9 @@ public class MainActivity extends AppCompatActivity implements BarcodeScanner.Li
                 MaterialColors.getColor(this, android.R.attr.colorControlHighlight, 0)), content, mask);
     }
 
-    private static int choiceIndex(int cents) {
+    static int choiceIndex(int cents) {
         return cents == DepositRules.REUSABLE_SMALL ? 0 : cents == DepositRules.REUSABLE ? 1
                 : cents == DepositRules.SINGLE_USE ? 2 : 3;
-    }
-
-    /**
-     * Jev is billed in US dollars; shown in euros like every other amount, so only roughly:
-     * ECB reference rate of 28.09.2026, 1 € = 1,1378 $ (ecb.europa.eu, eurofxref-daily.xml).
-     */
-    private static final double USD_PER_EUR = 1.1378;
-
-    private static String euros(double usd) {
-        double eur = usd / USD_PER_EUR;
-        return String.format(Locale.GERMANY, eur < 0.01 ? "≈ %.5f€" : "≈ %.2f€", eur);
-    }
-
-    /**
-     * The user picks how Jev is asked — through OpenRouter or directly at TypeSafe — and types that
-     * way's key here; the app never shows a key back. Each way keeps its own key.
-     */
-    private void showJevSettings() {
-        scanner.setPaused(true);
-        double[] spent = jev.spent();
-        final JevClient.Provider[] chosen = {jev.provider()};
-        // The switch is only kept on "Save"; "Cancel" leaves Jev as it was.
-        final boolean[] on = {jev.enabled()};
-        final EditText field = new com.google.android.material.textfield.TextInputEditText(this);
-        field.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD
-                | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-        field.setSingleLine(true);
-        final TextView state = new TextView(this);
-        final RadioGroup ways = new RadioGroup(this);
-        final RadioButton viaOpenRouter = new com.google.android.material.radiobutton.MaterialRadioButton(this);
-        viaOpenRouter.setId(View.generateViewId());
-        viaOpenRouter.setText(R.string.jev_via_openrouter);
-        final RadioButton viaTypeSafe = new com.google.android.material.radiobutton.MaterialRadioButton(this);
-        viaTypeSafe.setId(View.generateViewId());
-        viaTypeSafe.setText(R.string.jev_via_typesafe);
-        ways.addView(viaOpenRouter);
-        ways.addView(viaTypeSafe);
-        final com.google.android.material.textfield.TextInputLayout fieldBox = boxed(this, field, 0);
-        final AlertDialog[] shown = {null};
-        final Runnable showState = new Runnable() {
-            @Override public void run() {
-                boolean typeSafe = chosen[0] == JevClient.Provider.TYPESAFE;
-                boolean has = jev.hasKey(chosen[0]);
-                fieldBox.setHint(getString(typeSafe ? R.string.jev_key_hint_typesafe : R.string.jev_key_hint));
-                state.setText(getString(has ? R.string.jev_key_set : R.string.jev_key_none));
-                if (shown[0] != null) {
-                    Button remove = shown[0].getButton(DialogInterface.BUTTON_NEUTRAL);
-                    if (remove != null) remove.setVisibility(has && on[0] ? View.VISIBLE : View.GONE);
-                }
-            }
-        };
-        ways.check(chosen[0] == JevClient.Provider.TYPESAFE ? viaTypeSafe.getId() : viaOpenRouter.getId());
-        showState.run();
-        ways.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override public void onCheckedChanged(RadioGroup group, int id) {
-                chosen[0] = id == viaTypeSafe.getId() ? JevClient.Provider.TYPESAFE : JevClient.Provider.OPENROUTER;
-                showState.run();
-            }
-        });
-        LinearLayout wrap = new LinearLayout(this);
-        wrap.setOrientation(LinearLayout.VERTICAL);
-        int pad = (int) (20 * getResources().getDisplayMetrics().density);
-        wrap.setPadding(pad, 0, pad, 0);
-        wrap.addView(dialogText(getString(R.string.jev_settings_body, (int) spent[0], euros(spent[1]))));
-        final MaterialSwitch use = new MaterialSwitch(this);
-        use.setText(R.string.jev_use);
-        use.setTextSize(16);
-        use.setChecked(jev.enabled());
-        use.setPadding(0, pad / 2, 0, pad / 2);
-        wrap.addView(use);
-        // The way and the key only matter once Jev is on.
-        final LinearLayout keyPart = new LinearLayout(this);
-        keyPart.setOrientation(LinearLayout.VERTICAL);
-        keyPart.addView(ways);
-        keyPart.addView(state);
-        keyPart.addView(fieldBox, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
-        keyPart.setVisibility(jev.enabled() ? View.VISIBLE : View.GONE);
-        wrap.addView(keyPart);
-        use.setOnCheckedChangeListener(new android.widget.CompoundButton.OnCheckedChangeListener() {
-            @Override public void onCheckedChanged(android.widget.CompoundButton b, boolean checked) {
-                on[0] = checked;
-                keyPart.setVisibility(checked ? View.VISIBLE : View.GONE);
-                showState.run();
-            }
-        });
-        AlertDialog.Builder builder = new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.jev_settings)
-                .setView(scrolling(wrap))
-                .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
-                    @Override public void onClick(DialogInterface d, int which) {
-                        jev.setEnabled(on[0]);
-                        if (!on[0]) return; // switched off: nothing more to save
-                        String key = field.getText().toString().trim();
-                        jev.setProvider(chosen[0]);
-                        if (!key.isEmpty()) jev.setKey(chosen[0], key);
-                        Toast.makeText(MainActivity.this, !key.isEmpty() ? getString(R.string.jev_saved)
-                                : jev.hasKey() ? getString(R.string.jev_switched, getString(chosen[0] == JevClient.Provider.TYPESAFE
-                                        ? R.string.jev_way_typesafe : R.string.jev_way_openrouter))
-                                : getString(R.string.jev_key_none), Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .setNegativeButton(R.string.cancel, null)
-                .setNeutralButton(R.string.jev_remove_key, new DialogInterface.OnClickListener() {
-                    @Override public void onClick(DialogInterface d, int which) {
-                        jev.removeKey(chosen[0]);
-                        Toast.makeText(MainActivity.this, jev.hasKey() ? R.string.jev_removed_other : R.string.jev_removed,
-                                Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override public void onDismiss(DialogInterface d) {
-                        if (openDialog == d) openDialog = null;
-                        scanner.setPaused(false);
-                    }
-                });
-        AlertDialog dialog = builder.create();
-        openDialog = dialog;
-        dialog.show();
-        shown[0] = dialog;
-        showState.run();
     }
 
     /** The languages Settings offers, as language tags; the names stand in the strings lang_*. */
@@ -1400,16 +1057,19 @@ public class MainActivity extends AppCompatActivity implements BarcodeScanner.Li
         pp.topMargin = (int) (8 * getResources().getDisplayMetrics().density);
         Button statsButton = sheetButton(R.drawable.ic_b_stats, R.string.stats_open);
         Button learnedButton = sheetButton(R.drawable.ic_h_scan, R.string.learned_open);
-        // Jev and About sit here, not under the page: three buttons down there stacked up and
-        // had to be scrolled once the page grew. Two to a row, so the page fits on one screen.
-        Button jevButton = sheetButton(R.drawable.ic_b_ai, R.string.jev_settings);
+        // About (and a local build's own settings) sit here, not under the page: three buttons down
+        // there stacked up and had to be scrolled once the page grew. Two to a row, so the page fits
+        // on one screen.
+        Button addonButton = addon.settingsLabel() == 0 ? null
+                : sheetButton(addon.settingsIcon(), addon.settingsLabel());
         Button aboutButton = sheetButton(R.drawable.ic_b_info, R.string.settings_about);
         Button mapButton = sheetButton(R.drawable.ic_h_shop, R.string.map_open);
         LinearLayout.LayoutParams first = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         wrap.addView(pair(this, howTo, pfand), first);
         wrap.addView(pair(this, statsButton, learnedButton), pp);
-        wrap.addView(pair(this, jevButton, aboutButton), pp);
+        if (addonButton != null) wrap.addView(pair(this, addonButton, aboutButton), pp);
+        else wrap.addView(aboutButton, pp);
         wrap.addView(mapButton, pp);
         TextView mapNote = new TextView(this);
         mapNote.setText(R.string.map_note);
@@ -1538,12 +1198,12 @@ public class MainActivity extends AppCompatActivity implements BarcodeScanner.Li
                 openMapSearch();
             }
         });
-        jevButton.setOnClickListener(new View.OnClickListener() {
+        if (addonButton != null) addonButton.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 dialog.dismiss();
                 openLater(new Runnable() {
                     @Override public void run() {
-                        showJevSettings();
+                        addon.showSettings();
                     }
                 });
             }
@@ -1587,20 +1247,26 @@ public class MainActivity extends AppCompatActivity implements BarcodeScanner.Li
     private boolean howToPending;
 
     /**
-     * The short guide: one card per thing the app does, each with its picture, then what Jev
-     * (the optional AI suggestion) gets and what goes to Open Food Facts.
+     * The short guide: one card per thing the app does, each with its picture, then what goes to
+     * Open Food Facts. A local build may add cards of its own before that one.
      */
     private void showHowTo() {
         store.write(HOWTO_FILE, "1");
-        showCards(R.string.howto_title, new int[][]{
+        showCards(R.string.howto_title, join(new int[][]{
                 {R.drawable.ic_h_scan, R.string.h_scan_t, R.string.h_scan},
                 {R.drawable.ic_g_reuse, R.string.h_new_t, R.string.h_new},
                 {R.drawable.ic_g_crate, R.string.h_hand_t, R.string.h_hand},
                 {R.drawable.ic_h_list, R.string.h_list_t, R.string.h_list},
-                {R.drawable.ic_h_ai, R.string.h_jev_t, R.string.h_jev},
-                {R.drawable.ic_h_lock, R.string.h_jev_data_t, R.string.h_jev_data},
+        }, addon.howToCards(), new int[][]{
                 {R.drawable.ic_g_glass, R.string.h_names_t, R.string.h_names},
-        }, R.string.h_rules);
+        }), R.string.h_rules);
+    }
+
+    /** The cards of several lists, one after the other. */
+    private static int[][] join(int[][]... parts) {
+        List<int[]> all = new ArrayList<int[]>();
+        for (int[][] part : parts) all.addAll(java.util.Arrays.asList(part));
+        return all.toArray(new int[0][]);
     }
 
     /** The German deposit system in one screen: what carries how much, what carries none, where it goes back. */
@@ -1687,7 +1353,8 @@ public class MainActivity extends AppCompatActivity implements BarcodeScanner.Li
 
     /**
      * What has been counted since this page came into the app (Stats): the sum, bottles scanned
-     * and by hand, crates, each deposit amount, the months, learned barcodes and Jev's questions.
+     * and by hand, crates, each deposit amount, the months, learned barcodes (and whatever a local
+     * build adds).
      * The bars are drawn by the app itself, no chart library.
      */
     private void showStats() {
@@ -1697,7 +1364,7 @@ public class MainActivity extends AppCompatActivity implements BarcodeScanner.Li
         LinearLayout wrap = new LinearLayout(this);
         wrap.setOrientation(LinearLayout.VERTICAL);
         wrap.setPadding(pad, pad / 2, pad, 0);
-        buildStats(this, wrap, stats, rules.learnedCount(), jev.spent(), jev.enabled());
+        buildStats(this, wrap, stats, rules.learnedCount(), addon, false);
         ScrollView scroll = new ScrollView(this);
         scroll.addView(wrap);
         AlertDialog dialog = new MaterialAlertDialogBuilder(this)
@@ -1945,8 +1612,8 @@ public class MainActivity extends AppCompatActivity implements BarcodeScanner.Li
     }
 
     /** The statistics page's content; static so LayoutCheck can measure it in every language. */
-    static void buildStats(Context ctx, LinearLayout wrap, Stats stats, int learned, double[] jevSpent,
-            boolean jevShown) {
+    static void buildStats(Context ctx, LinearLayout wrap, Stats stats, int learned, Addon addon,
+            boolean sample) {
         float density = ctx.getResources().getDisplayMetrics().density;
         TextView total = new TextView(ctx);
         total.setText(String.format(Locale.GERMANY, "%.2f€", stats.totalCents() / 100.0));
@@ -2003,11 +1670,7 @@ public class MainActivity extends AppCompatActivity implements BarcodeScanner.Li
 
         wrap.addView(statsHeading(ctx, R.string.stats_more));
         wrap.addView(statsText(ctx, ctx.getString(R.string.stats_learned, learned), 14, R.color.text));
-        // Jev is opt-in: someone who never switched it on and never asked sees nothing of it here.
-        if (jevShown || jevSpent[0] > 0) {
-            wrap.addView(statsText(ctx, ctx.getString(R.string.stats_jev, (int) jevSpent[0], euros(jevSpent[1])),
-                    14, R.color.text));
-        }
+        addon.addStats(ctx, wrap, sample);
         TextView note = statsText(ctx, ctx.getString(R.string.stats_note), 12, R.color.text_dim);
         note.setPadding(0, (int) (12 * density), 0, (int) (8 * density));
         wrap.addView(note);
@@ -2019,7 +1682,7 @@ public class MainActivity extends AppCompatActivity implements BarcodeScanner.Li
         return t;
     }
 
-    private static TextView statsText(Context ctx, String text, int sp, int color) {
+    static TextView statsText(Context ctx, String text, int sp, int color) {
         TextView t = new TextView(ctx);
         t.setText(text);
         t.setTextSize(sp);
@@ -2139,22 +1802,24 @@ public class MainActivity extends AppCompatActivity implements BarcodeScanner.Li
         final String original = pageCheck[2];
         final String where = LANGUAGES[step / PAGE_CHECK_SCALES.length] + " x"
                 + PAGE_CHECK_SCALES[step % PAGE_CHECK_SCALES.length] + " ";
-        final String[] names = {"disclaimer", "howto", "pfand", "settings", "stats", "learned", "jev",
-                "about", "licenses", "privacy", "guide", "crates"};
-        final Runnable[] pages = {
+        final List<String> names = new ArrayList<String>(java.util.Arrays.asList("disclaimer", "howto",
+                "pfand", "settings", "stats", "learned", "about", "licenses", "privacy", "guide", "crates"));
+        final List<Runnable> pages = new ArrayList<Runnable>(java.util.Arrays.asList(
                 new Runnable() { @Override public void run() { showDisclaimer(); } },
                 new Runnable() { @Override public void run() { showHowTo(); } },
                 new Runnable() { @Override public void run() { showPfand(); } },
                 new Runnable() { @Override public void run() { showSettings(); } },
                 new Runnable() { @Override public void run() { showStats(); } },
                 new Runnable() { @Override public void run() { showLearned(); } },
-                new Runnable() { @Override public void run() { showJevSettings(); } },
                 new Runnable() { @Override public void run() { showAbout(); } },
                 new Runnable() { @Override public void run() { showLicenses(); } },
                 new Runnable() { @Override public void run() { showPrivacy(); } },
                 new Runnable() { @Override public void run() { guideByHand(); } },
-                new Runnable() { @Override public void run() { showCrates(); } },
-        };
+                new Runnable() { @Override public void run() { showCrates(); } }));
+        if (addon.settingsLabel() != 0) {
+            names.add(6, "addon-settings");
+            pages.add(6, new Runnable() { @Override public void run() { addon.showSettings(); } });
+        }
         final int[] at = {0};
         final Runnable[] next = {null};
         next[0] = new Runnable() {
@@ -2162,18 +1827,18 @@ public class MainActivity extends AppCompatActivity implements BarcodeScanner.Li
                 if (pageCheck == null) return;
                 if (openDialog != null) {
                     AlertDialog shown = openDialog;
-                    problems[0] += LayoutCheck.walk(shown.getWindow().getDecorView(), where + names[at[0] - 1]);
+                    problems[0] += LayoutCheck.walk(shown.getWindow().getDecorView(), where + names.get(at[0] - 1));
                     shown.dismiss();
                     openDialog = null;
                 } else if (at[0] > 0) {
-                    android.util.Log.w(LayoutCheck.TAG, where + names[at[0] - 1] + ": window did not open");
+                    android.util.Log.w(LayoutCheck.TAG, where + names.get(at[0] - 1) + ": window did not open");
                     problems[0]++;
                 }
-                if (at[0] == pages.length) {
+                if (at[0] == pages.size()) {
                     pageCheckNext(step + 1, problems[0], original);
                     return;
                 }
-                pages[at[0]++].run();
+                pages.get(at[0]++).run();
                 listView.postDelayed(next[0], 700);
             }
         };
@@ -2951,7 +2616,7 @@ public class MainActivity extends AppCompatActivity implements BarcodeScanner.Li
      * A window's explaining text inside the window's own scrolling content. Material windows give a
      * message and a custom part separate room, and at large font sizes the custom part was squeezed.
      */
-    private TextView dialogText(CharSequence text) {
+    TextView dialogText(CharSequence text) {
         TextView t = new TextView(this);
         t.setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_BodyMedium);
         t.setTextColor(MaterialColors.getColor(this, com.google.android.material.R.attr.colorOnSurfaceVariant, 0));
@@ -2960,7 +2625,7 @@ public class MainActivity extends AppCompatActivity implements BarcodeScanner.Li
         return t;
     }
 
-    private ScrollView scrolling(View content) {
+    ScrollView scrolling(View content) {
         ScrollView scroll = new ScrollView(this);
         scroll.addView(content);
         return scroll;
@@ -3048,16 +2713,16 @@ public class MainActivity extends AppCompatActivity implements BarcodeScanner.Li
 
     /** The privacy notice, card by card; the same text stands in PRIVACY.md in the repository. */
     private void showPrivacy() {
-        showCards(R.string.privacy_title, new int[][]{
+        showCards(R.string.privacy_title, join(new int[][]{
                 {R.drawable.ic_h_lock, R.string.pv_short_t, R.string.pv_short},
                 {R.drawable.ic_h_scan, R.string.pv_camera_t, R.string.pv_camera},
                 {R.drawable.ic_g_glass, R.string.pv_off_t, R.string.pv_off},
-                {R.drawable.ic_h_ai, R.string.pv_jev_t, R.string.pv_jev},
+        }, addon.privacyCards(), new int[][]{
                 {R.drawable.ic_b_share, R.string.pv_out_t, R.string.pv_out},
                 {R.drawable.ic_h_list, R.string.pv_stored_t, R.string.pv_stored},
                 {R.drawable.ic_g_none, R.string.pv_not_t, R.string.pv_not},
                 {R.drawable.ic_b_info, R.string.pv_rights_t, R.string.pv_rights},
-        }, R.string.pv_contact, backToAbout);
+        }), R.string.pv_contact, backToAbout);
     }
 
     /**

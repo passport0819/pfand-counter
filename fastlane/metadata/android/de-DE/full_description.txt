@@ -15,9 +15,6 @@ Ein Barcode verrät das Pfand nicht. Deshalb bringt die App eine Liste mit über
 <li>11 Sprachen: Deutsch, English, Türkçe, Русский, العربية, Polski, Українська, Français, Español, فارسی, Tiếng Việt (maschinell übersetzt, Verbesserungen willkommen).</li>
 </ul>
 
-<b>Freiwilliger KI-Vorschlag („Jev“)</b>
-Nach der Installation ausgeschaltet. Wenn du ihn einschaltest und einen eigenen Schlüssel für OpenRouter oder TypeSafe einträgst (beides kostenpflichtige Dienste, keine freie Software), schickt „Jev fragen“ die Produktbeschreibung, nie den Barcode, und zeigt einen Pfand-Vorschlag mit seiner gemessenen Zuverlässigkeit. Die Entscheidung liegt weiterhin bei dir.
-
 <b>Datenschutz</b>
 Kein Konto, keine Werbung, kein Tracking, kein eigener Server. Deine Zählung bleibt auf deinem Handy. Nur der gescannte Barcode geht an Open Food Facts, um den Produktnamen zu finden.
 
